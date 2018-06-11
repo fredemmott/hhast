@@ -20,6 +20,7 @@ use type Facebook\HHAST\Migrations\{
   ImplicitShapeSubtypesMigration,
   OptionalShapeFieldsMigration,
   NamespaceFallbackMigration,
+  PHP7UniformVariableSyntaxMigration,
 };
 
 class MigrationCLI extends CLIWithRequiredArguments {
@@ -82,6 +83,14 @@ class MigrationCLI extends CLIWithRequiredArguments {
         'Add leading \\ to calls to unqualified references to global '.
         'functions or constants',
         '--no-namespace-fallback',
+      ),
+      CLIOptions\flag(
+        () ==> {
+          $this->migrations[] = PHP7UniformVariableSyntaxMigration::class;
+        },
+        'Migrate expressions that change meaning in PHP7 mode to expressions '.
+        'equivalent to their old meaning',
+        '--uniform-variable-syntax',
       ),
       CLIOptions\flag(
         () ==> { $this->migrations[] = AddFixMesMigration::class; },
