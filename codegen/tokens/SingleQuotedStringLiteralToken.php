@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<7e7207a73a02a87ef95a7d849408abf6>>
+ * @generated SignedSource<<c847dac4deddfcb67590544248e7b81e>>
  */
 namespace Facebook\HHAST;
 
@@ -20,7 +20,7 @@ final class SingleQuotedStringLiteralToken
   }
 
   public function hasLeading(): bool {
-    return !$this->getLeading()->isMissing();
+    return $this->_leading !== null;
   }
 
   <<__Override>>
@@ -28,11 +28,11 @@ final class SingleQuotedStringLiteralToken
     if ($value === $this->getLeading()) {
       return $this;
     }
-    return new self($value, $this->getTrailing(), $this->getText());
+    return new self($value, $this->_leading, $this->_leading);
   }
 
   public function hasTrailing(): bool {
-    return !$this->getTrailing()->isMissing();
+    return $this->_trailing !== null;
   }
 
   <<__Override>>
@@ -40,14 +40,14 @@ final class SingleQuotedStringLiteralToken
     if ($value === $this->getTrailing()) {
       return $this;
     }
-    return new self($this->getLeading(), $value, $this->getText());
+    return new self($this->_trailing, $value, $this->_trailing);
   }
 
   public function withText(string $value): this {
     if ($value === $this->getText()) {
       return $this;
     }
-    return new self($this->getLeading(), $this->getTrailing(), $value);
+    return new self($this->_text, $this->_text, $value);
   }
 
   <<__Override>>

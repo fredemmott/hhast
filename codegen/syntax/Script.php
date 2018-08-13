@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<f9561df0b4fa9c9ee18ef07d08e55a58>>
+ * @generated SignedSource<<fc50562ade6c7d1f5e298893dd284c6d>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,11 +10,10 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class Script extends EditableNode {
 
-  private EditableNode $_declarations;
-
-  public function __construct(EditableNode $declarations) {
+  public function __construct(
+    private EditableList<EditableNode> $declarations,
+  ) {
     parent::__construct('script');
-    $this->_declarations = $declarations;
   }
 
   <<__Override>>
@@ -24,7 +23,7 @@ final class Script extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $declarations = EditableNode::fromJSON(
+    $declarations = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['script_declarations'],
       $file,
       $offset,
@@ -35,9 +34,9 @@ final class Script extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'declarations' => $this->_declarations,
+      'declarations' => $this->declarations,
     ];
   }
 
@@ -48,33 +47,33 @@ final class Script extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $declarations = $this->_declarations->rewrite($rewriter, $parents);
-    if ($declarations === $this->_declarations) {
+    $declarations = $this->declarations->rewrite($rewriter, $parents);
+    if ($declarations === $this->declarations) {
       return $this;
     }
     return new static($declarations);
   }
 
-  public function getDeclarationsUNTYPED(): EditableNode {
-    return $this->_declarations;
+  final public function getDeclarationsUNTYPED(): EditableNode {
+    return $this->declarations;
   }
 
-  public function withDeclarations(EditableNode $value): this {
-    if ($value === $this->_declarations) {
+  public function withDeclarations(EditableList<EditableNode> $value): this {
+    if ($value === $this->declarations) {
       return $this;
     }
     return new static($value);
   }
 
   public function hasDeclarations(): bool {
-    return !$this->_declarations->isMissing();
+    return $this->declarations !== null;
   }
 
   /**
    * @returns EditableList<EditableNode>
    */
   public function getDeclarations(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_declarations);
+    return TypeAssert\instance_of(EditableList::class, $this->declarations);
   }
 
   /**

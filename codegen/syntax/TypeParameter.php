@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<fa2bbcb5ac50628cfea52e62e73f3acd>>
+ * @generated SignedSource<<282a1472d91fe7ca9575b75543cf5e85>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class TypeParameter extends EditableNode {
 
-  private EditableNode $_variance;
-  private EditableNode $_name;
-  private EditableNode $_constraints;
-
   public function __construct(
-    EditableNode $variance,
-    EditableNode $name,
-    EditableNode $constraints,
+    private ?EditableToken $variance,
+    private NameToken $name,
+    private ?EditableList<EditableNode> $constraints,
   ) {
     parent::__construct('type_parameter');
-    $this->_variance = $variance;
-    $this->_name = $name;
-    $this->_constraints = $constraints;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class TypeParameter extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $variance = EditableNode::fromJSON(
+    $variance = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_variance'],
       $file,
       $offset,
       $source,
     );
     $offset += $variance->getWidth();
-    $name = EditableNode::fromJSON(
+    $name = NameToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_name'],
       $file,
       $offset,
       $source,
     );
     $offset += $name->getWidth();
-    $constraints = EditableNode::fromJSON(
+    $constraints = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['type_constraints'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class TypeParameter extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'variance' => $this->_variance,
-      'name' => $this->_name,
-      'constraints' => $this->_constraints,
+      'variance' => $this->variance,
+      'name' => $this->name,
+      'constraints' => $this->constraints,
     ];
   }
 
@@ -72,71 +65,71 @@ final class TypeParameter extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $variance = $this->_variance->rewrite($rewriter, $parents);
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $constraints = $this->_constraints->rewrite($rewriter, $parents);
+    $variance = $this->variance?->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
+    $constraints = $this->constraints?->rewrite($rewriter, $parents);
     if (
-      $variance === $this->_variance &&
-      $name === $this->_name &&
-      $constraints === $this->_constraints
+      $variance === $this->variance &&
+      $name === $this->name &&
+      $constraints === $this->constraints
     ) {
       return $this;
     }
     return new static($variance, $name, $constraints);
   }
 
-  public function getVarianceUNTYPED(): EditableNode {
-    return $this->_variance;
+  final public function getVarianceUNTYPED(): EditableNode {
+    return $this->variance;
   }
 
-  public function withVariance(EditableNode $value): this {
-    if ($value === $this->_variance) {
+  public function withVariance(?EditableToken $value): this {
+    if ($value === $this->variance) {
       return $this;
     }
-    return new static($value, $this->_name, $this->_constraints);
+    return new static($value, $this->name, $this->constraints);
   }
 
   public function hasVariance(): bool {
-    return !$this->_variance->isMissing();
+    return $this->variance !== null;
   }
 
   /**
    * @returns Missing | PlusToken | MinusToken
    */
   public function getVariance(): ?EditableToken {
-    if ($this->_variance->isMissing()) {
+    if ($this->variance->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableToken::class, $this->_variance);
+    return TypeAssert\instance_of(EditableToken::class, $this->variance);
   }
 
   /**
    * @returns PlusToken | MinusToken
    */
   public function getVariancex(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_variance);
+    return TypeAssert\instance_of(EditableToken::class, $this->variance);
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
-  public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+  public function withName(NameToken $value): this {
+    if ($value === $this->name) {
       return $this;
     }
-    return new static($this->_variance, $value, $this->_constraints);
+    return new static($this->variance, $value, $this->constraints);
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns NameToken
    */
   public function getName(): NameToken {
-    return TypeAssert\instance_of(NameToken::class, $this->_name);
+    return TypeAssert\instance_of(NameToken::class, $this->name);
   }
 
   /**
@@ -146,35 +139,35 @@ final class TypeParameter extends EditableNode {
     return $this->getName();
   }
 
-  public function getConstraintsUNTYPED(): EditableNode {
-    return $this->_constraints;
+  final public function getConstraintsUNTYPED(): EditableNode {
+    return $this->constraints;
   }
 
-  public function withConstraints(EditableNode $value): this {
-    if ($value === $this->_constraints) {
+  public function withConstraints(?EditableList<EditableNode> $value): this {
+    if ($value === $this->constraints) {
       return $this;
     }
-    return new static($this->_variance, $this->_name, $value);
+    return new static($this->variance, $this->name, $value);
   }
 
   public function hasConstraints(): bool {
-    return !$this->_constraints->isMissing();
+    return $this->constraints !== null;
   }
 
   /**
    * @returns EditableList<EditableNode> | Missing
    */
   public function getConstraints(): ?EditableList<EditableNode> {
-    if ($this->_constraints->isMissing()) {
+    if ($this->constraints->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_constraints);
+    return TypeAssert\instance_of(EditableList::class, $this->constraints);
   }
 
   /**
    * @returns EditableList<EditableNode>
    */
   public function getConstraintsx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_constraints);
+    return TypeAssert\instance_of(EditableList::class, $this->constraints);
   }
 }

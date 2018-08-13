@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<e23cd1006b2aa3976bc1adb4e6171895>>
+ * @generated SignedSource<<0487d53e5caf3dceb3ac9410f099dd21>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,37 +10,18 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class AnonymousClass extends EditableNode {
 
-  private EditableNode $_class_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_argument_list;
-  private EditableNode $_right_paren;
-  private EditableNode $_extends_keyword;
-  private EditableNode $_extends_list;
-  private EditableNode $_implements_keyword;
-  private EditableNode $_implements_list;
-  private EditableNode $_body;
-
   public function __construct(
-    EditableNode $class_keyword,
-    EditableNode $left_paren,
-    EditableNode $argument_list,
-    EditableNode $right_paren,
-    EditableNode $extends_keyword,
-    EditableNode $extends_list,
-    EditableNode $implements_keyword,
-    EditableNode $implements_list,
-    EditableNode $body,
+    private ClassToken $classKeyword,
+    private ?LeftParenToken $leftParen,
+    private ?EditableList<EditableNode> $argumentList,
+    private ?RightParenToken $rightParen,
+    private ?ExtendsToken $extendsKeyword,
+    private ?EditableList<SimpleTypeSpecifier> $extendsList,
+    private ?ImplementsToken $implementsKeyword,
+    private ?EditableList<SimpleTypeSpecifier> $implementsList,
+    private ClassishBody $body,
   ) {
     parent::__construct('anonymous_class');
-    $this->_class_keyword = $class_keyword;
-    $this->_left_paren = $left_paren;
-    $this->_argument_list = $argument_list;
-    $this->_right_paren = $right_paren;
-    $this->_extends_keyword = $extends_keyword;
-    $this->_extends_list = $extends_list;
-    $this->_implements_keyword = $implements_keyword;
-    $this->_implements_list = $implements_list;
-    $this->_body = $body;
   }
 
   <<__Override>>
@@ -50,63 +31,63 @@ final class AnonymousClass extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $class_keyword = EditableNode::fromJSON(
+    $class_keyword = ClassToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_class_class_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $class_keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_class_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $argument_list = EditableNode::fromJSON(
+    $argument_list = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_class_argument_list'],
       $file,
       $offset,
       $source,
     );
     $offset += $argument_list->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_class_right_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $right_paren->getWidth();
-    $extends_keyword = EditableNode::fromJSON(
+    $extends_keyword = ExtendsToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_class_extends_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $extends_keyword->getWidth();
-    $extends_list = EditableNode::fromJSON(
+    $extends_list = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_class_extends_list'],
       $file,
       $offset,
       $source,
     );
     $offset += $extends_list->getWidth();
-    $implements_keyword = EditableNode::fromJSON(
+    $implements_keyword = ImplementsToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_class_implements_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $implements_keyword->getWidth();
-    $implements_list = EditableNode::fromJSON(
+    $implements_list = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_class_implements_list'],
       $file,
       $offset,
       $source,
     );
     $offset += $implements_list->getWidth();
-    $body = EditableNode::fromJSON(
+    $body = ClassishBody::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_class_body'],
       $file,
       $offset,
@@ -127,17 +108,17 @@ final class AnonymousClass extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'class_keyword' => $this->_class_keyword,
-      'left_paren' => $this->_left_paren,
-      'argument_list' => $this->_argument_list,
-      'right_paren' => $this->_right_paren,
-      'extends_keyword' => $this->_extends_keyword,
-      'extends_list' => $this->_extends_list,
-      'implements_keyword' => $this->_implements_keyword,
-      'implements_list' => $this->_implements_list,
-      'body' => $this->_body,
+      'class_keyword' => $this->classKeyword,
+      'left_paren' => $this->leftParen,
+      'argument_list' => $this->argumentList,
+      'right_paren' => $this->rightParen,
+      'extends_keyword' => $this->extendsKeyword,
+      'extends_list' => $this->extendsList,
+      'implements_keyword' => $this->implementsKeyword,
+      'implements_list' => $this->implementsList,
+      'body' => $this->body,
     ];
   }
 
@@ -148,26 +129,26 @@ final class AnonymousClass extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $class_keyword = $this->_class_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $argument_list = $this->_argument_list->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
-    $extends_keyword = $this->_extends_keyword->rewrite($rewriter, $parents);
-    $extends_list = $this->_extends_list->rewrite($rewriter, $parents);
+    $class_keyword = $this->classKeyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen?->rewrite($rewriter, $parents);
+    $argument_list = $this->argumentList?->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen?->rewrite($rewriter, $parents);
+    $extends_keyword = $this->extendsKeyword?->rewrite($rewriter, $parents);
+    $extends_list = $this->extendsList?->rewrite($rewriter, $parents);
     $implements_keyword =
-      $this->_implements_keyword->rewrite($rewriter, $parents);
-    $implements_list = $this->_implements_list->rewrite($rewriter, $parents);
-    $body = $this->_body->rewrite($rewriter, $parents);
+      $this->implementsKeyword?->rewrite($rewriter, $parents);
+    $implements_list = $this->implementsList?->rewrite($rewriter, $parents);
+    $body = $this->body->rewrite($rewriter, $parents);
     if (
-      $class_keyword === $this->_class_keyword &&
-      $left_paren === $this->_left_paren &&
-      $argument_list === $this->_argument_list &&
-      $right_paren === $this->_right_paren &&
-      $extends_keyword === $this->_extends_keyword &&
-      $extends_list === $this->_extends_list &&
-      $implements_keyword === $this->_implements_keyword &&
-      $implements_list === $this->_implements_list &&
-      $body === $this->_body
+      $class_keyword === $this->classKeyword &&
+      $left_paren === $this->leftParen &&
+      $argument_list === $this->argumentList &&
+      $right_paren === $this->rightParen &&
+      $extends_keyword === $this->extendsKeyword &&
+      $extends_list === $this->extendsList &&
+      $implements_keyword === $this->implementsKeyword &&
+      $implements_list === $this->implementsList &&
+      $body === $this->body
     ) {
       return $this;
     }
@@ -184,36 +165,36 @@ final class AnonymousClass extends EditableNode {
     );
   }
 
-  public function getClassKeywordUNTYPED(): EditableNode {
-    return $this->_class_keyword;
+  final public function getClassKeywordUNTYPED(): EditableNode {
+    return $this->classKeyword;
   }
 
-  public function withClassKeyword(EditableNode $value): this {
-    if ($value === $this->_class_keyword) {
+  public function withClassKeyword(ClassToken $value): this {
+    if ($value === $this->classKeyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_paren,
-      $this->_argument_list,
-      $this->_right_paren,
-      $this->_extends_keyword,
-      $this->_extends_list,
-      $this->_implements_keyword,
-      $this->_implements_list,
-      $this->_body,
+      $this->left_paren,
+      $this->argument_list,
+      $this->right_paren,
+      $this->extends_keyword,
+      $this->extends_list,
+      $this->implements_keyword,
+      $this->implements_list,
+      $this->body,
     );
   }
 
   public function hasClassKeyword(): bool {
-    return !$this->_class_keyword->isMissing();
+    return $this->classKeyword !== null;
   }
 
   /**
    * @returns ClassToken
    */
   public function getClassKeyword(): ClassToken {
-    return TypeAssert\instance_of(ClassToken::class, $this->_class_keyword);
+    return TypeAssert\instance_of(ClassToken::class, $this->classKeyword);
   }
 
   /**
@@ -223,71 +204,71 @@ final class AnonymousClass extends EditableNode {
     return $this->getClassKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(?LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_class_keyword,
+      $this->class_keyword,
       $value,
-      $this->_argument_list,
-      $this->_right_paren,
-      $this->_extends_keyword,
-      $this->_extends_list,
-      $this->_implements_keyword,
-      $this->_implements_list,
-      $this->_body,
+      $this->argument_list,
+      $this->right_paren,
+      $this->extends_keyword,
+      $this->extends_list,
+      $this->implements_keyword,
+      $this->implements_list,
+      $this->body,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns Missing | LeftParenToken
    */
   public function getLeftParen(): ?LeftParenToken {
-    if ($this->_left_paren->isMissing()) {
+    if ($this->leftParen->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParenx(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
-  public function getArgumentListUNTYPED(): EditableNode {
-    return $this->_argument_list;
+  final public function getArgumentListUNTYPED(): EditableNode {
+    return $this->argumentList;
   }
 
-  public function withArgumentList(EditableNode $value): this {
-    if ($value === $this->_argument_list) {
+  public function withArgumentList(?EditableList<EditableNode> $value): this {
+    if ($value === $this->argumentList) {
       return $this;
     }
     return new static(
-      $this->_class_keyword,
-      $this->_left_paren,
+      $this->class_keyword,
+      $this->left_paren,
       $value,
-      $this->_right_paren,
-      $this->_extends_keyword,
-      $this->_extends_list,
-      $this->_implements_keyword,
-      $this->_implements_list,
-      $this->_body,
+      $this->right_paren,
+      $this->extends_keyword,
+      $this->extends_list,
+      $this->implements_keyword,
+      $this->implements_list,
+      $this->body,
     );
   }
 
   public function hasArgumentList(): bool {
-    return !$this->_argument_list->isMissing();
+    return $this->argumentList !== null;
   }
 
   /**
@@ -296,10 +277,10 @@ final class AnonymousClass extends EditableNode {
    * EditableList<VariableExpression> | Missing
    */
   public function getArgumentList(): ?EditableList<EditableNode> {
-    if ($this->_argument_list->isMissing()) {
+    if ($this->argumentList->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_argument_list);
+    return TypeAssert\instance_of(EditableList::class, $this->argumentList);
   }
 
   /**
@@ -308,255 +289,255 @@ final class AnonymousClass extends EditableNode {
    * EditableList<VariableExpression>
    */
   public function getArgumentListx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_argument_list);
+    return TypeAssert\instance_of(EditableList::class, $this->argumentList);
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(?RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_class_keyword,
-      $this->_left_paren,
-      $this->_argument_list,
+      $this->class_keyword,
+      $this->left_paren,
+      $this->argument_list,
       $value,
-      $this->_extends_keyword,
-      $this->_extends_list,
-      $this->_implements_keyword,
-      $this->_implements_list,
-      $this->_body,
+      $this->extends_keyword,
+      $this->extends_list,
+      $this->implements_keyword,
+      $this->implements_list,
+      $this->body,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns Missing | RightParenToken
    */
   public function getRightParen(): ?RightParenToken {
-    if ($this->_right_paren->isMissing()) {
+    if ($this->rightParen->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParenx(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
-  public function getExtendsKeywordUNTYPED(): EditableNode {
-    return $this->_extends_keyword;
+  final public function getExtendsKeywordUNTYPED(): EditableNode {
+    return $this->extendsKeyword;
   }
 
-  public function withExtendsKeyword(EditableNode $value): this {
-    if ($value === $this->_extends_keyword) {
+  public function withExtendsKeyword(?ExtendsToken $value): this {
+    if ($value === $this->extendsKeyword) {
       return $this;
     }
     return new static(
-      $this->_class_keyword,
-      $this->_left_paren,
-      $this->_argument_list,
-      $this->_right_paren,
+      $this->class_keyword,
+      $this->left_paren,
+      $this->argument_list,
+      $this->right_paren,
       $value,
-      $this->_extends_list,
-      $this->_implements_keyword,
-      $this->_implements_list,
-      $this->_body,
+      $this->extends_list,
+      $this->implements_keyword,
+      $this->implements_list,
+      $this->body,
     );
   }
 
   public function hasExtendsKeyword(): bool {
-    return !$this->_extends_keyword->isMissing();
+    return $this->extendsKeyword !== null;
   }
 
   /**
    * @returns Missing | ExtendsToken
    */
   public function getExtendsKeyword(): ?ExtendsToken {
-    if ($this->_extends_keyword->isMissing()) {
+    if ($this->extendsKeyword->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(ExtendsToken::class, $this->_extends_keyword);
+    return TypeAssert\instance_of(ExtendsToken::class, $this->extendsKeyword);
   }
 
   /**
    * @returns ExtendsToken
    */
   public function getExtendsKeywordx(): ExtendsToken {
-    return TypeAssert\instance_of(ExtendsToken::class, $this->_extends_keyword);
+    return TypeAssert\instance_of(ExtendsToken::class, $this->extendsKeyword);
   }
 
-  public function getExtendsListUNTYPED(): EditableNode {
-    return $this->_extends_list;
+  final public function getExtendsListUNTYPED(): EditableNode {
+    return $this->extendsList;
   }
 
-  public function withExtendsList(EditableNode $value): this {
-    if ($value === $this->_extends_list) {
+  public function withExtendsList(
+    ?EditableList<SimpleTypeSpecifier> $value,
+  ): this {
+    if ($value === $this->extendsList) {
       return $this;
     }
     return new static(
-      $this->_class_keyword,
-      $this->_left_paren,
-      $this->_argument_list,
-      $this->_right_paren,
-      $this->_extends_keyword,
+      $this->class_keyword,
+      $this->left_paren,
+      $this->argument_list,
+      $this->right_paren,
+      $this->extends_keyword,
       $value,
-      $this->_implements_keyword,
-      $this->_implements_list,
-      $this->_body,
+      $this->implements_keyword,
+      $this->implements_list,
+      $this->body,
     );
   }
 
   public function hasExtendsList(): bool {
-    return !$this->_extends_list->isMissing();
+    return $this->extendsList !== null;
   }
 
   /**
    * @returns EditableList<SimpleTypeSpecifier> | Missing
    */
   public function getExtendsList(): ?EditableList<SimpleTypeSpecifier> {
-    if ($this->_extends_list->isMissing()) {
+    if ($this->extendsList->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_extends_list);
+    return TypeAssert\instance_of(EditableList::class, $this->extendsList);
   }
 
   /**
    * @returns EditableList<SimpleTypeSpecifier>
    */
   public function getExtendsListx(): EditableList<SimpleTypeSpecifier> {
-    return TypeAssert\instance_of(EditableList::class, $this->_extends_list);
+    return TypeAssert\instance_of(EditableList::class, $this->extendsList);
   }
 
-  public function getImplementsKeywordUNTYPED(): EditableNode {
-    return $this->_implements_keyword;
+  final public function getImplementsKeywordUNTYPED(): EditableNode {
+    return $this->implementsKeyword;
   }
 
-  public function withImplementsKeyword(EditableNode $value): this {
-    if ($value === $this->_implements_keyword) {
+  public function withImplementsKeyword(?ImplementsToken $value): this {
+    if ($value === $this->implementsKeyword) {
       return $this;
     }
     return new static(
-      $this->_class_keyword,
-      $this->_left_paren,
-      $this->_argument_list,
-      $this->_right_paren,
-      $this->_extends_keyword,
-      $this->_extends_list,
+      $this->class_keyword,
+      $this->left_paren,
+      $this->argument_list,
+      $this->right_paren,
+      $this->extends_keyword,
+      $this->extends_list,
       $value,
-      $this->_implements_list,
-      $this->_body,
+      $this->implements_list,
+      $this->body,
     );
   }
 
   public function hasImplementsKeyword(): bool {
-    return !$this->_implements_keyword->isMissing();
+    return $this->implementsKeyword !== null;
   }
 
   /**
    * @returns Missing | ImplementsToken
    */
   public function getImplementsKeyword(): ?ImplementsToken {
-    if ($this->_implements_keyword->isMissing()) {
+    if ($this->implementsKeyword->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(
-      ImplementsToken::class,
-      $this->_implements_keyword,
-    );
+    return
+      TypeAssert\instance_of(ImplementsToken::class, $this->implementsKeyword);
   }
 
   /**
    * @returns ImplementsToken
    */
   public function getImplementsKeywordx(): ImplementsToken {
-    return TypeAssert\instance_of(
-      ImplementsToken::class,
-      $this->_implements_keyword,
-    );
+    return
+      TypeAssert\instance_of(ImplementsToken::class, $this->implementsKeyword);
   }
 
-  public function getImplementsListUNTYPED(): EditableNode {
-    return $this->_implements_list;
+  final public function getImplementsListUNTYPED(): EditableNode {
+    return $this->implementsList;
   }
 
-  public function withImplementsList(EditableNode $value): this {
-    if ($value === $this->_implements_list) {
+  public function withImplementsList(
+    ?EditableList<SimpleTypeSpecifier> $value,
+  ): this {
+    if ($value === $this->implementsList) {
       return $this;
     }
     return new static(
-      $this->_class_keyword,
-      $this->_left_paren,
-      $this->_argument_list,
-      $this->_right_paren,
-      $this->_extends_keyword,
-      $this->_extends_list,
-      $this->_implements_keyword,
+      $this->class_keyword,
+      $this->left_paren,
+      $this->argument_list,
+      $this->right_paren,
+      $this->extends_keyword,
+      $this->extends_list,
+      $this->implements_keyword,
       $value,
-      $this->_body,
+      $this->body,
     );
   }
 
   public function hasImplementsList(): bool {
-    return !$this->_implements_list->isMissing();
+    return $this->implementsList !== null;
   }
 
   /**
    * @returns EditableList<SimpleTypeSpecifier> | Missing
    */
   public function getImplementsList(): ?EditableList<SimpleTypeSpecifier> {
-    if ($this->_implements_list->isMissing()) {
+    if ($this->implementsList->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_implements_list);
+    return TypeAssert\instance_of(EditableList::class, $this->implementsList);
   }
 
   /**
    * @returns EditableList<SimpleTypeSpecifier>
    */
   public function getImplementsListx(): EditableList<SimpleTypeSpecifier> {
-    return TypeAssert\instance_of(EditableList::class, $this->_implements_list);
+    return TypeAssert\instance_of(EditableList::class, $this->implementsList);
   }
 
-  public function getBodyUNTYPED(): EditableNode {
-    return $this->_body;
+  final public function getBodyUNTYPED(): EditableNode {
+    return $this->body;
   }
 
-  public function withBody(EditableNode $value): this {
-    if ($value === $this->_body) {
+  public function withBody(ClassishBody $value): this {
+    if ($value === $this->body) {
       return $this;
     }
     return new static(
-      $this->_class_keyword,
-      $this->_left_paren,
-      $this->_argument_list,
-      $this->_right_paren,
-      $this->_extends_keyword,
-      $this->_extends_list,
-      $this->_implements_keyword,
-      $this->_implements_list,
+      $this->class_keyword,
+      $this->left_paren,
+      $this->argument_list,
+      $this->right_paren,
+      $this->extends_keyword,
+      $this->extends_list,
+      $this->implements_keyword,
+      $this->implements_list,
       $value,
     );
   }
 
   public function hasBody(): bool {
-    return !$this->_body->isMissing();
+    return $this->body !== null;
   }
 
   /**
    * @returns ClassishBody
    */
   public function getBody(): ClassishBody {
-    return TypeAssert\instance_of(ClassishBody::class, $this->_body);
+    return TypeAssert\instance_of(ClassishBody::class, $this->body);
   }
 
   /**

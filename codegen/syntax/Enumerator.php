@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<2671fc02b823a6b6d4e4b3a79d3c1952>>
+ * @generated SignedSource<<ab6e25311ad058e4a20ece9952a5c818>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class Enumerator extends EditableNode {
 
-  private EditableNode $_name;
-  private EditableNode $_equal;
-  private EditableNode $_value;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $name,
-    EditableNode $equal,
-    EditableNode $value,
-    EditableNode $semicolon,
+    private NameToken $name,
+    private EqualToken $equal,
+    private EditableNode $value,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('enumerator');
-    $this->_name = $name;
-    $this->_equal = $equal;
-    $this->_value = $value;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -35,14 +26,14 @@ final class Enumerator extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $name = EditableNode::fromJSON(
+    $name = NameToken::fromJSON(
       /* UNSAFE_EXPR */ $json['enumerator_name'],
       $file,
       $offset,
       $source,
     );
     $offset += $name->getWidth();
-    $equal = EditableNode::fromJSON(
+    $equal = EqualToken::fromJSON(
       /* UNSAFE_EXPR */ $json['enumerator_equal'],
       $file,
       $offset,
@@ -56,7 +47,7 @@ final class Enumerator extends EditableNode {
       $source,
     );
     $offset += $value->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['enumerator_semicolon'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class Enumerator extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'name' => $this->_name,
-      'equal' => $this->_equal,
-      'value' => $this->_value,
-      'semicolon' => $this->_semicolon,
+      'name' => $this->name,
+      'equal' => $this->equal,
+      'value' => $this->value,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -83,41 +74,41 @@ final class Enumerator extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $equal = $this->_equal->rewrite($rewriter, $parents);
-    $value = $this->_value->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
+    $equal = $this->equal->rewrite($rewriter, $parents);
+    $value = $this->value->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $name === $this->_name &&
-      $equal === $this->_equal &&
-      $value === $this->_value &&
-      $semicolon === $this->_semicolon
+      $name === $this->name &&
+      $equal === $this->equal &&
+      $value === $this->value &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
     return new static($name, $equal, $value, $semicolon);
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
-  public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+  public function withName(NameToken $value): this {
+    if ($value === $this->name) {
       return $this;
     }
-    return new static($value, $this->_equal, $this->_value, $this->_semicolon);
+    return new static($value, $this->equal, $this->value, $this->semicolon);
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns NameToken
    */
   public function getName(): NameToken {
-    return TypeAssert\instance_of(NameToken::class, $this->_name);
+    return TypeAssert\instance_of(NameToken::class, $this->name);
   }
 
   /**
@@ -127,26 +118,26 @@ final class Enumerator extends EditableNode {
     return $this->getName();
   }
 
-  public function getEqualUNTYPED(): EditableNode {
-    return $this->_equal;
+  final public function getEqualUNTYPED(): EditableNode {
+    return $this->equal;
   }
 
-  public function withEqual(EditableNode $value): this {
-    if ($value === $this->_equal) {
+  public function withEqual(EqualToken $value): this {
+    if ($value === $this->equal) {
       return $this;
     }
-    return new static($this->_name, $value, $this->_value, $this->_semicolon);
+    return new static($this->name, $value, $this->value, $this->semicolon);
   }
 
   public function hasEqual(): bool {
-    return !$this->_equal->isMissing();
+    return $this->equal !== null;
   }
 
   /**
    * @returns EqualToken
    */
   public function getEqual(): EqualToken {
-    return TypeAssert\instance_of(EqualToken::class, $this->_equal);
+    return TypeAssert\instance_of(EqualToken::class, $this->equal);
   }
 
   /**
@@ -156,19 +147,19 @@ final class Enumerator extends EditableNode {
     return $this->getEqual();
   }
 
-  public function getValueUNTYPED(): EditableNode {
-    return $this->_value;
+  final public function getValueUNTYPED(): EditableNode {
+    return $this->value;
   }
 
   public function withValue(EditableNode $value): this {
-    if ($value === $this->_value) {
+    if ($value === $this->value) {
       return $this;
     }
-    return new static($this->_name, $this->_equal, $value, $this->_semicolon);
+    return new static($this->name, $this->equal, $value, $this->semicolon);
   }
 
   public function hasValue(): bool {
-    return !$this->_value->isMissing();
+    return $this->value !== null;
   }
 
   /**
@@ -177,7 +168,7 @@ final class Enumerator extends EditableNode {
    * VariableExpression
    */
   public function getValue(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_value);
+    return TypeAssert\instance_of(EditableNode::class, $this->value);
   }
 
   /**
@@ -189,26 +180,26 @@ final class Enumerator extends EditableNode {
     return $this->getValue();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
-    return new static($this->_name, $this->_equal, $this->_value, $value);
+    return new static($this->name, $this->equal, $this->value, $value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

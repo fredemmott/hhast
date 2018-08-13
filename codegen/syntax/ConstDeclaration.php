@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<801f9675499ca3a3660219340b218c1f>>
+ * @generated SignedSource<<b571d05c13f74a584b7d6a05dafaed17>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,28 +10,15 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ConstDeclaration extends EditableNode {
 
-  private EditableNode $_visibility;
-  private EditableNode $_abstract;
-  private EditableNode $_keyword;
-  private EditableNode $_type_specifier;
-  private EditableNode $_declarators;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $visibility,
-    EditableNode $abstract,
-    EditableNode $keyword,
-    EditableNode $type_specifier,
-    EditableNode $declarators,
-    EditableNode $semicolon,
+    private ?EditableToken $visibility,
+    private ?AbstractToken $abstract,
+    private ConstToken $keyword,
+    private ?EditableNode $typeSpecifier,
+    private EditableList<ConstantDeclarator> $declarators,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('const_declaration');
-    $this->_visibility = $visibility;
-    $this->_abstract = $abstract;
-    $this->_keyword = $keyword;
-    $this->_type_specifier = $type_specifier;
-    $this->_declarators = $declarators;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -41,21 +28,21 @@ final class ConstDeclaration extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $visibility = EditableNode::fromJSON(
+    $visibility = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['const_visibility'],
       $file,
       $offset,
       $source,
     );
     $offset += $visibility->getWidth();
-    $abstract = EditableNode::fromJSON(
+    $abstract = AbstractToken::fromJSON(
       /* UNSAFE_EXPR */ $json['const_abstract'],
       $file,
       $offset,
       $source,
     );
     $offset += $abstract->getWidth();
-    $keyword = EditableNode::fromJSON(
+    $keyword = ConstToken::fromJSON(
       /* UNSAFE_EXPR */ $json['const_keyword'],
       $file,
       $offset,
@@ -69,14 +56,14 @@ final class ConstDeclaration extends EditableNode {
       $source,
     );
     $offset += $type_specifier->getWidth();
-    $declarators = EditableNode::fromJSON(
+    $declarators = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['const_declarators'],
       $file,
       $offset,
       $source,
     );
     $offset += $declarators->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['const_semicolon'],
       $file,
       $offset,
@@ -94,14 +81,14 @@ final class ConstDeclaration extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'visibility' => $this->_visibility,
-      'abstract' => $this->_abstract,
-      'keyword' => $this->_keyword,
-      'type_specifier' => $this->_type_specifier,
-      'declarators' => $this->_declarators,
-      'semicolon' => $this->_semicolon,
+      'visibility' => $this->visibility,
+      'abstract' => $this->abstract,
+      'keyword' => $this->keyword,
+      'type_specifier' => $this->typeSpecifier,
+      'declarators' => $this->declarators,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -112,19 +99,19 @@ final class ConstDeclaration extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $visibility = $this->_visibility->rewrite($rewriter, $parents);
-    $abstract = $this->_abstract->rewrite($rewriter, $parents);
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $type_specifier = $this->_type_specifier->rewrite($rewriter, $parents);
-    $declarators = $this->_declarators->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $visibility = $this->visibility?->rewrite($rewriter, $parents);
+    $abstract = $this->abstract?->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $type_specifier = $this->typeSpecifier?->rewrite($rewriter, $parents);
+    $declarators = $this->declarators->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $visibility === $this->_visibility &&
-      $abstract === $this->_abstract &&
-      $keyword === $this->_keyword &&
-      $type_specifier === $this->_type_specifier &&
-      $declarators === $this->_declarators &&
-      $semicolon === $this->_semicolon
+      $visibility === $this->visibility &&
+      $abstract === $this->abstract &&
+      $keyword === $this->keyword &&
+      $type_specifier === $this->typeSpecifier &&
+      $declarators === $this->declarators &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
@@ -138,111 +125,111 @@ final class ConstDeclaration extends EditableNode {
     );
   }
 
-  public function getVisibilityUNTYPED(): EditableNode {
-    return $this->_visibility;
+  final public function getVisibilityUNTYPED(): EditableNode {
+    return $this->visibility;
   }
 
-  public function withVisibility(EditableNode $value): this {
-    if ($value === $this->_visibility) {
+  public function withVisibility(?EditableToken $value): this {
+    if ($value === $this->visibility) {
       return $this;
     }
     return new static(
       $value,
-      $this->_abstract,
-      $this->_keyword,
-      $this->_type_specifier,
-      $this->_declarators,
-      $this->_semicolon,
+      $this->abstract,
+      $this->keyword,
+      $this->type_specifier,
+      $this->declarators,
+      $this->semicolon,
     );
   }
 
   public function hasVisibility(): bool {
-    return !$this->_visibility->isMissing();
+    return $this->visibility !== null;
   }
 
   /**
    * @returns Missing | ProtectedToken | PublicToken
    */
   public function getVisibility(): ?EditableToken {
-    if ($this->_visibility->isMissing()) {
+    if ($this->visibility->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableToken::class, $this->_visibility);
+    return TypeAssert\instance_of(EditableToken::class, $this->visibility);
   }
 
   /**
    * @returns ProtectedToken | PublicToken
    */
   public function getVisibilityx(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_visibility);
+    return TypeAssert\instance_of(EditableToken::class, $this->visibility);
   }
 
-  public function getAbstractUNTYPED(): EditableNode {
-    return $this->_abstract;
+  final public function getAbstractUNTYPED(): EditableNode {
+    return $this->abstract;
   }
 
-  public function withAbstract(EditableNode $value): this {
-    if ($value === $this->_abstract) {
+  public function withAbstract(?AbstractToken $value): this {
+    if ($value === $this->abstract) {
       return $this;
     }
     return new static(
-      $this->_visibility,
+      $this->visibility,
       $value,
-      $this->_keyword,
-      $this->_type_specifier,
-      $this->_declarators,
-      $this->_semicolon,
+      $this->keyword,
+      $this->type_specifier,
+      $this->declarators,
+      $this->semicolon,
     );
   }
 
   public function hasAbstract(): bool {
-    return !$this->_abstract->isMissing();
+    return $this->abstract !== null;
   }
 
   /**
    * @returns Missing | AbstractToken
    */
   public function getAbstract(): ?AbstractToken {
-    if ($this->_abstract->isMissing()) {
+    if ($this->abstract->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(AbstractToken::class, $this->_abstract);
+    return TypeAssert\instance_of(AbstractToken::class, $this->abstract);
   }
 
   /**
    * @returns AbstractToken
    */
   public function getAbstractx(): AbstractToken {
-    return TypeAssert\instance_of(AbstractToken::class, $this->_abstract);
+    return TypeAssert\instance_of(AbstractToken::class, $this->abstract);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(ConstToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
-      $this->_visibility,
-      $this->_abstract,
+      $this->visibility,
+      $this->abstract,
       $value,
-      $this->_type_specifier,
-      $this->_declarators,
-      $this->_semicolon,
+      $this->type_specifier,
+      $this->declarators,
+      $this->semicolon,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns ConstToken
    */
   public function getKeyword(): ConstToken {
-    return TypeAssert\instance_of(ConstToken::class, $this->_keyword);
+    return TypeAssert\instance_of(ConstToken::class, $this->keyword);
   }
 
   /**
@@ -252,26 +239,26 @@ final class ConstDeclaration extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getTypeSpecifierUNTYPED(): EditableNode {
-    return $this->_type_specifier;
+  final public function getTypeSpecifierUNTYPED(): EditableNode {
+    return $this->typeSpecifier;
   }
 
-  public function withTypeSpecifier(EditableNode $value): this {
-    if ($value === $this->_type_specifier) {
+  public function withTypeSpecifier(?EditableNode $value): this {
+    if ($value === $this->typeSpecifier) {
       return $this;
     }
     return new static(
-      $this->_visibility,
-      $this->_abstract,
-      $this->_keyword,
+      $this->visibility,
+      $this->abstract,
+      $this->keyword,
       $value,
-      $this->_declarators,
-      $this->_semicolon,
+      $this->declarators,
+      $this->semicolon,
     );
   }
 
   public function hasTypeSpecifier(): bool {
-    return !$this->_type_specifier->isMissing();
+    return $this->typeSpecifier !== null;
   }
 
   /**
@@ -280,10 +267,10 @@ final class ConstDeclaration extends EditableNode {
    * SimpleTypeSpecifier | TypeConstant | VectorTypeSpecifier
    */
   public function getTypeSpecifier(): ?EditableNode {
-    if ($this->_type_specifier->isMissing()) {
+    if ($this->typeSpecifier->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_type_specifier);
+    return TypeAssert\instance_of(EditableNode::class, $this->typeSpecifier);
   }
 
   /**
@@ -292,36 +279,38 @@ final class ConstDeclaration extends EditableNode {
    * TypeConstant | VectorTypeSpecifier
    */
   public function getTypeSpecifierx(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type_specifier);
+    return TypeAssert\instance_of(EditableNode::class, $this->typeSpecifier);
   }
 
-  public function getDeclaratorsUNTYPED(): EditableNode {
-    return $this->_declarators;
+  final public function getDeclaratorsUNTYPED(): EditableNode {
+    return $this->declarators;
   }
 
-  public function withDeclarators(EditableNode $value): this {
-    if ($value === $this->_declarators) {
+  public function withDeclarators(
+    EditableList<ConstantDeclarator> $value,
+  ): this {
+    if ($value === $this->declarators) {
       return $this;
     }
     return new static(
-      $this->_visibility,
-      $this->_abstract,
-      $this->_keyword,
-      $this->_type_specifier,
+      $this->visibility,
+      $this->abstract,
+      $this->keyword,
+      $this->type_specifier,
       $value,
-      $this->_semicolon,
+      $this->semicolon,
     );
   }
 
   public function hasDeclarators(): bool {
-    return !$this->_declarators->isMissing();
+    return $this->declarators !== null;
   }
 
   /**
    * @returns EditableList<ConstantDeclarator>
    */
   public function getDeclarators(): EditableList<ConstantDeclarator> {
-    return TypeAssert\instance_of(EditableList::class, $this->_declarators);
+    return TypeAssert\instance_of(EditableList::class, $this->declarators);
   }
 
   /**
@@ -331,33 +320,33 @@ final class ConstDeclaration extends EditableNode {
     return $this->getDeclarators();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
     return new static(
-      $this->_visibility,
-      $this->_abstract,
-      $this->_keyword,
-      $this->_type_specifier,
-      $this->_declarators,
+      $this->visibility,
+      $this->abstract,
+      $this->keyword,
+      $this->type_specifier,
+      $this->declarators,
       $value,
     );
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

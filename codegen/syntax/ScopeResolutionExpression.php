@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<a4d26ce02300bc32a1759e2797559c86>>
+ * @generated SignedSource<<20222a23c661b85af27474e724140672>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ScopeResolutionExpression extends EditableNode {
 
-  private EditableNode $_qualifier;
-  private EditableNode $_operator;
-  private EditableNode $_name;
-
   public function __construct(
-    EditableNode $qualifier,
-    EditableNode $operator,
-    EditableNode $name,
+    private EditableNode $qualifier,
+    private ColonColonToken $operator,
+    private EditableNode $name,
   ) {
     parent::__construct('scope_resolution_expression');
-    $this->_qualifier = $qualifier;
-    $this->_operator = $operator;
-    $this->_name = $name;
   }
 
   <<__Override>>
@@ -39,7 +32,7 @@ final class ScopeResolutionExpression extends EditableNode {
       $source,
     );
     $offset += $qualifier->getWidth();
-    $operator = EditableNode::fromJSON(
+    $operator = ColonColonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['scope_resolution_operator'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class ScopeResolutionExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'qualifier' => $this->_qualifier,
-      'operator' => $this->_operator,
-      'name' => $this->_name,
+      'qualifier' => $this->qualifier,
+      'operator' => $this->operator,
+      'name' => $this->name,
     ];
   }
 
@@ -72,32 +65,32 @@ final class ScopeResolutionExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $qualifier = $this->_qualifier->rewrite($rewriter, $parents);
-    $operator = $this->_operator->rewrite($rewriter, $parents);
-    $name = $this->_name->rewrite($rewriter, $parents);
+    $qualifier = $this->qualifier->rewrite($rewriter, $parents);
+    $operator = $this->operator->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
     if (
-      $qualifier === $this->_qualifier &&
-      $operator === $this->_operator &&
-      $name === $this->_name
+      $qualifier === $this->qualifier &&
+      $operator === $this->operator &&
+      $name === $this->name
     ) {
       return $this;
     }
     return new static($qualifier, $operator, $name);
   }
 
-  public function getQualifierUNTYPED(): EditableNode {
-    return $this->_qualifier;
+  final public function getQualifierUNTYPED(): EditableNode {
+    return $this->qualifier;
   }
 
   public function withQualifier(EditableNode $value): this {
-    if ($value === $this->_qualifier) {
+    if ($value === $this->qualifier) {
       return $this;
     }
-    return new static($value, $this->_operator, $this->_name);
+    return new static($value, $this->operator, $this->name);
   }
 
   public function hasQualifier(): bool {
-    return !$this->_qualifier->isMissing();
+    return $this->qualifier !== null;
   }
 
   /**
@@ -108,7 +101,7 @@ final class ScopeResolutionExpression extends EditableNode {
    * VariableExpression
    */
   public function getQualifier(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_qualifier);
+    return TypeAssert\instance_of(EditableNode::class, $this->qualifier);
   }
 
   /**
@@ -122,26 +115,26 @@ final class ScopeResolutionExpression extends EditableNode {
     return $this->getQualifier();
   }
 
-  public function getOperatorUNTYPED(): EditableNode {
-    return $this->_operator;
+  final public function getOperatorUNTYPED(): EditableNode {
+    return $this->operator;
   }
 
-  public function withOperator(EditableNode $value): this {
-    if ($value === $this->_operator) {
+  public function withOperator(ColonColonToken $value): this {
+    if ($value === $this->operator) {
       return $this;
     }
-    return new static($this->_qualifier, $value, $this->_name);
+    return new static($this->qualifier, $value, $this->name);
   }
 
   public function hasOperator(): bool {
-    return !$this->_operator->isMissing();
+    return $this->operator !== null;
   }
 
   /**
    * @returns ColonColonToken
    */
   public function getOperator(): ColonColonToken {
-    return TypeAssert\instance_of(ColonColonToken::class, $this->_operator);
+    return TypeAssert\instance_of(ColonColonToken::class, $this->operator);
   }
 
   /**
@@ -151,19 +144,19 @@ final class ScopeResolutionExpression extends EditableNode {
     return $this->getOperator();
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
   public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+    if ($value === $this->name) {
       return $this;
     }
-    return new static($this->_qualifier, $this->_operator, $value);
+    return new static($this->qualifier, $this->operator, $value);
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
@@ -171,7 +164,7 @@ final class ScopeResolutionExpression extends EditableNode {
    * | VariableToken
    */
   public function getName(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_name);
+    return TypeAssert\instance_of(EditableNode::class, $this->name);
   }
 
   /**

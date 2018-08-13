@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<aa966ea0e084eef5000ac6ca0a39353f>>
+ * @generated SignedSource<<d58b9023498aea8e664b18509ded4c98>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,11 +10,8 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ErrorSyntax extends EditableNode {
 
-  private EditableNode $_error;
-
-  public function __construct(EditableNode $error) {
+  public function __construct(private EditableToken $error) {
     parent::__construct('error');
-    $this->_error = $error;
   }
 
   <<__Override>>
@@ -24,7 +21,7 @@ final class ErrorSyntax extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $error = EditableNode::fromJSON(
+    $error = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['error_error'],
       $file,
       $offset,
@@ -35,9 +32,9 @@ final class ErrorSyntax extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'error' => $this->_error,
+      'error' => $this->error,
     ];
   }
 
@@ -48,26 +45,26 @@ final class ErrorSyntax extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $error = $this->_error->rewrite($rewriter, $parents);
-    if ($error === $this->_error) {
+    $error = $this->error->rewrite($rewriter, $parents);
+    if ($error === $this->error) {
       return $this;
     }
     return new static($error);
   }
 
-  public function getErrorUNTYPED(): EditableNode {
-    return $this->_error;
+  final public function getErrorUNTYPED(): EditableNode {
+    return $this->error;
   }
 
-  public function withError(EditableNode $value): this {
-    if ($value === $this->_error) {
+  public function withError(EditableToken $value): this {
+    if ($value === $this->error) {
       return $this;
     }
     return new static($value);
   }
 
   public function hasError(): bool {
-    return !$this->_error->isMissing();
+    return $this->error !== null;
   }
 
   /**
@@ -76,7 +73,7 @@ final class ErrorSyntax extends EditableNode {
    * LeftBraceToken | RightBraceToken
    */
   public function getError(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_error);
+    return TypeAssert\instance_of(EditableToken::class, $this->error);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<7d8c2c9395b8ed9305920fb0503663f7>>
+ * @generated SignedSource<<5001500e5114310a38cc3484d64b8fba>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,25 +10,14 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class DeclareDirectiveStatement extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_expression;
-  private EditableNode $_right_paren;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_paren,
-    EditableNode $expression,
-    EditableNode $right_paren,
-    EditableNode $semicolon,
+    private DeclareToken $keyword,
+    private LeftParenToken $leftParen,
+    private BinaryExpression $expression,
+    private RightParenToken $rightParen,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('declare_directive_statement');
-    $this->_keyword = $keyword;
-    $this->_left_paren = $left_paren;
-    $this->_expression = $expression;
-    $this->_right_paren = $right_paren;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -38,35 +27,35 @@ final class DeclareDirectiveStatement extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = DeclareToken::fromJSON(
       /* UNSAFE_EXPR */ $json['declare_directive_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['declare_directive_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $expression = EditableNode::fromJSON(
+    $expression = BinaryExpression::fromJSON(
       /* UNSAFE_EXPR */ $json['declare_directive_expression'],
       $file,
       $offset,
       $source,
     );
     $offset += $expression->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['declare_directive_right_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $right_paren->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['declare_directive_semicolon'],
       $file,
       $offset,
@@ -78,13 +67,13 @@ final class DeclareDirectiveStatement extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_paren' => $this->_left_paren,
-      'expression' => $this->_expression,
-      'right_paren' => $this->_right_paren,
-      'semicolon' => $this->_semicolon,
+      'keyword' => $this->keyword,
+      'left_paren' => $this->leftParen,
+      'expression' => $this->expression,
+      'right_paren' => $this->rightParen,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -95,17 +84,17 @@ final class DeclareDirectiveStatement extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $expression = $this->_expression->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $expression = $this->expression->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_paren === $this->_left_paren &&
-      $expression === $this->_expression &&
-      $right_paren === $this->_right_paren &&
-      $semicolon === $this->_semicolon
+      $keyword === $this->keyword &&
+      $left_paren === $this->leftParen &&
+      $expression === $this->expression &&
+      $right_paren === $this->rightParen &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
@@ -113,32 +102,32 @@ final class DeclareDirectiveStatement extends EditableNode {
       new static($keyword, $left_paren, $expression, $right_paren, $semicolon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(DeclareToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_paren,
-      $this->_expression,
-      $this->_right_paren,
-      $this->_semicolon,
+      $this->left_paren,
+      $this->expression,
+      $this->right_paren,
+      $this->semicolon,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns DeclareToken
    */
   public function getKeyword(): DeclareToken {
-    return TypeAssert\instance_of(DeclareToken::class, $this->_keyword);
+    return TypeAssert\instance_of(DeclareToken::class, $this->keyword);
   }
 
   /**
@@ -148,32 +137,32 @@ final class DeclareDirectiveStatement extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_expression,
-      $this->_right_paren,
-      $this->_semicolon,
+      $this->expression,
+      $this->right_paren,
+      $this->semicolon,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -183,32 +172,32 @@ final class DeclareDirectiveStatement extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getExpressionUNTYPED(): EditableNode {
-    return $this->_expression;
+  final public function getExpressionUNTYPED(): EditableNode {
+    return $this->expression;
   }
 
-  public function withExpression(EditableNode $value): this {
-    if ($value === $this->_expression) {
+  public function withExpression(BinaryExpression $value): this {
+    if ($value === $this->expression) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
+      $this->keyword,
+      $this->left_paren,
       $value,
-      $this->_right_paren,
-      $this->_semicolon,
+      $this->right_paren,
+      $this->semicolon,
     );
   }
 
   public function hasExpression(): bool {
-    return !$this->_expression->isMissing();
+    return $this->expression !== null;
   }
 
   /**
    * @returns BinaryExpression
    */
   public function getExpression(): BinaryExpression {
-    return TypeAssert\instance_of(BinaryExpression::class, $this->_expression);
+    return TypeAssert\instance_of(BinaryExpression::class, $this->expression);
   }
 
   /**
@@ -218,32 +207,32 @@ final class DeclareDirectiveStatement extends EditableNode {
     return $this->getExpression();
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_expression,
+      $this->keyword,
+      $this->left_paren,
+      $this->expression,
       $value,
-      $this->_semicolon,
+      $this->semicolon,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
@@ -253,32 +242,32 @@ final class DeclareDirectiveStatement extends EditableNode {
     return $this->getRightParen();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_expression,
-      $this->_right_paren,
+      $this->keyword,
+      $this->left_paren,
+      $this->expression,
+      $this->right_paren,
       $value,
     );
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<f1f81fb6264ff288d313ed18704fee23>>
+ * @generated SignedSource<<ba07feee92f53b15a9dbf62e174f9f44>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class BracedExpression extends EditableNode {
 
-  private EditableNode $_left_brace;
-  private EditableNode $_expression;
-  private EditableNode $_right_brace;
-
   public function __construct(
-    EditableNode $left_brace,
-    EditableNode $expression,
-    EditableNode $right_brace,
+    private LeftBraceToken $leftBrace,
+    private EditableNode $expression,
+    private RightBraceToken $rightBrace,
   ) {
     parent::__construct('braced_expression');
-    $this->_left_brace = $left_brace;
-    $this->_expression = $expression;
-    $this->_right_brace = $right_brace;
   }
 
   <<__Override>>
@@ -32,7 +25,7 @@ final class BracedExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_brace = EditableNode::fromJSON(
+    $left_brace = LeftBraceToken::fromJSON(
       /* UNSAFE_EXPR */ $json['braced_expression_left_brace'],
       $file,
       $offset,
@@ -46,7 +39,7 @@ final class BracedExpression extends EditableNode {
       $source,
     );
     $offset += $expression->getWidth();
-    $right_brace = EditableNode::fromJSON(
+    $right_brace = RightBraceToken::fromJSON(
       /* UNSAFE_EXPR */ $json['braced_expression_right_brace'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class BracedExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_brace' => $this->_left_brace,
-      'expression' => $this->_expression,
-      'right_brace' => $this->_right_brace,
+      'left_brace' => $this->leftBrace,
+      'expression' => $this->expression,
+      'right_brace' => $this->rightBrace,
     ];
   }
 
@@ -72,39 +65,39 @@ final class BracedExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_brace = $this->_left_brace->rewrite($rewriter, $parents);
-    $expression = $this->_expression->rewrite($rewriter, $parents);
-    $right_brace = $this->_right_brace->rewrite($rewriter, $parents);
+    $left_brace = $this->leftBrace->rewrite($rewriter, $parents);
+    $expression = $this->expression->rewrite($rewriter, $parents);
+    $right_brace = $this->rightBrace->rewrite($rewriter, $parents);
     if (
-      $left_brace === $this->_left_brace &&
-      $expression === $this->_expression &&
-      $right_brace === $this->_right_brace
+      $left_brace === $this->leftBrace &&
+      $expression === $this->expression &&
+      $right_brace === $this->rightBrace
     ) {
       return $this;
     }
     return new static($left_brace, $expression, $right_brace);
   }
 
-  public function getLeftBraceUNTYPED(): EditableNode {
-    return $this->_left_brace;
+  final public function getLeftBraceUNTYPED(): EditableNode {
+    return $this->leftBrace;
   }
 
-  public function withLeftBrace(EditableNode $value): this {
-    if ($value === $this->_left_brace) {
+  public function withLeftBrace(LeftBraceToken $value): this {
+    if ($value === $this->leftBrace) {
       return $this;
     }
-    return new static($value, $this->_expression, $this->_right_brace);
+    return new static($value, $this->expression, $this->right_brace);
   }
 
   public function hasLeftBrace(): bool {
-    return !$this->_left_brace->isMissing();
+    return $this->leftBrace !== null;
   }
 
   /**
    * @returns LeftBraceToken
    */
   public function getLeftBrace(): LeftBraceToken {
-    return TypeAssert\instance_of(LeftBraceToken::class, $this->_left_brace);
+    return TypeAssert\instance_of(LeftBraceToken::class, $this->leftBrace);
   }
 
   /**
@@ -114,19 +107,19 @@ final class BracedExpression extends EditableNode {
     return $this->getLeftBrace();
   }
 
-  public function getExpressionUNTYPED(): EditableNode {
-    return $this->_expression;
+  final public function getExpressionUNTYPED(): EditableNode {
+    return $this->expression;
   }
 
   public function withExpression(EditableNode $value): this {
-    if ($value === $this->_expression) {
+    if ($value === $this->expression) {
       return $this;
     }
-    return new static($this->_left_brace, $value, $this->_right_brace);
+    return new static($this->left_brace, $value, $this->right_brace);
   }
 
   public function hasExpression(): bool {
-    return !$this->_expression->isMissing();
+    return $this->expression !== null;
   }
 
   /**
@@ -136,7 +129,7 @@ final class BracedExpression extends EditableNode {
    * NameToken | VariableExpression
    */
   public function getExpression(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_expression);
+    return TypeAssert\instance_of(EditableNode::class, $this->expression);
   }
 
   /**
@@ -149,26 +142,26 @@ final class BracedExpression extends EditableNode {
     return $this->getExpression();
   }
 
-  public function getRightBraceUNTYPED(): EditableNode {
-    return $this->_right_brace;
+  final public function getRightBraceUNTYPED(): EditableNode {
+    return $this->rightBrace;
   }
 
-  public function withRightBrace(EditableNode $value): this {
-    if ($value === $this->_right_brace) {
+  public function withRightBrace(RightBraceToken $value): this {
+    if ($value === $this->rightBrace) {
       return $this;
     }
-    return new static($this->_left_brace, $this->_expression, $value);
+    return new static($this->left_brace, $this->expression, $value);
   }
 
   public function hasRightBrace(): bool {
-    return !$this->_right_brace->isMissing();
+    return $this->rightBrace !== null;
   }
 
   /**
    * @returns RightBraceToken
    */
   public function getRightBrace(): RightBraceToken {
-    return TypeAssert\instance_of(RightBraceToken::class, $this->_right_brace);
+    return TypeAssert\instance_of(RightBraceToken::class, $this->rightBrace);
   }
 
   /**

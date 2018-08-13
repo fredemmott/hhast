@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<f5c5be209252300ac03c604491d6cd3d>>
+ * @generated SignedSource<<4c0826c9f72f3f2ecfd759f08069164a>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class SafeMemberSelectionExpression extends EditableNode {
 
-  private EditableNode $_object;
-  private EditableNode $_operator;
-  private EditableNode $_name;
-
   public function __construct(
-    EditableNode $object,
-    EditableNode $operator,
-    EditableNode $name,
+    private EditableNode $object,
+    private QuestionMinusGreaterThanToken $operator,
+    private EditableNode $name,
   ) {
     parent::__construct('safe_member_selection_expression');
-    $this->_object = $object;
-    $this->_operator = $operator;
-    $this->_name = $name;
   }
 
   <<__Override>>
@@ -39,7 +32,7 @@ final class SafeMemberSelectionExpression extends EditableNode {
       $source,
     );
     $offset += $object->getWidth();
-    $operator = EditableNode::fromJSON(
+    $operator = QuestionMinusGreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['safe_member_operator'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class SafeMemberSelectionExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'object' => $this->_object,
-      'operator' => $this->_operator,
-      'name' => $this->_name,
+      'object' => $this->object,
+      'operator' => $this->operator,
+      'name' => $this->name,
     ];
   }
 
@@ -72,32 +65,32 @@ final class SafeMemberSelectionExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $object = $this->_object->rewrite($rewriter, $parents);
-    $operator = $this->_operator->rewrite($rewriter, $parents);
-    $name = $this->_name->rewrite($rewriter, $parents);
+    $object = $this->object->rewrite($rewriter, $parents);
+    $operator = $this->operator->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
     if (
-      $object === $this->_object &&
-      $operator === $this->_operator &&
-      $name === $this->_name
+      $object === $this->object &&
+      $operator === $this->operator &&
+      $name === $this->name
     ) {
       return $this;
     }
     return new static($object, $operator, $name);
   }
 
-  public function getObjectUNTYPED(): EditableNode {
-    return $this->_object;
+  final public function getObjectUNTYPED(): EditableNode {
+    return $this->object;
   }
 
   public function withObject(EditableNode $value): this {
-    if ($value === $this->_object) {
+    if ($value === $this->object) {
       return $this;
     }
-    return new static($value, $this->_operator, $this->_name);
+    return new static($value, $this->operator, $this->name);
   }
 
   public function hasObject(): bool {
-    return !$this->_object->isMissing();
+    return $this->object !== null;
   }
 
   /**
@@ -106,7 +99,7 @@ final class SafeMemberSelectionExpression extends EditableNode {
    * ScopeResolutionExpression | VariableExpression
    */
   public function getObject(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_object);
+    return TypeAssert\instance_of(EditableNode::class, $this->object);
   }
 
   /**
@@ -118,19 +111,19 @@ final class SafeMemberSelectionExpression extends EditableNode {
     return $this->getObject();
   }
 
-  public function getOperatorUNTYPED(): EditableNode {
-    return $this->_operator;
+  final public function getOperatorUNTYPED(): EditableNode {
+    return $this->operator;
   }
 
-  public function withOperator(EditableNode $value): this {
-    if ($value === $this->_operator) {
+  public function withOperator(QuestionMinusGreaterThanToken $value): this {
+    if ($value === $this->operator) {
       return $this;
     }
-    return new static($this->_object, $value, $this->_name);
+    return new static($this->object, $value, $this->name);
   }
 
   public function hasOperator(): bool {
-    return !$this->_operator->isMissing();
+    return $this->operator !== null;
   }
 
   /**
@@ -139,7 +132,7 @@ final class SafeMemberSelectionExpression extends EditableNode {
   public function getOperator(): QuestionMinusGreaterThanToken {
     return TypeAssert\instance_of(
       QuestionMinusGreaterThanToken::class,
-      $this->_operator,
+      $this->operator,
     );
   }
 
@@ -150,26 +143,26 @@ final class SafeMemberSelectionExpression extends EditableNode {
     return $this->getOperator();
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
   public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+    if ($value === $this->name) {
       return $this;
     }
-    return new static($this->_object, $this->_operator, $value);
+    return new static($this->object, $this->operator, $value);
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns PrefixUnaryExpression | XHPClassNameToken | NameToken
    */
   public function getName(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_name);
+    return TypeAssert\instance_of(EditableNode::class, $this->name);
   }
 
   /**

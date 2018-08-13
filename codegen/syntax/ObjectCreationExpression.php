@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<94cc30b608da445aeffb85add1f4a392>>
+ * @generated SignedSource<<6a007ac01df825ecfe4102edcf801217>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ObjectCreationExpression extends EditableNode {
 
-  private EditableNode $_new_keyword;
-  private EditableNode $_object;
-
-  public function __construct(EditableNode $new_keyword, EditableNode $object) {
+  public function __construct(
+    private NewToken $newKeyword,
+    private EditableNode $object,
+  ) {
     parent::__construct('object_creation_expression');
-    $this->_new_keyword = $new_keyword;
-    $this->_object = $object;
   }
 
   <<__Override>>
@@ -26,7 +24,7 @@ final class ObjectCreationExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $new_keyword = EditableNode::fromJSON(
+    $new_keyword = NewToken::fromJSON(
       /* UNSAFE_EXPR */ $json['object_creation_new_keyword'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class ObjectCreationExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'new_keyword' => $this->_new_keyword,
-      'object' => $this->_object,
+      'new_keyword' => $this->newKeyword,
+      'object' => $this->object,
     ];
   }
 
@@ -58,34 +56,34 @@ final class ObjectCreationExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $new_keyword = $this->_new_keyword->rewrite($rewriter, $parents);
-    $object = $this->_object->rewrite($rewriter, $parents);
-    if ($new_keyword === $this->_new_keyword && $object === $this->_object) {
+    $new_keyword = $this->newKeyword->rewrite($rewriter, $parents);
+    $object = $this->object->rewrite($rewriter, $parents);
+    if ($new_keyword === $this->newKeyword && $object === $this->object) {
       return $this;
     }
     return new static($new_keyword, $object);
   }
 
-  public function getNewKeywordUNTYPED(): EditableNode {
-    return $this->_new_keyword;
+  final public function getNewKeywordUNTYPED(): EditableNode {
+    return $this->newKeyword;
   }
 
-  public function withNewKeyword(EditableNode $value): this {
-    if ($value === $this->_new_keyword) {
+  public function withNewKeyword(NewToken $value): this {
+    if ($value === $this->newKeyword) {
       return $this;
     }
-    return new static($value, $this->_object);
+    return new static($value, $this->object);
   }
 
   public function hasNewKeyword(): bool {
-    return !$this->_new_keyword->isMissing();
+    return $this->newKeyword !== null;
   }
 
   /**
    * @returns NewToken
    */
   public function getNewKeyword(): NewToken {
-    return TypeAssert\instance_of(NewToken::class, $this->_new_keyword);
+    return TypeAssert\instance_of(NewToken::class, $this->newKeyword);
   }
 
   /**
@@ -95,26 +93,26 @@ final class ObjectCreationExpression extends EditableNode {
     return $this->getNewKeyword();
   }
 
-  public function getObjectUNTYPED(): EditableNode {
-    return $this->_object;
+  final public function getObjectUNTYPED(): EditableNode {
+    return $this->object;
   }
 
   public function withObject(EditableNode $value): this {
-    if ($value === $this->_object) {
+    if ($value === $this->object) {
       return $this;
     }
-    return new static($this->_new_keyword, $value);
+    return new static($this->new_keyword, $value);
   }
 
   public function hasObject(): bool {
-    return !$this->_object->isMissing();
+    return $this->object !== null;
   }
 
   /**
    * @returns AnonymousClass | ConstructorCall
    */
   public function getObject(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_object);
+    return TypeAssert\instance_of(EditableNode::class, $this->object);
   }
 
   /**

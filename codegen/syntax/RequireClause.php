@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<8f85b4ea79f10c3d9924c9ce5d9cfcfb>>
+ * @generated SignedSource<<43986b7e0b57909bf876aa6b8e8df8f9>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class RequireClause extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_kind;
-  private EditableNode $_name;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $kind,
-    EditableNode $name,
-    EditableNode $semicolon,
+    private RequireToken $keyword,
+    private EditableToken $kind,
+    private EditableNode $name,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('require_clause');
-    $this->_keyword = $keyword;
-    $this->_kind = $kind;
-    $this->_name = $name;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -35,14 +26,14 @@ final class RequireClause extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = RequireToken::fromJSON(
       /* UNSAFE_EXPR */ $json['require_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $kind = EditableNode::fromJSON(
+    $kind = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['require_kind'],
       $file,
       $offset,
@@ -56,7 +47,7 @@ final class RequireClause extends EditableNode {
       $source,
     );
     $offset += $name->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['require_semicolon'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class RequireClause extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'kind' => $this->_kind,
-      'name' => $this->_name,
-      'semicolon' => $this->_semicolon,
+      'keyword' => $this->keyword,
+      'kind' => $this->kind,
+      'name' => $this->name,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -83,41 +74,41 @@ final class RequireClause extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $kind = $this->_kind->rewrite($rewriter, $parents);
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $kind = $this->kind->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $kind === $this->_kind &&
-      $name === $this->_name &&
-      $semicolon === $this->_semicolon
+      $keyword === $this->keyword &&
+      $kind === $this->kind &&
+      $name === $this->name &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
     return new static($keyword, $kind, $name, $semicolon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(RequireToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_kind, $this->_name, $this->_semicolon);
+    return new static($value, $this->kind, $this->name, $this->semicolon);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns RequireToken
    */
   public function getKeyword(): RequireToken {
-    return TypeAssert\instance_of(RequireToken::class, $this->_keyword);
+    return TypeAssert\instance_of(RequireToken::class, $this->keyword);
   }
 
   /**
@@ -127,26 +118,26 @@ final class RequireClause extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getKindUNTYPED(): EditableNode {
-    return $this->_kind;
+  final public function getKindUNTYPED(): EditableNode {
+    return $this->kind;
   }
 
-  public function withKind(EditableNode $value): this {
-    if ($value === $this->_kind) {
+  public function withKind(EditableToken $value): this {
+    if ($value === $this->kind) {
       return $this;
     }
-    return new static($this->_keyword, $value, $this->_name, $this->_semicolon);
+    return new static($this->keyword, $value, $this->name, $this->semicolon);
   }
 
   public function hasKind(): bool {
-    return !$this->_kind->isMissing();
+    return $this->kind !== null;
   }
 
   /**
    * @returns ExtendsToken | ImplementsToken
    */
   public function getKind(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_kind);
+    return TypeAssert\instance_of(EditableToken::class, $this->kind);
   }
 
   /**
@@ -156,26 +147,26 @@ final class RequireClause extends EditableNode {
     return $this->getKind();
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
   public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+    if ($value === $this->name) {
       return $this;
     }
-    return new static($this->_keyword, $this->_kind, $value, $this->_semicolon);
+    return new static($this->keyword, $this->kind, $value, $this->semicolon);
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns GenericTypeSpecifier | SimpleTypeSpecifier
    */
   public function getName(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_name);
+    return TypeAssert\instance_of(EditableNode::class, $this->name);
   }
 
   /**
@@ -185,26 +176,26 @@ final class RequireClause extends EditableNode {
     return $this->getName();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
-    return new static($this->_keyword, $this->_kind, $this->_name, $value);
+    return new static($this->keyword, $this->kind, $this->name, $value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

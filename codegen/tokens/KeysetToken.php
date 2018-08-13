@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<35c6be750274a8f9af5df2967fa0e906>>
+ * @generated SignedSource<<d00d44f58a77eb4228fb7934f3acbd34>>
  */
 namespace Facebook\HHAST;
 
@@ -19,7 +19,7 @@ final class KeysetToken extends EditableTokenWithVariableText {
   }
 
   public function hasLeading(): bool {
-    return !$this->getLeading()->isMissing();
+    return $this->_leading !== null;
   }
 
   <<__Override>>
@@ -27,11 +27,11 @@ final class KeysetToken extends EditableTokenWithVariableText {
     if ($value === $this->getLeading()) {
       return $this;
     }
-    return new self($value, $this->getTrailing());
+    return new self($value, $this->_leading);
   }
 
   public function hasTrailing(): bool {
-    return !$this->getTrailing()->isMissing();
+    return $this->_trailing !== null;
   }
 
   <<__Override>>
@@ -39,7 +39,7 @@ final class KeysetToken extends EditableTokenWithVariableText {
     if ($value === $this->getTrailing()) {
       return $this;
     }
-    return new self($this->getLeading(), $value);
+    return new self($this->_trailing, $value);
   }
 
   <<__Override>>

@@ -28,11 +28,11 @@ abstract class EditableNode {
   }
 
   public abstract function getChildren(
-  ): dict<string, EditableNode>;
+  ): dict<string, ?EditableNode>;
 
   public function getChildrenWhere(
-    (function(EditableNode):bool) $filter,
-  ): dict<string, EditableNode> {
+    (function(?EditableNode):bool) $filter,
+  ): dict<string, ?EditableNode> {
     return Dict\filter(
       $this->getChildren(),
       $child ==> $filter($child),
@@ -89,10 +89,6 @@ abstract class EditableNode {
   }
 
   public function isList(): bool {
-    return false;
-  }
-
-  public function isMissing(): bool {
     return false;
   }
 

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<7319c46a309f8c3fbd7bae405cb4dd3c>>
+ * @generated SignedSource<<b4b18858dbe0ccb567ac596ddeede7ea>>
  */
 namespace Facebook\HHAST;
 
@@ -19,7 +19,7 @@ final class CloneToken extends EditableTokenWithVariableText {
   }
 
   public function hasLeading(): bool {
-    return !$this->getLeading()->isMissing();
+    return $this->_leading !== null;
   }
 
   <<__Override>>
@@ -27,11 +27,11 @@ final class CloneToken extends EditableTokenWithVariableText {
     if ($value === $this->getLeading()) {
       return $this;
     }
-    return new self($value, $this->getTrailing());
+    return new self($value, $this->_leading);
   }
 
   public function hasTrailing(): bool {
-    return !$this->getTrailing()->isMissing();
+    return $this->_trailing !== null;
   }
 
   <<__Override>>
@@ -39,7 +39,7 @@ final class CloneToken extends EditableTokenWithVariableText {
     if ($value === $this->getTrailing()) {
       return $this;
     }
-    return new self($this->getLeading(), $value);
+    return new self($this->_trailing, $value);
   }
 
   <<__Override>>

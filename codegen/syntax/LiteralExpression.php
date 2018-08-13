@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<5196b52bffd06ea799ab56d3e8da9dda>>
+ * @generated SignedSource<<d50b80e61d9964ca0469048dc93603db>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,11 +10,8 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class LiteralExpression extends EditableNode {
 
-  private EditableNode $_expression;
-
-  public function __construct(EditableNode $expression) {
+  public function __construct(private EditableNode $expression) {
     parent::__construct('literal_expression');
-    $this->_expression = $expression;
   }
 
   <<__Override>>
@@ -35,9 +32,9 @@ final class LiteralExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'expression' => $this->_expression,
+      'expression' => $this->expression,
     ];
   }
 
@@ -48,33 +45,33 @@ final class LiteralExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $expression = $this->_expression->rewrite($rewriter, $parents);
-    if ($expression === $this->_expression) {
+    $expression = $this->expression->rewrite($rewriter, $parents);
+    if ($expression === $this->expression) {
       return $this;
     }
     return new static($expression);
   }
 
-  public function getExpressionUNTYPED(): EditableNode {
-    return $this->_expression;
+  final public function getExpressionUNTYPED(): EditableNode {
+    return $this->expression;
   }
 
   public function withExpression(EditableNode $value): this {
-    if ($value === $this->_expression) {
+    if ($value === $this->expression) {
       return $this;
     }
     return new static($value);
   }
 
   public function hasExpression(): bool {
-    return !$this->_expression->isMissing();
+    return $this->expression !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getExpression(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_expression);
+    return TypeAssert\instance_of(EditableNode::class, $this->expression);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9204b07a7c7f9e440f2fb6c2cb002d2a>>
+ * @generated SignedSource<<e555c36993b761c50fe650d6f5c0d0db>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class TupleExpression extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_items;
-  private EditableNode $_right_paren;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_paren,
-    EditableNode $items,
-    EditableNode $right_paren,
+    private TupleToken $keyword,
+    private LeftParenToken $leftParen,
+    private ?EditableList<EditableNode> $items,
+    private RightParenToken $rightParen,
   ) {
     parent::__construct('tuple_expression');
-    $this->_keyword = $keyword;
-    $this->_left_paren = $left_paren;
-    $this->_items = $items;
-    $this->_right_paren = $right_paren;
   }
 
   <<__Override>>
@@ -35,28 +26,28 @@ final class TupleExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = TupleToken::fromJSON(
       /* UNSAFE_EXPR */ $json['tuple_expression_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['tuple_expression_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $items = EditableNode::fromJSON(
+    $items = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['tuple_expression_items'],
       $file,
       $offset,
       $source,
     );
     $offset += $items->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['tuple_expression_right_paren'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class TupleExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_paren' => $this->_left_paren,
-      'items' => $this->_items,
-      'right_paren' => $this->_right_paren,
+      'keyword' => $this->keyword,
+      'left_paren' => $this->leftParen,
+      'items' => $this->items,
+      'right_paren' => $this->rightParen,
     ];
   }
 
@@ -83,46 +74,42 @@ final class TupleExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $items = $this->_items->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $items = $this->items?->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_paren === $this->_left_paren &&
-      $items === $this->_items &&
-      $right_paren === $this->_right_paren
+      $keyword === $this->keyword &&
+      $left_paren === $this->leftParen &&
+      $items === $this->items &&
+      $right_paren === $this->rightParen
     ) {
       return $this;
     }
     return new static($keyword, $left_paren, $items, $right_paren);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(TupleToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static(
-      $value,
-      $this->_left_paren,
-      $this->_items,
-      $this->_right_paren,
-    );
+    return
+      new static($value, $this->left_paren, $this->items, $this->right_paren);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns TupleToken
    */
   public function getKeyword(): TupleToken {
-    return TypeAssert\instance_of(TupleToken::class, $this->_keyword);
+    return TypeAssert\instance_of(TupleToken::class, $this->keyword);
   }
 
   /**
@@ -132,27 +119,26 @@ final class TupleExpression extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
-    return
-      new static($this->_keyword, $value, $this->_items, $this->_right_paren);
+    return new static($this->keyword, $value, $this->items, $this->right_paren);
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -162,24 +148,20 @@ final class TupleExpression extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getItemsUNTYPED(): EditableNode {
-    return $this->_items;
+  final public function getItemsUNTYPED(): EditableNode {
+    return $this->items;
   }
 
-  public function withItems(EditableNode $value): this {
-    if ($value === $this->_items) {
+  public function withItems(?EditableList<EditableNode> $value): this {
+    if ($value === $this->items) {
       return $this;
     }
-    return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $value,
-      $this->_right_paren,
-    );
+    return
+      new static($this->keyword, $this->left_paren, $value, $this->right_paren);
   }
 
   public function hasItems(): bool {
-    return !$this->_items->isMissing();
+    return $this->items !== null;
   }
 
   /**
@@ -190,10 +172,10 @@ final class TupleExpression extends EditableNode {
    * Missing
    */
   public function getItems(): ?EditableList<EditableNode> {
-    if ($this->_items->isMissing()) {
+    if ($this->items->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_items);
+    return TypeAssert\instance_of(EditableList::class, $this->items);
   }
 
   /**
@@ -203,30 +185,29 @@ final class TupleExpression extends EditableNode {
    * EditableList<LiteralExpression> | EditableList<VariableExpression>
    */
   public function getItemsx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_items);
+    return TypeAssert\instance_of(EditableList::class, $this->items);
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
-    return
-      new static($this->_keyword, $this->_left_paren, $this->_items, $value);
+    return new static($this->keyword, $this->left_paren, $this->items, $value);
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**

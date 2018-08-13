@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<48ec0d24670e04a1057a0ba96f14f4ab>>
+ * @generated SignedSource<<2769cc8177dea04b9a7072baec1dfed3>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class NullableAsExpression extends EditableNode {
 
-  private EditableNode $_left_operand;
-  private EditableNode $_operator;
-  private EditableNode $_right_operand;
-
   public function __construct(
-    EditableNode $left_operand,
-    EditableNode $operator,
-    EditableNode $right_operand,
+    private VariableExpression $leftOperand,
+    private QuestionAsToken $operator,
+    private SimpleTypeSpecifier $rightOperand,
   ) {
     parent::__construct('nullable_as_expression');
-    $this->_left_operand = $left_operand;
-    $this->_operator = $operator;
-    $this->_right_operand = $right_operand;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class NullableAsExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_operand = EditableNode::fromJSON(
+    $left_operand = VariableExpression::fromJSON(
       /* UNSAFE_EXPR */ $json['nullable_as_left_operand'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_operand->getWidth();
-    $operator = EditableNode::fromJSON(
+    $operator = QuestionAsToken::fromJSON(
       /* UNSAFE_EXPR */ $json['nullable_as_operator'],
       $file,
       $offset,
       $source,
     );
     $offset += $operator->getWidth();
-    $right_operand = EditableNode::fromJSON(
+    $right_operand = SimpleTypeSpecifier::fromJSON(
       /* UNSAFE_EXPR */ $json['nullable_as_right_operand'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class NullableAsExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_operand' => $this->_left_operand,
-      'operator' => $this->_operator,
-      'right_operand' => $this->_right_operand,
+      'left_operand' => $this->leftOperand,
+      'operator' => $this->operator,
+      'right_operand' => $this->rightOperand,
     ];
   }
 
@@ -72,32 +65,32 @@ final class NullableAsExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_operand = $this->_left_operand->rewrite($rewriter, $parents);
-    $operator = $this->_operator->rewrite($rewriter, $parents);
-    $right_operand = $this->_right_operand->rewrite($rewriter, $parents);
+    $left_operand = $this->leftOperand->rewrite($rewriter, $parents);
+    $operator = $this->operator->rewrite($rewriter, $parents);
+    $right_operand = $this->rightOperand->rewrite($rewriter, $parents);
     if (
-      $left_operand === $this->_left_operand &&
-      $operator === $this->_operator &&
-      $right_operand === $this->_right_operand
+      $left_operand === $this->leftOperand &&
+      $operator === $this->operator &&
+      $right_operand === $this->rightOperand
     ) {
       return $this;
     }
     return new static($left_operand, $operator, $right_operand);
   }
 
-  public function getLeftOperandUNTYPED(): EditableNode {
-    return $this->_left_operand;
+  final public function getLeftOperandUNTYPED(): EditableNode {
+    return $this->leftOperand;
   }
 
-  public function withLeftOperand(EditableNode $value): this {
-    if ($value === $this->_left_operand) {
+  public function withLeftOperand(VariableExpression $value): this {
+    if ($value === $this->leftOperand) {
       return $this;
     }
-    return new static($value, $this->_operator, $this->_right_operand);
+    return new static($value, $this->operator, $this->right_operand);
   }
 
   public function hasLeftOperand(): bool {
-    return !$this->_left_operand->isMissing();
+    return $this->leftOperand !== null;
   }
 
   /**
@@ -105,7 +98,7 @@ final class NullableAsExpression extends EditableNode {
    */
   public function getLeftOperand(): VariableExpression {
     return
-      TypeAssert\instance_of(VariableExpression::class, $this->_left_operand);
+      TypeAssert\instance_of(VariableExpression::class, $this->leftOperand);
   }
 
   /**
@@ -115,26 +108,26 @@ final class NullableAsExpression extends EditableNode {
     return $this->getLeftOperand();
   }
 
-  public function getOperatorUNTYPED(): EditableNode {
-    return $this->_operator;
+  final public function getOperatorUNTYPED(): EditableNode {
+    return $this->operator;
   }
 
-  public function withOperator(EditableNode $value): this {
-    if ($value === $this->_operator) {
+  public function withOperator(QuestionAsToken $value): this {
+    if ($value === $this->operator) {
       return $this;
     }
-    return new static($this->_left_operand, $value, $this->_right_operand);
+    return new static($this->left_operand, $value, $this->right_operand);
   }
 
   public function hasOperator(): bool {
-    return !$this->_operator->isMissing();
+    return $this->operator !== null;
   }
 
   /**
    * @returns QuestionAsToken
    */
   public function getOperator(): QuestionAsToken {
-    return TypeAssert\instance_of(QuestionAsToken::class, $this->_operator);
+    return TypeAssert\instance_of(QuestionAsToken::class, $this->operator);
   }
 
   /**
@@ -144,19 +137,19 @@ final class NullableAsExpression extends EditableNode {
     return $this->getOperator();
   }
 
-  public function getRightOperandUNTYPED(): EditableNode {
-    return $this->_right_operand;
+  final public function getRightOperandUNTYPED(): EditableNode {
+    return $this->rightOperand;
   }
 
-  public function withRightOperand(EditableNode $value): this {
-    if ($value === $this->_right_operand) {
+  public function withRightOperand(SimpleTypeSpecifier $value): this {
+    if ($value === $this->rightOperand) {
       return $this;
     }
-    return new static($this->_left_operand, $this->_operator, $value);
+    return new static($this->left_operand, $this->operator, $value);
   }
 
   public function hasRightOperand(): bool {
-    return !$this->_right_operand->isMissing();
+    return $this->rightOperand !== null;
   }
 
   /**
@@ -164,7 +157,7 @@ final class NullableAsExpression extends EditableNode {
    */
   public function getRightOperand(): SimpleTypeSpecifier {
     return
-      TypeAssert\instance_of(SimpleTypeSpecifier::class, $this->_right_operand);
+      TypeAssert\instance_of(SimpleTypeSpecifier::class, $this->rightOperand);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<e71beb716e6e854c61f4a7280c81a3f3>>
+ * @generated SignedSource<<7aa6a7ec628a38a86203ee1f3c953e02>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class StaticDeclarator extends EditableNode {
 
-  private EditableNode $_name;
-  private EditableNode $_initializer;
-
-  public function __construct(EditableNode $name, EditableNode $initializer) {
+  public function __construct(
+    private VariableToken $name,
+    private ?SimpleInitializer $initializer,
+  ) {
     parent::__construct('static_declarator');
-    $this->_name = $name;
-    $this->_initializer = $initializer;
   }
 
   <<__Override>>
@@ -26,14 +24,14 @@ final class StaticDeclarator extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $name = EditableNode::fromJSON(
+    $name = VariableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['static_name'],
       $file,
       $offset,
       $source,
     );
     $offset += $name->getWidth();
-    $initializer = EditableNode::fromJSON(
+    $initializer = SimpleInitializer::fromJSON(
       /* UNSAFE_EXPR */ $json['static_initializer'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class StaticDeclarator extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'name' => $this->_name,
-      'initializer' => $this->_initializer,
+      'name' => $this->name,
+      'initializer' => $this->initializer,
     ];
   }
 
@@ -58,34 +56,34 @@ final class StaticDeclarator extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $initializer = $this->_initializer->rewrite($rewriter, $parents);
-    if ($name === $this->_name && $initializer === $this->_initializer) {
+    $name = $this->name->rewrite($rewriter, $parents);
+    $initializer = $this->initializer?->rewrite($rewriter, $parents);
+    if ($name === $this->name && $initializer === $this->initializer) {
       return $this;
     }
     return new static($name, $initializer);
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
-  public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+  public function withName(VariableToken $value): this {
+    if ($value === $this->name) {
       return $this;
     }
-    return new static($value, $this->_initializer);
+    return new static($value, $this->initializer);
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns VariableToken
    */
   public function getName(): VariableToken {
-    return TypeAssert\instance_of(VariableToken::class, $this->_name);
+    return TypeAssert\instance_of(VariableToken::class, $this->name);
   }
 
   /**
@@ -95,37 +93,35 @@ final class StaticDeclarator extends EditableNode {
     return $this->getName();
   }
 
-  public function getInitializerUNTYPED(): EditableNode {
-    return $this->_initializer;
+  final public function getInitializerUNTYPED(): EditableNode {
+    return $this->initializer;
   }
 
-  public function withInitializer(EditableNode $value): this {
-    if ($value === $this->_initializer) {
+  public function withInitializer(?SimpleInitializer $value): this {
+    if ($value === $this->initializer) {
       return $this;
     }
-    return new static($this->_name, $value);
+    return new static($this->name, $value);
   }
 
   public function hasInitializer(): bool {
-    return !$this->_initializer->isMissing();
+    return $this->initializer !== null;
   }
 
   /**
    * @returns Missing | SimpleInitializer
    */
   public function getInitializer(): ?SimpleInitializer {
-    if ($this->_initializer->isMissing()) {
+    if ($this->initializer->isMissing()) {
       return null;
     }
-    return
-      TypeAssert\instance_of(SimpleInitializer::class, $this->_initializer);
+    return TypeAssert\instance_of(SimpleInitializer::class, $this->initializer);
   }
 
   /**
    * @returns SimpleInitializer
    */
   public function getInitializerx(): SimpleInitializer {
-    return
-      TypeAssert\instance_of(SimpleInitializer::class, $this->_initializer);
+    return TypeAssert\instance_of(SimpleInitializer::class, $this->initializer);
   }
 }

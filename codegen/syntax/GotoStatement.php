@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<86aed5631ecd41c48b6514aee44a2cc1>>
+ * @generated SignedSource<<5cc33db88081c6056cabdd8943e8e477>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class GotoStatement extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_label_name;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $label_name,
-    EditableNode $semicolon,
+    private GotoToken $keyword,
+    private NameToken $labelName,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('goto_statement');
-    $this->_keyword = $keyword;
-    $this->_label_name = $label_name;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class GotoStatement extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = GotoToken::fromJSON(
       /* UNSAFE_EXPR */ $json['goto_statement_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $label_name = EditableNode::fromJSON(
+    $label_name = NameToken::fromJSON(
       /* UNSAFE_EXPR */ $json['goto_statement_label_name'],
       $file,
       $offset,
       $source,
     );
     $offset += $label_name->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['goto_statement_semicolon'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class GotoStatement extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'label_name' => $this->_label_name,
-      'semicolon' => $this->_semicolon,
+      'keyword' => $this->keyword,
+      'label_name' => $this->labelName,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -72,39 +65,39 @@ final class GotoStatement extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $label_name = $this->_label_name->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $label_name = $this->labelName->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $label_name === $this->_label_name &&
-      $semicolon === $this->_semicolon
+      $keyword === $this->keyword &&
+      $label_name === $this->labelName &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
     return new static($keyword, $label_name, $semicolon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(GotoToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_label_name, $this->_semicolon);
+    return new static($value, $this->label_name, $this->semicolon);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns GotoToken
    */
   public function getKeyword(): GotoToken {
-    return TypeAssert\instance_of(GotoToken::class, $this->_keyword);
+    return TypeAssert\instance_of(GotoToken::class, $this->keyword);
   }
 
   /**
@@ -114,26 +107,26 @@ final class GotoStatement extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLabelNameUNTYPED(): EditableNode {
-    return $this->_label_name;
+  final public function getLabelNameUNTYPED(): EditableNode {
+    return $this->labelName;
   }
 
-  public function withLabelName(EditableNode $value): this {
-    if ($value === $this->_label_name) {
+  public function withLabelName(NameToken $value): this {
+    if ($value === $this->labelName) {
       return $this;
     }
-    return new static($this->_keyword, $value, $this->_semicolon);
+    return new static($this->keyword, $value, $this->semicolon);
   }
 
   public function hasLabelName(): bool {
-    return !$this->_label_name->isMissing();
+    return $this->labelName !== null;
   }
 
   /**
    * @returns NameToken
    */
   public function getLabelName(): NameToken {
-    return TypeAssert\instance_of(NameToken::class, $this->_label_name);
+    return TypeAssert\instance_of(NameToken::class, $this->labelName);
   }
 
   /**
@@ -143,26 +136,26 @@ final class GotoStatement extends EditableNode {
     return $this->getLabelName();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
-    return new static($this->_keyword, $this->_label_name, $value);
+    return new static($this->keyword, $this->label_name, $value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

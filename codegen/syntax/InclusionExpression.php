@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<4f5556b44e4f860ef90aaca8b92bd5e2>>
+ * @generated SignedSource<<31f2811d5e55f69e6a67793d4eead79a>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class InclusionExpression extends EditableNode {
 
-  private EditableNode $_require;
-  private EditableNode $_filename;
-
-  public function __construct(EditableNode $require, EditableNode $filename) {
+  public function __construct(
+    private EditableToken $require,
+    private EditableNode $filename,
+  ) {
     parent::__construct('inclusion_expression');
-    $this->_require = $require;
-    $this->_filename = $filename;
   }
 
   <<__Override>>
@@ -26,7 +24,7 @@ final class InclusionExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $require = EditableNode::fromJSON(
+    $require = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['inclusion_require'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class InclusionExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'require' => $this->_require,
-      'filename' => $this->_filename,
+      'require' => $this->require,
+      'filename' => $this->filename,
     ];
   }
 
@@ -58,27 +56,27 @@ final class InclusionExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $require = $this->_require->rewrite($rewriter, $parents);
-    $filename = $this->_filename->rewrite($rewriter, $parents);
-    if ($require === $this->_require && $filename === $this->_filename) {
+    $require = $this->require->rewrite($rewriter, $parents);
+    $filename = $this->filename->rewrite($rewriter, $parents);
+    if ($require === $this->require && $filename === $this->filename) {
       return $this;
     }
     return new static($require, $filename);
   }
 
-  public function getRequireUNTYPED(): EditableNode {
-    return $this->_require;
+  final public function getRequireUNTYPED(): EditableNode {
+    return $this->require;
   }
 
-  public function withRequire(EditableNode $value): this {
-    if ($value === $this->_require) {
+  public function withRequire(EditableToken $value): this {
+    if ($value === $this->require) {
       return $this;
     }
-    return new static($value, $this->_filename);
+    return new static($value, $this->filename);
   }
 
   public function hasRequire(): bool {
-    return !$this->_require->isMissing();
+    return $this->require !== null;
   }
 
   /**
@@ -86,7 +84,7 @@ final class InclusionExpression extends EditableNode {
    * Require_onceToken
    */
   public function getRequire(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_require);
+    return TypeAssert\instance_of(EditableToken::class, $this->require);
   }
 
   /**
@@ -97,19 +95,19 @@ final class InclusionExpression extends EditableNode {
     return $this->getRequire();
   }
 
-  public function getFilenameUNTYPED(): EditableNode {
-    return $this->_filename;
+  final public function getFilenameUNTYPED(): EditableNode {
+    return $this->filename;
   }
 
   public function withFilename(EditableNode $value): this {
-    if ($value === $this->_filename) {
+    if ($value === $this->filename) {
       return $this;
     }
-    return new static($this->_require, $value);
+    return new static($this->require, $value);
   }
 
   public function hasFilename(): bool {
-    return !$this->_filename->isMissing();
+    return $this->filename !== null;
   }
 
   /**
@@ -117,7 +115,7 @@ final class InclusionExpression extends EditableNode {
    * SubscriptExpression | NameToken | VariableExpression
    */
   public function getFilename(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_filename);
+    return TypeAssert\instance_of(EditableNode::class, $this->filename);
   }
 
   /**

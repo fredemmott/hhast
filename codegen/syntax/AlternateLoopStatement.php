@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<1821d54b9310e323be7d5b5ed47f6a28>>
+ * @generated SignedSource<<81ceaeea3510d4c1b863d99c7c072181>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -12,22 +12,13 @@ abstract class AlternateLoopStatementGeneratedBase
   extends EditableNode
   implements IControlFlowStatement, ILoopStatement {
 
-  private EditableNode $_opening_colon;
-  private EditableNode $_statements;
-  private EditableNode $_closing_keyword;
-  private EditableNode $_closing_semicolon;
-
   public function __construct(
-    EditableNode $opening_colon,
-    EditableNode $statements,
-    EditableNode $closing_keyword,
-    EditableNode $closing_semicolon,
+    private ColonToken $openingColon,
+    private EditableList<EditableNode> $statements,
+    private EditableToken $closingKeyword,
+    private SemicolonToken $closingSemicolon,
   ) {
     parent::__construct('alternate_loop_statement');
-    $this->_opening_colon = $opening_colon;
-    $this->_statements = $statements;
-    $this->_closing_keyword = $closing_keyword;
-    $this->_closing_semicolon = $closing_semicolon;
   }
 
   <<__Override>>
@@ -37,28 +28,28 @@ abstract class AlternateLoopStatementGeneratedBase
     int $offset,
     string $source,
   ): this {
-    $opening_colon = EditableNode::fromJSON(
+    $opening_colon = ColonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['alternate_loop_opening_colon'],
       $file,
       $offset,
       $source,
     );
     $offset += $opening_colon->getWidth();
-    $statements = EditableNode::fromJSON(
+    $statements = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['alternate_loop_statements'],
       $file,
       $offset,
       $source,
     );
     $offset += $statements->getWidth();
-    $closing_keyword = EditableNode::fromJSON(
+    $closing_keyword = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['alternate_loop_closing_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $closing_keyword->getWidth();
-    $closing_semicolon = EditableNode::fromJSON(
+    $closing_semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['alternate_loop_closing_semicolon'],
       $file,
       $offset,
@@ -74,12 +65,12 @@ abstract class AlternateLoopStatementGeneratedBase
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'opening_colon' => $this->_opening_colon,
-      'statements' => $this->_statements,
-      'closing_keyword' => $this->_closing_keyword,
-      'closing_semicolon' => $this->_closing_semicolon,
+      'opening_colon' => $this->openingColon,
+      'statements' => $this->statements,
+      'closing_keyword' => $this->closingKeyword,
+      'closing_semicolon' => $this->closingSemicolon,
     ];
   }
 
@@ -90,16 +81,15 @@ abstract class AlternateLoopStatementGeneratedBase
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $opening_colon = $this->_opening_colon->rewrite($rewriter, $parents);
-    $statements = $this->_statements->rewrite($rewriter, $parents);
-    $closing_keyword = $this->_closing_keyword->rewrite($rewriter, $parents);
-    $closing_semicolon =
-      $this->_closing_semicolon->rewrite($rewriter, $parents);
+    $opening_colon = $this->openingColon->rewrite($rewriter, $parents);
+    $statements = $this->statements->rewrite($rewriter, $parents);
+    $closing_keyword = $this->closingKeyword->rewrite($rewriter, $parents);
+    $closing_semicolon = $this->closingSemicolon->rewrite($rewriter, $parents);
     if (
-      $opening_colon === $this->_opening_colon &&
-      $statements === $this->_statements &&
-      $closing_keyword === $this->_closing_keyword &&
-      $closing_semicolon === $this->_closing_semicolon
+      $opening_colon === $this->openingColon &&
+      $statements === $this->statements &&
+      $closing_keyword === $this->closingKeyword &&
+      $closing_semicolon === $this->closingSemicolon
     ) {
       return $this;
     }
@@ -111,31 +101,31 @@ abstract class AlternateLoopStatementGeneratedBase
     );
   }
 
-  public function getOpeningColonUNTYPED(): EditableNode {
-    return $this->_opening_colon;
+  final public function getOpeningColonUNTYPED(): EditableNode {
+    return $this->openingColon;
   }
 
-  public function withOpeningColon(EditableNode $value): this {
-    if ($value === $this->_opening_colon) {
+  public function withOpeningColon(ColonToken $value): this {
+    if ($value === $this->openingColon) {
       return $this;
     }
     return new static(
       $value,
-      $this->_statements,
-      $this->_closing_keyword,
-      $this->_closing_semicolon,
+      $this->statements,
+      $this->closing_keyword,
+      $this->closing_semicolon,
     );
   }
 
   public function hasOpeningColon(): bool {
-    return !$this->_opening_colon->isMissing();
+    return $this->openingColon !== null;
   }
 
   /**
    * @returns ColonToken
    */
   public function getOpeningColon(): ColonToken {
-    return TypeAssert\instance_of(ColonToken::class, $this->_opening_colon);
+    return TypeAssert\instance_of(ColonToken::class, $this->openingColon);
   }
 
   /**
@@ -145,31 +135,31 @@ abstract class AlternateLoopStatementGeneratedBase
     return $this->getOpeningColon();
   }
 
-  public function getStatementsUNTYPED(): EditableNode {
-    return $this->_statements;
+  final public function getStatementsUNTYPED(): EditableNode {
+    return $this->statements;
   }
 
-  public function withStatements(EditableNode $value): this {
-    if ($value === $this->_statements) {
+  public function withStatements(EditableList<EditableNode> $value): this {
+    if ($value === $this->statements) {
       return $this;
     }
     return new static(
-      $this->_opening_colon,
+      $this->opening_colon,
       $value,
-      $this->_closing_keyword,
-      $this->_closing_semicolon,
+      $this->closing_keyword,
+      $this->closing_semicolon,
     );
   }
 
   public function hasStatements(): bool {
-    return !$this->_statements->isMissing();
+    return $this->statements !== null;
   }
 
   /**
    * @returns EditableList<EditableNode>
    */
   public function getStatements(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_statements);
+    return TypeAssert\instance_of(EditableList::class, $this->statements);
   }
 
   /**
@@ -179,32 +169,31 @@ abstract class AlternateLoopStatementGeneratedBase
     return $this->getStatements();
   }
 
-  public function getClosingKeywordUNTYPED(): EditableNode {
-    return $this->_closing_keyword;
+  final public function getClosingKeywordUNTYPED(): EditableNode {
+    return $this->closingKeyword;
   }
 
-  public function withClosingKeyword(EditableNode $value): this {
-    if ($value === $this->_closing_keyword) {
+  public function withClosingKeyword(EditableToken $value): this {
+    if ($value === $this->closingKeyword) {
       return $this;
     }
     return new static(
-      $this->_opening_colon,
-      $this->_statements,
+      $this->opening_colon,
+      $this->statements,
       $value,
-      $this->_closing_semicolon,
+      $this->closing_semicolon,
     );
   }
 
   public function hasClosingKeyword(): bool {
-    return !$this->_closing_keyword->isMissing();
+    return $this->closingKeyword !== null;
   }
 
   /**
    * @returns EnddeclareToken | EndforToken | EndforeachToken | EndwhileToken
    */
   public function getClosingKeyword(): EditableToken {
-    return
-      TypeAssert\instance_of(EditableToken::class, $this->_closing_keyword);
+    return TypeAssert\instance_of(EditableToken::class, $this->closingKeyword);
   }
 
   /**
@@ -214,24 +203,24 @@ abstract class AlternateLoopStatementGeneratedBase
     return $this->getClosingKeyword();
   }
 
-  public function getClosingSemicolonUNTYPED(): EditableNode {
-    return $this->_closing_semicolon;
+  final public function getClosingSemicolonUNTYPED(): EditableNode {
+    return $this->closingSemicolon;
   }
 
-  public function withClosingSemicolon(EditableNode $value): this {
-    if ($value === $this->_closing_semicolon) {
+  public function withClosingSemicolon(SemicolonToken $value): this {
+    if ($value === $this->closingSemicolon) {
       return $this;
     }
     return new static(
-      $this->_opening_colon,
-      $this->_statements,
-      $this->_closing_keyword,
+      $this->opening_colon,
+      $this->statements,
+      $this->closing_keyword,
       $value,
     );
   }
 
   public function hasClosingSemicolon(): bool {
-    return !$this->_closing_semicolon->isMissing();
+    return $this->closingSemicolon !== null;
   }
 
   /**
@@ -239,7 +228,7 @@ abstract class AlternateLoopStatementGeneratedBase
    */
   public function getClosingSemicolon(): SemicolonToken {
     return
-      TypeAssert\instance_of(SemicolonToken::class, $this->_closing_semicolon);
+      TypeAssert\instance_of(SemicolonToken::class, $this->closingSemicolon);
   }
 
   /**

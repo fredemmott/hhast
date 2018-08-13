@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<a4ab78d71700014e147c44ec6c1d44ee>>
+ * @generated SignedSource<<3386ec29fba5086b1a72184901769dc8>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,16 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ClosureParameterTypeSpecifier extends EditableNode {
 
-  private EditableNode $_call_convention;
-  private EditableNode $_type;
-
   public function __construct(
-    EditableNode $call_convention,
-    EditableNode $type,
+    private ?InoutToken $callConvention,
+    private EditableNode $type,
   ) {
     parent::__construct('closure_parameter_type_specifier');
-    $this->_call_convention = $call_convention;
-    $this->_type = $type;
   }
 
   <<__Override>>
@@ -29,7 +24,7 @@ final class ClosureParameterTypeSpecifier extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $call_convention = EditableNode::fromJSON(
+    $call_convention = InoutToken::fromJSON(
       /* UNSAFE_EXPR */ $json['closure_parameter_call_convention'],
       $file,
       $offset,
@@ -47,10 +42,10 @@ final class ClosureParameterTypeSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'call_convention' => $this->_call_convention,
-      'type' => $this->_type,
+      'call_convention' => $this->callConvention,
+      'type' => $this->type,
     ];
   }
 
@@ -61,61 +56,59 @@ final class ClosureParameterTypeSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $call_convention = $this->_call_convention->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
-    if (
-      $call_convention === $this->_call_convention && $type === $this->_type
-    ) {
+    $call_convention = $this->callConvention?->rewrite($rewriter, $parents);
+    $type = $this->type->rewrite($rewriter, $parents);
+    if ($call_convention === $this->callConvention && $type === $this->type) {
       return $this;
     }
     return new static($call_convention, $type);
   }
 
-  public function getCallConventionUNTYPED(): EditableNode {
-    return $this->_call_convention;
+  final public function getCallConventionUNTYPED(): EditableNode {
+    return $this->callConvention;
   }
 
-  public function withCallConvention(EditableNode $value): this {
-    if ($value === $this->_call_convention) {
+  public function withCallConvention(?InoutToken $value): this {
+    if ($value === $this->callConvention) {
       return $this;
     }
-    return new static($value, $this->_type);
+    return new static($value, $this->type);
   }
 
   public function hasCallConvention(): bool {
-    return !$this->_call_convention->isMissing();
+    return $this->callConvention !== null;
   }
 
   /**
    * @returns Missing | InoutToken
    */
   public function getCallConvention(): ?InoutToken {
-    if ($this->_call_convention->isMissing()) {
+    if ($this->callConvention->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(InoutToken::class, $this->_call_convention);
+    return TypeAssert\instance_of(InoutToken::class, $this->callConvention);
   }
 
   /**
    * @returns InoutToken
    */
   public function getCallConventionx(): InoutToken {
-    return TypeAssert\instance_of(InoutToken::class, $this->_call_convention);
+    return TypeAssert\instance_of(InoutToken::class, $this->callConvention);
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
   public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+    if ($value === $this->type) {
       return $this;
     }
-    return new static($this->_call_convention, $value);
+    return new static($this->call_convention, $value);
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
@@ -123,7 +116,7 @@ final class ClosureParameterTypeSpecifier extends EditableNode {
    * SimpleTypeSpecifier | SoftTypeSpecifier | TupleTypeSpecifier | TypeConstant
    */
   public function getType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
   /**

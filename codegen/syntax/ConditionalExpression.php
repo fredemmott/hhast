@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<8fc037695afd4eb83627807b27ec98fa>>
+ * @generated SignedSource<<fce75924b583d6bcc6d2334a99083122>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,25 +10,14 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ConditionalExpression extends EditableNode {
 
-  private EditableNode $_test;
-  private EditableNode $_question;
-  private EditableNode $_consequence;
-  private EditableNode $_colon;
-  private EditableNode $_alternative;
-
   public function __construct(
-    EditableNode $test,
-    EditableNode $question,
-    EditableNode $consequence,
-    EditableNode $colon,
-    EditableNode $alternative,
+    private EditableNode $test,
+    private QuestionToken $question,
+    private ?EditableNode $consequence,
+    private ?ColonToken $colon,
+    private ?EditableNode $alternative,
   ) {
     parent::__construct('conditional_expression');
-    $this->_test = $test;
-    $this->_question = $question;
-    $this->_consequence = $consequence;
-    $this->_colon = $colon;
-    $this->_alternative = $alternative;
   }
 
   <<__Override>>
@@ -45,7 +34,7 @@ final class ConditionalExpression extends EditableNode {
       $source,
     );
     $offset += $test->getWidth();
-    $question = EditableNode::fromJSON(
+    $question = QuestionToken::fromJSON(
       /* UNSAFE_EXPR */ $json['conditional_question'],
       $file,
       $offset,
@@ -59,7 +48,7 @@ final class ConditionalExpression extends EditableNode {
       $source,
     );
     $offset += $consequence->getWidth();
-    $colon = EditableNode::fromJSON(
+    $colon = ColonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['conditional_colon'],
       $file,
       $offset,
@@ -77,13 +66,13 @@ final class ConditionalExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'test' => $this->_test,
-      'question' => $this->_question,
-      'consequence' => $this->_consequence,
-      'colon' => $this->_colon,
-      'alternative' => $this->_alternative,
+      'test' => $this->test,
+      'question' => $this->question,
+      'consequence' => $this->consequence,
+      'colon' => $this->colon,
+      'alternative' => $this->alternative,
     ];
   }
 
@@ -94,42 +83,42 @@ final class ConditionalExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $test = $this->_test->rewrite($rewriter, $parents);
-    $question = $this->_question->rewrite($rewriter, $parents);
-    $consequence = $this->_consequence->rewrite($rewriter, $parents);
-    $colon = $this->_colon->rewrite($rewriter, $parents);
-    $alternative = $this->_alternative->rewrite($rewriter, $parents);
+    $test = $this->test->rewrite($rewriter, $parents);
+    $question = $this->question->rewrite($rewriter, $parents);
+    $consequence = $this->consequence?->rewrite($rewriter, $parents);
+    $colon = $this->colon?->rewrite($rewriter, $parents);
+    $alternative = $this->alternative?->rewrite($rewriter, $parents);
     if (
-      $test === $this->_test &&
-      $question === $this->_question &&
-      $consequence === $this->_consequence &&
-      $colon === $this->_colon &&
-      $alternative === $this->_alternative
+      $test === $this->test &&
+      $question === $this->question &&
+      $consequence === $this->consequence &&
+      $colon === $this->colon &&
+      $alternative === $this->alternative
     ) {
       return $this;
     }
     return new static($test, $question, $consequence, $colon, $alternative);
   }
 
-  public function getTestUNTYPED(): EditableNode {
-    return $this->_test;
+  final public function getTestUNTYPED(): EditableNode {
+    return $this->test;
   }
 
   public function withTest(EditableNode $value): this {
-    if ($value === $this->_test) {
+    if ($value === $this->test) {
       return $this;
     }
     return new static(
       $value,
-      $this->_question,
-      $this->_consequence,
-      $this->_colon,
-      $this->_alternative,
+      $this->question,
+      $this->consequence,
+      $this->colon,
+      $this->alternative,
     );
   }
 
   public function hasTest(): bool {
-    return !$this->_test->isMissing();
+    return $this->test !== null;
   }
 
   /**
@@ -140,7 +129,7 @@ final class ConditionalExpression extends EditableNode {
    * LessThanToken | NameToken | VariableExpression
    */
   public function getTest(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_test);
+    return TypeAssert\instance_of(EditableNode::class, $this->test);
   }
 
   /**
@@ -154,32 +143,32 @@ final class ConditionalExpression extends EditableNode {
     return $this->getTest();
   }
 
-  public function getQuestionUNTYPED(): EditableNode {
-    return $this->_question;
+  final public function getQuestionUNTYPED(): EditableNode {
+    return $this->question;
   }
 
-  public function withQuestion(EditableNode $value): this {
-    if ($value === $this->_question) {
+  public function withQuestion(QuestionToken $value): this {
+    if ($value === $this->question) {
       return $this;
     }
     return new static(
-      $this->_test,
+      $this->test,
       $value,
-      $this->_consequence,
-      $this->_colon,
-      $this->_alternative,
+      $this->consequence,
+      $this->colon,
+      $this->alternative,
     );
   }
 
   public function hasQuestion(): bool {
-    return !$this->_question->isMissing();
+    return $this->question !== null;
   }
 
   /**
    * @returns QuestionToken
    */
   public function getQuestion(): QuestionToken {
-    return TypeAssert\instance_of(QuestionToken::class, $this->_question);
+    return TypeAssert\instance_of(QuestionToken::class, $this->question);
   }
 
   /**
@@ -189,25 +178,25 @@ final class ConditionalExpression extends EditableNode {
     return $this->getQuestion();
   }
 
-  public function getConsequenceUNTYPED(): EditableNode {
-    return $this->_consequence;
+  final public function getConsequenceUNTYPED(): EditableNode {
+    return $this->consequence;
   }
 
-  public function withConsequence(EditableNode $value): this {
-    if ($value === $this->_consequence) {
+  public function withConsequence(?EditableNode $value): this {
+    if ($value === $this->consequence) {
       return $this;
     }
     return new static(
-      $this->_test,
-      $this->_question,
+      $this->test,
+      $this->question,
       $value,
-      $this->_colon,
-      $this->_alternative,
+      $this->colon,
+      $this->alternative,
     );
   }
 
   public function hasConsequence(): bool {
-    return !$this->_consequence->isMissing();
+    return $this->consequence !== null;
   }
 
   /**
@@ -220,10 +209,10 @@ final class ConditionalExpression extends EditableNode {
    * VariableExpression
    */
   public function getConsequence(): ?EditableNode {
-    if ($this->_consequence->isMissing()) {
+    if ($this->consequence->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_consequence);
+    return TypeAssert\instance_of(EditableNode::class, $this->consequence);
   }
 
   /**
@@ -236,66 +225,66 @@ final class ConditionalExpression extends EditableNode {
    * VariableExpression
    */
   public function getConsequencex(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_consequence);
+    return TypeAssert\instance_of(EditableNode::class, $this->consequence);
   }
 
-  public function getColonUNTYPED(): EditableNode {
-    return $this->_colon;
+  final public function getColonUNTYPED(): EditableNode {
+    return $this->colon;
   }
 
-  public function withColon(EditableNode $value): this {
-    if ($value === $this->_colon) {
+  public function withColon(?ColonToken $value): this {
+    if ($value === $this->colon) {
       return $this;
     }
     return new static(
-      $this->_test,
-      $this->_question,
-      $this->_consequence,
+      $this->test,
+      $this->question,
+      $this->consequence,
       $value,
-      $this->_alternative,
+      $this->alternative,
     );
   }
 
   public function hasColon(): bool {
-    return !$this->_colon->isMissing();
+    return $this->colon !== null;
   }
 
   /**
    * @returns Missing | ColonToken
    */
   public function getColon(): ?ColonToken {
-    if ($this->_colon->isMissing()) {
+    if ($this->colon->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(ColonToken::class, $this->_colon);
+    return TypeAssert\instance_of(ColonToken::class, $this->colon);
   }
 
   /**
    * @returns ColonToken
    */
   public function getColonx(): ColonToken {
-    return TypeAssert\instance_of(ColonToken::class, $this->_colon);
+    return TypeAssert\instance_of(ColonToken::class, $this->colon);
   }
 
-  public function getAlternativeUNTYPED(): EditableNode {
-    return $this->_alternative;
+  final public function getAlternativeUNTYPED(): EditableNode {
+    return $this->alternative;
   }
 
-  public function withAlternative(EditableNode $value): this {
-    if ($value === $this->_alternative) {
+  public function withAlternative(?EditableNode $value): this {
+    if ($value === $this->alternative) {
       return $this;
     }
     return new static(
-      $this->_test,
-      $this->_question,
-      $this->_consequence,
-      $this->_colon,
+      $this->test,
+      $this->question,
+      $this->consequence,
+      $this->colon,
       $value,
     );
   }
 
   public function hasAlternative(): bool {
-    return !$this->_alternative->isMissing();
+    return $this->alternative !== null;
   }
 
   /**
@@ -308,10 +297,10 @@ final class ConditionalExpression extends EditableNode {
    * TupleExpression | VariableExpression
    */
   public function getAlternative(): ?EditableNode {
-    if ($this->_alternative->isMissing()) {
+    if ($this->alternative->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_alternative);
+    return TypeAssert\instance_of(EditableNode::class, $this->alternative);
   }
 
   /**
@@ -324,6 +313,6 @@ final class ConditionalExpression extends EditableNode {
    * TupleExpression | VariableExpression
    */
   public function getAlternativex(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_alternative);
+    return TypeAssert\instance_of(EditableNode::class, $this->alternative);
   }
 }

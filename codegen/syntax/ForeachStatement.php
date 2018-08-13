@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<393d2b5a4c1e282c0c6bebd6a7767870>>
+ * @generated SignedSource<<2921a83441c8546680041292d4446aae>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -12,40 +12,19 @@ final class ForeachStatement
   extends EditableNode
   implements IControlFlowStatement, ILoopStatement {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_collection;
-  private EditableNode $_await_keyword;
-  private EditableNode $_as;
-  private EditableNode $_key;
-  private EditableNode $_arrow;
-  private EditableNode $_value;
-  private EditableNode $_right_paren;
-  private EditableNode $_body;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_paren,
-    EditableNode $collection,
-    EditableNode $await_keyword,
-    EditableNode $as,
-    EditableNode $key,
-    EditableNode $arrow,
-    EditableNode $value,
-    EditableNode $right_paren,
-    EditableNode $body,
+    private ForeachToken $keyword,
+    private LeftParenToken $leftParen,
+    private EditableNode $collection,
+    private ?AwaitToken $awaitKeyword,
+    private AsToken $as,
+    private ?EditableNode $key,
+    private ?EqualGreaterThanToken $arrow,
+    private EditableNode $value,
+    private RightParenToken $rightParen,
+    private EditableNode $body,
   ) {
     parent::__construct('foreach_statement');
-    $this->_keyword = $keyword;
-    $this->_left_paren = $left_paren;
-    $this->_collection = $collection;
-    $this->_await_keyword = $await_keyword;
-    $this->_as = $as;
-    $this->_key = $key;
-    $this->_arrow = $arrow;
-    $this->_value = $value;
-    $this->_right_paren = $right_paren;
-    $this->_body = $body;
   }
 
   <<__Override>>
@@ -55,14 +34,14 @@ final class ForeachStatement
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = ForeachToken::fromJSON(
       /* UNSAFE_EXPR */ $json['foreach_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['foreach_left_paren'],
       $file,
       $offset,
@@ -76,14 +55,14 @@ final class ForeachStatement
       $source,
     );
     $offset += $collection->getWidth();
-    $await_keyword = EditableNode::fromJSON(
+    $await_keyword = AwaitToken::fromJSON(
       /* UNSAFE_EXPR */ $json['foreach_await_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $await_keyword->getWidth();
-    $as = EditableNode::fromJSON(
+    $as = AsToken::fromJSON(
       /* UNSAFE_EXPR */ $json['foreach_as'],
       $file,
       $offset,
@@ -97,7 +76,7 @@ final class ForeachStatement
       $source,
     );
     $offset += $key->getWidth();
-    $arrow = EditableNode::fromJSON(
+    $arrow = EqualGreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['foreach_arrow'],
       $file,
       $offset,
@@ -111,7 +90,7 @@ final class ForeachStatement
       $source,
     );
     $offset += $value->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['foreach_right_paren'],
       $file,
       $offset,
@@ -140,18 +119,18 @@ final class ForeachStatement
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_paren' => $this->_left_paren,
-      'collection' => $this->_collection,
-      'await_keyword' => $this->_await_keyword,
-      'as' => $this->_as,
-      'key' => $this->_key,
-      'arrow' => $this->_arrow,
-      'value' => $this->_value,
-      'right_paren' => $this->_right_paren,
-      'body' => $this->_body,
+      'keyword' => $this->keyword,
+      'left_paren' => $this->leftParen,
+      'collection' => $this->collection,
+      'await_keyword' => $this->awaitKeyword,
+      'as' => $this->as,
+      'key' => $this->key,
+      'arrow' => $this->arrow,
+      'value' => $this->value,
+      'right_paren' => $this->rightParen,
+      'body' => $this->body,
     ];
   }
 
@@ -162,27 +141,27 @@ final class ForeachStatement
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $collection = $this->_collection->rewrite($rewriter, $parents);
-    $await_keyword = $this->_await_keyword->rewrite($rewriter, $parents);
-    $as = $this->_as->rewrite($rewriter, $parents);
-    $key = $this->_key->rewrite($rewriter, $parents);
-    $arrow = $this->_arrow->rewrite($rewriter, $parents);
-    $value = $this->_value->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
-    $body = $this->_body->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $collection = $this->collection->rewrite($rewriter, $parents);
+    $await_keyword = $this->awaitKeyword?->rewrite($rewriter, $parents);
+    $as = $this->as->rewrite($rewriter, $parents);
+    $key = $this->key?->rewrite($rewriter, $parents);
+    $arrow = $this->arrow?->rewrite($rewriter, $parents);
+    $value = $this->value->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
+    $body = $this->body->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_paren === $this->_left_paren &&
-      $collection === $this->_collection &&
-      $await_keyword === $this->_await_keyword &&
-      $as === $this->_as &&
-      $key === $this->_key &&
-      $arrow === $this->_arrow &&
-      $value === $this->_value &&
-      $right_paren === $this->_right_paren &&
-      $body === $this->_body
+      $keyword === $this->keyword &&
+      $left_paren === $this->leftParen &&
+      $collection === $this->collection &&
+      $await_keyword === $this->awaitKeyword &&
+      $as === $this->as &&
+      $key === $this->key &&
+      $arrow === $this->arrow &&
+      $value === $this->value &&
+      $right_paren === $this->rightParen &&
+      $body === $this->body
     ) {
       return $this;
     }
@@ -200,37 +179,37 @@ final class ForeachStatement
     );
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(ForeachToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_paren,
-      $this->_collection,
-      $this->_await_keyword,
-      $this->_as,
-      $this->_key,
-      $this->_arrow,
-      $this->_value,
-      $this->_right_paren,
-      $this->_body,
+      $this->left_paren,
+      $this->collection,
+      $this->await_keyword,
+      $this->as,
+      $this->key,
+      $this->arrow,
+      $this->value,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns ForeachToken
    */
   public function getKeyword(): ForeachToken {
-    return TypeAssert\instance_of(ForeachToken::class, $this->_keyword);
+    return TypeAssert\instance_of(ForeachToken::class, $this->keyword);
   }
 
   /**
@@ -240,37 +219,37 @@ final class ForeachStatement
     return $this->getKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_collection,
-      $this->_await_keyword,
-      $this->_as,
-      $this->_key,
-      $this->_arrow,
-      $this->_value,
-      $this->_right_paren,
-      $this->_body,
+      $this->collection,
+      $this->await_keyword,
+      $this->as,
+      $this->key,
+      $this->arrow,
+      $this->value,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -280,30 +259,30 @@ final class ForeachStatement
     return $this->getLeftParen();
   }
 
-  public function getCollectionUNTYPED(): EditableNode {
-    return $this->_collection;
+  final public function getCollectionUNTYPED(): EditableNode {
+    return $this->collection;
   }
 
   public function withCollection(EditableNode $value): this {
-    if ($value === $this->_collection) {
+    if ($value === $this->collection) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
+      $this->keyword,
+      $this->left_paren,
       $value,
-      $this->_await_keyword,
-      $this->_as,
-      $this->_key,
-      $this->_arrow,
-      $this->_value,
-      $this->_right_paren,
-      $this->_body,
+      $this->await_keyword,
+      $this->as,
+      $this->key,
+      $this->arrow,
+      $this->value,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasCollection(): bool {
-    return !$this->_collection->isMissing();
+    return $this->collection !== null;
   }
 
   /**
@@ -315,7 +294,7 @@ final class ForeachStatement
    * VariableExpression | VectorIntrinsicExpression
    */
   public function getCollection(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_collection);
+    return TypeAssert\instance_of(EditableNode::class, $this->collection);
   }
 
   /**
@@ -330,80 +309,80 @@ final class ForeachStatement
     return $this->getCollection();
   }
 
-  public function getAwaitKeywordUNTYPED(): EditableNode {
-    return $this->_await_keyword;
+  final public function getAwaitKeywordUNTYPED(): EditableNode {
+    return $this->awaitKeyword;
   }
 
-  public function withAwaitKeyword(EditableNode $value): this {
-    if ($value === $this->_await_keyword) {
+  public function withAwaitKeyword(?AwaitToken $value): this {
+    if ($value === $this->awaitKeyword) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_collection,
+      $this->keyword,
+      $this->left_paren,
+      $this->collection,
       $value,
-      $this->_as,
-      $this->_key,
-      $this->_arrow,
-      $this->_value,
-      $this->_right_paren,
-      $this->_body,
+      $this->as,
+      $this->key,
+      $this->arrow,
+      $this->value,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasAwaitKeyword(): bool {
-    return !$this->_await_keyword->isMissing();
+    return $this->awaitKeyword !== null;
   }
 
   /**
    * @returns Missing | AwaitToken
    */
   public function getAwaitKeyword(): ?AwaitToken {
-    if ($this->_await_keyword->isMissing()) {
+    if ($this->awaitKeyword->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(AwaitToken::class, $this->_await_keyword);
+    return TypeAssert\instance_of(AwaitToken::class, $this->awaitKeyword);
   }
 
   /**
    * @returns AwaitToken
    */
   public function getAwaitKeywordx(): AwaitToken {
-    return TypeAssert\instance_of(AwaitToken::class, $this->_await_keyword);
+    return TypeAssert\instance_of(AwaitToken::class, $this->awaitKeyword);
   }
 
-  public function getAsUNTYPED(): EditableNode {
-    return $this->_as;
+  final public function getAsUNTYPED(): EditableNode {
+    return $this->as;
   }
 
-  public function withAs(EditableNode $value): this {
-    if ($value === $this->_as) {
+  public function withAs(AsToken $value): this {
+    if ($value === $this->as) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_collection,
-      $this->_await_keyword,
+      $this->keyword,
+      $this->left_paren,
+      $this->collection,
+      $this->await_keyword,
       $value,
-      $this->_key,
-      $this->_arrow,
-      $this->_value,
-      $this->_right_paren,
-      $this->_body,
+      $this->key,
+      $this->arrow,
+      $this->value,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasAs(): bool {
-    return !$this->_as->isMissing();
+    return $this->as !== null;
   }
 
   /**
    * @returns AsToken
    */
   public function getAs(): AsToken {
-    return TypeAssert\instance_of(AsToken::class, $this->_as);
+    return TypeAssert\instance_of(AsToken::class, $this->as);
   }
 
   /**
@@ -413,30 +392,30 @@ final class ForeachStatement
     return $this->getAs();
   }
 
-  public function getKeyUNTYPED(): EditableNode {
-    return $this->_key;
+  final public function getKeyUNTYPED(): EditableNode {
+    return $this->key;
   }
 
-  public function withKey(EditableNode $value): this {
-    if ($value === $this->_key) {
+  public function withKey(?EditableNode $value): this {
+    if ($value === $this->key) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_collection,
-      $this->_await_keyword,
-      $this->_as,
+      $this->keyword,
+      $this->left_paren,
+      $this->collection,
+      $this->await_keyword,
+      $this->as,
       $value,
-      $this->_arrow,
-      $this->_value,
-      $this->_right_paren,
-      $this->_body,
+      $this->arrow,
+      $this->value,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasKey(): bool {
-    return !$this->_key->isMissing();
+    return $this->key !== null;
   }
 
   /**
@@ -446,10 +425,10 @@ final class ForeachStatement
    * VariableExpression
    */
   public function getKey(): ?EditableNode {
-    if ($this->_key->isMissing()) {
+    if ($this->key->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_key);
+    return TypeAssert\instance_of(EditableNode::class, $this->key);
   }
 
   /**
@@ -459,76 +438,76 @@ final class ForeachStatement
    * VariableExpression
    */
   public function getKeyx(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_key);
+    return TypeAssert\instance_of(EditableNode::class, $this->key);
   }
 
-  public function getArrowUNTYPED(): EditableNode {
-    return $this->_arrow;
+  final public function getArrowUNTYPED(): EditableNode {
+    return $this->arrow;
   }
 
-  public function withArrow(EditableNode $value): this {
-    if ($value === $this->_arrow) {
+  public function withArrow(?EqualGreaterThanToken $value): this {
+    if ($value === $this->arrow) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_collection,
-      $this->_await_keyword,
-      $this->_as,
-      $this->_key,
+      $this->keyword,
+      $this->left_paren,
+      $this->collection,
+      $this->await_keyword,
+      $this->as,
+      $this->key,
       $value,
-      $this->_value,
-      $this->_right_paren,
-      $this->_body,
+      $this->value,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasArrow(): bool {
-    return !$this->_arrow->isMissing();
+    return $this->arrow !== null;
   }
 
   /**
    * @returns Missing | EqualGreaterThanToken
    */
   public function getArrow(): ?EqualGreaterThanToken {
-    if ($this->_arrow->isMissing()) {
+    if ($this->arrow->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EqualGreaterThanToken::class, $this->_arrow);
+    return TypeAssert\instance_of(EqualGreaterThanToken::class, $this->arrow);
   }
 
   /**
    * @returns EqualGreaterThanToken
    */
   public function getArrowx(): EqualGreaterThanToken {
-    return TypeAssert\instance_of(EqualGreaterThanToken::class, $this->_arrow);
+    return TypeAssert\instance_of(EqualGreaterThanToken::class, $this->arrow);
   }
 
-  public function getValueUNTYPED(): EditableNode {
-    return $this->_value;
+  final public function getValueUNTYPED(): EditableNode {
+    return $this->value;
   }
 
   public function withValue(EditableNode $value): this {
-    if ($value === $this->_value) {
+    if ($value === $this->value) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_collection,
-      $this->_await_keyword,
-      $this->_as,
-      $this->_key,
-      $this->_arrow,
+      $this->keyword,
+      $this->left_paren,
+      $this->collection,
+      $this->await_keyword,
+      $this->as,
+      $this->key,
+      $this->arrow,
       $value,
-      $this->_right_paren,
-      $this->_body,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasValue(): bool {
-    return !$this->_value->isMissing();
+    return $this->value !== null;
   }
 
   /**
@@ -538,7 +517,7 @@ final class ForeachStatement
    * VariableExpression
    */
   public function getValue(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_value);
+    return TypeAssert\instance_of(EditableNode::class, $this->value);
   }
 
   /**
@@ -551,37 +530,37 @@ final class ForeachStatement
     return $this->getValue();
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_collection,
-      $this->_await_keyword,
-      $this->_as,
-      $this->_key,
-      $this->_arrow,
-      $this->_value,
+      $this->keyword,
+      $this->left_paren,
+      $this->collection,
+      $this->await_keyword,
+      $this->as,
+      $this->key,
+      $this->arrow,
+      $this->value,
       $value,
-      $this->_body,
+      $this->body,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
@@ -591,30 +570,30 @@ final class ForeachStatement
     return $this->getRightParen();
   }
 
-  public function getBodyUNTYPED(): EditableNode {
-    return $this->_body;
+  final public function getBodyUNTYPED(): EditableNode {
+    return $this->body;
   }
 
   public function withBody(EditableNode $value): this {
-    if ($value === $this->_body) {
+    if ($value === $this->body) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_collection,
-      $this->_await_keyword,
-      $this->_as,
-      $this->_key,
-      $this->_arrow,
-      $this->_value,
-      $this->_right_paren,
+      $this->keyword,
+      $this->left_paren,
+      $this->collection,
+      $this->await_keyword,
+      $this->as,
+      $this->key,
+      $this->arrow,
+      $this->value,
+      $this->right_paren,
       $value,
     );
   }
 
   public function hasBody(): bool {
-    return !$this->_body->isMissing();
+    return $this->body !== null;
   }
 
   /**
@@ -622,7 +601,7 @@ final class ForeachStatement
    * ExpressionStatement | ForeachStatement
    */
   public function getBody(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_body);
+    return TypeAssert\instance_of(EditableNode::class, $this->body);
   }
 
   /**

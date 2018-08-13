@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<8ee59ad4dddb860c7026d2fcb8459ec0>>
+ * @generated SignedSource<<c010e25fcf376b9c3b5799ebb0af055b>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -12,19 +12,12 @@ final class FunctionDeclaration
   extends EditableNode
   implements IFunctionishDeclaration {
 
-  private EditableNode $_attribute_spec;
-  private EditableNode $_declaration_header;
-  private EditableNode $_body;
-
   public function __construct(
-    EditableNode $attribute_spec,
-    EditableNode $declaration_header,
-    EditableNode $body,
+    private ?AttributeSpecification $attributeSpec,
+    private FunctionDeclarationHeader $declarationHeader,
+    private CompoundStatement $body,
   ) {
     parent::__construct('function_declaration');
-    $this->_attribute_spec = $attribute_spec;
-    $this->_declaration_header = $declaration_header;
-    $this->_body = $body;
   }
 
   <<__Override>>
@@ -34,21 +27,21 @@ final class FunctionDeclaration
     int $offset,
     string $source,
   ): this {
-    $attribute_spec = EditableNode::fromJSON(
+    $attribute_spec = AttributeSpecification::fromJSON(
       /* UNSAFE_EXPR */ $json['function_attribute_spec'],
       $file,
       $offset,
       $source,
     );
     $offset += $attribute_spec->getWidth();
-    $declaration_header = EditableNode::fromJSON(
+    $declaration_header = FunctionDeclarationHeader::fromJSON(
       /* UNSAFE_EXPR */ $json['function_declaration_header'],
       $file,
       $offset,
       $source,
     );
     $offset += $declaration_header->getWidth();
-    $body = EditableNode::fromJSON(
+    $body = CompoundStatement::fromJSON(
       /* UNSAFE_EXPR */ $json['function_body'],
       $file,
       $offset,
@@ -59,11 +52,11 @@ final class FunctionDeclaration
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'attribute_spec' => $this->_attribute_spec,
-      'declaration_header' => $this->_declaration_header,
-      'body' => $this->_body,
+      'attribute_spec' => $this->attributeSpec,
+      'declaration_header' => $this->declarationHeader,
+      'body' => $this->body,
     ];
   }
 
@@ -74,45 +67,45 @@ final class FunctionDeclaration
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $attribute_spec = $this->_attribute_spec->rewrite($rewriter, $parents);
+    $attribute_spec = $this->attributeSpec?->rewrite($rewriter, $parents);
     $declaration_header =
-      $this->_declaration_header->rewrite($rewriter, $parents);
-    $body = $this->_body->rewrite($rewriter, $parents);
+      $this->declarationHeader->rewrite($rewriter, $parents);
+    $body = $this->body->rewrite($rewriter, $parents);
     if (
-      $attribute_spec === $this->_attribute_spec &&
-      $declaration_header === $this->_declaration_header &&
-      $body === $this->_body
+      $attribute_spec === $this->attributeSpec &&
+      $declaration_header === $this->declarationHeader &&
+      $body === $this->body
     ) {
       return $this;
     }
     return new static($attribute_spec, $declaration_header, $body);
   }
 
-  public function getAttributeSpecUNTYPED(): EditableNode {
-    return $this->_attribute_spec;
+  final public function getAttributeSpecUNTYPED(): EditableNode {
+    return $this->attributeSpec;
   }
 
-  public function withAttributeSpec(EditableNode $value): this {
-    if ($value === $this->_attribute_spec) {
+  public function withAttributeSpec(?AttributeSpecification $value): this {
+    if ($value === $this->attributeSpec) {
       return $this;
     }
-    return new static($value, $this->_declaration_header, $this->_body);
+    return new static($value, $this->declaration_header, $this->body);
   }
 
   public function hasAttributeSpec(): bool {
-    return !$this->_attribute_spec->isMissing();
+    return $this->attributeSpec !== null;
   }
 
   /**
    * @returns AttributeSpecification | Missing
    */
   public function getAttributeSpec(): ?AttributeSpecification {
-    if ($this->_attribute_spec->isMissing()) {
+    if ($this->attributeSpec->isMissing()) {
       return null;
     }
     return TypeAssert\instance_of(
       AttributeSpecification::class,
-      $this->_attribute_spec,
+      $this->attributeSpec,
     );
   }
 
@@ -122,23 +115,25 @@ final class FunctionDeclaration
   public function getAttributeSpecx(): AttributeSpecification {
     return TypeAssert\instance_of(
       AttributeSpecification::class,
-      $this->_attribute_spec,
+      $this->attributeSpec,
     );
   }
 
-  public function getDeclarationHeaderUNTYPED(): EditableNode {
-    return $this->_declaration_header;
+  final public function getDeclarationHeaderUNTYPED(): EditableNode {
+    return $this->declarationHeader;
   }
 
-  public function withDeclarationHeader(EditableNode $value): this {
-    if ($value === $this->_declaration_header) {
+  public function withDeclarationHeader(
+    FunctionDeclarationHeader $value,
+  ): this {
+    if ($value === $this->declarationHeader) {
       return $this;
     }
-    return new static($this->_attribute_spec, $value, $this->_body);
+    return new static($this->attribute_spec, $value, $this->body);
   }
 
   public function hasDeclarationHeader(): bool {
-    return !$this->_declaration_header->isMissing();
+    return $this->declarationHeader !== null;
   }
 
   /**
@@ -147,7 +142,7 @@ final class FunctionDeclaration
   public function getDeclarationHeader(): FunctionDeclarationHeader {
     return TypeAssert\instance_of(
       FunctionDeclarationHeader::class,
-      $this->_declaration_header,
+      $this->declarationHeader,
     );
   }
 
@@ -158,27 +153,26 @@ final class FunctionDeclaration
     return $this->getDeclarationHeader();
   }
 
-  public function getBodyUNTYPED(): EditableNode {
-    return $this->_body;
+  final public function getBodyUNTYPED(): EditableNode {
+    return $this->body;
   }
 
-  public function withBody(EditableNode $value): this {
-    if ($value === $this->_body) {
+  public function withBody(CompoundStatement $value): this {
+    if ($value === $this->body) {
       return $this;
     }
-    return
-      new static($this->_attribute_spec, $this->_declaration_header, $value);
+    return new static($this->attribute_spec, $this->declaration_header, $value);
   }
 
   public function hasBody(): bool {
-    return !$this->_body->isMissing();
+    return $this->body !== null;
   }
 
   /**
    * @returns CompoundStatement
    */
   public function getBody(): CompoundStatement {
-    return TypeAssert\instance_of(CompoundStatement::class, $this->_body);
+    return TypeAssert\instance_of(CompoundStatement::class, $this->body);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<bf6a4e3092776a7feb0cb3c285708c16>>
+ * @generated SignedSource<<2e219122e17af0f76cb049e251a38472>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class MarkupSection extends EditableNode {
 
-  private EditableNode $_prefix;
-  private EditableNode $_text;
-  private EditableNode $_suffix;
-  private EditableNode $_expression;
-
   public function __construct(
-    EditableNode $prefix,
-    EditableNode $text,
-    EditableNode $suffix,
-    EditableNode $expression,
+    private ?QuestionGreaterThanToken $prefix,
+    private ?MarkupToken $text,
+    private ?MarkupSuffix $suffix,
+    private ?ExpressionStatement $expression,
   ) {
     parent::__construct('markup_section');
-    $this->_prefix = $prefix;
-    $this->_text = $text;
-    $this->_suffix = $suffix;
-    $this->_expression = $expression;
   }
 
   <<__Override>>
@@ -35,28 +26,28 @@ final class MarkupSection extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $prefix = EditableNode::fromJSON(
+    $prefix = QuestionGreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['markup_prefix'],
       $file,
       $offset,
       $source,
     );
     $offset += $prefix->getWidth();
-    $text = EditableNode::fromJSON(
+    $text = MarkupToken::fromJSON(
       /* UNSAFE_EXPR */ $json['markup_text'],
       $file,
       $offset,
       $source,
     );
     $offset += $text->getWidth();
-    $suffix = EditableNode::fromJSON(
+    $suffix = MarkupSuffix::fromJSON(
       /* UNSAFE_EXPR */ $json['markup_suffix'],
       $file,
       $offset,
       $source,
     );
     $offset += $suffix->getWidth();
-    $expression = EditableNode::fromJSON(
+    $expression = ExpressionStatement::fromJSON(
       /* UNSAFE_EXPR */ $json['markup_expression'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class MarkupSection extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'prefix' => $this->_prefix,
-      'text' => $this->_text,
-      'suffix' => $this->_suffix,
-      'expression' => $this->_expression,
+      'prefix' => $this->prefix,
+      'text' => $this->text,
+      'suffix' => $this->suffix,
+      'expression' => $this->expression,
     ];
   }
 
@@ -83,45 +74,45 @@ final class MarkupSection extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $prefix = $this->_prefix->rewrite($rewriter, $parents);
-    $text = $this->_text->rewrite($rewriter, $parents);
-    $suffix = $this->_suffix->rewrite($rewriter, $parents);
-    $expression = $this->_expression->rewrite($rewriter, $parents);
+    $prefix = $this->prefix?->rewrite($rewriter, $parents);
+    $text = $this->text?->rewrite($rewriter, $parents);
+    $suffix = $this->suffix?->rewrite($rewriter, $parents);
+    $expression = $this->expression?->rewrite($rewriter, $parents);
     if (
-      $prefix === $this->_prefix &&
-      $text === $this->_text &&
-      $suffix === $this->_suffix &&
-      $expression === $this->_expression
+      $prefix === $this->prefix &&
+      $text === $this->text &&
+      $suffix === $this->suffix &&
+      $expression === $this->expression
     ) {
       return $this;
     }
     return new static($prefix, $text, $suffix, $expression);
   }
 
-  public function getPrefixUNTYPED(): EditableNode {
-    return $this->_prefix;
+  final public function getPrefixUNTYPED(): EditableNode {
+    return $this->prefix;
   }
 
-  public function withPrefix(EditableNode $value): this {
-    if ($value === $this->_prefix) {
+  public function withPrefix(?QuestionGreaterThanToken $value): this {
+    if ($value === $this->prefix) {
       return $this;
     }
-    return new static($value, $this->_text, $this->_suffix, $this->_expression);
+    return new static($value, $this->text, $this->suffix, $this->expression);
   }
 
   public function hasPrefix(): bool {
-    return !$this->_prefix->isMissing();
+    return $this->prefix !== null;
   }
 
   /**
    * @returns Missing | QuestionGreaterThanToken
    */
   public function getPrefix(): ?QuestionGreaterThanToken {
-    if ($this->_prefix->isMissing()) {
+    if ($this->prefix->isMissing()) {
       return null;
     }
     return
-      TypeAssert\instance_of(QuestionGreaterThanToken::class, $this->_prefix);
+      TypeAssert\instance_of(QuestionGreaterThanToken::class, $this->prefix);
   }
 
   /**
@@ -129,98 +120,97 @@ final class MarkupSection extends EditableNode {
    */
   public function getPrefixx(): QuestionGreaterThanToken {
     return
-      TypeAssert\instance_of(QuestionGreaterThanToken::class, $this->_prefix);
+      TypeAssert\instance_of(QuestionGreaterThanToken::class, $this->prefix);
   }
 
-  public function getTextUNTYPED(): EditableNode {
-    return $this->_text;
+  final public function getTextUNTYPED(): EditableNode {
+    return $this->text;
   }
 
-  public function withText(EditableNode $value): this {
-    if ($value === $this->_text) {
+  public function withText(?MarkupToken $value): this {
+    if ($value === $this->text) {
       return $this;
     }
-    return
-      new static($this->_prefix, $value, $this->_suffix, $this->_expression);
+    return new static($this->prefix, $value, $this->suffix, $this->expression);
   }
 
   public function hasText(): bool {
-    return !$this->_text->isMissing();
+    return $this->text !== null;
   }
 
   /**
    * @returns Missing | MarkupToken
    */
   public function getText(): ?MarkupToken {
-    if ($this->_text->isMissing()) {
+    if ($this->text->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(MarkupToken::class, $this->_text);
+    return TypeAssert\instance_of(MarkupToken::class, $this->text);
   }
 
   /**
    * @returns MarkupToken
    */
   public function getTextx(): MarkupToken {
-    return TypeAssert\instance_of(MarkupToken::class, $this->_text);
+    return TypeAssert\instance_of(MarkupToken::class, $this->text);
   }
 
-  public function getSuffixUNTYPED(): EditableNode {
-    return $this->_suffix;
+  final public function getSuffixUNTYPED(): EditableNode {
+    return $this->suffix;
   }
 
-  public function withSuffix(EditableNode $value): this {
-    if ($value === $this->_suffix) {
+  public function withSuffix(?MarkupSuffix $value): this {
+    if ($value === $this->suffix) {
       return $this;
     }
-    return new static($this->_prefix, $this->_text, $value, $this->_expression);
+    return new static($this->prefix, $this->text, $value, $this->expression);
   }
 
   public function hasSuffix(): bool {
-    return !$this->_suffix->isMissing();
+    return $this->suffix !== null;
   }
 
   /**
    * @returns MarkupSuffix | Missing
    */
   public function getSuffix(): ?MarkupSuffix {
-    if ($this->_suffix->isMissing()) {
+    if ($this->suffix->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(MarkupSuffix::class, $this->_suffix);
+    return TypeAssert\instance_of(MarkupSuffix::class, $this->suffix);
   }
 
   /**
    * @returns MarkupSuffix
    */
   public function getSuffixx(): MarkupSuffix {
-    return TypeAssert\instance_of(MarkupSuffix::class, $this->_suffix);
+    return TypeAssert\instance_of(MarkupSuffix::class, $this->suffix);
   }
 
-  public function getExpressionUNTYPED(): EditableNode {
-    return $this->_expression;
+  final public function getExpressionUNTYPED(): EditableNode {
+    return $this->expression;
   }
 
-  public function withExpression(EditableNode $value): this {
-    if ($value === $this->_expression) {
+  public function withExpression(?ExpressionStatement $value): this {
+    if ($value === $this->expression) {
       return $this;
     }
-    return new static($this->_prefix, $this->_text, $this->_suffix, $value);
+    return new static($this->prefix, $this->text, $this->suffix, $value);
   }
 
   public function hasExpression(): bool {
-    return !$this->_expression->isMissing();
+    return $this->expression !== null;
   }
 
   /**
    * @returns ExpressionStatement | Missing
    */
   public function getExpression(): ?ExpressionStatement {
-    if ($this->_expression->isMissing()) {
+    if ($this->expression->isMissing()) {
       return null;
     }
     return
-      TypeAssert\instance_of(ExpressionStatement::class, $this->_expression);
+      TypeAssert\instance_of(ExpressionStatement::class, $this->expression);
   }
 
   /**
@@ -228,6 +218,6 @@ final class MarkupSection extends EditableNode {
    */
   public function getExpressionx(): ExpressionStatement {
     return
-      TypeAssert\instance_of(ExpressionStatement::class, $this->_expression);
+      TypeAssert\instance_of(ExpressionStatement::class, $this->expression);
   }
 }

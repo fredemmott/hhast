@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9e8b13a41d02b94eae0eab6a59a4996f>>
+ * @generated SignedSource<<21e9718c959b8bc48dd0a0a1abcbe302>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class XHPOpen extends EditableNode {
 
-  private EditableNode $_left_angle;
-  private EditableNode $_name;
-  private EditableNode $_attributes;
-  private EditableNode $_right_angle;
-
   public function __construct(
-    EditableNode $left_angle,
-    EditableNode $name,
-    EditableNode $attributes,
-    EditableNode $right_angle,
+    private LessThanToken $leftAngle,
+    private XHPElementNameToken $name,
+    private ?EditableList<EditableNode> $attributes,
+    private ?EditableToken $rightAngle,
   ) {
     parent::__construct('xhp_open');
-    $this->_left_angle = $left_angle;
-    $this->_name = $name;
-    $this->_attributes = $attributes;
-    $this->_right_angle = $right_angle;
   }
 
   <<__Override>>
@@ -35,28 +26,28 @@ final class XHPOpen extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_angle = EditableNode::fromJSON(
+    $left_angle = LessThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_open_left_angle'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_angle->getWidth();
-    $name = EditableNode::fromJSON(
+    $name = XHPElementNameToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_open_name'],
       $file,
       $offset,
       $source,
     );
     $offset += $name->getWidth();
-    $attributes = EditableNode::fromJSON(
+    $attributes = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_open_attributes'],
       $file,
       $offset,
       $source,
     );
     $offset += $attributes->getWidth();
-    $right_angle = EditableNode::fromJSON(
+    $right_angle = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_open_right_angle'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class XHPOpen extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_angle' => $this->_left_angle,
-      'name' => $this->_name,
-      'attributes' => $this->_attributes,
-      'right_angle' => $this->_right_angle,
+      'left_angle' => $this->leftAngle,
+      'name' => $this->name,
+      'attributes' => $this->attributes,
+      'right_angle' => $this->rightAngle,
     ];
   }
 
@@ -83,42 +74,42 @@ final class XHPOpen extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_angle = $this->_left_angle->rewrite($rewriter, $parents);
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $attributes = $this->_attributes->rewrite($rewriter, $parents);
-    $right_angle = $this->_right_angle->rewrite($rewriter, $parents);
+    $left_angle = $this->leftAngle->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
+    $attributes = $this->attributes?->rewrite($rewriter, $parents);
+    $right_angle = $this->rightAngle?->rewrite($rewriter, $parents);
     if (
-      $left_angle === $this->_left_angle &&
-      $name === $this->_name &&
-      $attributes === $this->_attributes &&
-      $right_angle === $this->_right_angle
+      $left_angle === $this->leftAngle &&
+      $name === $this->name &&
+      $attributes === $this->attributes &&
+      $right_angle === $this->rightAngle
     ) {
       return $this;
     }
     return new static($left_angle, $name, $attributes, $right_angle);
   }
 
-  public function getLeftAngleUNTYPED(): EditableNode {
-    return $this->_left_angle;
+  final public function getLeftAngleUNTYPED(): EditableNode {
+    return $this->leftAngle;
   }
 
-  public function withLeftAngle(EditableNode $value): this {
-    if ($value === $this->_left_angle) {
+  public function withLeftAngle(LessThanToken $value): this {
+    if ($value === $this->leftAngle) {
       return $this;
     }
     return
-      new static($value, $this->_name, $this->_attributes, $this->_right_angle);
+      new static($value, $this->name, $this->attributes, $this->right_angle);
   }
 
   public function hasLeftAngle(): bool {
-    return !$this->_left_angle->isMissing();
+    return $this->leftAngle !== null;
   }
 
   /**
    * @returns LessThanToken
    */
   public function getLeftAngle(): LessThanToken {
-    return TypeAssert\instance_of(LessThanToken::class, $this->_left_angle);
+    return TypeAssert\instance_of(LessThanToken::class, $this->leftAngle);
   }
 
   /**
@@ -128,31 +119,31 @@ final class XHPOpen extends EditableNode {
     return $this->getLeftAngle();
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
-  public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+  public function withName(XHPElementNameToken $value): this {
+    if ($value === $this->name) {
       return $this;
     }
     return new static(
-      $this->_left_angle,
+      $this->left_angle,
       $value,
-      $this->_attributes,
-      $this->_right_angle,
+      $this->attributes,
+      $this->right_angle,
     );
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns XHPElementNameToken
    */
   public function getName(): XHPElementNameToken {
-    return TypeAssert\instance_of(XHPElementNameToken::class, $this->_name);
+    return TypeAssert\instance_of(XHPElementNameToken::class, $this->name);
   }
 
   /**
@@ -162,69 +153,69 @@ final class XHPOpen extends EditableNode {
     return $this->getName();
   }
 
-  public function getAttributesUNTYPED(): EditableNode {
-    return $this->_attributes;
+  final public function getAttributesUNTYPED(): EditableNode {
+    return $this->attributes;
   }
 
-  public function withAttributes(EditableNode $value): this {
-    if ($value === $this->_attributes) {
+  public function withAttributes(?EditableList<EditableNode> $value): this {
+    if ($value === $this->attributes) {
       return $this;
     }
     return
-      new static($this->_left_angle, $this->_name, $value, $this->_right_angle);
+      new static($this->left_angle, $this->name, $value, $this->right_angle);
   }
 
   public function hasAttributes(): bool {
-    return !$this->_attributes->isMissing();
+    return $this->attributes !== null;
   }
 
   /**
    * @returns EditableList<EditableNode> | Missing
    */
   public function getAttributes(): ?EditableList<EditableNode> {
-    if ($this->_attributes->isMissing()) {
+    if ($this->attributes->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_attributes);
+    return TypeAssert\instance_of(EditableList::class, $this->attributes);
   }
 
   /**
    * @returns EditableList<EditableNode>
    */
   public function getAttributesx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_attributes);
+    return TypeAssert\instance_of(EditableList::class, $this->attributes);
   }
 
-  public function getRightAngleUNTYPED(): EditableNode {
-    return $this->_right_angle;
+  final public function getRightAngleUNTYPED(): EditableNode {
+    return $this->rightAngle;
   }
 
-  public function withRightAngle(EditableNode $value): this {
-    if ($value === $this->_right_angle) {
+  public function withRightAngle(?EditableToken $value): this {
+    if ($value === $this->rightAngle) {
       return $this;
     }
     return
-      new static($this->_left_angle, $this->_name, $this->_attributes, $value);
+      new static($this->left_angle, $this->name, $this->attributes, $value);
   }
 
   public function hasRightAngle(): bool {
-    return !$this->_right_angle->isMissing();
+    return $this->rightAngle !== null;
   }
 
   /**
    * @returns Missing | SlashGreaterThanToken | GreaterThanToken
    */
   public function getRightAngle(): ?EditableToken {
-    if ($this->_right_angle->isMissing()) {
+    if ($this->rightAngle->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableToken::class, $this->_right_angle);
+    return TypeAssert\instance_of(EditableToken::class, $this->rightAngle);
   }
 
   /**
    * @returns SlashGreaterThanToken | GreaterThanToken
    */
   public function getRightAnglex(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_right_angle);
+    return TypeAssert\instance_of(EditableToken::class, $this->rightAngle);
   }
 }

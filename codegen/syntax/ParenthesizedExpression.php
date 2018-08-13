@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<48af887f6e4d66acdc224c416a49fee4>>
+ * @generated SignedSource<<fb6dc8232a7246f2b14fde53ca065b33>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ParenthesizedExpression extends EditableNode {
 
-  private EditableNode $_left_paren;
-  private EditableNode $_expression;
-  private EditableNode $_right_paren;
-
   public function __construct(
-    EditableNode $left_paren,
-    EditableNode $expression,
-    EditableNode $right_paren,
+    private LeftParenToken $leftParen,
+    private EditableNode $expression,
+    private ?RightParenToken $rightParen,
   ) {
     parent::__construct('parenthesized_expression');
-    $this->_left_paren = $left_paren;
-    $this->_expression = $expression;
-    $this->_right_paren = $right_paren;
   }
 
   <<__Override>>
@@ -32,7 +25,7 @@ final class ParenthesizedExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['parenthesized_expression_left_paren'],
       $file,
       $offset,
@@ -46,7 +39,7 @@ final class ParenthesizedExpression extends EditableNode {
       $source,
     );
     $offset += $expression->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['parenthesized_expression_right_paren'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class ParenthesizedExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_paren' => $this->_left_paren,
-      'expression' => $this->_expression,
-      'right_paren' => $this->_right_paren,
+      'left_paren' => $this->leftParen,
+      'expression' => $this->expression,
+      'right_paren' => $this->rightParen,
     ];
   }
 
@@ -72,39 +65,39 @@ final class ParenthesizedExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $expression = $this->_expression->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $expression = $this->expression->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen?->rewrite($rewriter, $parents);
     if (
-      $left_paren === $this->_left_paren &&
-      $expression === $this->_expression &&
-      $right_paren === $this->_right_paren
+      $left_paren === $this->leftParen &&
+      $expression === $this->expression &&
+      $right_paren === $this->rightParen
     ) {
       return $this;
     }
     return new static($left_paren, $expression, $right_paren);
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
-    return new static($value, $this->_expression, $this->_right_paren);
+    return new static($value, $this->expression, $this->right_paren);
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -114,19 +107,19 @@ final class ParenthesizedExpression extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getExpressionUNTYPED(): EditableNode {
-    return $this->_expression;
+  final public function getExpressionUNTYPED(): EditableNode {
+    return $this->expression;
   }
 
   public function withExpression(EditableNode $value): this {
-    if ($value === $this->_expression) {
+    if ($value === $this->expression) {
       return $this;
     }
-    return new static($this->_left_paren, $value, $this->_right_paren);
+    return new static($this->left_paren, $value, $this->right_paren);
   }
 
   public function hasExpression(): bool {
-    return !$this->_expression->isMissing();
+    return $this->expression !== null;
   }
 
   /**
@@ -141,7 +134,7 @@ final class ParenthesizedExpression extends EditableNode {
    * YieldExpression
    */
   public function getExpression(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_expression);
+    return TypeAssert\instance_of(EditableNode::class, $this->expression);
   }
 
   /**
@@ -159,35 +152,35 @@ final class ParenthesizedExpression extends EditableNode {
     return $this->getExpression();
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(?RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
-    return new static($this->_left_paren, $this->_expression, $value);
+    return new static($this->left_paren, $this->expression, $value);
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns Missing | RightParenToken
    */
   public function getRightParen(): ?RightParenToken {
-    if ($this->_right_paren->isMissing()) {
+    if ($this->rightParen->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParenx(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 }

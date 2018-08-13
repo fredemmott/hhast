@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<2e518b9a893f139bc92c5ad5243682df>>
+ * @generated SignedSource<<32458e6faf73801f102fcad47d55028f>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,25 +10,14 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class KeysetTypeSpecifier extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_angle;
-  private EditableNode $_type;
-  private EditableNode $_trailing_comma;
-  private EditableNode $_right_angle;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_angle,
-    EditableNode $type,
-    EditableNode $trailing_comma,
-    EditableNode $right_angle,
+    private KeysetToken $keyword,
+    private LessThanToken $leftAngle,
+    private SimpleTypeSpecifier $type,
+    private ?EditableNode $trailingComma,
+    private GreaterThanToken $rightAngle,
   ) {
     parent::__construct('keyset_type_specifier');
-    $this->_keyword = $keyword;
-    $this->_left_angle = $left_angle;
-    $this->_type = $type;
-    $this->_trailing_comma = $trailing_comma;
-    $this->_right_angle = $right_angle;
   }
 
   <<__Override>>
@@ -38,21 +27,21 @@ final class KeysetTypeSpecifier extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = KeysetToken::fromJSON(
       /* UNSAFE_EXPR */ $json['keyset_type_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_angle = EditableNode::fromJSON(
+    $left_angle = LessThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['keyset_type_left_angle'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_angle->getWidth();
-    $type = EditableNode::fromJSON(
+    $type = SimpleTypeSpecifier::fromJSON(
       /* UNSAFE_EXPR */ $json['keyset_type_type'],
       $file,
       $offset,
@@ -66,7 +55,7 @@ final class KeysetTypeSpecifier extends EditableNode {
       $source,
     );
     $offset += $trailing_comma->getWidth();
-    $right_angle = EditableNode::fromJSON(
+    $right_angle = GreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['keyset_type_right_angle'],
       $file,
       $offset,
@@ -78,13 +67,13 @@ final class KeysetTypeSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_angle' => $this->_left_angle,
-      'type' => $this->_type,
-      'trailing_comma' => $this->_trailing_comma,
-      'right_angle' => $this->_right_angle,
+      'keyword' => $this->keyword,
+      'left_angle' => $this->leftAngle,
+      'type' => $this->type,
+      'trailing_comma' => $this->trailingComma,
+      'right_angle' => $this->rightAngle,
     ];
   }
 
@@ -95,17 +84,17 @@ final class KeysetTypeSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_angle = $this->_left_angle->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
-    $trailing_comma = $this->_trailing_comma->rewrite($rewriter, $parents);
-    $right_angle = $this->_right_angle->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_angle = $this->leftAngle->rewrite($rewriter, $parents);
+    $type = $this->type->rewrite($rewriter, $parents);
+    $trailing_comma = $this->trailingComma?->rewrite($rewriter, $parents);
+    $right_angle = $this->rightAngle->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_angle === $this->_left_angle &&
-      $type === $this->_type &&
-      $trailing_comma === $this->_trailing_comma &&
-      $right_angle === $this->_right_angle
+      $keyword === $this->keyword &&
+      $left_angle === $this->leftAngle &&
+      $type === $this->type &&
+      $trailing_comma === $this->trailingComma &&
+      $right_angle === $this->rightAngle
     ) {
       return $this;
     }
@@ -113,32 +102,32 @@ final class KeysetTypeSpecifier extends EditableNode {
       new static($keyword, $left_angle, $type, $trailing_comma, $right_angle);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(KeysetToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_angle,
-      $this->_type,
-      $this->_trailing_comma,
-      $this->_right_angle,
+      $this->left_angle,
+      $this->type,
+      $this->trailing_comma,
+      $this->right_angle,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns KeysetToken
    */
   public function getKeyword(): KeysetToken {
-    return TypeAssert\instance_of(KeysetToken::class, $this->_keyword);
+    return TypeAssert\instance_of(KeysetToken::class, $this->keyword);
   }
 
   /**
@@ -148,32 +137,32 @@ final class KeysetTypeSpecifier extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftAngleUNTYPED(): EditableNode {
-    return $this->_left_angle;
+  final public function getLeftAngleUNTYPED(): EditableNode {
+    return $this->leftAngle;
   }
 
-  public function withLeftAngle(EditableNode $value): this {
-    if ($value === $this->_left_angle) {
+  public function withLeftAngle(LessThanToken $value): this {
+    if ($value === $this->leftAngle) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_type,
-      $this->_trailing_comma,
-      $this->_right_angle,
+      $this->type,
+      $this->trailing_comma,
+      $this->right_angle,
     );
   }
 
   public function hasLeftAngle(): bool {
-    return !$this->_left_angle->isMissing();
+    return $this->leftAngle !== null;
   }
 
   /**
    * @returns LessThanToken
    */
   public function getLeftAngle(): LessThanToken {
-    return TypeAssert\instance_of(LessThanToken::class, $this->_left_angle);
+    return TypeAssert\instance_of(LessThanToken::class, $this->leftAngle);
   }
 
   /**
@@ -183,32 +172,32 @@ final class KeysetTypeSpecifier extends EditableNode {
     return $this->getLeftAngle();
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
-  public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+  public function withType(SimpleTypeSpecifier $value): this {
+    if ($value === $this->type) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_angle,
+      $this->keyword,
+      $this->left_angle,
       $value,
-      $this->_trailing_comma,
-      $this->_right_angle,
+      $this->trailing_comma,
+      $this->right_angle,
     );
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
    * @returns SimpleTypeSpecifier
    */
   public function getType(): SimpleTypeSpecifier {
-    return TypeAssert\instance_of(SimpleTypeSpecifier::class, $this->_type);
+    return TypeAssert\instance_of(SimpleTypeSpecifier::class, $this->type);
   }
 
   /**
@@ -218,70 +207,70 @@ final class KeysetTypeSpecifier extends EditableNode {
     return $this->getType();
   }
 
-  public function getTrailingCommaUNTYPED(): EditableNode {
-    return $this->_trailing_comma;
+  final public function getTrailingCommaUNTYPED(): EditableNode {
+    return $this->trailingComma;
   }
 
-  public function withTrailingComma(EditableNode $value): this {
-    if ($value === $this->_trailing_comma) {
+  public function withTrailingComma(?EditableNode $value): this {
+    if ($value === $this->trailingComma) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_angle,
-      $this->_type,
+      $this->keyword,
+      $this->left_angle,
+      $this->type,
       $value,
-      $this->_right_angle,
+      $this->right_angle,
     );
   }
 
   public function hasTrailingComma(): bool {
-    return !$this->_trailing_comma->isMissing();
+    return $this->trailingComma !== null;
   }
 
   /**
    * @returns Missing
    */
   public function getTrailingComma(): ?EditableNode {
-    if ($this->_trailing_comma->isMissing()) {
+    if ($this->trailingComma->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_trailing_comma);
+    return TypeAssert\instance_of(EditableNode::class, $this->trailingComma);
   }
 
   /**
    * @returns
    */
   public function getTrailingCommax(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_trailing_comma);
+    return TypeAssert\instance_of(EditableNode::class, $this->trailingComma);
   }
 
-  public function getRightAngleUNTYPED(): EditableNode {
-    return $this->_right_angle;
+  final public function getRightAngleUNTYPED(): EditableNode {
+    return $this->rightAngle;
   }
 
-  public function withRightAngle(EditableNode $value): this {
-    if ($value === $this->_right_angle) {
+  public function withRightAngle(GreaterThanToken $value): this {
+    if ($value === $this->rightAngle) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_angle,
-      $this->_type,
-      $this->_trailing_comma,
+      $this->keyword,
+      $this->left_angle,
+      $this->type,
+      $this->trailing_comma,
       $value,
     );
   }
 
   public function hasRightAngle(): bool {
-    return !$this->_right_angle->isMissing();
+    return $this->rightAngle !== null;
   }
 
   /**
    * @returns GreaterThanToken
    */
   public function getRightAngle(): GreaterThanToken {
-    return TypeAssert\instance_of(GreaterThanToken::class, $this->_right_angle);
+    return TypeAssert\instance_of(GreaterThanToken::class, $this->rightAngle);
   }
 
   /**

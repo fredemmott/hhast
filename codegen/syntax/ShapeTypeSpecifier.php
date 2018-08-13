@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<ec962cec6acb178332b930a41df4d5a5>>
+ * @generated SignedSource<<40bfb938eab621291d354b84746b1c98>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,25 +10,14 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ShapeTypeSpecifier extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_fields;
-  private EditableNode $_ellipsis;
-  private EditableNode $_right_paren;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_paren,
-    EditableNode $fields,
-    EditableNode $ellipsis,
-    EditableNode $right_paren,
+    private ShapeToken $keyword,
+    private LeftParenToken $leftParen,
+    private ?EditableList<FieldSpecifier> $fields,
+    private ?DotDotDotToken $ellipsis,
+    private RightParenToken $rightParen,
   ) {
     parent::__construct('shape_type_specifier');
-    $this->_keyword = $keyword;
-    $this->_left_paren = $left_paren;
-    $this->_fields = $fields;
-    $this->_ellipsis = $ellipsis;
-    $this->_right_paren = $right_paren;
   }
 
   <<__Override>>
@@ -38,35 +27,35 @@ final class ShapeTypeSpecifier extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = ShapeToken::fromJSON(
       /* UNSAFE_EXPR */ $json['shape_type_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['shape_type_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $fields = EditableNode::fromJSON(
+    $fields = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['shape_type_fields'],
       $file,
       $offset,
       $source,
     );
     $offset += $fields->getWidth();
-    $ellipsis = EditableNode::fromJSON(
+    $ellipsis = DotDotDotToken::fromJSON(
       /* UNSAFE_EXPR */ $json['shape_type_ellipsis'],
       $file,
       $offset,
       $source,
     );
     $offset += $ellipsis->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['shape_type_right_paren'],
       $file,
       $offset,
@@ -77,13 +66,13 @@ final class ShapeTypeSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_paren' => $this->_left_paren,
-      'fields' => $this->_fields,
-      'ellipsis' => $this->_ellipsis,
-      'right_paren' => $this->_right_paren,
+      'keyword' => $this->keyword,
+      'left_paren' => $this->leftParen,
+      'fields' => $this->fields,
+      'ellipsis' => $this->ellipsis,
+      'right_paren' => $this->rightParen,
     ];
   }
 
@@ -94,49 +83,49 @@ final class ShapeTypeSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $fields = $this->_fields->rewrite($rewriter, $parents);
-    $ellipsis = $this->_ellipsis->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $fields = $this->fields?->rewrite($rewriter, $parents);
+    $ellipsis = $this->ellipsis?->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_paren === $this->_left_paren &&
-      $fields === $this->_fields &&
-      $ellipsis === $this->_ellipsis &&
-      $right_paren === $this->_right_paren
+      $keyword === $this->keyword &&
+      $left_paren === $this->leftParen &&
+      $fields === $this->fields &&
+      $ellipsis === $this->ellipsis &&
+      $right_paren === $this->rightParen
     ) {
       return $this;
     }
     return new static($keyword, $left_paren, $fields, $ellipsis, $right_paren);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(ShapeToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_paren,
-      $this->_fields,
-      $this->_ellipsis,
-      $this->_right_paren,
+      $this->left_paren,
+      $this->fields,
+      $this->ellipsis,
+      $this->right_paren,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns ShapeToken
    */
   public function getKeyword(): ShapeToken {
-    return TypeAssert\instance_of(ShapeToken::class, $this->_keyword);
+    return TypeAssert\instance_of(ShapeToken::class, $this->keyword);
   }
 
   /**
@@ -146,32 +135,32 @@ final class ShapeTypeSpecifier extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_fields,
-      $this->_ellipsis,
-      $this->_right_paren,
+      $this->fields,
+      $this->ellipsis,
+      $this->right_paren,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -181,108 +170,108 @@ final class ShapeTypeSpecifier extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getFieldsUNTYPED(): EditableNode {
-    return $this->_fields;
+  final public function getFieldsUNTYPED(): EditableNode {
+    return $this->fields;
   }
 
-  public function withFields(EditableNode $value): this {
-    if ($value === $this->_fields) {
+  public function withFields(?EditableList<FieldSpecifier> $value): this {
+    if ($value === $this->fields) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
+      $this->keyword,
+      $this->left_paren,
       $value,
-      $this->_ellipsis,
-      $this->_right_paren,
+      $this->ellipsis,
+      $this->right_paren,
     );
   }
 
   public function hasFields(): bool {
-    return !$this->_fields->isMissing();
+    return $this->fields !== null;
   }
 
   /**
    * @returns EditableList<FieldSpecifier> | Missing
    */
   public function getFields(): ?EditableList<FieldSpecifier> {
-    if ($this->_fields->isMissing()) {
+    if ($this->fields->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_fields);
+    return TypeAssert\instance_of(EditableList::class, $this->fields);
   }
 
   /**
    * @returns EditableList<FieldSpecifier>
    */
   public function getFieldsx(): EditableList<FieldSpecifier> {
-    return TypeAssert\instance_of(EditableList::class, $this->_fields);
+    return TypeAssert\instance_of(EditableList::class, $this->fields);
   }
 
-  public function getEllipsisUNTYPED(): EditableNode {
-    return $this->_ellipsis;
+  final public function getEllipsisUNTYPED(): EditableNode {
+    return $this->ellipsis;
   }
 
-  public function withEllipsis(EditableNode $value): this {
-    if ($value === $this->_ellipsis) {
+  public function withEllipsis(?DotDotDotToken $value): this {
+    if ($value === $this->ellipsis) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_fields,
+      $this->keyword,
+      $this->left_paren,
+      $this->fields,
       $value,
-      $this->_right_paren,
+      $this->right_paren,
     );
   }
 
   public function hasEllipsis(): bool {
-    return !$this->_ellipsis->isMissing();
+    return $this->ellipsis !== null;
   }
 
   /**
    * @returns Missing | DotDotDotToken
    */
   public function getEllipsis(): ?DotDotDotToken {
-    if ($this->_ellipsis->isMissing()) {
+    if ($this->ellipsis->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(DotDotDotToken::class, $this->_ellipsis);
+    return TypeAssert\instance_of(DotDotDotToken::class, $this->ellipsis);
   }
 
   /**
    * @returns DotDotDotToken
    */
   public function getEllipsisx(): DotDotDotToken {
-    return TypeAssert\instance_of(DotDotDotToken::class, $this->_ellipsis);
+    return TypeAssert\instance_of(DotDotDotToken::class, $this->ellipsis);
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_fields,
-      $this->_ellipsis,
+      $this->keyword,
+      $this->left_paren,
+      $this->fields,
+      $this->ellipsis,
       $value,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**

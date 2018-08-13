@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<846f33fdb6dcb443eb58237a067ff5b9>>
+ * @generated SignedSource<<c98f7fa3e4764b95efd4258182388e7e>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -12,19 +12,12 @@ final class AlternateElseClause
   extends EditableNode
   implements IControlFlowStatement {
 
-  private EditableNode $_keyword;
-  private EditableNode $_colon;
-  private EditableNode $_statement;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $colon,
-    EditableNode $statement,
+    private ElseToken $keyword,
+    private ColonToken $colon,
+    private EditableList<EditableNode> $statement,
   ) {
     parent::__construct('alternate_else_clause');
-    $this->_keyword = $keyword;
-    $this->_colon = $colon;
-    $this->_statement = $statement;
   }
 
   <<__Override>>
@@ -34,21 +27,21 @@ final class AlternateElseClause
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = ElseToken::fromJSON(
       /* UNSAFE_EXPR */ $json['alternate_else_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $colon = EditableNode::fromJSON(
+    $colon = ColonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['alternate_else_colon'],
       $file,
       $offset,
       $source,
     );
     $offset += $colon->getWidth();
-    $statement = EditableNode::fromJSON(
+    $statement = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['alternate_else_statement'],
       $file,
       $offset,
@@ -59,11 +52,11 @@ final class AlternateElseClause
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'colon' => $this->_colon,
-      'statement' => $this->_statement,
+      'keyword' => $this->keyword,
+      'colon' => $this->colon,
+      'statement' => $this->statement,
     ];
   }
 
@@ -74,39 +67,39 @@ final class AlternateElseClause
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $colon = $this->_colon->rewrite($rewriter, $parents);
-    $statement = $this->_statement->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $colon = $this->colon->rewrite($rewriter, $parents);
+    $statement = $this->statement->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $colon === $this->_colon &&
-      $statement === $this->_statement
+      $keyword === $this->keyword &&
+      $colon === $this->colon &&
+      $statement === $this->statement
     ) {
       return $this;
     }
     return new static($keyword, $colon, $statement);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(ElseToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_colon, $this->_statement);
+    return new static($value, $this->colon, $this->statement);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns ElseToken
    */
   public function getKeyword(): ElseToken {
-    return TypeAssert\instance_of(ElseToken::class, $this->_keyword);
+    return TypeAssert\instance_of(ElseToken::class, $this->keyword);
   }
 
   /**
@@ -116,26 +109,26 @@ final class AlternateElseClause
     return $this->getKeyword();
   }
 
-  public function getColonUNTYPED(): EditableNode {
-    return $this->_colon;
+  final public function getColonUNTYPED(): EditableNode {
+    return $this->colon;
   }
 
-  public function withColon(EditableNode $value): this {
-    if ($value === $this->_colon) {
+  public function withColon(ColonToken $value): this {
+    if ($value === $this->colon) {
       return $this;
     }
-    return new static($this->_keyword, $value, $this->_statement);
+    return new static($this->keyword, $value, $this->statement);
   }
 
   public function hasColon(): bool {
-    return !$this->_colon->isMissing();
+    return $this->colon !== null;
   }
 
   /**
    * @returns ColonToken
    */
   public function getColon(): ColonToken {
-    return TypeAssert\instance_of(ColonToken::class, $this->_colon);
+    return TypeAssert\instance_of(ColonToken::class, $this->colon);
   }
 
   /**
@@ -145,26 +138,26 @@ final class AlternateElseClause
     return $this->getColon();
   }
 
-  public function getStatementUNTYPED(): EditableNode {
-    return $this->_statement;
+  final public function getStatementUNTYPED(): EditableNode {
+    return $this->statement;
   }
 
-  public function withStatement(EditableNode $value): this {
-    if ($value === $this->_statement) {
+  public function withStatement(EditableList<EditableNode> $value): this {
+    if ($value === $this->statement) {
       return $this;
     }
-    return new static($this->_keyword, $this->_colon, $value);
+    return new static($this->keyword, $this->colon, $value);
   }
 
   public function hasStatement(): bool {
-    return !$this->_statement->isMissing();
+    return $this->statement !== null;
   }
 
   /**
    * @returns EditableList<EditableNode>
    */
   public function getStatement(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_statement);
+    return TypeAssert\instance_of(EditableList::class, $this->statement);
   }
 
   /**

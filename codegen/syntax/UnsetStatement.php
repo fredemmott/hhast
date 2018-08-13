@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<40980bfa4a4584dee2e8135ef9e49a98>>
+ * @generated SignedSource<<289bd0284f5a47f842aecb12efd0d972>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,25 +10,14 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class UnsetStatement extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_variables;
-  private EditableNode $_right_paren;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_paren,
-    EditableNode $variables,
-    EditableNode $right_paren,
-    EditableNode $semicolon,
+    private UnsetToken $keyword,
+    private LeftParenToken $leftParen,
+    private EditableList<EditableNode> $variables,
+    private RightParenToken $rightParen,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('unset_statement');
-    $this->_keyword = $keyword;
-    $this->_left_paren = $left_paren;
-    $this->_variables = $variables;
-    $this->_right_paren = $right_paren;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -38,35 +27,35 @@ final class UnsetStatement extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = UnsetToken::fromJSON(
       /* UNSAFE_EXPR */ $json['unset_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['unset_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $variables = EditableNode::fromJSON(
+    $variables = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['unset_variables'],
       $file,
       $offset,
       $source,
     );
     $offset += $variables->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['unset_right_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $right_paren->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['unset_semicolon'],
       $file,
       $offset,
@@ -78,13 +67,13 @@ final class UnsetStatement extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_paren' => $this->_left_paren,
-      'variables' => $this->_variables,
-      'right_paren' => $this->_right_paren,
-      'semicolon' => $this->_semicolon,
+      'keyword' => $this->keyword,
+      'left_paren' => $this->leftParen,
+      'variables' => $this->variables,
+      'right_paren' => $this->rightParen,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -95,17 +84,17 @@ final class UnsetStatement extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $variables = $this->_variables->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $variables = $this->variables->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_paren === $this->_left_paren &&
-      $variables === $this->_variables &&
-      $right_paren === $this->_right_paren &&
-      $semicolon === $this->_semicolon
+      $keyword === $this->keyword &&
+      $left_paren === $this->leftParen &&
+      $variables === $this->variables &&
+      $right_paren === $this->rightParen &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
@@ -113,32 +102,32 @@ final class UnsetStatement extends EditableNode {
       new static($keyword, $left_paren, $variables, $right_paren, $semicolon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(UnsetToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_paren,
-      $this->_variables,
-      $this->_right_paren,
-      $this->_semicolon,
+      $this->left_paren,
+      $this->variables,
+      $this->right_paren,
+      $this->semicolon,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns UnsetToken
    */
   public function getKeyword(): UnsetToken {
-    return TypeAssert\instance_of(UnsetToken::class, $this->_keyword);
+    return TypeAssert\instance_of(UnsetToken::class, $this->keyword);
   }
 
   /**
@@ -148,32 +137,32 @@ final class UnsetStatement extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_variables,
-      $this->_right_paren,
-      $this->_semicolon,
+      $this->variables,
+      $this->right_paren,
+      $this->semicolon,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -183,25 +172,25 @@ final class UnsetStatement extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getVariablesUNTYPED(): EditableNode {
-    return $this->_variables;
+  final public function getVariablesUNTYPED(): EditableNode {
+    return $this->variables;
   }
 
-  public function withVariables(EditableNode $value): this {
-    if ($value === $this->_variables) {
+  public function withVariables(EditableList<EditableNode> $value): this {
+    if ($value === $this->variables) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
+      $this->keyword,
+      $this->left_paren,
       $value,
-      $this->_right_paren,
-      $this->_semicolon,
+      $this->right_paren,
+      $this->semicolon,
     );
   }
 
   public function hasVariables(): bool {
-    return !$this->_variables->isMissing();
+    return $this->variables !== null;
   }
 
   /**
@@ -212,7 +201,7 @@ final class UnsetStatement extends EditableNode {
    * EditableList<SubscriptExpression> | EditableList<VariableExpression>
    */
   public function getVariables(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_variables);
+    return TypeAssert\instance_of(EditableList::class, $this->variables);
   }
 
   /**
@@ -226,32 +215,32 @@ final class UnsetStatement extends EditableNode {
     return $this->getVariables();
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_variables,
+      $this->keyword,
+      $this->left_paren,
+      $this->variables,
       $value,
-      $this->_semicolon,
+      $this->semicolon,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
@@ -261,32 +250,32 @@ final class UnsetStatement extends EditableNode {
     return $this->getRightParen();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_variables,
-      $this->_right_paren,
+      $this->keyword,
+      $this->left_paren,
+      $this->variables,
+      $this->right_paren,
       $value,
     );
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

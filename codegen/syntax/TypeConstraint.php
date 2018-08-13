@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<be07a11b8263035b4e9fc14828b36f40>>
+ * @generated SignedSource<<87cc896b6e2a77eb6b8d1173b09efa39>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class TypeConstraint extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_type;
-
-  public function __construct(EditableNode $keyword, EditableNode $type) {
+  public function __construct(
+    private EditableToken $keyword,
+    private EditableNode $type,
+  ) {
     parent::__construct('type_constraint');
-    $this->_keyword = $keyword;
-    $this->_type = $type;
   }
 
   <<__Override>>
@@ -26,7 +24,7 @@ final class TypeConstraint extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['constraint_keyword'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class TypeConstraint extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'type' => $this->_type,
+      'keyword' => $this->keyword,
+      'type' => $this->type,
     ];
   }
 
@@ -58,34 +56,34 @@ final class TypeConstraint extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
-    if ($keyword === $this->_keyword && $type === $this->_type) {
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $type = $this->type->rewrite($rewriter, $parents);
+    if ($keyword === $this->keyword && $type === $this->type) {
       return $this;
     }
     return new static($keyword, $type);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(EditableToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_type);
+    return new static($value, $this->type);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns AsToken | SuperToken
    */
   public function getKeyword(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_keyword);
+    return TypeAssert\instance_of(EditableToken::class, $this->keyword);
   }
 
   /**
@@ -95,19 +93,19 @@ final class TypeConstraint extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
   public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+    if ($value === $this->type) {
       return $this;
     }
-    return new static($this->_keyword, $value);
+    return new static($this->keyword, $value);
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
@@ -117,7 +115,7 @@ final class TypeConstraint extends EditableNode {
    * TypeConstant | VectorArrayTypeSpecifier
    */
   public function getType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
   /**

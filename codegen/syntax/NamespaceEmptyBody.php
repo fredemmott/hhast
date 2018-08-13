@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<6b33a77733d3a1470a6a0777ae2462fb>>
+ * @generated SignedSource<<e13c06b761203efc3f00f10eb58e8bfd>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,11 +10,8 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class NamespaceEmptyBody extends EditableNode {
 
-  private EditableNode $_semicolon;
-
-  public function __construct(EditableNode $semicolon) {
+  public function __construct(private SemicolonToken $semicolon) {
     parent::__construct('namespace_empty_body');
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -24,7 +21,7 @@ final class NamespaceEmptyBody extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['namespace_semicolon'],
       $file,
       $offset,
@@ -35,9 +32,9 @@ final class NamespaceEmptyBody extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'semicolon' => $this->_semicolon,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -48,33 +45,33 @@ final class NamespaceEmptyBody extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
-    if ($semicolon === $this->_semicolon) {
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
+    if ($semicolon === $this->semicolon) {
       return $this;
     }
     return new static($semicolon);
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
     return new static($value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<d6e7368981319facf29e6540713d1c70>>
+ * @generated SignedSource<<61489f4ebc6db18e54868040b752c6b9>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class TypeArguments extends EditableNode {
 
-  private EditableNode $_left_angle;
-  private EditableNode $_types;
-  private EditableNode $_right_angle;
-
   public function __construct(
-    EditableNode $left_angle,
-    EditableNode $types,
-    EditableNode $right_angle,
+    private LessThanToken $leftAngle,
+    private EditableList<EditableNode> $types,
+    private ?GreaterThanToken $rightAngle,
   ) {
     parent::__construct('type_arguments');
-    $this->_left_angle = $left_angle;
-    $this->_types = $types;
-    $this->_right_angle = $right_angle;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class TypeArguments extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_angle = EditableNode::fromJSON(
+    $left_angle = LessThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_arguments_left_angle'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_angle->getWidth();
-    $types = EditableNode::fromJSON(
+    $types = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['type_arguments_types'],
       $file,
       $offset,
       $source,
     );
     $offset += $types->getWidth();
-    $right_angle = EditableNode::fromJSON(
+    $right_angle = GreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_arguments_right_angle'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class TypeArguments extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_angle' => $this->_left_angle,
-      'types' => $this->_types,
-      'right_angle' => $this->_right_angle,
+      'left_angle' => $this->leftAngle,
+      'types' => $this->types,
+      'right_angle' => $this->rightAngle,
     ];
   }
 
@@ -72,39 +65,39 @@ final class TypeArguments extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_angle = $this->_left_angle->rewrite($rewriter, $parents);
-    $types = $this->_types->rewrite($rewriter, $parents);
-    $right_angle = $this->_right_angle->rewrite($rewriter, $parents);
+    $left_angle = $this->leftAngle->rewrite($rewriter, $parents);
+    $types = $this->types->rewrite($rewriter, $parents);
+    $right_angle = $this->rightAngle?->rewrite($rewriter, $parents);
     if (
-      $left_angle === $this->_left_angle &&
-      $types === $this->_types &&
-      $right_angle === $this->_right_angle
+      $left_angle === $this->leftAngle &&
+      $types === $this->types &&
+      $right_angle === $this->rightAngle
     ) {
       return $this;
     }
     return new static($left_angle, $types, $right_angle);
   }
 
-  public function getLeftAngleUNTYPED(): EditableNode {
-    return $this->_left_angle;
+  final public function getLeftAngleUNTYPED(): EditableNode {
+    return $this->leftAngle;
   }
 
-  public function withLeftAngle(EditableNode $value): this {
-    if ($value === $this->_left_angle) {
+  public function withLeftAngle(LessThanToken $value): this {
+    if ($value === $this->leftAngle) {
       return $this;
     }
-    return new static($value, $this->_types, $this->_right_angle);
+    return new static($value, $this->types, $this->right_angle);
   }
 
   public function hasLeftAngle(): bool {
-    return !$this->_left_angle->isMissing();
+    return $this->leftAngle !== null;
   }
 
   /**
    * @returns LessThanToken
    */
   public function getLeftAngle(): LessThanToken {
-    return TypeAssert\instance_of(LessThanToken::class, $this->_left_angle);
+    return TypeAssert\instance_of(LessThanToken::class, $this->leftAngle);
   }
 
   /**
@@ -114,19 +107,19 @@ final class TypeArguments extends EditableNode {
     return $this->getLeftAngle();
   }
 
-  public function getTypesUNTYPED(): EditableNode {
-    return $this->_types;
+  final public function getTypesUNTYPED(): EditableNode {
+    return $this->types;
   }
 
-  public function withTypes(EditableNode $value): this {
-    if ($value === $this->_types) {
+  public function withTypes(EditableList<EditableNode> $value): this {
+    if ($value === $this->types) {
       return $this;
     }
-    return new static($this->_left_angle, $value, $this->_right_angle);
+    return new static($this->left_angle, $value, $this->right_angle);
   }
 
   public function hasTypes(): bool {
-    return !$this->_types->isMissing();
+    return $this->types !== null;
   }
 
   /**
@@ -139,7 +132,7 @@ final class TypeArguments extends EditableNode {
    * EditableList<TypeConstant> | EditableList<VectorArrayTypeSpecifier>
    */
   public function getTypes(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_types);
+    return TypeAssert\instance_of(EditableList::class, $this->types);
   }
 
   /**
@@ -155,35 +148,35 @@ final class TypeArguments extends EditableNode {
     return $this->getTypes();
   }
 
-  public function getRightAngleUNTYPED(): EditableNode {
-    return $this->_right_angle;
+  final public function getRightAngleUNTYPED(): EditableNode {
+    return $this->rightAngle;
   }
 
-  public function withRightAngle(EditableNode $value): this {
-    if ($value === $this->_right_angle) {
+  public function withRightAngle(?GreaterThanToken $value): this {
+    if ($value === $this->rightAngle) {
       return $this;
     }
-    return new static($this->_left_angle, $this->_types, $value);
+    return new static($this->left_angle, $this->types, $value);
   }
 
   public function hasRightAngle(): bool {
-    return !$this->_right_angle->isMissing();
+    return $this->rightAngle !== null;
   }
 
   /**
    * @returns Missing | GreaterThanToken
    */
   public function getRightAngle(): ?GreaterThanToken {
-    if ($this->_right_angle->isMissing()) {
+    if ($this->rightAngle->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(GreaterThanToken::class, $this->_right_angle);
+    return TypeAssert\instance_of(GreaterThanToken::class, $this->rightAngle);
   }
 
   /**
    * @returns GreaterThanToken
    */
   public function getRightAnglex(): GreaterThanToken {
-    return TypeAssert\instance_of(GreaterThanToken::class, $this->_right_angle);
+    return TypeAssert\instance_of(GreaterThanToken::class, $this->rightAngle);
   }
 }

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<17c9cd27ccd934dfba04bd7db1c09d1d>>
+ * @generated SignedSource<<fd0724b39cab101b73d66e989d110c4b>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,11 +10,8 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class SimpleTypeSpecifier extends EditableNode {
 
-  private EditableNode $_specifier;
-
-  public function __construct(EditableNode $specifier) {
+  public function __construct(private EditableNode $specifier) {
     parent::__construct('simple_type_specifier');
-    $this->_specifier = $specifier;
   }
 
   <<__Override>>
@@ -35,9 +32,9 @@ final class SimpleTypeSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'specifier' => $this->_specifier,
+      'specifier' => $this->specifier,
     ];
   }
 
@@ -48,26 +45,26 @@ final class SimpleTypeSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $specifier = $this->_specifier->rewrite($rewriter, $parents);
-    if ($specifier === $this->_specifier) {
+    $specifier = $this->specifier->rewrite($rewriter, $parents);
+    if ($specifier === $this->specifier) {
       return $this;
     }
     return new static($specifier);
   }
 
-  public function getSpecifierUNTYPED(): EditableNode {
-    return $this->_specifier;
+  final public function getSpecifierUNTYPED(): EditableNode {
+    return $this->specifier;
   }
 
   public function withSpecifier(EditableNode $value): this {
-    if ($value === $this->_specifier) {
+    if ($value === $this->specifier) {
       return $this;
     }
     return new static($value);
   }
 
   public function hasSpecifier(): bool {
-    return !$this->_specifier->isMissing();
+    return $this->specifier !== null;
   }
 
   /**
@@ -79,7 +76,7 @@ final class SimpleTypeSpecifier extends EditableNode {
    * ThisToken | VarToken | VarrayToken | VecToken | VoidToken
    */
   public function getSpecifier(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_specifier);
+    return TypeAssert\instance_of(EditableNode::class, $this->specifier);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<cf7142ff4986e7e4130b7ec18bdd4e4c>>
+ * @generated SignedSource<<f7d0afc48addc003e9788884d261be9f>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,16 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class GenericTypeSpecifier extends EditableNode {
 
-  private EditableNode $_class_type;
-  private EditableNode $_argument_list;
-
   public function __construct(
-    EditableNode $class_type,
-    EditableNode $argument_list,
+    private EditableNode $classType,
+    private TypeArguments $argumentList,
   ) {
     parent::__construct('generic_type_specifier');
-    $this->_class_type = $class_type;
-    $this->_argument_list = $argument_list;
   }
 
   <<__Override>>
@@ -36,7 +31,7 @@ final class GenericTypeSpecifier extends EditableNode {
       $source,
     );
     $offset += $class_type->getWidth();
-    $argument_list = EditableNode::fromJSON(
+    $argument_list = TypeArguments::fromJSON(
       /* UNSAFE_EXPR */ $json['generic_argument_list'],
       $file,
       $offset,
@@ -47,10 +42,10 @@ final class GenericTypeSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'class_type' => $this->_class_type,
-      'argument_list' => $this->_argument_list,
+      'class_type' => $this->classType,
+      'argument_list' => $this->argumentList,
     ];
   }
 
@@ -61,37 +56,36 @@ final class GenericTypeSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $class_type = $this->_class_type->rewrite($rewriter, $parents);
-    $argument_list = $this->_argument_list->rewrite($rewriter, $parents);
+    $class_type = $this->classType->rewrite($rewriter, $parents);
+    $argument_list = $this->argumentList->rewrite($rewriter, $parents);
     if (
-      $class_type === $this->_class_type &&
-      $argument_list === $this->_argument_list
+      $class_type === $this->classType && $argument_list === $this->argumentList
     ) {
       return $this;
     }
     return new static($class_type, $argument_list);
   }
 
-  public function getClassTypeUNTYPED(): EditableNode {
-    return $this->_class_type;
+  final public function getClassTypeUNTYPED(): EditableNode {
+    return $this->classType;
   }
 
   public function withClassType(EditableNode $value): this {
-    if ($value === $this->_class_type) {
+    if ($value === $this->classType) {
       return $this;
     }
-    return new static($value, $this->_argument_list);
+    return new static($value, $this->argument_list);
   }
 
   public function hasClassType(): bool {
-    return !$this->_class_type->isMissing();
+    return $this->classType !== null;
   }
 
   /**
    * @returns QualifiedName | XHPClassNameToken | NameToken | StringToken
    */
   public function getClassType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_class_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->classType);
   }
 
   /**
@@ -101,26 +95,26 @@ final class GenericTypeSpecifier extends EditableNode {
     return $this->getClassType();
   }
 
-  public function getArgumentListUNTYPED(): EditableNode {
-    return $this->_argument_list;
+  final public function getArgumentListUNTYPED(): EditableNode {
+    return $this->argumentList;
   }
 
-  public function withArgumentList(EditableNode $value): this {
-    if ($value === $this->_argument_list) {
+  public function withArgumentList(TypeArguments $value): this {
+    if ($value === $this->argumentList) {
       return $this;
     }
-    return new static($this->_class_type, $value);
+    return new static($this->class_type, $value);
   }
 
   public function hasArgumentList(): bool {
-    return !$this->_argument_list->isMissing();
+    return $this->argumentList !== null;
   }
 
   /**
    * @returns TypeArguments
    */
   public function getArgumentList(): TypeArguments {
-    return TypeAssert\instance_of(TypeArguments::class, $this->_argument_list);
+    return TypeAssert\instance_of(TypeArguments::class, $this->argumentList);
   }
 
   /**

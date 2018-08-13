@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<32a406ddb605e6d4e369f6ff14f90774>>
+ * @generated SignedSource<<86fd32e10e0416f8e97ec12fd96e0059>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class XHPSpreadAttribute extends EditableNode {
 
-  private EditableNode $_left_brace;
-  private EditableNode $_spread_operator;
-  private EditableNode $_expression;
-  private EditableNode $_right_brace;
-
   public function __construct(
-    EditableNode $left_brace,
-    EditableNode $spread_operator,
-    EditableNode $expression,
-    EditableNode $right_brace,
+    private LeftBraceToken $leftBrace,
+    private DotDotDotToken $spreadOperator,
+    private EditableNode $expression,
+    private RightBraceToken $rightBrace,
   ) {
     parent::__construct('xhp_spread_attribute');
-    $this->_left_brace = $left_brace;
-    $this->_spread_operator = $spread_operator;
-    $this->_expression = $expression;
-    $this->_right_brace = $right_brace;
   }
 
   <<__Override>>
@@ -35,14 +26,14 @@ final class XHPSpreadAttribute extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_brace = EditableNode::fromJSON(
+    $left_brace = LeftBraceToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_spread_attribute_left_brace'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_brace->getWidth();
-    $spread_operator = EditableNode::fromJSON(
+    $spread_operator = DotDotDotToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_spread_attribute_spread_operator'],
       $file,
       $offset,
@@ -56,7 +47,7 @@ final class XHPSpreadAttribute extends EditableNode {
       $source,
     );
     $offset += $expression->getWidth();
-    $right_brace = EditableNode::fromJSON(
+    $right_brace = RightBraceToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_spread_attribute_right_brace'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class XHPSpreadAttribute extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_brace' => $this->_left_brace,
-      'spread_operator' => $this->_spread_operator,
-      'expression' => $this->_expression,
-      'right_brace' => $this->_right_brace,
+      'left_brace' => $this->leftBrace,
+      'spread_operator' => $this->spreadOperator,
+      'expression' => $this->expression,
+      'right_brace' => $this->rightBrace,
     ];
   }
 
@@ -83,46 +74,46 @@ final class XHPSpreadAttribute extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_brace = $this->_left_brace->rewrite($rewriter, $parents);
-    $spread_operator = $this->_spread_operator->rewrite($rewriter, $parents);
-    $expression = $this->_expression->rewrite($rewriter, $parents);
-    $right_brace = $this->_right_brace->rewrite($rewriter, $parents);
+    $left_brace = $this->leftBrace->rewrite($rewriter, $parents);
+    $spread_operator = $this->spreadOperator->rewrite($rewriter, $parents);
+    $expression = $this->expression->rewrite($rewriter, $parents);
+    $right_brace = $this->rightBrace->rewrite($rewriter, $parents);
     if (
-      $left_brace === $this->_left_brace &&
-      $spread_operator === $this->_spread_operator &&
-      $expression === $this->_expression &&
-      $right_brace === $this->_right_brace
+      $left_brace === $this->leftBrace &&
+      $spread_operator === $this->spreadOperator &&
+      $expression === $this->expression &&
+      $right_brace === $this->rightBrace
     ) {
       return $this;
     }
     return new static($left_brace, $spread_operator, $expression, $right_brace);
   }
 
-  public function getLeftBraceUNTYPED(): EditableNode {
-    return $this->_left_brace;
+  final public function getLeftBraceUNTYPED(): EditableNode {
+    return $this->leftBrace;
   }
 
-  public function withLeftBrace(EditableNode $value): this {
-    if ($value === $this->_left_brace) {
+  public function withLeftBrace(LeftBraceToken $value): this {
+    if ($value === $this->leftBrace) {
       return $this;
     }
     return new static(
       $value,
-      $this->_spread_operator,
-      $this->_expression,
-      $this->_right_brace,
+      $this->spread_operator,
+      $this->expression,
+      $this->right_brace,
     );
   }
 
   public function hasLeftBrace(): bool {
-    return !$this->_left_brace->isMissing();
+    return $this->leftBrace !== null;
   }
 
   /**
    * @returns LeftBraceToken
    */
   public function getLeftBrace(): LeftBraceToken {
-    return TypeAssert\instance_of(LeftBraceToken::class, $this->_left_brace);
+    return TypeAssert\instance_of(LeftBraceToken::class, $this->leftBrace);
   }
 
   /**
@@ -132,32 +123,31 @@ final class XHPSpreadAttribute extends EditableNode {
     return $this->getLeftBrace();
   }
 
-  public function getSpreadOperatorUNTYPED(): EditableNode {
-    return $this->_spread_operator;
+  final public function getSpreadOperatorUNTYPED(): EditableNode {
+    return $this->spreadOperator;
   }
 
-  public function withSpreadOperator(EditableNode $value): this {
-    if ($value === $this->_spread_operator) {
+  public function withSpreadOperator(DotDotDotToken $value): this {
+    if ($value === $this->spreadOperator) {
       return $this;
     }
     return new static(
-      $this->_left_brace,
+      $this->left_brace,
       $value,
-      $this->_expression,
-      $this->_right_brace,
+      $this->expression,
+      $this->right_brace,
     );
   }
 
   public function hasSpreadOperator(): bool {
-    return !$this->_spread_operator->isMissing();
+    return $this->spreadOperator !== null;
   }
 
   /**
    * @returns DotDotDotToken
    */
   public function getSpreadOperator(): DotDotDotToken {
-    return
-      TypeAssert\instance_of(DotDotDotToken::class, $this->_spread_operator);
+    return TypeAssert\instance_of(DotDotDotToken::class, $this->spreadOperator);
   }
 
   /**
@@ -167,31 +157,31 @@ final class XHPSpreadAttribute extends EditableNode {
     return $this->getSpreadOperator();
   }
 
-  public function getExpressionUNTYPED(): EditableNode {
-    return $this->_expression;
+  final public function getExpressionUNTYPED(): EditableNode {
+    return $this->expression;
   }
 
   public function withExpression(EditableNode $value): this {
-    if ($value === $this->_expression) {
+    if ($value === $this->expression) {
       return $this;
     }
     return new static(
-      $this->_left_brace,
-      $this->_spread_operator,
+      $this->left_brace,
+      $this->spread_operator,
       $value,
-      $this->_right_brace,
+      $this->right_brace,
     );
   }
 
   public function hasExpression(): bool {
-    return !$this->_expression->isMissing();
+    return $this->expression !== null;
   }
 
   /**
    * @returns VariableExpression | XHPExpression
    */
   public function getExpression(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_expression);
+    return TypeAssert\instance_of(EditableNode::class, $this->expression);
   }
 
   /**
@@ -201,31 +191,31 @@ final class XHPSpreadAttribute extends EditableNode {
     return $this->getExpression();
   }
 
-  public function getRightBraceUNTYPED(): EditableNode {
-    return $this->_right_brace;
+  final public function getRightBraceUNTYPED(): EditableNode {
+    return $this->rightBrace;
   }
 
-  public function withRightBrace(EditableNode $value): this {
-    if ($value === $this->_right_brace) {
+  public function withRightBrace(RightBraceToken $value): this {
+    if ($value === $this->rightBrace) {
       return $this;
     }
     return new static(
-      $this->_left_brace,
-      $this->_spread_operator,
-      $this->_expression,
+      $this->left_brace,
+      $this->spread_operator,
+      $this->expression,
       $value,
     );
   }
 
   public function hasRightBrace(): bool {
-    return !$this->_right_brace->isMissing();
+    return $this->rightBrace !== null;
   }
 
   /**
    * @returns RightBraceToken
    */
   public function getRightBrace(): RightBraceToken {
-    return TypeAssert\instance_of(RightBraceToken::class, $this->_right_brace);
+    return TypeAssert\instance_of(RightBraceToken::class, $this->rightBrace);
   }
 
   /**

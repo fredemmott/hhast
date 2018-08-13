@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<41f6f6540745c65e0937bfcac34f93a9>>
+ * @generated SignedSource<<7664df092db9bb6bb7d61c7df0364259>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class NullableTypeSpecifier extends EditableNode {
 
-  private EditableNode $_question;
-  private EditableNode $_type;
-
-  public function __construct(EditableNode $question, EditableNode $type) {
+  public function __construct(
+    private QuestionToken $question,
+    private EditableNode $type,
+  ) {
     parent::__construct('nullable_type_specifier');
-    $this->_question = $question;
-    $this->_type = $type;
   }
 
   <<__Override>>
@@ -26,7 +24,7 @@ final class NullableTypeSpecifier extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $question = EditableNode::fromJSON(
+    $question = QuestionToken::fromJSON(
       /* UNSAFE_EXPR */ $json['nullable_question'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class NullableTypeSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'question' => $this->_question,
-      'type' => $this->_type,
+      'question' => $this->question,
+      'type' => $this->type,
     ];
   }
 
@@ -58,34 +56,34 @@ final class NullableTypeSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $question = $this->_question->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
-    if ($question === $this->_question && $type === $this->_type) {
+    $question = $this->question->rewrite($rewriter, $parents);
+    $type = $this->type->rewrite($rewriter, $parents);
+    if ($question === $this->question && $type === $this->type) {
       return $this;
     }
     return new static($question, $type);
   }
 
-  public function getQuestionUNTYPED(): EditableNode {
-    return $this->_question;
+  final public function getQuestionUNTYPED(): EditableNode {
+    return $this->question;
   }
 
-  public function withQuestion(EditableNode $value): this {
-    if ($value === $this->_question) {
+  public function withQuestion(QuestionToken $value): this {
+    if ($value === $this->question) {
       return $this;
     }
-    return new static($value, $this->_type);
+    return new static($value, $this->type);
   }
 
   public function hasQuestion(): bool {
-    return !$this->_question->isMissing();
+    return $this->question !== null;
   }
 
   /**
    * @returns QuestionToken
    */
   public function getQuestion(): QuestionToken {
-    return TypeAssert\instance_of(QuestionToken::class, $this->_question);
+    return TypeAssert\instance_of(QuestionToken::class, $this->question);
   }
 
   /**
@@ -95,19 +93,19 @@ final class NullableTypeSpecifier extends EditableNode {
     return $this->getQuestion();
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
   public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+    if ($value === $this->type) {
       return $this;
     }
-    return new static($this->_question, $value);
+    return new static($this->question, $value);
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
@@ -117,7 +115,7 @@ final class NullableTypeSpecifier extends EditableNode {
    * TypeConstant | VectorArrayTypeSpecifier | VectorTypeSpecifier
    */
   public function getType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
   /**

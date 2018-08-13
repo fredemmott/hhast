@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<3c879b204c1c4bd03a5b565af6461a41>>
+ * @generated SignedSource<<6b157683d92661f454f132bd04324d43>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,37 +10,18 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class TypeConstDeclaration extends EditableNode {
 
-  private EditableNode $_abstract;
-  private EditableNode $_keyword;
-  private EditableNode $_type_keyword;
-  private EditableNode $_name;
-  private EditableNode $_type_parameters;
-  private EditableNode $_type_constraint;
-  private EditableNode $_equal;
-  private EditableNode $_type_specifier;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $abstract,
-    EditableNode $keyword,
-    EditableNode $type_keyword,
-    EditableNode $name,
-    EditableNode $type_parameters,
-    EditableNode $type_constraint,
-    EditableNode $equal,
-    EditableNode $type_specifier,
-    EditableNode $semicolon,
+    private ?AbstractToken $abstract,
+    private ConstToken $keyword,
+    private TypeToken $typeKeyword,
+    private NameToken $name,
+    private ?EditableNode $typeParameters,
+    private ?TypeConstraint $typeConstraint,
+    private ?EqualToken $equal,
+    private ?EditableNode $typeSpecifier,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('type_const_declaration');
-    $this->_abstract = $abstract;
-    $this->_keyword = $keyword;
-    $this->_type_keyword = $type_keyword;
-    $this->_name = $name;
-    $this->_type_parameters = $type_parameters;
-    $this->_type_constraint = $type_constraint;
-    $this->_equal = $equal;
-    $this->_type_specifier = $type_specifier;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -50,28 +31,28 @@ final class TypeConstDeclaration extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $abstract = EditableNode::fromJSON(
+    $abstract = AbstractToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_const_abstract'],
       $file,
       $offset,
       $source,
     );
     $offset += $abstract->getWidth();
-    $keyword = EditableNode::fromJSON(
+    $keyword = ConstToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_const_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $type_keyword = EditableNode::fromJSON(
+    $type_keyword = TypeToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_const_type_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $type_keyword->getWidth();
-    $name = EditableNode::fromJSON(
+    $name = NameToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_const_name'],
       $file,
       $offset,
@@ -85,14 +66,14 @@ final class TypeConstDeclaration extends EditableNode {
       $source,
     );
     $offset += $type_parameters->getWidth();
-    $type_constraint = EditableNode::fromJSON(
+    $type_constraint = TypeConstraint::fromJSON(
       /* UNSAFE_EXPR */ $json['type_const_type_constraint'],
       $file,
       $offset,
       $source,
     );
     $offset += $type_constraint->getWidth();
-    $equal = EditableNode::fromJSON(
+    $equal = EqualToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_const_equal'],
       $file,
       $offset,
@@ -106,7 +87,7 @@ final class TypeConstDeclaration extends EditableNode {
       $source,
     );
     $offset += $type_specifier->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_const_semicolon'],
       $file,
       $offset,
@@ -127,17 +108,17 @@ final class TypeConstDeclaration extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'abstract' => $this->_abstract,
-      'keyword' => $this->_keyword,
-      'type_keyword' => $this->_type_keyword,
-      'name' => $this->_name,
-      'type_parameters' => $this->_type_parameters,
-      'type_constraint' => $this->_type_constraint,
-      'equal' => $this->_equal,
-      'type_specifier' => $this->_type_specifier,
-      'semicolon' => $this->_semicolon,
+      'abstract' => $this->abstract,
+      'keyword' => $this->keyword,
+      'type_keyword' => $this->typeKeyword,
+      'name' => $this->name,
+      'type_parameters' => $this->typeParameters,
+      'type_constraint' => $this->typeConstraint,
+      'equal' => $this->equal,
+      'type_specifier' => $this->typeSpecifier,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -148,25 +129,25 @@ final class TypeConstDeclaration extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $abstract = $this->_abstract->rewrite($rewriter, $parents);
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $type_keyword = $this->_type_keyword->rewrite($rewriter, $parents);
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $type_parameters = $this->_type_parameters->rewrite($rewriter, $parents);
-    $type_constraint = $this->_type_constraint->rewrite($rewriter, $parents);
-    $equal = $this->_equal->rewrite($rewriter, $parents);
-    $type_specifier = $this->_type_specifier->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $abstract = $this->abstract?->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $type_keyword = $this->typeKeyword->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
+    $type_parameters = $this->typeParameters?->rewrite($rewriter, $parents);
+    $type_constraint = $this->typeConstraint?->rewrite($rewriter, $parents);
+    $equal = $this->equal?->rewrite($rewriter, $parents);
+    $type_specifier = $this->typeSpecifier?->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $abstract === $this->_abstract &&
-      $keyword === $this->_keyword &&
-      $type_keyword === $this->_type_keyword &&
-      $name === $this->_name &&
-      $type_parameters === $this->_type_parameters &&
-      $type_constraint === $this->_type_constraint &&
-      $equal === $this->_equal &&
-      $type_specifier === $this->_type_specifier &&
-      $semicolon === $this->_semicolon
+      $abstract === $this->abstract &&
+      $keyword === $this->keyword &&
+      $type_keyword === $this->typeKeyword &&
+      $name === $this->name &&
+      $type_parameters === $this->typeParameters &&
+      $type_constraint === $this->typeConstraint &&
+      $equal === $this->equal &&
+      $type_specifier === $this->typeSpecifier &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
@@ -183,78 +164,78 @@ final class TypeConstDeclaration extends EditableNode {
     );
   }
 
-  public function getAbstractUNTYPED(): EditableNode {
-    return $this->_abstract;
+  final public function getAbstractUNTYPED(): EditableNode {
+    return $this->abstract;
   }
 
-  public function withAbstract(EditableNode $value): this {
-    if ($value === $this->_abstract) {
+  public function withAbstract(?AbstractToken $value): this {
+    if ($value === $this->abstract) {
       return $this;
     }
     return new static(
       $value,
-      $this->_keyword,
-      $this->_type_keyword,
-      $this->_name,
-      $this->_type_parameters,
-      $this->_type_constraint,
-      $this->_equal,
-      $this->_type_specifier,
-      $this->_semicolon,
+      $this->keyword,
+      $this->type_keyword,
+      $this->name,
+      $this->type_parameters,
+      $this->type_constraint,
+      $this->equal,
+      $this->type_specifier,
+      $this->semicolon,
     );
   }
 
   public function hasAbstract(): bool {
-    return !$this->_abstract->isMissing();
+    return $this->abstract !== null;
   }
 
   /**
    * @returns Missing | AbstractToken
    */
   public function getAbstract(): ?AbstractToken {
-    if ($this->_abstract->isMissing()) {
+    if ($this->abstract->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(AbstractToken::class, $this->_abstract);
+    return TypeAssert\instance_of(AbstractToken::class, $this->abstract);
   }
 
   /**
    * @returns AbstractToken
    */
   public function getAbstractx(): AbstractToken {
-    return TypeAssert\instance_of(AbstractToken::class, $this->_abstract);
+    return TypeAssert\instance_of(AbstractToken::class, $this->abstract);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(ConstToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
-      $this->_abstract,
+      $this->abstract,
       $value,
-      $this->_type_keyword,
-      $this->_name,
-      $this->_type_parameters,
-      $this->_type_constraint,
-      $this->_equal,
-      $this->_type_specifier,
-      $this->_semicolon,
+      $this->type_keyword,
+      $this->name,
+      $this->type_parameters,
+      $this->type_constraint,
+      $this->equal,
+      $this->type_specifier,
+      $this->semicolon,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns ConstToken
    */
   public function getKeyword(): ConstToken {
-    return TypeAssert\instance_of(ConstToken::class, $this->_keyword);
+    return TypeAssert\instance_of(ConstToken::class, $this->keyword);
   }
 
   /**
@@ -264,36 +245,36 @@ final class TypeConstDeclaration extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getTypeKeywordUNTYPED(): EditableNode {
-    return $this->_type_keyword;
+  final public function getTypeKeywordUNTYPED(): EditableNode {
+    return $this->typeKeyword;
   }
 
-  public function withTypeKeyword(EditableNode $value): this {
-    if ($value === $this->_type_keyword) {
+  public function withTypeKeyword(TypeToken $value): this {
+    if ($value === $this->typeKeyword) {
       return $this;
     }
     return new static(
-      $this->_abstract,
-      $this->_keyword,
+      $this->abstract,
+      $this->keyword,
       $value,
-      $this->_name,
-      $this->_type_parameters,
-      $this->_type_constraint,
-      $this->_equal,
-      $this->_type_specifier,
-      $this->_semicolon,
+      $this->name,
+      $this->type_parameters,
+      $this->type_constraint,
+      $this->equal,
+      $this->type_specifier,
+      $this->semicolon,
     );
   }
 
   public function hasTypeKeyword(): bool {
-    return !$this->_type_keyword->isMissing();
+    return $this->typeKeyword !== null;
   }
 
   /**
    * @returns TypeToken
    */
   public function getTypeKeyword(): TypeToken {
-    return TypeAssert\instance_of(TypeToken::class, $this->_type_keyword);
+    return TypeAssert\instance_of(TypeToken::class, $this->typeKeyword);
   }
 
   /**
@@ -303,36 +284,36 @@ final class TypeConstDeclaration extends EditableNode {
     return $this->getTypeKeyword();
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
-  public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+  public function withName(NameToken $value): this {
+    if ($value === $this->name) {
       return $this;
     }
     return new static(
-      $this->_abstract,
-      $this->_keyword,
-      $this->_type_keyword,
+      $this->abstract,
+      $this->keyword,
+      $this->type_keyword,
       $value,
-      $this->_type_parameters,
-      $this->_type_constraint,
-      $this->_equal,
-      $this->_type_specifier,
-      $this->_semicolon,
+      $this->type_parameters,
+      $this->type_constraint,
+      $this->equal,
+      $this->type_specifier,
+      $this->semicolon,
     );
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns NameToken
    */
   public function getName(): NameToken {
-    return TypeAssert\instance_of(NameToken::class, $this->_name);
+    return TypeAssert\instance_of(NameToken::class, $this->name);
   }
 
   /**
@@ -342,157 +323,155 @@ final class TypeConstDeclaration extends EditableNode {
     return $this->getName();
   }
 
-  public function getTypeParametersUNTYPED(): EditableNode {
-    return $this->_type_parameters;
+  final public function getTypeParametersUNTYPED(): EditableNode {
+    return $this->typeParameters;
   }
 
-  public function withTypeParameters(EditableNode $value): this {
-    if ($value === $this->_type_parameters) {
+  public function withTypeParameters(?EditableNode $value): this {
+    if ($value === $this->typeParameters) {
       return $this;
     }
     return new static(
-      $this->_abstract,
-      $this->_keyword,
-      $this->_type_keyword,
-      $this->_name,
+      $this->abstract,
+      $this->keyword,
+      $this->type_keyword,
+      $this->name,
       $value,
-      $this->_type_constraint,
-      $this->_equal,
-      $this->_type_specifier,
-      $this->_semicolon,
+      $this->type_constraint,
+      $this->equal,
+      $this->type_specifier,
+      $this->semicolon,
     );
   }
 
   public function hasTypeParameters(): bool {
-    return !$this->_type_parameters->isMissing();
+    return $this->typeParameters !== null;
   }
 
   /**
    * @returns Missing
    */
   public function getTypeParameters(): ?EditableNode {
-    if ($this->_type_parameters->isMissing()) {
+    if ($this->typeParameters->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_type_parameters);
+    return TypeAssert\instance_of(EditableNode::class, $this->typeParameters);
   }
 
   /**
    * @returns
    */
   public function getTypeParametersx(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type_parameters);
+    return TypeAssert\instance_of(EditableNode::class, $this->typeParameters);
   }
 
-  public function getTypeConstraintUNTYPED(): EditableNode {
-    return $this->_type_constraint;
+  final public function getTypeConstraintUNTYPED(): EditableNode {
+    return $this->typeConstraint;
   }
 
-  public function withTypeConstraint(EditableNode $value): this {
-    if ($value === $this->_type_constraint) {
+  public function withTypeConstraint(?TypeConstraint $value): this {
+    if ($value === $this->typeConstraint) {
       return $this;
     }
     return new static(
-      $this->_abstract,
-      $this->_keyword,
-      $this->_type_keyword,
-      $this->_name,
-      $this->_type_parameters,
+      $this->abstract,
+      $this->keyword,
+      $this->type_keyword,
+      $this->name,
+      $this->type_parameters,
       $value,
-      $this->_equal,
-      $this->_type_specifier,
-      $this->_semicolon,
+      $this->equal,
+      $this->type_specifier,
+      $this->semicolon,
     );
   }
 
   public function hasTypeConstraint(): bool {
-    return !$this->_type_constraint->isMissing();
+    return $this->typeConstraint !== null;
   }
 
   /**
    * @returns Missing | TypeConstraint
    */
   public function getTypeConstraint(): ?TypeConstraint {
-    if ($this->_type_constraint->isMissing()) {
+    if ($this->typeConstraint->isMissing()) {
       return null;
     }
-    return
-      TypeAssert\instance_of(TypeConstraint::class, $this->_type_constraint);
+    return TypeAssert\instance_of(TypeConstraint::class, $this->typeConstraint);
   }
 
   /**
    * @returns TypeConstraint
    */
   public function getTypeConstraintx(): TypeConstraint {
-    return
-      TypeAssert\instance_of(TypeConstraint::class, $this->_type_constraint);
+    return TypeAssert\instance_of(TypeConstraint::class, $this->typeConstraint);
   }
 
-  public function getEqualUNTYPED(): EditableNode {
-    return $this->_equal;
+  final public function getEqualUNTYPED(): EditableNode {
+    return $this->equal;
   }
 
-  public function withEqual(EditableNode $value): this {
-    if ($value === $this->_equal) {
+  public function withEqual(?EqualToken $value): this {
+    if ($value === $this->equal) {
       return $this;
     }
     return new static(
-      $this->_abstract,
-      $this->_keyword,
-      $this->_type_keyword,
-      $this->_name,
-      $this->_type_parameters,
-      $this->_type_constraint,
+      $this->abstract,
+      $this->keyword,
+      $this->type_keyword,
+      $this->name,
+      $this->type_parameters,
+      $this->type_constraint,
       $value,
-      $this->_type_specifier,
-      $this->_semicolon,
+      $this->type_specifier,
+      $this->semicolon,
     );
   }
 
   public function hasEqual(): bool {
-    return !$this->_equal->isMissing();
+    return $this->equal !== null;
   }
 
   /**
    * @returns Missing | EqualToken
    */
   public function getEqual(): ?EqualToken {
-    if ($this->_equal->isMissing()) {
+    if ($this->equal->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EqualToken::class, $this->_equal);
+    return TypeAssert\instance_of(EqualToken::class, $this->equal);
   }
 
   /**
    * @returns EqualToken
    */
   public function getEqualx(): EqualToken {
-    return TypeAssert\instance_of(EqualToken::class, $this->_equal);
+    return TypeAssert\instance_of(EqualToken::class, $this->equal);
   }
 
-  public function getTypeSpecifierUNTYPED(): EditableNode {
-    return $this->_type_specifier;
+  final public function getTypeSpecifierUNTYPED(): EditableNode {
+    return $this->typeSpecifier;
   }
 
-  public function withTypeSpecifier(EditableNode $value): this {
-    if ($value === $this->_type_specifier) {
+  public function withTypeSpecifier(?EditableNode $value): this {
+    if ($value === $this->typeSpecifier) {
       return $this;
     }
     return new static(
-      $this->_abstract,
-      $this->_keyword,
-      $this->_type_keyword,
-      $this->_name,
-      $this->_type_parameters,
-      $this->_type_constraint,
-      $this->_equal,
+      $this->abstract,
+      $this->keyword,
+      $this->type_keyword,
+      $this->name,
+      $this->type_parameters,
+      $this->type_constraint,
+      $this->equal,
       $value,
-      $this->_semicolon,
+      $this->semicolon,
     );
   }
 
   public function hasTypeSpecifier(): bool {
-    return !$this->_type_specifier->isMissing();
+    return $this->typeSpecifier !== null;
   }
 
   /**
@@ -502,10 +481,10 @@ final class TypeConstDeclaration extends EditableNode {
    * TupleTypeSpecifier | TypeConstant | VectorTypeSpecifier
    */
   public function getTypeSpecifier(): ?EditableNode {
-    if ($this->_type_specifier->isMissing()) {
+    if ($this->typeSpecifier->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_type_specifier);
+    return TypeAssert\instance_of(EditableNode::class, $this->typeSpecifier);
   }
 
   /**
@@ -515,39 +494,39 @@ final class TypeConstDeclaration extends EditableNode {
    * TypeConstant | VectorTypeSpecifier
    */
   public function getTypeSpecifierx(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type_specifier);
+    return TypeAssert\instance_of(EditableNode::class, $this->typeSpecifier);
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
     return new static(
-      $this->_abstract,
-      $this->_keyword,
-      $this->_type_keyword,
-      $this->_name,
-      $this->_type_parameters,
-      $this->_type_constraint,
-      $this->_equal,
-      $this->_type_specifier,
+      $this->abstract,
+      $this->keyword,
+      $this->type_keyword,
+      $this->name,
+      $this->type_parameters,
+      $this->type_constraint,
+      $this->equal,
+      $this->type_specifier,
       $value,
     );
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

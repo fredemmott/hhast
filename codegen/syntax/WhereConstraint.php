@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<7469ccdcf64e78ed5486571e486f3f63>>
+ * @generated SignedSource<<49d7afda6e6b3fe04b0f01c08de22dbf>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class WhereConstraint extends EditableNode {
 
-  private EditableNode $_left_type;
-  private EditableNode $_operator;
-  private EditableNode $_right_type;
-
   public function __construct(
-    EditableNode $left_type,
-    EditableNode $operator,
-    EditableNode $right_type,
+    private EditableNode $leftType,
+    private EditableToken $operator,
+    private EditableNode $rightType,
   ) {
     parent::__construct('where_constraint');
-    $this->_left_type = $left_type;
-    $this->_operator = $operator;
-    $this->_right_type = $right_type;
   }
 
   <<__Override>>
@@ -39,7 +32,7 @@ final class WhereConstraint extends EditableNode {
       $source,
     );
     $offset += $left_type->getWidth();
-    $operator = EditableNode::fromJSON(
+    $operator = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['where_constraint_operator'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class WhereConstraint extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_type' => $this->_left_type,
-      'operator' => $this->_operator,
-      'right_type' => $this->_right_type,
+      'left_type' => $this->leftType,
+      'operator' => $this->operator,
+      'right_type' => $this->rightType,
     ];
   }
 
@@ -72,39 +65,39 @@ final class WhereConstraint extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_type = $this->_left_type->rewrite($rewriter, $parents);
-    $operator = $this->_operator->rewrite($rewriter, $parents);
-    $right_type = $this->_right_type->rewrite($rewriter, $parents);
+    $left_type = $this->leftType->rewrite($rewriter, $parents);
+    $operator = $this->operator->rewrite($rewriter, $parents);
+    $right_type = $this->rightType->rewrite($rewriter, $parents);
     if (
-      $left_type === $this->_left_type &&
-      $operator === $this->_operator &&
-      $right_type === $this->_right_type
+      $left_type === $this->leftType &&
+      $operator === $this->operator &&
+      $right_type === $this->rightType
     ) {
       return $this;
     }
     return new static($left_type, $operator, $right_type);
   }
 
-  public function getLeftTypeUNTYPED(): EditableNode {
-    return $this->_left_type;
+  final public function getLeftTypeUNTYPED(): EditableNode {
+    return $this->leftType;
   }
 
   public function withLeftType(EditableNode $value): this {
-    if ($value === $this->_left_type) {
+    if ($value === $this->leftType) {
       return $this;
     }
-    return new static($value, $this->_operator, $this->_right_type);
+    return new static($value, $this->operator, $this->right_type);
   }
 
   public function hasLeftType(): bool {
-    return !$this->_left_type->isMissing();
+    return $this->leftType !== null;
   }
 
   /**
    * @returns GenericTypeSpecifier | SimpleTypeSpecifier | TypeConstant
    */
   public function getLeftType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_left_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->leftType);
   }
 
   /**
@@ -114,26 +107,26 @@ final class WhereConstraint extends EditableNode {
     return $this->getLeftType();
   }
 
-  public function getOperatorUNTYPED(): EditableNode {
-    return $this->_operator;
+  final public function getOperatorUNTYPED(): EditableNode {
+    return $this->operator;
   }
 
-  public function withOperator(EditableNode $value): this {
-    if ($value === $this->_operator) {
+  public function withOperator(EditableToken $value): this {
+    if ($value === $this->operator) {
       return $this;
     }
-    return new static($this->_left_type, $value, $this->_right_type);
+    return new static($this->left_type, $value, $this->right_type);
   }
 
   public function hasOperator(): bool {
-    return !$this->_operator->isMissing();
+    return $this->operator !== null;
   }
 
   /**
    * @returns EqualToken | AsToken | SuperToken
    */
   public function getOperator(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_operator);
+    return TypeAssert\instance_of(EditableToken::class, $this->operator);
   }
 
   /**
@@ -143,19 +136,19 @@ final class WhereConstraint extends EditableNode {
     return $this->getOperator();
   }
 
-  public function getRightTypeUNTYPED(): EditableNode {
-    return $this->_right_type;
+  final public function getRightTypeUNTYPED(): EditableNode {
+    return $this->rightType;
   }
 
   public function withRightType(EditableNode $value): this {
-    if ($value === $this->_right_type) {
+    if ($value === $this->rightType) {
       return $this;
     }
-    return new static($this->_left_type, $this->_operator, $value);
+    return new static($this->left_type, $this->operator, $value);
   }
 
   public function hasRightType(): bool {
-    return !$this->_right_type->isMissing();
+    return $this->rightType !== null;
   }
 
   /**
@@ -163,7 +156,7 @@ final class WhereConstraint extends EditableNode {
    * SimpleTypeSpecifier | TypeConstant
    */
   public function getRightType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_right_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->rightType);
   }
 
   /**

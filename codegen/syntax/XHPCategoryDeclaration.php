@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<86645b02403c1c68e9c662d5b5c1637e>>
+ * @generated SignedSource<<8b10e4d492a44dbd469e47a827370428>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class XHPCategoryDeclaration extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_categories;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $categories,
-    EditableNode $semicolon,
+    private CategoryToken $keyword,
+    private EditableList<XHPCategoryNameToken> $categories,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('xhp_category_declaration');
-    $this->_keyword = $keyword;
-    $this->_categories = $categories;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class XHPCategoryDeclaration extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = CategoryToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_category_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $categories = EditableNode::fromJSON(
+    $categories = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_category_categories'],
       $file,
       $offset,
       $source,
     );
     $offset += $categories->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_category_semicolon'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class XHPCategoryDeclaration extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'categories' => $this->_categories,
-      'semicolon' => $this->_semicolon,
+      'keyword' => $this->keyword,
+      'categories' => $this->categories,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -72,39 +65,39 @@ final class XHPCategoryDeclaration extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $categories = $this->_categories->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $categories = $this->categories->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $categories === $this->_categories &&
-      $semicolon === $this->_semicolon
+      $keyword === $this->keyword &&
+      $categories === $this->categories &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
     return new static($keyword, $categories, $semicolon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(CategoryToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_categories, $this->_semicolon);
+    return new static($value, $this->categories, $this->semicolon);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns CategoryToken
    */
   public function getKeyword(): CategoryToken {
-    return TypeAssert\instance_of(CategoryToken::class, $this->_keyword);
+    return TypeAssert\instance_of(CategoryToken::class, $this->keyword);
   }
 
   /**
@@ -114,26 +107,28 @@ final class XHPCategoryDeclaration extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getCategoriesUNTYPED(): EditableNode {
-    return $this->_categories;
+  final public function getCategoriesUNTYPED(): EditableNode {
+    return $this->categories;
   }
 
-  public function withCategories(EditableNode $value): this {
-    if ($value === $this->_categories) {
+  public function withCategories(
+    EditableList<XHPCategoryNameToken> $value,
+  ): this {
+    if ($value === $this->categories) {
       return $this;
     }
-    return new static($this->_keyword, $value, $this->_semicolon);
+    return new static($this->keyword, $value, $this->semicolon);
   }
 
   public function hasCategories(): bool {
-    return !$this->_categories->isMissing();
+    return $this->categories !== null;
   }
 
   /**
    * @returns EditableList<XHPCategoryNameToken>
    */
   public function getCategories(): EditableList<XHPCategoryNameToken> {
-    return TypeAssert\instance_of(EditableList::class, $this->_categories);
+    return TypeAssert\instance_of(EditableList::class, $this->categories);
   }
 
   /**
@@ -143,26 +138,26 @@ final class XHPCategoryDeclaration extends EditableNode {
     return $this->getCategories();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
-    return new static($this->_keyword, $this->_categories, $value);
+    return new static($this->keyword, $this->categories, $value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

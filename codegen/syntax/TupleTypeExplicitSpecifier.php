@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<31ac9fb78f456234d592a59cf0694755>>
+ * @generated SignedSource<<f3b2bb916ea025cf9f2fd52adce789ee>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class TupleTypeExplicitSpecifier extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_angle;
-  private EditableNode $_types;
-  private EditableNode $_right_angle;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_angle,
-    EditableNode $types,
-    EditableNode $right_angle,
+    private EditableNode $keyword,
+    private EditableNode $leftAngle,
+    private EditableNode $types,
+    private EditableNode $rightAngle,
   ) {
     parent::__construct('tuple_type_explicit_specifier');
-    $this->_keyword = $keyword;
-    $this->_left_angle = $left_angle;
-    $this->_types = $types;
-    $this->_right_angle = $right_angle;
   }
 
   <<__Override>>
@@ -67,12 +58,12 @@ final class TupleTypeExplicitSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_angle' => $this->_left_angle,
-      'types' => $this->_types,
-      'right_angle' => $this->_right_angle,
+      'keyword' => $this->keyword,
+      'left_angle' => $this->leftAngle,
+      'types' => $this->types,
+      'right_angle' => $this->rightAngle,
     ];
   }
 
@@ -83,46 +74,42 @@ final class TupleTypeExplicitSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_angle = $this->_left_angle->rewrite($rewriter, $parents);
-    $types = $this->_types->rewrite($rewriter, $parents);
-    $right_angle = $this->_right_angle->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_angle = $this->leftAngle->rewrite($rewriter, $parents);
+    $types = $this->types->rewrite($rewriter, $parents);
+    $right_angle = $this->rightAngle->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_angle === $this->_left_angle &&
-      $types === $this->_types &&
-      $right_angle === $this->_right_angle
+      $keyword === $this->keyword &&
+      $left_angle === $this->leftAngle &&
+      $types === $this->types &&
+      $right_angle === $this->rightAngle
     ) {
       return $this;
     }
     return new static($keyword, $left_angle, $types, $right_angle);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
   public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static(
-      $value,
-      $this->_left_angle,
-      $this->_types,
-      $this->_right_angle,
-    );
+    return
+      new static($value, $this->left_angle, $this->types, $this->right_angle);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getKeyword(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_keyword);
+    return TypeAssert\instance_of(EditableNode::class, $this->keyword);
   }
 
   /**
@@ -132,27 +119,26 @@ final class TupleTypeExplicitSpecifier extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftAngleUNTYPED(): EditableNode {
-    return $this->_left_angle;
+  final public function getLeftAngleUNTYPED(): EditableNode {
+    return $this->leftAngle;
   }
 
   public function withLeftAngle(EditableNode $value): this {
-    if ($value === $this->_left_angle) {
+    if ($value === $this->leftAngle) {
       return $this;
     }
-    return
-      new static($this->_keyword, $value, $this->_types, $this->_right_angle);
+    return new static($this->keyword, $value, $this->types, $this->right_angle);
   }
 
   public function hasLeftAngle(): bool {
-    return !$this->_left_angle->isMissing();
+    return $this->leftAngle !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getLeftAngle(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_left_angle);
+    return TypeAssert\instance_of(EditableNode::class, $this->leftAngle);
   }
 
   /**
@@ -162,31 +148,27 @@ final class TupleTypeExplicitSpecifier extends EditableNode {
     return $this->getLeftAngle();
   }
 
-  public function getTypesUNTYPED(): EditableNode {
-    return $this->_types;
+  final public function getTypesUNTYPED(): EditableNode {
+    return $this->types;
   }
 
   public function withTypes(EditableNode $value): this {
-    if ($value === $this->_types) {
+    if ($value === $this->types) {
       return $this;
     }
-    return new static(
-      $this->_keyword,
-      $this->_left_angle,
-      $value,
-      $this->_right_angle,
-    );
+    return
+      new static($this->keyword, $this->left_angle, $value, $this->right_angle);
   }
 
   public function hasTypes(): bool {
-    return !$this->_types->isMissing();
+    return $this->types !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getTypes(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_types);
+    return TypeAssert\instance_of(EditableNode::class, $this->types);
   }
 
   /**
@@ -196,27 +178,26 @@ final class TupleTypeExplicitSpecifier extends EditableNode {
     return $this->getTypes();
   }
 
-  public function getRightAngleUNTYPED(): EditableNode {
-    return $this->_right_angle;
+  final public function getRightAngleUNTYPED(): EditableNode {
+    return $this->rightAngle;
   }
 
   public function withRightAngle(EditableNode $value): this {
-    if ($value === $this->_right_angle) {
+    if ($value === $this->rightAngle) {
       return $this;
     }
-    return
-      new static($this->_keyword, $this->_left_angle, $this->_types, $value);
+    return new static($this->keyword, $this->left_angle, $this->types, $value);
   }
 
   public function hasRightAngle(): bool {
-    return !$this->_right_angle->isMissing();
+    return $this->rightAngle !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getRightAngle(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_right_angle);
+    return TypeAssert\instance_of(EditableNode::class, $this->rightAngle);
   }
 
   /**

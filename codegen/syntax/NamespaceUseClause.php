@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<5892b70cbe60b77e5419604b0a5650b4>>
+ * @generated SignedSource<<f47b08756687b1a10da576c35f5ca921>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class NamespaceUseClause extends EditableNode {
 
-  private EditableNode $_clause_kind;
-  private EditableNode $_name;
-  private EditableNode $_as;
-  private EditableNode $_alias;
-
   public function __construct(
-    EditableNode $clause_kind,
-    EditableNode $name,
-    EditableNode $as,
-    EditableNode $alias,
+    private ?EditableToken $clauseKind,
+    private EditableNode $name,
+    private ?AsToken $as,
+    private ?NameToken $alias,
   ) {
     parent::__construct('namespace_use_clause');
-    $this->_clause_kind = $clause_kind;
-    $this->_name = $name;
-    $this->_as = $as;
-    $this->_alias = $alias;
   }
 
   <<__Override>>
@@ -35,7 +26,7 @@ final class NamespaceUseClause extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $clause_kind = EditableNode::fromJSON(
+    $clause_kind = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['namespace_use_clause_kind'],
       $file,
       $offset,
@@ -49,14 +40,14 @@ final class NamespaceUseClause extends EditableNode {
       $source,
     );
     $offset += $name->getWidth();
-    $as = EditableNode::fromJSON(
+    $as = AsToken::fromJSON(
       /* UNSAFE_EXPR */ $json['namespace_use_as'],
       $file,
       $offset,
       $source,
     );
     $offset += $as->getWidth();
-    $alias = EditableNode::fromJSON(
+    $alias = NameToken::fromJSON(
       /* UNSAFE_EXPR */ $json['namespace_use_alias'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class NamespaceUseClause extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'clause_kind' => $this->_clause_kind,
-      'name' => $this->_name,
-      'as' => $this->_as,
-      'alias' => $this->_alias,
+      'clause_kind' => $this->clauseKind,
+      'name' => $this->name,
+      'as' => $this->as,
+      'alias' => $this->alias,
     ];
   }
 
@@ -83,73 +74,73 @@ final class NamespaceUseClause extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $clause_kind = $this->_clause_kind->rewrite($rewriter, $parents);
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $as = $this->_as->rewrite($rewriter, $parents);
-    $alias = $this->_alias->rewrite($rewriter, $parents);
+    $clause_kind = $this->clauseKind?->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
+    $as = $this->as?->rewrite($rewriter, $parents);
+    $alias = $this->alias?->rewrite($rewriter, $parents);
     if (
-      $clause_kind === $this->_clause_kind &&
-      $name === $this->_name &&
-      $as === $this->_as &&
-      $alias === $this->_alias
+      $clause_kind === $this->clauseKind &&
+      $name === $this->name &&
+      $as === $this->as &&
+      $alias === $this->alias
     ) {
       return $this;
     }
     return new static($clause_kind, $name, $as, $alias);
   }
 
-  public function getClauseKindUNTYPED(): EditableNode {
-    return $this->_clause_kind;
+  final public function getClauseKindUNTYPED(): EditableNode {
+    return $this->clauseKind;
   }
 
-  public function withClauseKind(EditableNode $value): this {
-    if ($value === $this->_clause_kind) {
+  public function withClauseKind(?EditableToken $value): this {
+    if ($value === $this->clauseKind) {
       return $this;
     }
-    return new static($value, $this->_name, $this->_as, $this->_alias);
+    return new static($value, $this->name, $this->as, $this->alias);
   }
 
   public function hasClauseKind(): bool {
-    return !$this->_clause_kind->isMissing();
+    return $this->clauseKind !== null;
   }
 
   /**
    * @returns Missing | ConstToken | FunctionToken
    */
   public function getClauseKind(): ?EditableToken {
-    if ($this->_clause_kind->isMissing()) {
+    if ($this->clauseKind->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableToken::class, $this->_clause_kind);
+    return TypeAssert\instance_of(EditableToken::class, $this->clauseKind);
   }
 
   /**
    * @returns ConstToken | FunctionToken
    */
   public function getClauseKindx(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_clause_kind);
+    return TypeAssert\instance_of(EditableToken::class, $this->clauseKind);
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
   public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+    if ($value === $this->name) {
       return $this;
     }
-    return new static($this->_clause_kind, $value, $this->_as, $this->_alias);
+    return new static($this->clause_kind, $value, $this->as, $this->alias);
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns QualifiedName | NameToken
    */
   public function getName(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_name);
+    return TypeAssert\instance_of(EditableNode::class, $this->name);
   }
 
   /**
@@ -159,67 +150,67 @@ final class NamespaceUseClause extends EditableNode {
     return $this->getName();
   }
 
-  public function getAsUNTYPED(): EditableNode {
-    return $this->_as;
+  final public function getAsUNTYPED(): EditableNode {
+    return $this->as;
   }
 
-  public function withAs(EditableNode $value): this {
-    if ($value === $this->_as) {
+  public function withAs(?AsToken $value): this {
+    if ($value === $this->as) {
       return $this;
     }
-    return new static($this->_clause_kind, $this->_name, $value, $this->_alias);
+    return new static($this->clause_kind, $this->name, $value, $this->alias);
   }
 
   public function hasAs(): bool {
-    return !$this->_as->isMissing();
+    return $this->as !== null;
   }
 
   /**
    * @returns Missing | AsToken
    */
   public function getAs(): ?AsToken {
-    if ($this->_as->isMissing()) {
+    if ($this->as->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(AsToken::class, $this->_as);
+    return TypeAssert\instance_of(AsToken::class, $this->as);
   }
 
   /**
    * @returns AsToken
    */
   public function getAsx(): AsToken {
-    return TypeAssert\instance_of(AsToken::class, $this->_as);
+    return TypeAssert\instance_of(AsToken::class, $this->as);
   }
 
-  public function getAliasUNTYPED(): EditableNode {
-    return $this->_alias;
+  final public function getAliasUNTYPED(): EditableNode {
+    return $this->alias;
   }
 
-  public function withAlias(EditableNode $value): this {
-    if ($value === $this->_alias) {
+  public function withAlias(?NameToken $value): this {
+    if ($value === $this->alias) {
       return $this;
     }
-    return new static($this->_clause_kind, $this->_name, $this->_as, $value);
+    return new static($this->clause_kind, $this->name, $this->as, $value);
   }
 
   public function hasAlias(): bool {
-    return !$this->_alias->isMissing();
+    return $this->alias !== null;
   }
 
   /**
    * @returns Missing | NameToken
    */
   public function getAlias(): ?NameToken {
-    if ($this->_alias->isMissing()) {
+    if ($this->alias->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(NameToken::class, $this->_alias);
+    return TypeAssert\instance_of(NameToken::class, $this->alias);
   }
 
   /**
    * @returns NameToken
    */
   public function getAliasx(): NameToken {
-    return TypeAssert\instance_of(NameToken::class, $this->_alias);
+    return TypeAssert\instance_of(NameToken::class, $this->alias);
   }
 }

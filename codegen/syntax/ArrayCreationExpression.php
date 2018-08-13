@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<79e76d9bc22aa77b87e2e1dad4472123>>
+ * @generated SignedSource<<5f3821798786d53b26dc9f3cd9f844ba>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ArrayCreationExpression extends EditableNode {
 
-  private EditableNode $_left_bracket;
-  private EditableNode $_members;
-  private EditableNode $_right_bracket;
-
   public function __construct(
-    EditableNode $left_bracket,
-    EditableNode $members,
-    EditableNode $right_bracket,
+    private LeftBracketToken $leftBracket,
+    private ?EditableList<EditableNode> $members,
+    private RightBracketToken $rightBracket,
   ) {
     parent::__construct('array_creation_expression');
-    $this->_left_bracket = $left_bracket;
-    $this->_members = $members;
-    $this->_right_bracket = $right_bracket;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class ArrayCreationExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_bracket = EditableNode::fromJSON(
+    $left_bracket = LeftBracketToken::fromJSON(
       /* UNSAFE_EXPR */ $json['array_creation_left_bracket'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_bracket->getWidth();
-    $members = EditableNode::fromJSON(
+    $members = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['array_creation_members'],
       $file,
       $offset,
       $source,
     );
     $offset += $members->getWidth();
-    $right_bracket = EditableNode::fromJSON(
+    $right_bracket = RightBracketToken::fromJSON(
       /* UNSAFE_EXPR */ $json['array_creation_right_bracket'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class ArrayCreationExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_bracket' => $this->_left_bracket,
-      'members' => $this->_members,
-      'right_bracket' => $this->_right_bracket,
+      'left_bracket' => $this->leftBracket,
+      'members' => $this->members,
+      'right_bracket' => $this->rightBracket,
     ];
   }
 
@@ -72,40 +65,39 @@ final class ArrayCreationExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_bracket = $this->_left_bracket->rewrite($rewriter, $parents);
-    $members = $this->_members->rewrite($rewriter, $parents);
-    $right_bracket = $this->_right_bracket->rewrite($rewriter, $parents);
+    $left_bracket = $this->leftBracket->rewrite($rewriter, $parents);
+    $members = $this->members?->rewrite($rewriter, $parents);
+    $right_bracket = $this->rightBracket->rewrite($rewriter, $parents);
     if (
-      $left_bracket === $this->_left_bracket &&
-      $members === $this->_members &&
-      $right_bracket === $this->_right_bracket
+      $left_bracket === $this->leftBracket &&
+      $members === $this->members &&
+      $right_bracket === $this->rightBracket
     ) {
       return $this;
     }
     return new static($left_bracket, $members, $right_bracket);
   }
 
-  public function getLeftBracketUNTYPED(): EditableNode {
-    return $this->_left_bracket;
+  final public function getLeftBracketUNTYPED(): EditableNode {
+    return $this->leftBracket;
   }
 
-  public function withLeftBracket(EditableNode $value): this {
-    if ($value === $this->_left_bracket) {
+  public function withLeftBracket(LeftBracketToken $value): this {
+    if ($value === $this->leftBracket) {
       return $this;
     }
-    return new static($value, $this->_members, $this->_right_bracket);
+    return new static($value, $this->members, $this->right_bracket);
   }
 
   public function hasLeftBracket(): bool {
-    return !$this->_left_bracket->isMissing();
+    return $this->leftBracket !== null;
   }
 
   /**
    * @returns LeftBracketToken
    */
   public function getLeftBracket(): LeftBracketToken {
-    return
-      TypeAssert\instance_of(LeftBracketToken::class, $this->_left_bracket);
+    return TypeAssert\instance_of(LeftBracketToken::class, $this->leftBracket);
   }
 
   /**
@@ -115,19 +107,19 @@ final class ArrayCreationExpression extends EditableNode {
     return $this->getLeftBracket();
   }
 
-  public function getMembersUNTYPED(): EditableNode {
-    return $this->_members;
+  final public function getMembersUNTYPED(): EditableNode {
+    return $this->members;
   }
 
-  public function withMembers(EditableNode $value): this {
-    if ($value === $this->_members) {
+  public function withMembers(?EditableList<EditableNode> $value): this {
+    if ($value === $this->members) {
       return $this;
     }
-    return new static($this->_left_bracket, $value, $this->_right_bracket);
+    return new static($this->left_bracket, $value, $this->right_bracket);
   }
 
   public function hasMembers(): bool {
-    return !$this->_members->isMissing();
+    return $this->members !== null;
   }
 
   /**
@@ -145,10 +137,10 @@ final class ArrayCreationExpression extends EditableNode {
    * | EditableList<VectorIntrinsicExpression> | Missing
    */
   public function getMembers(): ?EditableList<EditableNode> {
-    if ($this->_members->isMissing()) {
+    if ($this->members->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_members);
+    return TypeAssert\instance_of(EditableList::class, $this->members);
   }
 
   /**
@@ -166,22 +158,22 @@ final class ArrayCreationExpression extends EditableNode {
    * | EditableList<VectorIntrinsicExpression>
    */
   public function getMembersx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_members);
+    return TypeAssert\instance_of(EditableList::class, $this->members);
   }
 
-  public function getRightBracketUNTYPED(): EditableNode {
-    return $this->_right_bracket;
+  final public function getRightBracketUNTYPED(): EditableNode {
+    return $this->rightBracket;
   }
 
-  public function withRightBracket(EditableNode $value): this {
-    if ($value === $this->_right_bracket) {
+  public function withRightBracket(RightBracketToken $value): this {
+    if ($value === $this->rightBracket) {
       return $this;
     }
-    return new static($this->_left_bracket, $this->_members, $value);
+    return new static($this->left_bracket, $this->members, $value);
   }
 
   public function hasRightBracket(): bool {
-    return !$this->_right_bracket->isMissing();
+    return $this->rightBracket !== null;
   }
 
   /**
@@ -189,7 +181,7 @@ final class ArrayCreationExpression extends EditableNode {
    */
   public function getRightBracket(): RightBracketToken {
     return
-      TypeAssert\instance_of(RightBracketToken::class, $this->_right_bracket);
+      TypeAssert\instance_of(RightBracketToken::class, $this->rightBracket);
   }
 
   /**

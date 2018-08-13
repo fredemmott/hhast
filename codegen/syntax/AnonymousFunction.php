@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<33a0af6e527da45e1c245749475abf4c>>
+ * @generated SignedSource<<738d8c97e7b491651beb1f4315763ff2>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,49 +10,22 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class AnonymousFunction extends EditableNode {
 
-  private EditableNode $_attribute_spec;
-  private EditableNode $_static_keyword;
-  private EditableNode $_async_keyword;
-  private EditableNode $_coroutine_keyword;
-  private EditableNode $_function_keyword;
-  private EditableNode $_ampersand;
-  private EditableNode $_left_paren;
-  private EditableNode $_parameters;
-  private EditableNode $_right_paren;
-  private EditableNode $_colon;
-  private EditableNode $_type;
-  private EditableNode $_use;
-  private EditableNode $_body;
-
   public function __construct(
-    EditableNode $attribute_spec,
-    EditableNode $static_keyword,
-    EditableNode $async_keyword,
-    EditableNode $coroutine_keyword,
-    EditableNode $function_keyword,
-    EditableNode $ampersand,
-    EditableNode $left_paren,
-    EditableNode $parameters,
-    EditableNode $right_paren,
-    EditableNode $colon,
-    EditableNode $type,
-    EditableNode $use,
-    EditableNode $body,
+    private ?AttributeSpecification $attributeSpec,
+    private ?StaticToken $staticKeyword,
+    private ?AsyncToken $asyncKeyword,
+    private ?CoroutineToken $coroutineKeyword,
+    private FunctionToken $functionKeyword,
+    private ?AmpersandToken $ampersand,
+    private ?LeftParenToken $leftParen,
+    private ?EditableList<EditableNode> $parameters,
+    private ?RightParenToken $rightParen,
+    private ?ColonToken $colon,
+    private ?EditableNode $type,
+    private ?AnonymousFunctionUseClause $use,
+    private CompoundStatement $body,
   ) {
     parent::__construct('anonymous_function');
-    $this->_attribute_spec = $attribute_spec;
-    $this->_static_keyword = $static_keyword;
-    $this->_async_keyword = $async_keyword;
-    $this->_coroutine_keyword = $coroutine_keyword;
-    $this->_function_keyword = $function_keyword;
-    $this->_ampersand = $ampersand;
-    $this->_left_paren = $left_paren;
-    $this->_parameters = $parameters;
-    $this->_right_paren = $right_paren;
-    $this->_colon = $colon;
-    $this->_type = $type;
-    $this->_use = $use;
-    $this->_body = $body;
   }
 
   <<__Override>>
@@ -62,70 +35,70 @@ final class AnonymousFunction extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $attribute_spec = EditableNode::fromJSON(
+    $attribute_spec = AttributeSpecification::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_attribute_spec'],
       $file,
       $offset,
       $source,
     );
     $offset += $attribute_spec->getWidth();
-    $static_keyword = EditableNode::fromJSON(
+    $static_keyword = StaticToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_static_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $static_keyword->getWidth();
-    $async_keyword = EditableNode::fromJSON(
+    $async_keyword = AsyncToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_async_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $async_keyword->getWidth();
-    $coroutine_keyword = EditableNode::fromJSON(
+    $coroutine_keyword = CoroutineToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_coroutine_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $coroutine_keyword->getWidth();
-    $function_keyword = EditableNode::fromJSON(
+    $function_keyword = FunctionToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_function_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $function_keyword->getWidth();
-    $ampersand = EditableNode::fromJSON(
+    $ampersand = AmpersandToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_ampersand'],
       $file,
       $offset,
       $source,
     );
     $offset += $ampersand->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $parameters = EditableNode::fromJSON(
+    $parameters = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_parameters'],
       $file,
       $offset,
       $source,
     );
     $offset += $parameters->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_right_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $right_paren->getWidth();
-    $colon = EditableNode::fromJSON(
+    $colon = ColonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_colon'],
       $file,
       $offset,
@@ -139,14 +112,14 @@ final class AnonymousFunction extends EditableNode {
       $source,
     );
     $offset += $type->getWidth();
-    $use = EditableNode::fromJSON(
+    $use = AnonymousFunctionUseClause::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_use'],
       $file,
       $offset,
       $source,
     );
     $offset += $use->getWidth();
-    $body = EditableNode::fromJSON(
+    $body = CompoundStatement::fromJSON(
       /* UNSAFE_EXPR */ $json['anonymous_body'],
       $file,
       $offset,
@@ -171,21 +144,21 @@ final class AnonymousFunction extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'attribute_spec' => $this->_attribute_spec,
-      'static_keyword' => $this->_static_keyword,
-      'async_keyword' => $this->_async_keyword,
-      'coroutine_keyword' => $this->_coroutine_keyword,
-      'function_keyword' => $this->_function_keyword,
-      'ampersand' => $this->_ampersand,
-      'left_paren' => $this->_left_paren,
-      'parameters' => $this->_parameters,
-      'right_paren' => $this->_right_paren,
-      'colon' => $this->_colon,
-      'type' => $this->_type,
-      'use' => $this->_use,
-      'body' => $this->_body,
+      'attribute_spec' => $this->attributeSpec,
+      'static_keyword' => $this->staticKeyword,
+      'async_keyword' => $this->asyncKeyword,
+      'coroutine_keyword' => $this->coroutineKeyword,
+      'function_keyword' => $this->functionKeyword,
+      'ampersand' => $this->ampersand,
+      'left_paren' => $this->leftParen,
+      'parameters' => $this->parameters,
+      'right_paren' => $this->rightParen,
+      'colon' => $this->colon,
+      'type' => $this->type,
+      'use' => $this->use,
+      'body' => $this->body,
     ];
   }
 
@@ -196,34 +169,33 @@ final class AnonymousFunction extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $attribute_spec = $this->_attribute_spec->rewrite($rewriter, $parents);
-    $static_keyword = $this->_static_keyword->rewrite($rewriter, $parents);
-    $async_keyword = $this->_async_keyword->rewrite($rewriter, $parents);
-    $coroutine_keyword =
-      $this->_coroutine_keyword->rewrite($rewriter, $parents);
-    $function_keyword = $this->_function_keyword->rewrite($rewriter, $parents);
-    $ampersand = $this->_ampersand->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $parameters = $this->_parameters->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
-    $colon = $this->_colon->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
-    $use = $this->_use->rewrite($rewriter, $parents);
-    $body = $this->_body->rewrite($rewriter, $parents);
+    $attribute_spec = $this->attributeSpec?->rewrite($rewriter, $parents);
+    $static_keyword = $this->staticKeyword?->rewrite($rewriter, $parents);
+    $async_keyword = $this->asyncKeyword?->rewrite($rewriter, $parents);
+    $coroutine_keyword = $this->coroutineKeyword?->rewrite($rewriter, $parents);
+    $function_keyword = $this->functionKeyword->rewrite($rewriter, $parents);
+    $ampersand = $this->ampersand?->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen?->rewrite($rewriter, $parents);
+    $parameters = $this->parameters?->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen?->rewrite($rewriter, $parents);
+    $colon = $this->colon?->rewrite($rewriter, $parents);
+    $type = $this->type?->rewrite($rewriter, $parents);
+    $use = $this->use?->rewrite($rewriter, $parents);
+    $body = $this->body->rewrite($rewriter, $parents);
     if (
-      $attribute_spec === $this->_attribute_spec &&
-      $static_keyword === $this->_static_keyword &&
-      $async_keyword === $this->_async_keyword &&
-      $coroutine_keyword === $this->_coroutine_keyword &&
-      $function_keyword === $this->_function_keyword &&
-      $ampersand === $this->_ampersand &&
-      $left_paren === $this->_left_paren &&
-      $parameters === $this->_parameters &&
-      $right_paren === $this->_right_paren &&
-      $colon === $this->_colon &&
-      $type === $this->_type &&
-      $use === $this->_use &&
-      $body === $this->_body
+      $attribute_spec === $this->attributeSpec &&
+      $static_keyword === $this->staticKeyword &&
+      $async_keyword === $this->asyncKeyword &&
+      $coroutine_keyword === $this->coroutineKeyword &&
+      $function_keyword === $this->functionKeyword &&
+      $ampersand === $this->ampersand &&
+      $left_paren === $this->leftParen &&
+      $parameters === $this->parameters &&
+      $right_paren === $this->rightParen &&
+      $colon === $this->colon &&
+      $type === $this->type &&
+      $use === $this->use &&
+      $body === $this->body
     ) {
       return $this;
     }
@@ -244,45 +216,45 @@ final class AnonymousFunction extends EditableNode {
     );
   }
 
-  public function getAttributeSpecUNTYPED(): EditableNode {
-    return $this->_attribute_spec;
+  final public function getAttributeSpecUNTYPED(): EditableNode {
+    return $this->attributeSpec;
   }
 
-  public function withAttributeSpec(EditableNode $value): this {
-    if ($value === $this->_attribute_spec) {
+  public function withAttributeSpec(?AttributeSpecification $value): this {
+    if ($value === $this->attributeSpec) {
       return $this;
     }
     return new static(
       $value,
-      $this->_static_keyword,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
-      $this->_ampersand,
-      $this->_left_paren,
-      $this->_parameters,
-      $this->_right_paren,
-      $this->_colon,
-      $this->_type,
-      $this->_use,
-      $this->_body,
+      $this->static_keyword,
+      $this->async_keyword,
+      $this->coroutine_keyword,
+      $this->function_keyword,
+      $this->ampersand,
+      $this->left_paren,
+      $this->parameters,
+      $this->right_paren,
+      $this->colon,
+      $this->type,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasAttributeSpec(): bool {
-    return !$this->_attribute_spec->isMissing();
+    return $this->attributeSpec !== null;
   }
 
   /**
    * @returns AttributeSpecification | Missing
    */
   public function getAttributeSpec(): ?AttributeSpecification {
-    if ($this->_attribute_spec->isMissing()) {
+    if ($this->attributeSpec->isMissing()) {
       return null;
     }
     return TypeAssert\instance_of(
       AttributeSpecification::class,
-      $this->_attribute_spec,
+      $this->attributeSpec,
     );
   }
 
@@ -292,140 +264,140 @@ final class AnonymousFunction extends EditableNode {
   public function getAttributeSpecx(): AttributeSpecification {
     return TypeAssert\instance_of(
       AttributeSpecification::class,
-      $this->_attribute_spec,
+      $this->attributeSpec,
     );
   }
 
-  public function getStaticKeywordUNTYPED(): EditableNode {
-    return $this->_static_keyword;
+  final public function getStaticKeywordUNTYPED(): EditableNode {
+    return $this->staticKeyword;
   }
 
-  public function withStaticKeyword(EditableNode $value): this {
-    if ($value === $this->_static_keyword) {
+  public function withStaticKeyword(?StaticToken $value): this {
+    if ($value === $this->staticKeyword) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
+      $this->attribute_spec,
       $value,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
-      $this->_ampersand,
-      $this->_left_paren,
-      $this->_parameters,
-      $this->_right_paren,
-      $this->_colon,
-      $this->_type,
-      $this->_use,
-      $this->_body,
+      $this->async_keyword,
+      $this->coroutine_keyword,
+      $this->function_keyword,
+      $this->ampersand,
+      $this->left_paren,
+      $this->parameters,
+      $this->right_paren,
+      $this->colon,
+      $this->type,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasStaticKeyword(): bool {
-    return !$this->_static_keyword->isMissing();
+    return $this->staticKeyword !== null;
   }
 
   /**
    * @returns Missing | StaticToken
    */
   public function getStaticKeyword(): ?StaticToken {
-    if ($this->_static_keyword->isMissing()) {
+    if ($this->staticKeyword->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(StaticToken::class, $this->_static_keyword);
+    return TypeAssert\instance_of(StaticToken::class, $this->staticKeyword);
   }
 
   /**
    * @returns StaticToken
    */
   public function getStaticKeywordx(): StaticToken {
-    return TypeAssert\instance_of(StaticToken::class, $this->_static_keyword);
+    return TypeAssert\instance_of(StaticToken::class, $this->staticKeyword);
   }
 
-  public function getAsyncKeywordUNTYPED(): EditableNode {
-    return $this->_async_keyword;
+  final public function getAsyncKeywordUNTYPED(): EditableNode {
+    return $this->asyncKeyword;
   }
 
-  public function withAsyncKeyword(EditableNode $value): this {
-    if ($value === $this->_async_keyword) {
+  public function withAsyncKeyword(?AsyncToken $value): this {
+    if ($value === $this->asyncKeyword) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
+      $this->attribute_spec,
+      $this->static_keyword,
       $value,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
-      $this->_ampersand,
-      $this->_left_paren,
-      $this->_parameters,
-      $this->_right_paren,
-      $this->_colon,
-      $this->_type,
-      $this->_use,
-      $this->_body,
+      $this->coroutine_keyword,
+      $this->function_keyword,
+      $this->ampersand,
+      $this->left_paren,
+      $this->parameters,
+      $this->right_paren,
+      $this->colon,
+      $this->type,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasAsyncKeyword(): bool {
-    return !$this->_async_keyword->isMissing();
+    return $this->asyncKeyword !== null;
   }
 
   /**
    * @returns Missing | AsyncToken
    */
   public function getAsyncKeyword(): ?AsyncToken {
-    if ($this->_async_keyword->isMissing()) {
+    if ($this->asyncKeyword->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(AsyncToken::class, $this->_async_keyword);
+    return TypeAssert\instance_of(AsyncToken::class, $this->asyncKeyword);
   }
 
   /**
    * @returns AsyncToken
    */
   public function getAsyncKeywordx(): AsyncToken {
-    return TypeAssert\instance_of(AsyncToken::class, $this->_async_keyword);
+    return TypeAssert\instance_of(AsyncToken::class, $this->asyncKeyword);
   }
 
-  public function getCoroutineKeywordUNTYPED(): EditableNode {
-    return $this->_coroutine_keyword;
+  final public function getCoroutineKeywordUNTYPED(): EditableNode {
+    return $this->coroutineKeyword;
   }
 
-  public function withCoroutineKeyword(EditableNode $value): this {
-    if ($value === $this->_coroutine_keyword) {
+  public function withCoroutineKeyword(?CoroutineToken $value): this {
+    if ($value === $this->coroutineKeyword) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
-      $this->_async_keyword,
+      $this->attribute_spec,
+      $this->static_keyword,
+      $this->async_keyword,
       $value,
-      $this->_function_keyword,
-      $this->_ampersand,
-      $this->_left_paren,
-      $this->_parameters,
-      $this->_right_paren,
-      $this->_colon,
-      $this->_type,
-      $this->_use,
-      $this->_body,
+      $this->function_keyword,
+      $this->ampersand,
+      $this->left_paren,
+      $this->parameters,
+      $this->right_paren,
+      $this->colon,
+      $this->type,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasCoroutineKeyword(): bool {
-    return !$this->_coroutine_keyword->isMissing();
+    return $this->coroutineKeyword !== null;
   }
 
   /**
    * @returns Missing | CoroutineToken
    */
   public function getCoroutineKeyword(): ?CoroutineToken {
-    if ($this->_coroutine_keyword->isMissing()) {
+    if ($this->coroutineKeyword->isMissing()) {
       return null;
     }
     return
-      TypeAssert\instance_of(CoroutineToken::class, $this->_coroutine_keyword);
+      TypeAssert\instance_of(CoroutineToken::class, $this->coroutineKeyword);
   }
 
   /**
@@ -433,44 +405,43 @@ final class AnonymousFunction extends EditableNode {
    */
   public function getCoroutineKeywordx(): CoroutineToken {
     return
-      TypeAssert\instance_of(CoroutineToken::class, $this->_coroutine_keyword);
+      TypeAssert\instance_of(CoroutineToken::class, $this->coroutineKeyword);
   }
 
-  public function getFunctionKeywordUNTYPED(): EditableNode {
-    return $this->_function_keyword;
+  final public function getFunctionKeywordUNTYPED(): EditableNode {
+    return $this->functionKeyword;
   }
 
-  public function withFunctionKeyword(EditableNode $value): this {
-    if ($value === $this->_function_keyword) {
+  public function withFunctionKeyword(FunctionToken $value): this {
+    if ($value === $this->functionKeyword) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
+      $this->attribute_spec,
+      $this->static_keyword,
+      $this->async_keyword,
+      $this->coroutine_keyword,
       $value,
-      $this->_ampersand,
-      $this->_left_paren,
-      $this->_parameters,
-      $this->_right_paren,
-      $this->_colon,
-      $this->_type,
-      $this->_use,
-      $this->_body,
+      $this->ampersand,
+      $this->left_paren,
+      $this->parameters,
+      $this->right_paren,
+      $this->colon,
+      $this->type,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasFunctionKeyword(): bool {
-    return !$this->_function_keyword->isMissing();
+    return $this->functionKeyword !== null;
   }
 
   /**
    * @returns FunctionToken
    */
   public function getFunctionKeyword(): FunctionToken {
-    return
-      TypeAssert\instance_of(FunctionToken::class, $this->_function_keyword);
+    return TypeAssert\instance_of(FunctionToken::class, $this->functionKeyword);
   }
 
   /**
@@ -480,125 +451,125 @@ final class AnonymousFunction extends EditableNode {
     return $this->getFunctionKeyword();
   }
 
-  public function getAmpersandUNTYPED(): EditableNode {
-    return $this->_ampersand;
+  final public function getAmpersandUNTYPED(): EditableNode {
+    return $this->ampersand;
   }
 
-  public function withAmpersand(EditableNode $value): this {
-    if ($value === $this->_ampersand) {
+  public function withAmpersand(?AmpersandToken $value): this {
+    if ($value === $this->ampersand) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
+      $this->attribute_spec,
+      $this->static_keyword,
+      $this->async_keyword,
+      $this->coroutine_keyword,
+      $this->function_keyword,
       $value,
-      $this->_left_paren,
-      $this->_parameters,
-      $this->_right_paren,
-      $this->_colon,
-      $this->_type,
-      $this->_use,
-      $this->_body,
+      $this->left_paren,
+      $this->parameters,
+      $this->right_paren,
+      $this->colon,
+      $this->type,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasAmpersand(): bool {
-    return !$this->_ampersand->isMissing();
+    return $this->ampersand !== null;
   }
 
   /**
    * @returns Missing | AmpersandToken
    */
   public function getAmpersand(): ?AmpersandToken {
-    if ($this->_ampersand->isMissing()) {
+    if ($this->ampersand->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(AmpersandToken::class, $this->_ampersand);
+    return TypeAssert\instance_of(AmpersandToken::class, $this->ampersand);
   }
 
   /**
    * @returns AmpersandToken
    */
   public function getAmpersandx(): AmpersandToken {
-    return TypeAssert\instance_of(AmpersandToken::class, $this->_ampersand);
+    return TypeAssert\instance_of(AmpersandToken::class, $this->ampersand);
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(?LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
-      $this->_ampersand,
+      $this->attribute_spec,
+      $this->static_keyword,
+      $this->async_keyword,
+      $this->coroutine_keyword,
+      $this->function_keyword,
+      $this->ampersand,
       $value,
-      $this->_parameters,
-      $this->_right_paren,
-      $this->_colon,
-      $this->_type,
-      $this->_use,
-      $this->_body,
+      $this->parameters,
+      $this->right_paren,
+      $this->colon,
+      $this->type,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns Missing | LeftParenToken
    */
   public function getLeftParen(): ?LeftParenToken {
-    if ($this->_left_paren->isMissing()) {
+    if ($this->leftParen->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParenx(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
-  public function getParametersUNTYPED(): EditableNode {
-    return $this->_parameters;
+  final public function getParametersUNTYPED(): EditableNode {
+    return $this->parameters;
   }
 
-  public function withParameters(EditableNode $value): this {
-    if ($value === $this->_parameters) {
+  public function withParameters(?EditableList<EditableNode> $value): this {
+    if ($value === $this->parameters) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
-      $this->_ampersand,
-      $this->_left_paren,
+      $this->attribute_spec,
+      $this->static_keyword,
+      $this->async_keyword,
+      $this->coroutine_keyword,
+      $this->function_keyword,
+      $this->ampersand,
+      $this->left_paren,
       $value,
-      $this->_right_paren,
-      $this->_colon,
-      $this->_type,
-      $this->_use,
-      $this->_body,
+      $this->right_paren,
+      $this->colon,
+      $this->type,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasParameters(): bool {
-    return !$this->_parameters->isMissing();
+    return $this->parameters !== null;
   }
 
   /**
@@ -606,10 +577,10 @@ final class AnonymousFunction extends EditableNode {
    * EditableList<VariadicParameter> | Missing
    */
   public function getParameters(): ?EditableList<EditableNode> {
-    if ($this->_parameters->isMissing()) {
+    if ($this->parameters->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_parameters);
+    return TypeAssert\instance_of(EditableList::class, $this->parameters);
   }
 
   /**
@@ -617,128 +588,128 @@ final class AnonymousFunction extends EditableNode {
    * EditableList<VariadicParameter>
    */
   public function getParametersx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_parameters);
+    return TypeAssert\instance_of(EditableList::class, $this->parameters);
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(?RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
-      $this->_ampersand,
-      $this->_left_paren,
-      $this->_parameters,
+      $this->attribute_spec,
+      $this->static_keyword,
+      $this->async_keyword,
+      $this->coroutine_keyword,
+      $this->function_keyword,
+      $this->ampersand,
+      $this->left_paren,
+      $this->parameters,
       $value,
-      $this->_colon,
-      $this->_type,
-      $this->_use,
-      $this->_body,
+      $this->colon,
+      $this->type,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns Missing | RightParenToken
    */
   public function getRightParen(): ?RightParenToken {
-    if ($this->_right_paren->isMissing()) {
+    if ($this->rightParen->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParenx(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
-  public function getColonUNTYPED(): EditableNode {
-    return $this->_colon;
+  final public function getColonUNTYPED(): EditableNode {
+    return $this->colon;
   }
 
-  public function withColon(EditableNode $value): this {
-    if ($value === $this->_colon) {
+  public function withColon(?ColonToken $value): this {
+    if ($value === $this->colon) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
-      $this->_ampersand,
-      $this->_left_paren,
-      $this->_parameters,
-      $this->_right_paren,
+      $this->attribute_spec,
+      $this->static_keyword,
+      $this->async_keyword,
+      $this->coroutine_keyword,
+      $this->function_keyword,
+      $this->ampersand,
+      $this->left_paren,
+      $this->parameters,
+      $this->right_paren,
       $value,
-      $this->_type,
-      $this->_use,
-      $this->_body,
+      $this->type,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasColon(): bool {
-    return !$this->_colon->isMissing();
+    return $this->colon !== null;
   }
 
   /**
    * @returns Missing | ColonToken
    */
   public function getColon(): ?ColonToken {
-    if ($this->_colon->isMissing()) {
+    if ($this->colon->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(ColonToken::class, $this->_colon);
+    return TypeAssert\instance_of(ColonToken::class, $this->colon);
   }
 
   /**
    * @returns ColonToken
    */
   public function getColonx(): ColonToken {
-    return TypeAssert\instance_of(ColonToken::class, $this->_colon);
+    return TypeAssert\instance_of(ColonToken::class, $this->colon);
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
-  public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+  public function withType(?EditableNode $value): this {
+    if ($value === $this->type) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
-      $this->_ampersand,
-      $this->_left_paren,
-      $this->_parameters,
-      $this->_right_paren,
-      $this->_colon,
+      $this->attribute_spec,
+      $this->static_keyword,
+      $this->async_keyword,
+      $this->coroutine_keyword,
+      $this->function_keyword,
+      $this->ampersand,
+      $this->left_paren,
+      $this->parameters,
+      $this->right_paren,
+      $this->colon,
       $value,
-      $this->_use,
-      $this->_body,
+      $this->use,
+      $this->body,
     );
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
@@ -748,10 +719,10 @@ final class AnonymousFunction extends EditableNode {
    * VectorArrayTypeSpecifier
    */
   public function getType(): ?EditableNode {
-    if ($this->_type->isMissing()) {
+    if ($this->type->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
   /**
@@ -760,47 +731,47 @@ final class AnonymousFunction extends EditableNode {
    * SoftTypeSpecifier | TupleTypeSpecifier | VectorArrayTypeSpecifier
    */
   public function getTypex(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
-  public function getUseUNTYPED(): EditableNode {
-    return $this->_use;
+  final public function getUseUNTYPED(): EditableNode {
+    return $this->use;
   }
 
-  public function withUse(EditableNode $value): this {
-    if ($value === $this->_use) {
+  public function withUse(?AnonymousFunctionUseClause $value): this {
+    if ($value === $this->use) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
-      $this->_ampersand,
-      $this->_left_paren,
-      $this->_parameters,
-      $this->_right_paren,
-      $this->_colon,
-      $this->_type,
+      $this->attribute_spec,
+      $this->static_keyword,
+      $this->async_keyword,
+      $this->coroutine_keyword,
+      $this->function_keyword,
+      $this->ampersand,
+      $this->left_paren,
+      $this->parameters,
+      $this->right_paren,
+      $this->colon,
+      $this->type,
       $value,
-      $this->_body,
+      $this->body,
     );
   }
 
   public function hasUse(): bool {
-    return !$this->_use->isMissing();
+    return $this->use !== null;
   }
 
   /**
    * @returns AnonymousFunctionUseClause | Missing
    */
   public function getUse(): ?AnonymousFunctionUseClause {
-    if ($this->_use->isMissing()) {
+    if ($this->use->isMissing()) {
       return null;
     }
     return
-      TypeAssert\instance_of(AnonymousFunctionUseClause::class, $this->_use);
+      TypeAssert\instance_of(AnonymousFunctionUseClause::class, $this->use);
   }
 
   /**
@@ -808,43 +779,43 @@ final class AnonymousFunction extends EditableNode {
    */
   public function getUsex(): AnonymousFunctionUseClause {
     return
-      TypeAssert\instance_of(AnonymousFunctionUseClause::class, $this->_use);
+      TypeAssert\instance_of(AnonymousFunctionUseClause::class, $this->use);
   }
 
-  public function getBodyUNTYPED(): EditableNode {
-    return $this->_body;
+  final public function getBodyUNTYPED(): EditableNode {
+    return $this->body;
   }
 
-  public function withBody(EditableNode $value): this {
-    if ($value === $this->_body) {
+  public function withBody(CompoundStatement $value): this {
+    if ($value === $this->body) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_static_keyword,
-      $this->_async_keyword,
-      $this->_coroutine_keyword,
-      $this->_function_keyword,
-      $this->_ampersand,
-      $this->_left_paren,
-      $this->_parameters,
-      $this->_right_paren,
-      $this->_colon,
-      $this->_type,
-      $this->_use,
+      $this->attribute_spec,
+      $this->static_keyword,
+      $this->async_keyword,
+      $this->coroutine_keyword,
+      $this->function_keyword,
+      $this->ampersand,
+      $this->left_paren,
+      $this->parameters,
+      $this->right_paren,
+      $this->colon,
+      $this->type,
+      $this->use,
       $value,
     );
   }
 
   public function hasBody(): bool {
-    return !$this->_body->isMissing();
+    return $this->body !== null;
   }
 
   /**
    * @returns CompoundStatement
    */
   public function getBody(): CompoundStatement {
-    return TypeAssert\instance_of(CompoundStatement::class, $this->_body);
+    return TypeAssert\instance_of(CompoundStatement::class, $this->body);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b998649d45a7f808df1d029b6a66b365>>
+ * @generated SignedSource<<9ac96e7a1507d997a7a96bf85f851fa4>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ConstructorCall extends EditableNode {
 
-  private EditableNode $_type;
-  private EditableNode $_left_paren;
-  private EditableNode $_argument_list;
-  private EditableNode $_right_paren;
-
   public function __construct(
-    EditableNode $type,
-    EditableNode $left_paren,
-    EditableNode $argument_list,
-    EditableNode $right_paren,
+    private EditableNode $type,
+    private ?LeftParenToken $leftParen,
+    private ?EditableList<EditableNode> $argumentList,
+    private ?RightParenToken $rightParen,
   ) {
     parent::__construct('constructor_call');
-    $this->_type = $type;
-    $this->_left_paren = $left_paren;
-    $this->_argument_list = $argument_list;
-    $this->_right_paren = $right_paren;
   }
 
   <<__Override>>
@@ -42,21 +33,21 @@ final class ConstructorCall extends EditableNode {
       $source,
     );
     $offset += $type->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['constructor_call_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $argument_list = EditableNode::fromJSON(
+    $argument_list = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['constructor_call_argument_list'],
       $file,
       $offset,
       $source,
     );
     $offset += $argument_list->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['constructor_call_right_paren'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class ConstructorCall extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'type' => $this->_type,
-      'left_paren' => $this->_left_paren,
-      'argument_list' => $this->_argument_list,
-      'right_paren' => $this->_right_paren,
+      'type' => $this->type,
+      'left_paren' => $this->leftParen,
+      'argument_list' => $this->argumentList,
+      'right_paren' => $this->rightParen,
     ];
   }
 
@@ -83,39 +74,39 @@ final class ConstructorCall extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $type = $this->_type->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $argument_list = $this->_argument_list->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
+    $type = $this->type->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen?->rewrite($rewriter, $parents);
+    $argument_list = $this->argumentList?->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen?->rewrite($rewriter, $parents);
     if (
-      $type === $this->_type &&
-      $left_paren === $this->_left_paren &&
-      $argument_list === $this->_argument_list &&
-      $right_paren === $this->_right_paren
+      $type === $this->type &&
+      $left_paren === $this->leftParen &&
+      $argument_list === $this->argumentList &&
+      $right_paren === $this->rightParen
     ) {
       return $this;
     }
     return new static($type, $left_paren, $argument_list, $right_paren);
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
   public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+    if ($value === $this->type) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_paren,
-      $this->_argument_list,
-      $this->_right_paren,
+      $this->left_paren,
+      $this->argument_list,
+      $this->right_paren,
     );
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
@@ -125,7 +116,7 @@ final class ConstructorCall extends EditableNode {
    * SelfToken | StaticToken | VariableExpression
    */
   public function getType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
   /**
@@ -138,57 +129,53 @@ final class ConstructorCall extends EditableNode {
     return $this->getType();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(?LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
-    return new static(
-      $this->_type,
-      $value,
-      $this->_argument_list,
-      $this->_right_paren,
-    );
+    return
+      new static($this->type, $value, $this->argument_list, $this->right_paren);
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns Missing | LeftParenToken
    */
   public function getLeftParen(): ?LeftParenToken {
-    if ($this->_left_paren->isMissing()) {
+    if ($this->leftParen->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParenx(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
-  public function getArgumentListUNTYPED(): EditableNode {
-    return $this->_argument_list;
+  final public function getArgumentListUNTYPED(): EditableNode {
+    return $this->argumentList;
   }
 
-  public function withArgumentList(EditableNode $value): this {
-    if ($value === $this->_argument_list) {
+  public function withArgumentList(?EditableList<EditableNode> $value): this {
+    if ($value === $this->argumentList) {
       return $this;
     }
     return
-      new static($this->_type, $this->_left_paren, $value, $this->_right_paren);
+      new static($this->type, $this->left_paren, $value, $this->right_paren);
   }
 
   public function hasArgumentList(): bool {
-    return !$this->_argument_list->isMissing();
+    return $this->argumentList !== null;
   }
 
   /**
@@ -209,10 +196,10 @@ final class ConstructorCall extends EditableNode {
    * | Missing
    */
   public function getArgumentList(): ?EditableList<EditableNode> {
-    if ($this->_argument_list->isMissing()) {
+    if ($this->argumentList->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_argument_list);
+    return TypeAssert\instance_of(EditableList::class, $this->argumentList);
   }
 
   /**
@@ -232,43 +219,39 @@ final class ConstructorCall extends EditableNode {
    * EditableList<VariableExpression> | EditableList<VectorIntrinsicExpression>
    */
   public function getArgumentListx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_argument_list);
+    return TypeAssert\instance_of(EditableList::class, $this->argumentList);
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(?RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
-    return new static(
-      $this->_type,
-      $this->_left_paren,
-      $this->_argument_list,
-      $value,
-    );
+    return
+      new static($this->type, $this->left_paren, $this->argument_list, $value);
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns Missing | RightParenToken
    */
   public function getRightParen(): ?RightParenToken {
-    if ($this->_right_paren->isMissing()) {
+    if ($this->rightParen->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParenx(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 }

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<418c7267e38ea8be641ee84ddadbe40e>>
+ * @generated SignedSource<<6b39b7e1d27b4bf4e2d542784c9c6780>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -12,22 +12,13 @@ final class MethodishDeclaration
   extends EditableNode
   implements IFunctionishDeclaration {
 
-  private EditableNode $_attribute;
-  private EditableNode $_function_decl_header;
-  private EditableNode $_function_body;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $attribute,
-    EditableNode $function_decl_header,
-    EditableNode $function_body,
-    EditableNode $semicolon,
+    private ?AttributeSpecification $attribute,
+    private FunctionDeclarationHeader $functionDeclHeader,
+    private ?CompoundStatement $functionBody,
+    private ?SemicolonToken $semicolon,
   ) {
     parent::__construct('methodish_declaration');
-    $this->_attribute = $attribute;
-    $this->_function_decl_header = $function_decl_header;
-    $this->_function_body = $function_body;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -37,28 +28,28 @@ final class MethodishDeclaration
     int $offset,
     string $source,
   ): this {
-    $attribute = EditableNode::fromJSON(
+    $attribute = AttributeSpecification::fromJSON(
       /* UNSAFE_EXPR */ $json['methodish_attribute'],
       $file,
       $offset,
       $source,
     );
     $offset += $attribute->getWidth();
-    $function_decl_header = EditableNode::fromJSON(
+    $function_decl_header = FunctionDeclarationHeader::fromJSON(
       /* UNSAFE_EXPR */ $json['methodish_function_decl_header'],
       $file,
       $offset,
       $source,
     );
     $offset += $function_decl_header->getWidth();
-    $function_body = EditableNode::fromJSON(
+    $function_body = CompoundStatement::fromJSON(
       /* UNSAFE_EXPR */ $json['methodish_function_body'],
       $file,
       $offset,
       $source,
     );
     $offset += $function_body->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['methodish_semicolon'],
       $file,
       $offset,
@@ -70,12 +61,12 @@ final class MethodishDeclaration
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'attribute' => $this->_attribute,
-      'function_decl_header' => $this->_function_decl_header,
-      'function_body' => $this->_function_body,
-      'semicolon' => $this->_semicolon,
+      'attribute' => $this->attribute,
+      'function_decl_header' => $this->functionDeclHeader,
+      'function_body' => $this->functionBody,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -86,16 +77,16 @@ final class MethodishDeclaration
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $attribute = $this->_attribute->rewrite($rewriter, $parents);
+    $attribute = $this->attribute?->rewrite($rewriter, $parents);
     $function_decl_header =
-      $this->_function_decl_header->rewrite($rewriter, $parents);
-    $function_body = $this->_function_body->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+      $this->functionDeclHeader->rewrite($rewriter, $parents);
+    $function_body = $this->functionBody?->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon?->rewrite($rewriter, $parents);
     if (
-      $attribute === $this->_attribute &&
-      $function_decl_header === $this->_function_decl_header &&
-      $function_body === $this->_function_body &&
-      $semicolon === $this->_semicolon
+      $attribute === $this->attribute &&
+      $function_decl_header === $this->functionDeclHeader &&
+      $function_body === $this->functionBody &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
@@ -103,35 +94,35 @@ final class MethodishDeclaration
       new static($attribute, $function_decl_header, $function_body, $semicolon);
   }
 
-  public function getAttributeUNTYPED(): EditableNode {
-    return $this->_attribute;
+  final public function getAttributeUNTYPED(): EditableNode {
+    return $this->attribute;
   }
 
-  public function withAttribute(EditableNode $value): this {
-    if ($value === $this->_attribute) {
+  public function withAttribute(?AttributeSpecification $value): this {
+    if ($value === $this->attribute) {
       return $this;
     }
     return new static(
       $value,
-      $this->_function_decl_header,
-      $this->_function_body,
-      $this->_semicolon,
+      $this->function_decl_header,
+      $this->function_body,
+      $this->semicolon,
     );
   }
 
   public function hasAttribute(): bool {
-    return !$this->_attribute->isMissing();
+    return $this->attribute !== null;
   }
 
   /**
    * @returns AttributeSpecification | Missing
    */
   public function getAttribute(): ?AttributeSpecification {
-    if ($this->_attribute->isMissing()) {
+    if ($this->attribute->isMissing()) {
       return null;
     }
     return
-      TypeAssert\instance_of(AttributeSpecification::class, $this->_attribute);
+      TypeAssert\instance_of(AttributeSpecification::class, $this->attribute);
   }
 
   /**
@@ -139,27 +130,29 @@ final class MethodishDeclaration
    */
   public function getAttributex(): AttributeSpecification {
     return
-      TypeAssert\instance_of(AttributeSpecification::class, $this->_attribute);
+      TypeAssert\instance_of(AttributeSpecification::class, $this->attribute);
   }
 
-  public function getFunctionDeclHeaderUNTYPED(): EditableNode {
-    return $this->_function_decl_header;
+  final public function getFunctionDeclHeaderUNTYPED(): EditableNode {
+    return $this->functionDeclHeader;
   }
 
-  public function withFunctionDeclHeader(EditableNode $value): this {
-    if ($value === $this->_function_decl_header) {
+  public function withFunctionDeclHeader(
+    FunctionDeclarationHeader $value,
+  ): this {
+    if ($value === $this->functionDeclHeader) {
       return $this;
     }
     return new static(
-      $this->_attribute,
+      $this->attribute,
       $value,
-      $this->_function_body,
-      $this->_semicolon,
+      $this->function_body,
+      $this->semicolon,
     );
   }
 
   public function hasFunctionDeclHeader(): bool {
-    return !$this->_function_decl_header->isMissing();
+    return $this->functionDeclHeader !== null;
   }
 
   /**
@@ -168,7 +161,7 @@ final class MethodishDeclaration
   public function getFunctionDeclHeader(): FunctionDeclarationHeader {
     return TypeAssert\instance_of(
       FunctionDeclarationHeader::class,
-      $this->_function_decl_header,
+      $this->functionDeclHeader,
     );
   }
 
@@ -179,35 +172,35 @@ final class MethodishDeclaration
     return $this->getFunctionDeclHeader();
   }
 
-  public function getFunctionBodyUNTYPED(): EditableNode {
-    return $this->_function_body;
+  final public function getFunctionBodyUNTYPED(): EditableNode {
+    return $this->functionBody;
   }
 
-  public function withFunctionBody(EditableNode $value): this {
-    if ($value === $this->_function_body) {
+  public function withFunctionBody(?CompoundStatement $value): this {
+    if ($value === $this->functionBody) {
       return $this;
     }
     return new static(
-      $this->_attribute,
-      $this->_function_decl_header,
+      $this->attribute,
+      $this->function_decl_header,
       $value,
-      $this->_semicolon,
+      $this->semicolon,
     );
   }
 
   public function hasFunctionBody(): bool {
-    return !$this->_function_body->isMissing();
+    return $this->functionBody !== null;
   }
 
   /**
    * @returns CompoundStatement | Missing
    */
   public function getFunctionBody(): ?CompoundStatement {
-    if ($this->_function_body->isMissing()) {
+    if ($this->functionBody->isMissing()) {
       return null;
     }
     return
-      TypeAssert\instance_of(CompoundStatement::class, $this->_function_body);
+      TypeAssert\instance_of(CompoundStatement::class, $this->functionBody);
   }
 
   /**
@@ -215,43 +208,43 @@ final class MethodishDeclaration
    */
   public function getFunctionBodyx(): CompoundStatement {
     return
-      TypeAssert\instance_of(CompoundStatement::class, $this->_function_body);
+      TypeAssert\instance_of(CompoundStatement::class, $this->functionBody);
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(?SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
     return new static(
-      $this->_attribute,
-      $this->_function_decl_header,
-      $this->_function_body,
+      $this->attribute,
+      $this->function_decl_header,
+      $this->function_body,
       $value,
     );
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns Missing | SemicolonToken
    */
   public function getSemicolon(): ?SemicolonToken {
-    if ($this->_semicolon->isMissing()) {
+    if ($this->semicolon->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolonx(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 }

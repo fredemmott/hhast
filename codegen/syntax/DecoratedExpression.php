@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<4631f5bb8f95d42c329389474931b0f3>>
+ * @generated SignedSource<<95d70b5dedbfd060575a747451011b1f>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,16 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class DecoratedExpression extends EditableNode {
 
-  private EditableNode $_decorator;
-  private EditableNode $_expression;
-
   public function __construct(
-    EditableNode $decorator,
-    EditableNode $expression,
+    private EditableToken $decorator,
+    private EditableNode $expression,
   ) {
     parent::__construct('decorated_expression');
-    $this->_decorator = $decorator;
-    $this->_expression = $expression;
   }
 
   <<__Override>>
@@ -29,7 +24,7 @@ final class DecoratedExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $decorator = EditableNode::fromJSON(
+    $decorator = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['decorated_expression_decorator'],
       $file,
       $offset,
@@ -47,10 +42,10 @@ final class DecoratedExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'decorator' => $this->_decorator,
-      'expression' => $this->_expression,
+      'decorator' => $this->decorator,
+      'expression' => $this->expression,
     ];
   }
 
@@ -61,36 +56,34 @@ final class DecoratedExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $decorator = $this->_decorator->rewrite($rewriter, $parents);
-    $expression = $this->_expression->rewrite($rewriter, $parents);
-    if (
-      $decorator === $this->_decorator && $expression === $this->_expression
-    ) {
+    $decorator = $this->decorator->rewrite($rewriter, $parents);
+    $expression = $this->expression->rewrite($rewriter, $parents);
+    if ($decorator === $this->decorator && $expression === $this->expression) {
       return $this;
     }
     return new static($decorator, $expression);
   }
 
-  public function getDecoratorUNTYPED(): EditableNode {
-    return $this->_decorator;
+  final public function getDecoratorUNTYPED(): EditableNode {
+    return $this->decorator;
   }
 
-  public function withDecorator(EditableNode $value): this {
-    if ($value === $this->_decorator) {
+  public function withDecorator(EditableToken $value): this {
+    if ($value === $this->decorator) {
       return $this;
     }
-    return new static($value, $this->_expression);
+    return new static($value, $this->expression);
   }
 
   public function hasDecorator(): bool {
-    return !$this->_decorator->isMissing();
+    return $this->decorator !== null;
   }
 
   /**
    * @returns AmpersandToken | DotDotDotToken | InoutToken
    */
   public function getDecorator(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_decorator);
+    return TypeAssert\instance_of(EditableToken::class, $this->decorator);
   }
 
   /**
@@ -100,19 +93,19 @@ final class DecoratedExpression extends EditableNode {
     return $this->getDecorator();
   }
 
-  public function getExpressionUNTYPED(): EditableNode {
-    return $this->_expression;
+  final public function getExpressionUNTYPED(): EditableNode {
+    return $this->expression;
   }
 
   public function withExpression(EditableNode $value): this {
-    if ($value === $this->_expression) {
+    if ($value === $this->expression) {
       return $this;
     }
-    return new static($this->_decorator, $value);
+    return new static($this->decorator, $value);
   }
 
   public function hasExpression(): bool {
-    return !$this->_expression->isMissing();
+    return $this->expression !== null;
   }
 
   /**
@@ -121,7 +114,7 @@ final class DecoratedExpression extends EditableNode {
    * SubscriptExpression | VariableToken | VariableExpression
    */
   public function getExpression(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_expression);
+    return TypeAssert\instance_of(EditableNode::class, $this->expression);
   }
 
   /**

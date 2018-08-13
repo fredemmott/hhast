@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<68219344482a251921750b67ce37dc97>>
+ * @generated SignedSource<<0e19a44207c7514fc4535b1c4dd280cf>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ClassishBody extends EditableNode {
 
-  private EditableNode $_left_brace;
-  private EditableNode $_elements;
-  private EditableNode $_right_brace;
-
   public function __construct(
-    EditableNode $left_brace,
-    EditableNode $elements,
-    EditableNode $right_brace,
+    private LeftBraceToken $leftBrace,
+    private ?EditableList<EditableNode> $elements,
+    private ?RightBraceToken $rightBrace,
   ) {
     parent::__construct('classish_body');
-    $this->_left_brace = $left_brace;
-    $this->_elements = $elements;
-    $this->_right_brace = $right_brace;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class ClassishBody extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_brace = EditableNode::fromJSON(
+    $left_brace = LeftBraceToken::fromJSON(
       /* UNSAFE_EXPR */ $json['classish_body_left_brace'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_brace->getWidth();
-    $elements = EditableNode::fromJSON(
+    $elements = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['classish_body_elements'],
       $file,
       $offset,
       $source,
     );
     $offset += $elements->getWidth();
-    $right_brace = EditableNode::fromJSON(
+    $right_brace = RightBraceToken::fromJSON(
       /* UNSAFE_EXPR */ $json['classish_body_right_brace'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class ClassishBody extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_brace' => $this->_left_brace,
-      'elements' => $this->_elements,
-      'right_brace' => $this->_right_brace,
+      'left_brace' => $this->leftBrace,
+      'elements' => $this->elements,
+      'right_brace' => $this->rightBrace,
     ];
   }
 
@@ -72,39 +65,39 @@ final class ClassishBody extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_brace = $this->_left_brace->rewrite($rewriter, $parents);
-    $elements = $this->_elements->rewrite($rewriter, $parents);
-    $right_brace = $this->_right_brace->rewrite($rewriter, $parents);
+    $left_brace = $this->leftBrace->rewrite($rewriter, $parents);
+    $elements = $this->elements?->rewrite($rewriter, $parents);
+    $right_brace = $this->rightBrace?->rewrite($rewriter, $parents);
     if (
-      $left_brace === $this->_left_brace &&
-      $elements === $this->_elements &&
-      $right_brace === $this->_right_brace
+      $left_brace === $this->leftBrace &&
+      $elements === $this->elements &&
+      $right_brace === $this->rightBrace
     ) {
       return $this;
     }
     return new static($left_brace, $elements, $right_brace);
   }
 
-  public function getLeftBraceUNTYPED(): EditableNode {
-    return $this->_left_brace;
+  final public function getLeftBraceUNTYPED(): EditableNode {
+    return $this->leftBrace;
   }
 
-  public function withLeftBrace(EditableNode $value): this {
-    if ($value === $this->_left_brace) {
+  public function withLeftBrace(LeftBraceToken $value): this {
+    if ($value === $this->leftBrace) {
       return $this;
     }
-    return new static($value, $this->_elements, $this->_right_brace);
+    return new static($value, $this->elements, $this->right_brace);
   }
 
   public function hasLeftBrace(): bool {
-    return !$this->_left_brace->isMissing();
+    return $this->leftBrace !== null;
   }
 
   /**
    * @returns LeftBraceToken
    */
   public function getLeftBrace(): LeftBraceToken {
-    return TypeAssert\instance_of(LeftBraceToken::class, $this->_left_brace);
+    return TypeAssert\instance_of(LeftBraceToken::class, $this->leftBrace);
   }
 
   /**
@@ -114,67 +107,67 @@ final class ClassishBody extends EditableNode {
     return $this->getLeftBrace();
   }
 
-  public function getElementsUNTYPED(): EditableNode {
-    return $this->_elements;
+  final public function getElementsUNTYPED(): EditableNode {
+    return $this->elements;
   }
 
-  public function withElements(EditableNode $value): this {
-    if ($value === $this->_elements) {
+  public function withElements(?EditableList<EditableNode> $value): this {
+    if ($value === $this->elements) {
       return $this;
     }
-    return new static($this->_left_brace, $value, $this->_right_brace);
+    return new static($this->left_brace, $value, $this->right_brace);
   }
 
   public function hasElements(): bool {
-    return !$this->_elements->isMissing();
+    return $this->elements !== null;
   }
 
   /**
    * @returns EditableList<EditableNode> | Missing
    */
   public function getElements(): ?EditableList<EditableNode> {
-    if ($this->_elements->isMissing()) {
+    if ($this->elements->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_elements);
+    return TypeAssert\instance_of(EditableList::class, $this->elements);
   }
 
   /**
    * @returns EditableList<EditableNode>
    */
   public function getElementsx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_elements);
+    return TypeAssert\instance_of(EditableList::class, $this->elements);
   }
 
-  public function getRightBraceUNTYPED(): EditableNode {
-    return $this->_right_brace;
+  final public function getRightBraceUNTYPED(): EditableNode {
+    return $this->rightBrace;
   }
 
-  public function withRightBrace(EditableNode $value): this {
-    if ($value === $this->_right_brace) {
+  public function withRightBrace(?RightBraceToken $value): this {
+    if ($value === $this->rightBrace) {
       return $this;
     }
-    return new static($this->_left_brace, $this->_elements, $value);
+    return new static($this->left_brace, $this->elements, $value);
   }
 
   public function hasRightBrace(): bool {
-    return !$this->_right_brace->isMissing();
+    return $this->rightBrace !== null;
   }
 
   /**
    * @returns Missing | RightBraceToken
    */
   public function getRightBrace(): ?RightBraceToken {
-    if ($this->_right_brace->isMissing()) {
+    if ($this->rightBrace->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(RightBraceToken::class, $this->_right_brace);
+    return TypeAssert\instance_of(RightBraceToken::class, $this->rightBrace);
   }
 
   /**
    * @returns RightBraceToken
    */
   public function getRightBracex(): RightBraceToken {
-    return TypeAssert\instance_of(RightBraceToken::class, $this->_right_brace);
+    return TypeAssert\instance_of(RightBraceToken::class, $this->rightBrace);
   }
 }

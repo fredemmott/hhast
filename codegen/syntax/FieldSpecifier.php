@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<20e9c12c032964dc6085ec1e21a9b40c>>
+ * @generated SignedSource<<9895a30e8ab8884955ebc0bf65f1242c>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class FieldSpecifier extends EditableNode {
 
-  private EditableNode $_question;
-  private EditableNode $_name;
-  private EditableNode $_arrow;
-  private EditableNode $_type;
-
   public function __construct(
-    EditableNode $question,
-    EditableNode $name,
-    EditableNode $arrow,
-    EditableNode $type,
+    private ?QuestionToken $question,
+    private EditableNode $name,
+    private EqualGreaterThanToken $arrow,
+    private EditableNode $type,
   ) {
     parent::__construct('field_specifier');
-    $this->_question = $question;
-    $this->_name = $name;
-    $this->_arrow = $arrow;
-    $this->_type = $type;
   }
 
   <<__Override>>
@@ -35,7 +26,7 @@ final class FieldSpecifier extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $question = EditableNode::fromJSON(
+    $question = QuestionToken::fromJSON(
       /* UNSAFE_EXPR */ $json['field_question'],
       $file,
       $offset,
@@ -49,7 +40,7 @@ final class FieldSpecifier extends EditableNode {
       $source,
     );
     $offset += $name->getWidth();
-    $arrow = EditableNode::fromJSON(
+    $arrow = EqualGreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['field_arrow'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class FieldSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'question' => $this->_question,
-      'name' => $this->_name,
-      'arrow' => $this->_arrow,
-      'type' => $this->_type,
+      'question' => $this->question,
+      'name' => $this->name,
+      'arrow' => $this->arrow,
+      'type' => $this->type,
     ];
   }
 
@@ -83,73 +74,73 @@ final class FieldSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $question = $this->_question->rewrite($rewriter, $parents);
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $arrow = $this->_arrow->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
+    $question = $this->question?->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
+    $arrow = $this->arrow->rewrite($rewriter, $parents);
+    $type = $this->type->rewrite($rewriter, $parents);
     if (
-      $question === $this->_question &&
-      $name === $this->_name &&
-      $arrow === $this->_arrow &&
-      $type === $this->_type
+      $question === $this->question &&
+      $name === $this->name &&
+      $arrow === $this->arrow &&
+      $type === $this->type
     ) {
       return $this;
     }
     return new static($question, $name, $arrow, $type);
   }
 
-  public function getQuestionUNTYPED(): EditableNode {
-    return $this->_question;
+  final public function getQuestionUNTYPED(): EditableNode {
+    return $this->question;
   }
 
-  public function withQuestion(EditableNode $value): this {
-    if ($value === $this->_question) {
+  public function withQuestion(?QuestionToken $value): this {
+    if ($value === $this->question) {
       return $this;
     }
-    return new static($value, $this->_name, $this->_arrow, $this->_type);
+    return new static($value, $this->name, $this->arrow, $this->type);
   }
 
   public function hasQuestion(): bool {
-    return !$this->_question->isMissing();
+    return $this->question !== null;
   }
 
   /**
    * @returns Missing | QuestionToken
    */
   public function getQuestion(): ?QuestionToken {
-    if ($this->_question->isMissing()) {
+    if ($this->question->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(QuestionToken::class, $this->_question);
+    return TypeAssert\instance_of(QuestionToken::class, $this->question);
   }
 
   /**
    * @returns QuestionToken
    */
   public function getQuestionx(): QuestionToken {
-    return TypeAssert\instance_of(QuestionToken::class, $this->_question);
+    return TypeAssert\instance_of(QuestionToken::class, $this->question);
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
   public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+    if ($value === $this->name) {
       return $this;
     }
-    return new static($this->_question, $value, $this->_arrow, $this->_type);
+    return new static($this->question, $value, $this->arrow, $this->type);
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns LiteralExpression | ScopeResolutionExpression
    */
   public function getName(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_name);
+    return TypeAssert\instance_of(EditableNode::class, $this->name);
   }
 
   /**
@@ -159,26 +150,26 @@ final class FieldSpecifier extends EditableNode {
     return $this->getName();
   }
 
-  public function getArrowUNTYPED(): EditableNode {
-    return $this->_arrow;
+  final public function getArrowUNTYPED(): EditableNode {
+    return $this->arrow;
   }
 
-  public function withArrow(EditableNode $value): this {
-    if ($value === $this->_arrow) {
+  public function withArrow(EqualGreaterThanToken $value): this {
+    if ($value === $this->arrow) {
       return $this;
     }
-    return new static($this->_question, $this->_name, $value, $this->_type);
+    return new static($this->question, $this->name, $value, $this->type);
   }
 
   public function hasArrow(): bool {
-    return !$this->_arrow->isMissing();
+    return $this->arrow !== null;
   }
 
   /**
    * @returns EqualGreaterThanToken
    */
   public function getArrow(): EqualGreaterThanToken {
-    return TypeAssert\instance_of(EqualGreaterThanToken::class, $this->_arrow);
+    return TypeAssert\instance_of(EqualGreaterThanToken::class, $this->arrow);
   }
 
   /**
@@ -188,19 +179,19 @@ final class FieldSpecifier extends EditableNode {
     return $this->getArrow();
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
   public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+    if ($value === $this->type) {
       return $this;
     }
-    return new static($this->_question, $this->_name, $this->_arrow, $value);
+    return new static($this->question, $this->name, $this->arrow, $value);
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
@@ -209,7 +200,7 @@ final class FieldSpecifier extends EditableNode {
    * TypeConstant
    */
   public function getType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
   /**

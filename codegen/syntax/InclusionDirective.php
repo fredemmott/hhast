@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<83a55a9df91186c9e378cc690d403865>>
+ * @generated SignedSource<<a397e0f068240e0fa4bd084b97fe4868>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,16 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class InclusionDirective extends EditableNode {
 
-  private EditableNode $_expression;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $expression,
-    EditableNode $semicolon,
+    private InclusionExpression $expression,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('inclusion_directive');
-    $this->_expression = $expression;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -29,14 +24,14 @@ final class InclusionDirective extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $expression = EditableNode::fromJSON(
+    $expression = InclusionExpression::fromJSON(
       /* UNSAFE_EXPR */ $json['inclusion_expression'],
       $file,
       $offset,
       $source,
     );
     $offset += $expression->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['inclusion_semicolon'],
       $file,
       $offset,
@@ -47,10 +42,10 @@ final class InclusionDirective extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'expression' => $this->_expression,
-      'semicolon' => $this->_semicolon,
+      'expression' => $this->expression,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -61,29 +56,27 @@ final class InclusionDirective extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $expression = $this->_expression->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
-    if (
-      $expression === $this->_expression && $semicolon === $this->_semicolon
-    ) {
+    $expression = $this->expression->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
+    if ($expression === $this->expression && $semicolon === $this->semicolon) {
       return $this;
     }
     return new static($expression, $semicolon);
   }
 
-  public function getExpressionUNTYPED(): EditableNode {
-    return $this->_expression;
+  final public function getExpressionUNTYPED(): EditableNode {
+    return $this->expression;
   }
 
-  public function withExpression(EditableNode $value): this {
-    if ($value === $this->_expression) {
+  public function withExpression(InclusionExpression $value): this {
+    if ($value === $this->expression) {
       return $this;
     }
-    return new static($value, $this->_semicolon);
+    return new static($value, $this->semicolon);
   }
 
   public function hasExpression(): bool {
-    return !$this->_expression->isMissing();
+    return $this->expression !== null;
   }
 
   /**
@@ -91,7 +84,7 @@ final class InclusionDirective extends EditableNode {
    */
   public function getExpression(): InclusionExpression {
     return
-      TypeAssert\instance_of(InclusionExpression::class, $this->_expression);
+      TypeAssert\instance_of(InclusionExpression::class, $this->expression);
   }
 
   /**
@@ -101,26 +94,26 @@ final class InclusionDirective extends EditableNode {
     return $this->getExpression();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
-    return new static($this->_expression, $value);
+    return new static($this->expression, $value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

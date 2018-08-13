@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<45205ee6dbb85aa08d61a64d3de85dfc>>
+ * @generated SignedSource<<72494bf2047dad5b2288bb28aaaffe98>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class XHPChildrenParenthesizedList extends EditableNode {
 
-  private EditableNode $_left_paren;
-  private EditableNode $_xhp_children;
-  private EditableNode $_right_paren;
-
   public function __construct(
-    EditableNode $left_paren,
-    EditableNode $xhp_children,
-    EditableNode $right_paren,
+    private EditableNode $leftParen,
+    private EditableNode $xhpChildren,
+    private EditableNode $rightParen,
   ) {
     parent::__construct('xhp_children_parenthesized_list');
-    $this->_left_paren = $left_paren;
-    $this->_xhp_children = $xhp_children;
-    $this->_right_paren = $right_paren;
   }
 
   <<__Override>>
@@ -57,11 +50,11 @@ final class XHPChildrenParenthesizedList extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_paren' => $this->_left_paren,
-      'xhp_children' => $this->_xhp_children,
-      'right_paren' => $this->_right_paren,
+      'left_paren' => $this->leftParen,
+      'xhp_children' => $this->xhpChildren,
+      'right_paren' => $this->rightParen,
     ];
   }
 
@@ -72,39 +65,39 @@ final class XHPChildrenParenthesizedList extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $xhp_children = $this->_xhp_children->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $xhp_children = $this->xhpChildren->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
     if (
-      $left_paren === $this->_left_paren &&
-      $xhp_children === $this->_xhp_children &&
-      $right_paren === $this->_right_paren
+      $left_paren === $this->leftParen &&
+      $xhp_children === $this->xhpChildren &&
+      $right_paren === $this->rightParen
     ) {
       return $this;
     }
     return new static($left_paren, $xhp_children, $right_paren);
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
   public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+    if ($value === $this->leftParen) {
       return $this;
     }
-    return new static($value, $this->_xhp_children, $this->_right_paren);
+    return new static($value, $this->xhp_children, $this->right_paren);
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getLeftParen(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_left_paren);
+    return TypeAssert\instance_of(EditableNode::class, $this->leftParen);
   }
 
   /**
@@ -114,26 +107,26 @@ final class XHPChildrenParenthesizedList extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getXhpChildrenUNTYPED(): EditableNode {
-    return $this->_xhp_children;
+  final public function getXhpChildrenUNTYPED(): EditableNode {
+    return $this->xhpChildren;
   }
 
   public function withXhpChildren(EditableNode $value): this {
-    if ($value === $this->_xhp_children) {
+    if ($value === $this->xhpChildren) {
       return $this;
     }
-    return new static($this->_left_paren, $value, $this->_right_paren);
+    return new static($this->left_paren, $value, $this->right_paren);
   }
 
   public function hasXhpChildren(): bool {
-    return !$this->_xhp_children->isMissing();
+    return $this->xhpChildren !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getXhpChildren(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_xhp_children);
+    return TypeAssert\instance_of(EditableNode::class, $this->xhpChildren);
   }
 
   /**
@@ -143,26 +136,26 @@ final class XHPChildrenParenthesizedList extends EditableNode {
     return $this->getXhpChildren();
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
   public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+    if ($value === $this->rightParen) {
       return $this;
     }
-    return new static($this->_left_paren, $this->_xhp_children, $value);
+    return new static($this->left_paren, $this->xhp_children, $value);
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getRightParen(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_right_paren);
+    return TypeAssert\instance_of(EditableNode::class, $this->rightParen);
   }
 
   /**

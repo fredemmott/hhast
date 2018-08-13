@@ -12,12 +12,19 @@ namespace Facebook\HHAST\__Private\StrP;
 
 use namespace HH\Lib\Str;
 
+<<__Memoize>>
 function upper_camel(string $in): string {
   return \preg_replace_callback(
     '/(^|_)([a-z])/',
     $matches ==> Str\uppercase($matches[2]),
     $in,
   );
+}
+
+function lower_camel(string $in): string {
+  $upper_camel = upper_camel($in);
+  $upper_camel[0] = Str\lowercase($upper_camel[0]);
+  return $upper_camel;
 }
 
 <<__Memoize>>

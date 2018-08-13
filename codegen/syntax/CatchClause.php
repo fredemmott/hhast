@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<01c82cc7311f4a11b17b7ef7cb00ebf9>>
+ * @generated SignedSource<<877fd9ca9677c1a694c2eee86a38d5ff>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,28 +10,15 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class CatchClause extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_type;
-  private EditableNode $_variable;
-  private EditableNode $_right_paren;
-  private EditableNode $_body;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_paren,
-    EditableNode $type,
-    EditableNode $variable,
-    EditableNode $right_paren,
-    EditableNode $body,
+    private CatchToken $keyword,
+    private LeftParenToken $leftParen,
+    private SimpleTypeSpecifier $type,
+    private ?VariableToken $variable,
+    private RightParenToken $rightParen,
+    private CompoundStatement $body,
   ) {
     parent::__construct('catch_clause');
-    $this->_keyword = $keyword;
-    $this->_left_paren = $left_paren;
-    $this->_type = $type;
-    $this->_variable = $variable;
-    $this->_right_paren = $right_paren;
-    $this->_body = $body;
   }
 
   <<__Override>>
@@ -41,42 +28,42 @@ final class CatchClause extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = CatchToken::fromJSON(
       /* UNSAFE_EXPR */ $json['catch_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['catch_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $type = EditableNode::fromJSON(
+    $type = SimpleTypeSpecifier::fromJSON(
       /* UNSAFE_EXPR */ $json['catch_type'],
       $file,
       $offset,
       $source,
     );
     $offset += $type->getWidth();
-    $variable = EditableNode::fromJSON(
+    $variable = VariableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['catch_variable'],
       $file,
       $offset,
       $source,
     );
     $offset += $variable->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['catch_right_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $right_paren->getWidth();
-    $body = EditableNode::fromJSON(
+    $body = CompoundStatement::fromJSON(
       /* UNSAFE_EXPR */ $json['catch_body'],
       $file,
       $offset,
@@ -88,14 +75,14 @@ final class CatchClause extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_paren' => $this->_left_paren,
-      'type' => $this->_type,
-      'variable' => $this->_variable,
-      'right_paren' => $this->_right_paren,
-      'body' => $this->_body,
+      'keyword' => $this->keyword,
+      'left_paren' => $this->leftParen,
+      'type' => $this->type,
+      'variable' => $this->variable,
+      'right_paren' => $this->rightParen,
+      'body' => $this->body,
     ];
   }
 
@@ -106,19 +93,19 @@ final class CatchClause extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
-    $variable = $this->_variable->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
-    $body = $this->_body->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $type = $this->type->rewrite($rewriter, $parents);
+    $variable = $this->variable?->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
+    $body = $this->body->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_paren === $this->_left_paren &&
-      $type === $this->_type &&
-      $variable === $this->_variable &&
-      $right_paren === $this->_right_paren &&
-      $body === $this->_body
+      $keyword === $this->keyword &&
+      $left_paren === $this->leftParen &&
+      $type === $this->type &&
+      $variable === $this->variable &&
+      $right_paren === $this->rightParen &&
+      $body === $this->body
     ) {
       return $this;
     }
@@ -126,33 +113,33 @@ final class CatchClause extends EditableNode {
       new static($keyword, $left_paren, $type, $variable, $right_paren, $body);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(CatchToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_paren,
-      $this->_type,
-      $this->_variable,
-      $this->_right_paren,
-      $this->_body,
+      $this->left_paren,
+      $this->type,
+      $this->variable,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns CatchToken
    */
   public function getKeyword(): CatchToken {
-    return TypeAssert\instance_of(CatchToken::class, $this->_keyword);
+    return TypeAssert\instance_of(CatchToken::class, $this->keyword);
   }
 
   /**
@@ -162,33 +149,33 @@ final class CatchClause extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_type,
-      $this->_variable,
-      $this->_right_paren,
-      $this->_body,
+      $this->type,
+      $this->variable,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -198,33 +185,33 @@ final class CatchClause extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
-  public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+  public function withType(SimpleTypeSpecifier $value): this {
+    if ($value === $this->type) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
+      $this->keyword,
+      $this->left_paren,
       $value,
-      $this->_variable,
-      $this->_right_paren,
-      $this->_body,
+      $this->variable,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
    * @returns SimpleTypeSpecifier
    */
   public function getType(): SimpleTypeSpecifier {
-    return TypeAssert\instance_of(SimpleTypeSpecifier::class, $this->_type);
+    return TypeAssert\instance_of(SimpleTypeSpecifier::class, $this->type);
   }
 
   /**
@@ -234,72 +221,72 @@ final class CatchClause extends EditableNode {
     return $this->getType();
   }
 
-  public function getVariableUNTYPED(): EditableNode {
-    return $this->_variable;
+  final public function getVariableUNTYPED(): EditableNode {
+    return $this->variable;
   }
 
-  public function withVariable(EditableNode $value): this {
-    if ($value === $this->_variable) {
+  public function withVariable(?VariableToken $value): this {
+    if ($value === $this->variable) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_type,
+      $this->keyword,
+      $this->left_paren,
+      $this->type,
       $value,
-      $this->_right_paren,
-      $this->_body,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasVariable(): bool {
-    return !$this->_variable->isMissing();
+    return $this->variable !== null;
   }
 
   /**
    * @returns Missing | VariableToken
    */
   public function getVariable(): ?VariableToken {
-    if ($this->_variable->isMissing()) {
+    if ($this->variable->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(VariableToken::class, $this->_variable);
+    return TypeAssert\instance_of(VariableToken::class, $this->variable);
   }
 
   /**
    * @returns VariableToken
    */
   public function getVariablex(): VariableToken {
-    return TypeAssert\instance_of(VariableToken::class, $this->_variable);
+    return TypeAssert\instance_of(VariableToken::class, $this->variable);
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_type,
-      $this->_variable,
+      $this->keyword,
+      $this->left_paren,
+      $this->type,
+      $this->variable,
       $value,
-      $this->_body,
+      $this->body,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
@@ -309,33 +296,33 @@ final class CatchClause extends EditableNode {
     return $this->getRightParen();
   }
 
-  public function getBodyUNTYPED(): EditableNode {
-    return $this->_body;
+  final public function getBodyUNTYPED(): EditableNode {
+    return $this->body;
   }
 
-  public function withBody(EditableNode $value): this {
-    if ($value === $this->_body) {
+  public function withBody(CompoundStatement $value): this {
+    if ($value === $this->body) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_type,
-      $this->_variable,
-      $this->_right_paren,
+      $this->keyword,
+      $this->left_paren,
+      $this->type,
+      $this->variable,
+      $this->right_paren,
       $value,
     );
   }
 
   public function hasBody(): bool {
-    return !$this->_body->isMissing();
+    return $this->body !== null;
   }
 
   /**
    * @returns CompoundStatement
    */
   public function getBody(): CompoundStatement {
-    return TypeAssert\instance_of(CompoundStatement::class, $this->_body);
+    return TypeAssert\instance_of(CompoundStatement::class, $this->body);
   }
 
   /**

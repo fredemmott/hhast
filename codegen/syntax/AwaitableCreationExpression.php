@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<953198e3455abc447403ead911f5ebf5>>
+ * @generated SignedSource<<7cfefb3fbc9b3d816320816dd1f5e973>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class AwaitableCreationExpression extends EditableNode {
 
-  private EditableNode $_attribute_spec;
-  private EditableNode $_async;
-  private EditableNode $_coroutine;
-  private EditableNode $_compound_statement;
-
   public function __construct(
-    EditableNode $attribute_spec,
-    EditableNode $async,
-    EditableNode $coroutine,
-    EditableNode $compound_statement,
+    private ?AttributeSpecification $attributeSpec,
+    private AsyncToken $async,
+    private ?EditableNode $coroutine,
+    private CompoundStatement $compoundStatement,
   ) {
     parent::__construct('awaitable_creation_expression');
-    $this->_attribute_spec = $attribute_spec;
-    $this->_async = $async;
-    $this->_coroutine = $coroutine;
-    $this->_compound_statement = $compound_statement;
   }
 
   <<__Override>>
@@ -35,14 +26,14 @@ final class AwaitableCreationExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $attribute_spec = EditableNode::fromJSON(
+    $attribute_spec = AttributeSpecification::fromJSON(
       /* UNSAFE_EXPR */ $json['awaitable_attribute_spec'],
       $file,
       $offset,
       $source,
     );
     $offset += $attribute_spec->getWidth();
-    $async = EditableNode::fromJSON(
+    $async = AsyncToken::fromJSON(
       /* UNSAFE_EXPR */ $json['awaitable_async'],
       $file,
       $offset,
@@ -56,7 +47,7 @@ final class AwaitableCreationExpression extends EditableNode {
       $source,
     );
     $offset += $coroutine->getWidth();
-    $compound_statement = EditableNode::fromJSON(
+    $compound_statement = CompoundStatement::fromJSON(
       /* UNSAFE_EXPR */ $json['awaitable_compound_statement'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class AwaitableCreationExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'attribute_spec' => $this->_attribute_spec,
-      'async' => $this->_async,
-      'coroutine' => $this->_coroutine,
-      'compound_statement' => $this->_compound_statement,
+      'attribute_spec' => $this->attributeSpec,
+      'async' => $this->async,
+      'coroutine' => $this->coroutine,
+      'compound_statement' => $this->compoundStatement,
     ];
   }
 
@@ -83,52 +74,52 @@ final class AwaitableCreationExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $attribute_spec = $this->_attribute_spec->rewrite($rewriter, $parents);
-    $async = $this->_async->rewrite($rewriter, $parents);
-    $coroutine = $this->_coroutine->rewrite($rewriter, $parents);
+    $attribute_spec = $this->attributeSpec?->rewrite($rewriter, $parents);
+    $async = $this->async->rewrite($rewriter, $parents);
+    $coroutine = $this->coroutine?->rewrite($rewriter, $parents);
     $compound_statement =
-      $this->_compound_statement->rewrite($rewriter, $parents);
+      $this->compoundStatement->rewrite($rewriter, $parents);
     if (
-      $attribute_spec === $this->_attribute_spec &&
-      $async === $this->_async &&
-      $coroutine === $this->_coroutine &&
-      $compound_statement === $this->_compound_statement
+      $attribute_spec === $this->attributeSpec &&
+      $async === $this->async &&
+      $coroutine === $this->coroutine &&
+      $compound_statement === $this->compoundStatement
     ) {
       return $this;
     }
     return new static($attribute_spec, $async, $coroutine, $compound_statement);
   }
 
-  public function getAttributeSpecUNTYPED(): EditableNode {
-    return $this->_attribute_spec;
+  final public function getAttributeSpecUNTYPED(): EditableNode {
+    return $this->attributeSpec;
   }
 
-  public function withAttributeSpec(EditableNode $value): this {
-    if ($value === $this->_attribute_spec) {
+  public function withAttributeSpec(?AttributeSpecification $value): this {
+    if ($value === $this->attributeSpec) {
       return $this;
     }
     return new static(
       $value,
-      $this->_async,
-      $this->_coroutine,
-      $this->_compound_statement,
+      $this->async,
+      $this->coroutine,
+      $this->compound_statement,
     );
   }
 
   public function hasAttributeSpec(): bool {
-    return !$this->_attribute_spec->isMissing();
+    return $this->attributeSpec !== null;
   }
 
   /**
    * @returns AttributeSpecification | Missing
    */
   public function getAttributeSpec(): ?AttributeSpecification {
-    if ($this->_attribute_spec->isMissing()) {
+    if ($this->attributeSpec->isMissing()) {
       return null;
     }
     return TypeAssert\instance_of(
       AttributeSpecification::class,
-      $this->_attribute_spec,
+      $this->attributeSpec,
     );
   }
 
@@ -138,35 +129,35 @@ final class AwaitableCreationExpression extends EditableNode {
   public function getAttributeSpecx(): AttributeSpecification {
     return TypeAssert\instance_of(
       AttributeSpecification::class,
-      $this->_attribute_spec,
+      $this->attributeSpec,
     );
   }
 
-  public function getAsyncUNTYPED(): EditableNode {
-    return $this->_async;
+  final public function getAsyncUNTYPED(): EditableNode {
+    return $this->async;
   }
 
-  public function withAsync(EditableNode $value): this {
-    if ($value === $this->_async) {
+  public function withAsync(AsyncToken $value): this {
+    if ($value === $this->async) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
+      $this->attribute_spec,
       $value,
-      $this->_coroutine,
-      $this->_compound_statement,
+      $this->coroutine,
+      $this->compound_statement,
     );
   }
 
   public function hasAsync(): bool {
-    return !$this->_async->isMissing();
+    return $this->async !== null;
   }
 
   /**
    * @returns AsyncToken
    */
   public function getAsync(): AsyncToken {
-    return TypeAssert\instance_of(AsyncToken::class, $this->_async);
+    return TypeAssert\instance_of(AsyncToken::class, $this->async);
   }
 
   /**
@@ -176,61 +167,57 @@ final class AwaitableCreationExpression extends EditableNode {
     return $this->getAsync();
   }
 
-  public function getCoroutineUNTYPED(): EditableNode {
-    return $this->_coroutine;
+  final public function getCoroutineUNTYPED(): EditableNode {
+    return $this->coroutine;
   }
 
-  public function withCoroutine(EditableNode $value): this {
-    if ($value === $this->_coroutine) {
+  public function withCoroutine(?EditableNode $value): this {
+    if ($value === $this->coroutine) {
       return $this;
     }
     return new static(
-      $this->_attribute_spec,
-      $this->_async,
+      $this->attribute_spec,
+      $this->async,
       $value,
-      $this->_compound_statement,
+      $this->compound_statement,
     );
   }
 
   public function hasCoroutine(): bool {
-    return !$this->_coroutine->isMissing();
+    return $this->coroutine !== null;
   }
 
   /**
    * @returns Missing
    */
   public function getCoroutine(): ?EditableNode {
-    if ($this->_coroutine->isMissing()) {
+    if ($this->coroutine->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_coroutine);
+    return TypeAssert\instance_of(EditableNode::class, $this->coroutine);
   }
 
   /**
    * @returns
    */
   public function getCoroutinex(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_coroutine);
+    return TypeAssert\instance_of(EditableNode::class, $this->coroutine);
   }
 
-  public function getCompoundStatementUNTYPED(): EditableNode {
-    return $this->_compound_statement;
+  final public function getCompoundStatementUNTYPED(): EditableNode {
+    return $this->compoundStatement;
   }
 
-  public function withCompoundStatement(EditableNode $value): this {
-    if ($value === $this->_compound_statement) {
+  public function withCompoundStatement(CompoundStatement $value): this {
+    if ($value === $this->compoundStatement) {
       return $this;
     }
-    return new static(
-      $this->_attribute_spec,
-      $this->_async,
-      $this->_coroutine,
-      $value,
-    );
+    return
+      new static($this->attribute_spec, $this->async, $this->coroutine, $value);
   }
 
   public function hasCompoundStatement(): bool {
-    return !$this->_compound_statement->isMissing();
+    return $this->compoundStatement !== null;
   }
 
   /**
@@ -239,7 +226,7 @@ final class AwaitableCreationExpression extends EditableNode {
   public function getCompoundStatement(): CompoundStatement {
     return TypeAssert\instance_of(
       CompoundStatement::class,
-      $this->_compound_statement,
+      $this->compoundStatement,
     );
   }
 

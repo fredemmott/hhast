@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<c8775c91fb67f1f67434920ca4171177>>
+ * @generated SignedSource<<3f539417949e9242fda0b2d97bdb4f12>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -12,37 +12,18 @@ final class ForStatement
   extends EditableNode
   implements IControlFlowStatement, ILoopStatement {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_initializer;
-  private EditableNode $_first_semicolon;
-  private EditableNode $_control;
-  private EditableNode $_second_semicolon;
-  private EditableNode $_end_of_loop;
-  private EditableNode $_right_paren;
-  private EditableNode $_body;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_paren,
-    EditableNode $initializer,
-    EditableNode $first_semicolon,
-    EditableNode $control,
-    EditableNode $second_semicolon,
-    EditableNode $end_of_loop,
-    EditableNode $right_paren,
-    EditableNode $body,
+    private ForToken $keyword,
+    private LeftParenToken $leftParen,
+    private ?EditableList<EditableNode> $initializer,
+    private SemicolonToken $firstSemicolon,
+    private ?EditableList<EditableNode> $control,
+    private SemicolonToken $secondSemicolon,
+    private ?EditableList<EditableNode> $endOfLoop,
+    private RightParenToken $rightParen,
+    private EditableNode $body,
   ) {
     parent::__construct('for_statement');
-    $this->_keyword = $keyword;
-    $this->_left_paren = $left_paren;
-    $this->_initializer = $initializer;
-    $this->_first_semicolon = $first_semicolon;
-    $this->_control = $control;
-    $this->_second_semicolon = $second_semicolon;
-    $this->_end_of_loop = $end_of_loop;
-    $this->_right_paren = $right_paren;
-    $this->_body = $body;
   }
 
   <<__Override>>
@@ -52,56 +33,56 @@ final class ForStatement
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = ForToken::fromJSON(
       /* UNSAFE_EXPR */ $json['for_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['for_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $initializer = EditableNode::fromJSON(
+    $initializer = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['for_initializer'],
       $file,
       $offset,
       $source,
     );
     $offset += $initializer->getWidth();
-    $first_semicolon = EditableNode::fromJSON(
+    $first_semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['for_first_semicolon'],
       $file,
       $offset,
       $source,
     );
     $offset += $first_semicolon->getWidth();
-    $control = EditableNode::fromJSON(
+    $control = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['for_control'],
       $file,
       $offset,
       $source,
     );
     $offset += $control->getWidth();
-    $second_semicolon = EditableNode::fromJSON(
+    $second_semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['for_second_semicolon'],
       $file,
       $offset,
       $source,
     );
     $offset += $second_semicolon->getWidth();
-    $end_of_loop = EditableNode::fromJSON(
+    $end_of_loop = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['for_end_of_loop'],
       $file,
       $offset,
       $source,
     );
     $offset += $end_of_loop->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['for_right_paren'],
       $file,
       $offset,
@@ -129,17 +110,17 @@ final class ForStatement
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_paren' => $this->_left_paren,
-      'initializer' => $this->_initializer,
-      'first_semicolon' => $this->_first_semicolon,
-      'control' => $this->_control,
-      'second_semicolon' => $this->_second_semicolon,
-      'end_of_loop' => $this->_end_of_loop,
-      'right_paren' => $this->_right_paren,
-      'body' => $this->_body,
+      'keyword' => $this->keyword,
+      'left_paren' => $this->leftParen,
+      'initializer' => $this->initializer,
+      'first_semicolon' => $this->firstSemicolon,
+      'control' => $this->control,
+      'second_semicolon' => $this->secondSemicolon,
+      'end_of_loop' => $this->endOfLoop,
+      'right_paren' => $this->rightParen,
+      'body' => $this->body,
     ];
   }
 
@@ -150,25 +131,25 @@ final class ForStatement
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $initializer = $this->_initializer->rewrite($rewriter, $parents);
-    $first_semicolon = $this->_first_semicolon->rewrite($rewriter, $parents);
-    $control = $this->_control->rewrite($rewriter, $parents);
-    $second_semicolon = $this->_second_semicolon->rewrite($rewriter, $parents);
-    $end_of_loop = $this->_end_of_loop->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
-    $body = $this->_body->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $initializer = $this->initializer?->rewrite($rewriter, $parents);
+    $first_semicolon = $this->firstSemicolon->rewrite($rewriter, $parents);
+    $control = $this->control?->rewrite($rewriter, $parents);
+    $second_semicolon = $this->secondSemicolon->rewrite($rewriter, $parents);
+    $end_of_loop = $this->endOfLoop?->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
+    $body = $this->body->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_paren === $this->_left_paren &&
-      $initializer === $this->_initializer &&
-      $first_semicolon === $this->_first_semicolon &&
-      $control === $this->_control &&
-      $second_semicolon === $this->_second_semicolon &&
-      $end_of_loop === $this->_end_of_loop &&
-      $right_paren === $this->_right_paren &&
-      $body === $this->_body
+      $keyword === $this->keyword &&
+      $left_paren === $this->leftParen &&
+      $initializer === $this->initializer &&
+      $first_semicolon === $this->firstSemicolon &&
+      $control === $this->control &&
+      $second_semicolon === $this->secondSemicolon &&
+      $end_of_loop === $this->endOfLoop &&
+      $right_paren === $this->rightParen &&
+      $body === $this->body
     ) {
       return $this;
     }
@@ -185,36 +166,36 @@ final class ForStatement
     );
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(ForToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_paren,
-      $this->_initializer,
-      $this->_first_semicolon,
-      $this->_control,
-      $this->_second_semicolon,
-      $this->_end_of_loop,
-      $this->_right_paren,
-      $this->_body,
+      $this->left_paren,
+      $this->initializer,
+      $this->first_semicolon,
+      $this->control,
+      $this->second_semicolon,
+      $this->end_of_loop,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns ForToken
    */
   public function getKeyword(): ForToken {
-    return TypeAssert\instance_of(ForToken::class, $this->_keyword);
+    return TypeAssert\instance_of(ForToken::class, $this->keyword);
   }
 
   /**
@@ -224,36 +205,36 @@ final class ForStatement
     return $this->getKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_initializer,
-      $this->_first_semicolon,
-      $this->_control,
-      $this->_second_semicolon,
-      $this->_end_of_loop,
-      $this->_right_paren,
-      $this->_body,
+      $this->initializer,
+      $this->first_semicolon,
+      $this->control,
+      $this->second_semicolon,
+      $this->end_of_loop,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -263,29 +244,29 @@ final class ForStatement
     return $this->getLeftParen();
   }
 
-  public function getInitializerUNTYPED(): EditableNode {
-    return $this->_initializer;
+  final public function getInitializerUNTYPED(): EditableNode {
+    return $this->initializer;
   }
 
-  public function withInitializer(EditableNode $value): this {
-    if ($value === $this->_initializer) {
+  public function withInitializer(?EditableList<EditableNode> $value): this {
+    if ($value === $this->initializer) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
+      $this->keyword,
+      $this->left_paren,
       $value,
-      $this->_first_semicolon,
-      $this->_control,
-      $this->_second_semicolon,
-      $this->_end_of_loop,
-      $this->_right_paren,
-      $this->_body,
+      $this->first_semicolon,
+      $this->control,
+      $this->second_semicolon,
+      $this->end_of_loop,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasInitializer(): bool {
-    return !$this->_initializer->isMissing();
+    return $this->initializer !== null;
   }
 
   /**
@@ -294,10 +275,10 @@ final class ForStatement
    * Missing
    */
   public function getInitializer(): ?EditableList<EditableNode> {
-    if ($this->_initializer->isMissing()) {
+    if ($this->initializer->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_initializer);
+    return TypeAssert\instance_of(EditableList::class, $this->initializer);
   }
 
   /**
@@ -305,40 +286,39 @@ final class ForStatement
    * EditableList<FunctionCallExpression> | EditableList<LiteralExpression>
    */
   public function getInitializerx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_initializer);
+    return TypeAssert\instance_of(EditableList::class, $this->initializer);
   }
 
-  public function getFirstSemicolonUNTYPED(): EditableNode {
-    return $this->_first_semicolon;
+  final public function getFirstSemicolonUNTYPED(): EditableNode {
+    return $this->firstSemicolon;
   }
 
-  public function withFirstSemicolon(EditableNode $value): this {
-    if ($value === $this->_first_semicolon) {
+  public function withFirstSemicolon(SemicolonToken $value): this {
+    if ($value === $this->firstSemicolon) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_initializer,
+      $this->keyword,
+      $this->left_paren,
+      $this->initializer,
       $value,
-      $this->_control,
-      $this->_second_semicolon,
-      $this->_end_of_loop,
-      $this->_right_paren,
-      $this->_body,
+      $this->control,
+      $this->second_semicolon,
+      $this->end_of_loop,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasFirstSemicolon(): bool {
-    return !$this->_first_semicolon->isMissing();
+    return $this->firstSemicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getFirstSemicolon(): SemicolonToken {
-    return
-      TypeAssert\instance_of(SemicolonToken::class, $this->_first_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->firstSemicolon);
   }
 
   /**
@@ -348,29 +328,29 @@ final class ForStatement
     return $this->getFirstSemicolon();
   }
 
-  public function getControlUNTYPED(): EditableNode {
-    return $this->_control;
+  final public function getControlUNTYPED(): EditableNode {
+    return $this->control;
   }
 
-  public function withControl(EditableNode $value): this {
-    if ($value === $this->_control) {
+  public function withControl(?EditableList<EditableNode> $value): this {
+    if ($value === $this->control) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_initializer,
-      $this->_first_semicolon,
+      $this->keyword,
+      $this->left_paren,
+      $this->initializer,
+      $this->first_semicolon,
       $value,
-      $this->_second_semicolon,
-      $this->_end_of_loop,
-      $this->_right_paren,
-      $this->_body,
+      $this->second_semicolon,
+      $this->end_of_loop,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasControl(): bool {
-    return !$this->_control->isMissing();
+    return $this->control !== null;
   }
 
   /**
@@ -380,10 +360,10 @@ final class ForStatement
    * Missing
    */
   public function getControl(): ?EditableList<EditableNode> {
-    if ($this->_control->isMissing()) {
+    if ($this->control->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_control);
+    return TypeAssert\instance_of(EditableList::class, $this->control);
   }
 
   /**
@@ -392,32 +372,32 @@ final class ForStatement
    * | EditableList<PrefixUnaryExpression> | EditableList<VariableExpression>
    */
   public function getControlx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_control);
+    return TypeAssert\instance_of(EditableList::class, $this->control);
   }
 
-  public function getSecondSemicolonUNTYPED(): EditableNode {
-    return $this->_second_semicolon;
+  final public function getSecondSemicolonUNTYPED(): EditableNode {
+    return $this->secondSemicolon;
   }
 
-  public function withSecondSemicolon(EditableNode $value): this {
-    if ($value === $this->_second_semicolon) {
+  public function withSecondSemicolon(SemicolonToken $value): this {
+    if ($value === $this->secondSemicolon) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_initializer,
-      $this->_first_semicolon,
-      $this->_control,
+      $this->keyword,
+      $this->left_paren,
+      $this->initializer,
+      $this->first_semicolon,
+      $this->control,
       $value,
-      $this->_end_of_loop,
-      $this->_right_paren,
-      $this->_body,
+      $this->end_of_loop,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasSecondSemicolon(): bool {
-    return !$this->_second_semicolon->isMissing();
+    return $this->secondSemicolon !== null;
   }
 
   /**
@@ -425,7 +405,7 @@ final class ForStatement
    */
   public function getSecondSemicolon(): SemicolonToken {
     return
-      TypeAssert\instance_of(SemicolonToken::class, $this->_second_semicolon);
+      TypeAssert\instance_of(SemicolonToken::class, $this->secondSemicolon);
   }
 
   /**
@@ -435,29 +415,29 @@ final class ForStatement
     return $this->getSecondSemicolon();
   }
 
-  public function getEndOfLoopUNTYPED(): EditableNode {
-    return $this->_end_of_loop;
+  final public function getEndOfLoopUNTYPED(): EditableNode {
+    return $this->endOfLoop;
   }
 
-  public function withEndOfLoop(EditableNode $value): this {
-    if ($value === $this->_end_of_loop) {
+  public function withEndOfLoop(?EditableList<EditableNode> $value): this {
+    if ($value === $this->endOfLoop) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_initializer,
-      $this->_first_semicolon,
-      $this->_control,
-      $this->_second_semicolon,
+      $this->keyword,
+      $this->left_paren,
+      $this->initializer,
+      $this->first_semicolon,
+      $this->control,
+      $this->second_semicolon,
       $value,
-      $this->_right_paren,
-      $this->_body,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasEndOfLoop(): bool {
-    return !$this->_end_of_loop->isMissing();
+    return $this->endOfLoop !== null;
   }
 
   /**
@@ -467,10 +447,10 @@ final class ForStatement
    * | Missing
    */
   public function getEndOfLoop(): ?EditableList<EditableNode> {
-    if ($this->_end_of_loop->isMissing()) {
+    if ($this->endOfLoop->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_end_of_loop);
+    return TypeAssert\instance_of(EditableList::class, $this->endOfLoop);
   }
 
   /**
@@ -479,39 +459,39 @@ final class ForStatement
    * EditableList<PostfixUnaryExpression> | EditableList<PrefixUnaryExpression>
    */
   public function getEndOfLoopx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_end_of_loop);
+    return TypeAssert\instance_of(EditableList::class, $this->endOfLoop);
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_initializer,
-      $this->_first_semicolon,
-      $this->_control,
-      $this->_second_semicolon,
-      $this->_end_of_loop,
+      $this->keyword,
+      $this->left_paren,
+      $this->initializer,
+      $this->first_semicolon,
+      $this->control,
+      $this->second_semicolon,
+      $this->end_of_loop,
       $value,
-      $this->_body,
+      $this->body,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
@@ -521,29 +501,29 @@ final class ForStatement
     return $this->getRightParen();
   }
 
-  public function getBodyUNTYPED(): EditableNode {
-    return $this->_body;
+  final public function getBodyUNTYPED(): EditableNode {
+    return $this->body;
   }
 
   public function withBody(EditableNode $value): this {
-    if ($value === $this->_body) {
+    if ($value === $this->body) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_initializer,
-      $this->_first_semicolon,
-      $this->_control,
-      $this->_second_semicolon,
-      $this->_end_of_loop,
-      $this->_right_paren,
+      $this->keyword,
+      $this->left_paren,
+      $this->initializer,
+      $this->first_semicolon,
+      $this->control,
+      $this->second_semicolon,
+      $this->end_of_loop,
+      $this->right_paren,
       $value,
     );
   }
 
   public function hasBody(): bool {
-    return !$this->_body->isMissing();
+    return $this->body !== null;
   }
 
   /**
@@ -551,7 +531,7 @@ final class ForStatement
    * ExpressionStatement | ForStatement | UnsetStatement
    */
   public function getBody(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_body);
+    return TypeAssert\instance_of(EditableNode::class, $this->body);
   }
 
   /**

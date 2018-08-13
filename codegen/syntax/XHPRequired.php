@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<ad9bc060af97cef9f55ad959bef34ab8>>
+ * @generated SignedSource<<bd13b4f226c026cd5041cfe79c674bd7>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class XHPRequired extends EditableNode {
 
-  private EditableNode $_at;
-  private EditableNode $_keyword;
-
-  public function __construct(EditableNode $at, EditableNode $keyword) {
+  public function __construct(
+    private AtToken $at,
+    private RequiredToken $keyword,
+  ) {
     parent::__construct('xhp_required');
-    $this->_at = $at;
-    $this->_keyword = $keyword;
   }
 
   <<__Override>>
@@ -26,14 +24,14 @@ final class XHPRequired extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $at = EditableNode::fromJSON(
+    $at = AtToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_required_at'],
       $file,
       $offset,
       $source,
     );
     $offset += $at->getWidth();
-    $keyword = EditableNode::fromJSON(
+    $keyword = RequiredToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_required_keyword'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class XHPRequired extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'at' => $this->_at,
-      'keyword' => $this->_keyword,
+      'at' => $this->at,
+      'keyword' => $this->keyword,
     ];
   }
 
@@ -58,34 +56,34 @@ final class XHPRequired extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $at = $this->_at->rewrite($rewriter, $parents);
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    if ($at === $this->_at && $keyword === $this->_keyword) {
+    $at = $this->at->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    if ($at === $this->at && $keyword === $this->keyword) {
       return $this;
     }
     return new static($at, $keyword);
   }
 
-  public function getAtUNTYPED(): EditableNode {
-    return $this->_at;
+  final public function getAtUNTYPED(): EditableNode {
+    return $this->at;
   }
 
-  public function withAt(EditableNode $value): this {
-    if ($value === $this->_at) {
+  public function withAt(AtToken $value): this {
+    if ($value === $this->at) {
       return $this;
     }
-    return new static($value, $this->_keyword);
+    return new static($value, $this->keyword);
   }
 
   public function hasAt(): bool {
-    return !$this->_at->isMissing();
+    return $this->at !== null;
   }
 
   /**
    * @returns AtToken
    */
   public function getAt(): AtToken {
-    return TypeAssert\instance_of(AtToken::class, $this->_at);
+    return TypeAssert\instance_of(AtToken::class, $this->at);
   }
 
   /**
@@ -95,26 +93,26 @@ final class XHPRequired extends EditableNode {
     return $this->getAt();
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(RequiredToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($this->_at, $value);
+    return new static($this->at, $value);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns RequiredToken
    */
   public function getKeyword(): RequiredToken {
-    return TypeAssert\instance_of(RequiredToken::class, $this->_keyword);
+    return TypeAssert\instance_of(RequiredToken::class, $this->keyword);
   }
 
   /**

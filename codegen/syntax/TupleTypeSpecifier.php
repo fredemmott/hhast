@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b3f7e6f720869406e1462903e7f50b09>>
+ * @generated SignedSource<<62a3c70b949219b414f1810fa630b6df>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class TupleTypeSpecifier extends EditableNode {
 
-  private EditableNode $_left_paren;
-  private EditableNode $_types;
-  private EditableNode $_right_paren;
-
   public function __construct(
-    EditableNode $left_paren,
-    EditableNode $types,
-    EditableNode $right_paren,
+    private LeftParenToken $leftParen,
+    private EditableList<EditableNode> $types,
+    private RightParenToken $rightParen,
   ) {
     parent::__construct('tuple_type_specifier');
-    $this->_left_paren = $left_paren;
-    $this->_types = $types;
-    $this->_right_paren = $right_paren;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class TupleTypeSpecifier extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['tuple_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $types = EditableNode::fromJSON(
+    $types = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['tuple_types'],
       $file,
       $offset,
       $source,
     );
     $offset += $types->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['tuple_right_paren'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class TupleTypeSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_paren' => $this->_left_paren,
-      'types' => $this->_types,
-      'right_paren' => $this->_right_paren,
+      'left_paren' => $this->leftParen,
+      'types' => $this->types,
+      'right_paren' => $this->rightParen,
     ];
   }
 
@@ -72,39 +65,39 @@ final class TupleTypeSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $types = $this->_types->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $types = $this->types->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
     if (
-      $left_paren === $this->_left_paren &&
-      $types === $this->_types &&
-      $right_paren === $this->_right_paren
+      $left_paren === $this->leftParen &&
+      $types === $this->types &&
+      $right_paren === $this->rightParen
     ) {
       return $this;
     }
     return new static($left_paren, $types, $right_paren);
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
-    return new static($value, $this->_types, $this->_right_paren);
+    return new static($value, $this->types, $this->right_paren);
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -114,19 +107,19 @@ final class TupleTypeSpecifier extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getTypesUNTYPED(): EditableNode {
-    return $this->_types;
+  final public function getTypesUNTYPED(): EditableNode {
+    return $this->types;
   }
 
-  public function withTypes(EditableNode $value): this {
-    if ($value === $this->_types) {
+  public function withTypes(EditableList<EditableNode> $value): this {
+    if ($value === $this->types) {
       return $this;
     }
-    return new static($this->_left_paren, $value, $this->_right_paren);
+    return new static($this->left_paren, $value, $this->right_paren);
   }
 
   public function hasTypes(): bool {
-    return !$this->_types->isMissing();
+    return $this->types !== null;
   }
 
   /**
@@ -134,7 +127,7 @@ final class TupleTypeSpecifier extends EditableNode {
    * EditableList<VectorArrayTypeSpecifier> | EditableList<VectorTypeSpecifier>
    */
   public function getTypes(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_types);
+    return TypeAssert\instance_of(EditableList::class, $this->types);
   }
 
   /**
@@ -145,26 +138,26 @@ final class TupleTypeSpecifier extends EditableNode {
     return $this->getTypes();
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
-    return new static($this->_left_paren, $this->_types, $value);
+    return new static($this->left_paren, $this->types, $value);
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**

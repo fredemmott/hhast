@@ -117,7 +117,7 @@ final class CodegenTokens extends CodegenBase {
       ->addConst('string KIND', $token['description'])
       ->setConstructor($this->generateConstructor($token))
       ->addMethods($this->generateFieldMethods($token))
-      ->addMethod($this->generateRewriteChildrenMethod($token));
+      ->addMethod($this->generateRewriteDescendantsMethod($token));
 
     $text = $token['text'];
     if ($text !== null) {
@@ -197,6 +197,7 @@ final class CodegenTokens extends CodegenBase {
     $cg = $this->getCodegenFactory();
     foreach ($token['fields'] as $field) {
       $underscored = $field['name'];
+      $lower_camel = StrP\lower_camel($underscored);
       $upper_camel = StrP\upper_camel($underscored);
 
       if ($field['type'] !== 'string') {
@@ -204,8 +205,8 @@ final class CodegenTokens extends CodegenBase {
           ->codegenMethodf('has%s', $upper_camel)
           ->setReturnType('bool')
           ->setBodyf(
-            'return !$this->get%s()->isMissing();',
-            $upper_camel,
+            'return $this->_%s !== null;',
+            $lower_camel,
           );
       }
 
@@ -229,7 +230,7 @@ final class CodegenTokens extends CodegenBase {
                 $token['fields'],
                 $inner ==> $inner === $field
                   ? '$value'
-                  : '$this->get'.StrP\upper_camel($inner['name']).'()'
+                  : '$this->_'.$lower_camel,
               ),
             )
             ->getCode()
@@ -237,7 +238,7 @@ final class CodegenTokens extends CodegenBase {
     }
   }
 
-  private function generateRewriteChildrenMethod(
+  private function generateRewriteDescendantsMethod(
     self::TTokenSpec $token,
   ): CodegenMethod {
     $cg = $this->getCodegenFactory();

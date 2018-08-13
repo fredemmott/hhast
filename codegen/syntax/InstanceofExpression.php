@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<57eec61e4591684a12d7d1ccce9e9dd4>>
+ * @generated SignedSource<<95fd768a6406cf21c96382678f9a2f95>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class InstanceofExpression extends EditableNode {
 
-  private EditableNode $_left_operand;
-  private EditableNode $_operator;
-  private EditableNode $_right_operand;
-
   public function __construct(
-    EditableNode $left_operand,
-    EditableNode $operator,
-    EditableNode $right_operand,
+    private EditableNode $leftOperand,
+    private InstanceofToken $operator,
+    private ?EditableNode $rightOperand,
   ) {
     parent::__construct('instanceof_expression');
-    $this->_left_operand = $left_operand;
-    $this->_operator = $operator;
-    $this->_right_operand = $right_operand;
   }
 
   <<__Override>>
@@ -39,7 +32,7 @@ final class InstanceofExpression extends EditableNode {
       $source,
     );
     $offset += $left_operand->getWidth();
-    $operator = EditableNode::fromJSON(
+    $operator = InstanceofToken::fromJSON(
       /* UNSAFE_EXPR */ $json['instanceof_operator'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class InstanceofExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_operand' => $this->_left_operand,
-      'operator' => $this->_operator,
-      'right_operand' => $this->_right_operand,
+      'left_operand' => $this->leftOperand,
+      'operator' => $this->operator,
+      'right_operand' => $this->rightOperand,
     ];
   }
 
@@ -72,32 +65,32 @@ final class InstanceofExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_operand = $this->_left_operand->rewrite($rewriter, $parents);
-    $operator = $this->_operator->rewrite($rewriter, $parents);
-    $right_operand = $this->_right_operand->rewrite($rewriter, $parents);
+    $left_operand = $this->leftOperand->rewrite($rewriter, $parents);
+    $operator = $this->operator->rewrite($rewriter, $parents);
+    $right_operand = $this->rightOperand?->rewrite($rewriter, $parents);
     if (
-      $left_operand === $this->_left_operand &&
-      $operator === $this->_operator &&
-      $right_operand === $this->_right_operand
+      $left_operand === $this->leftOperand &&
+      $operator === $this->operator &&
+      $right_operand === $this->rightOperand
     ) {
       return $this;
     }
     return new static($left_operand, $operator, $right_operand);
   }
 
-  public function getLeftOperandUNTYPED(): EditableNode {
-    return $this->_left_operand;
+  final public function getLeftOperandUNTYPED(): EditableNode {
+    return $this->leftOperand;
   }
 
   public function withLeftOperand(EditableNode $value): this {
-    if ($value === $this->_left_operand) {
+    if ($value === $this->leftOperand) {
       return $this;
     }
-    return new static($value, $this->_operator, $this->_right_operand);
+    return new static($value, $this->operator, $this->right_operand);
   }
 
   public function hasLeftOperand(): bool {
-    return !$this->_left_operand->isMissing();
+    return $this->leftOperand !== null;
   }
 
   /**
@@ -107,7 +100,7 @@ final class InstanceofExpression extends EditableNode {
    * | ScopeResolutionExpression | SubscriptExpression | VariableExpression
    */
   public function getLeftOperand(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_left_operand);
+    return TypeAssert\instance_of(EditableNode::class, $this->leftOperand);
   }
 
   /**
@@ -120,26 +113,26 @@ final class InstanceofExpression extends EditableNode {
     return $this->getLeftOperand();
   }
 
-  public function getOperatorUNTYPED(): EditableNode {
-    return $this->_operator;
+  final public function getOperatorUNTYPED(): EditableNode {
+    return $this->operator;
   }
 
-  public function withOperator(EditableNode $value): this {
-    if ($value === $this->_operator) {
+  public function withOperator(InstanceofToken $value): this {
+    if ($value === $this->operator) {
       return $this;
     }
-    return new static($this->_left_operand, $value, $this->_right_operand);
+    return new static($this->left_operand, $value, $this->right_operand);
   }
 
   public function hasOperator(): bool {
-    return !$this->_operator->isMissing();
+    return $this->operator !== null;
   }
 
   /**
    * @returns InstanceofToken
    */
   public function getOperator(): InstanceofToken {
-    return TypeAssert\instance_of(InstanceofToken::class, $this->_operator);
+    return TypeAssert\instance_of(InstanceofToken::class, $this->operator);
   }
 
   /**
@@ -149,19 +142,19 @@ final class InstanceofExpression extends EditableNode {
     return $this->getOperator();
   }
 
-  public function getRightOperandUNTYPED(): EditableNode {
-    return $this->_right_operand;
+  final public function getRightOperandUNTYPED(): EditableNode {
+    return $this->rightOperand;
   }
 
-  public function withRightOperand(EditableNode $value): this {
-    if ($value === $this->_right_operand) {
+  public function withRightOperand(?EditableNode $value): this {
+    if ($value === $this->rightOperand) {
       return $this;
     }
-    return new static($this->_left_operand, $this->_operator, $value);
+    return new static($this->left_operand, $this->operator, $value);
   }
 
   public function hasRightOperand(): bool {
-    return !$this->_right_operand->isMissing();
+    return $this->rightOperand !== null;
   }
 
   /**
@@ -170,10 +163,10 @@ final class InstanceofExpression extends EditableNode {
    * NameToken | VariableExpression
    */
   public function getRightOperand(): ?EditableNode {
-    if ($this->_right_operand->isMissing()) {
+    if ($this->rightOperand->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_right_operand);
+    return TypeAssert\instance_of(EditableNode::class, $this->rightOperand);
   }
 
   /**
@@ -182,6 +175,6 @@ final class InstanceofExpression extends EditableNode {
    * NameToken | VariableExpression
    */
   public function getRightOperandx(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_right_operand);
+    return TypeAssert\instance_of(EditableNode::class, $this->rightOperand);
   }
 }

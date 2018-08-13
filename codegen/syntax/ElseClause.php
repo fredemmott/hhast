@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9699fd92dfc4cc119a4ba5aa0ce70091>>
+ * @generated SignedSource<<58df8e4c2c636cca9645dc3daa216b09>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ElseClause extends EditableNode implements IControlFlowStatement {
 
-  private EditableNode $_keyword;
-  private EditableNode $_statement;
-
-  public function __construct(EditableNode $keyword, EditableNode $statement) {
+  public function __construct(
+    private ElseToken $keyword,
+    private EditableNode $statement,
+  ) {
     parent::__construct('else_clause');
-    $this->_keyword = $keyword;
-    $this->_statement = $statement;
   }
 
   <<__Override>>
@@ -26,7 +24,7 @@ final class ElseClause extends EditableNode implements IControlFlowStatement {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = ElseToken::fromJSON(
       /* UNSAFE_EXPR */ $json['else_keyword'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class ElseClause extends EditableNode implements IControlFlowStatement {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'statement' => $this->_statement,
+      'keyword' => $this->keyword,
+      'statement' => $this->statement,
     ];
   }
 
@@ -58,34 +56,34 @@ final class ElseClause extends EditableNode implements IControlFlowStatement {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $statement = $this->_statement->rewrite($rewriter, $parents);
-    if ($keyword === $this->_keyword && $statement === $this->_statement) {
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $statement = $this->statement->rewrite($rewriter, $parents);
+    if ($keyword === $this->keyword && $statement === $this->statement) {
       return $this;
     }
     return new static($keyword, $statement);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(ElseToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_statement);
+    return new static($value, $this->statement);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns ElseToken
    */
   public function getKeyword(): ElseToken {
-    return TypeAssert\instance_of(ElseToken::class, $this->_keyword);
+    return TypeAssert\instance_of(ElseToken::class, $this->keyword);
   }
 
   /**
@@ -95,19 +93,19 @@ final class ElseClause extends EditableNode implements IControlFlowStatement {
     return $this->getKeyword();
   }
 
-  public function getStatementUNTYPED(): EditableNode {
-    return $this->_statement;
+  final public function getStatementUNTYPED(): EditableNode {
+    return $this->statement;
   }
 
   public function withStatement(EditableNode $value): this {
-    if ($value === $this->_statement) {
+    if ($value === $this->statement) {
       return $this;
     }
-    return new static($this->_keyword, $value);
+    return new static($this->keyword, $value);
   }
 
   public function hasStatement(): bool {
-    return !$this->_statement->isMissing();
+    return $this->statement !== null;
   }
 
   /**
@@ -115,7 +113,7 @@ final class ElseClause extends EditableNode implements IControlFlowStatement {
    * IfStatement | ReturnStatement
    */
   public function getStatement(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_statement);
+    return TypeAssert\instance_of(EditableNode::class, $this->statement);
   }
 
   /**

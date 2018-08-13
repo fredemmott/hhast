@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<3df2e3b3b1510e2b52c2cb05407af0b0>>
+ * @generated SignedSource<<462628bfd92c75a6b9950f597a635827>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,11 +10,8 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class EndOfFile extends EditableNode {
 
-  private EditableNode $_token;
-
-  public function __construct(EditableNode $token) {
+  public function __construct(private EndOfFileToken $token) {
     parent::__construct('end_of_file');
-    $this->_token = $token;
   }
 
   <<__Override>>
@@ -24,7 +21,7 @@ final class EndOfFile extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $token = EditableNode::fromJSON(
+    $token = EndOfFileToken::fromJSON(
       /* UNSAFE_EXPR */ $json['end_of_file_token'],
       $file,
       $offset,
@@ -35,9 +32,9 @@ final class EndOfFile extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'token' => $this->_token,
+      'token' => $this->token,
     ];
   }
 
@@ -48,33 +45,33 @@ final class EndOfFile extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $token = $this->_token->rewrite($rewriter, $parents);
-    if ($token === $this->_token) {
+    $token = $this->token->rewrite($rewriter, $parents);
+    if ($token === $this->token) {
       return $this;
     }
     return new static($token);
   }
 
-  public function getTokenUNTYPED(): EditableNode {
-    return $this->_token;
+  final public function getTokenUNTYPED(): EditableNode {
+    return $this->token;
   }
 
-  public function withToken(EditableNode $value): this {
-    if ($value === $this->_token) {
+  public function withToken(EndOfFileToken $value): this {
+    if ($value === $this->token) {
       return $this;
     }
     return new static($value);
   }
 
   public function hasToken(): bool {
-    return !$this->_token->isMissing();
+    return $this->token !== null;
   }
 
   /**
    * @returns EndOfFileToken
    */
   public function getToken(): EndOfFileToken {
-    return TypeAssert\instance_of(EndOfFileToken::class, $this->_token);
+    return TypeAssert\instance_of(EndOfFileToken::class, $this->token);
   }
 
   /**

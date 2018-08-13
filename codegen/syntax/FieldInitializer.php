@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<8d3d6bf7a6380854daa1f53da66d52ac>>
+ * @generated SignedSource<<523f5ab41fb4b3f93000877bad6a8c24>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class FieldInitializer extends EditableNode {
 
-  private EditableNode $_name;
-  private EditableNode $_arrow;
-  private EditableNode $_value;
-
   public function __construct(
-    EditableNode $name,
-    EditableNode $arrow,
-    EditableNode $value,
+    private EditableNode $name,
+    private EqualGreaterThanToken $arrow,
+    private EditableNode $value,
   ) {
     parent::__construct('field_initializer');
-    $this->_name = $name;
-    $this->_arrow = $arrow;
-    $this->_value = $value;
   }
 
   <<__Override>>
@@ -39,7 +32,7 @@ final class FieldInitializer extends EditableNode {
       $source,
     );
     $offset += $name->getWidth();
-    $arrow = EditableNode::fromJSON(
+    $arrow = EqualGreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['field_initializer_arrow'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class FieldInitializer extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'name' => $this->_name,
-      'arrow' => $this->_arrow,
-      'value' => $this->_value,
+      'name' => $this->name,
+      'arrow' => $this->arrow,
+      'value' => $this->value,
     ];
   }
 
@@ -72,32 +65,32 @@ final class FieldInitializer extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $arrow = $this->_arrow->rewrite($rewriter, $parents);
-    $value = $this->_value->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
+    $arrow = $this->arrow->rewrite($rewriter, $parents);
+    $value = $this->value->rewrite($rewriter, $parents);
     if (
-      $name === $this->_name &&
-      $arrow === $this->_arrow &&
-      $value === $this->_value
+      $name === $this->name &&
+      $arrow === $this->arrow &&
+      $value === $this->value
     ) {
       return $this;
     }
     return new static($name, $arrow, $value);
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
   public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+    if ($value === $this->name) {
       return $this;
     }
-    return new static($value, $this->_arrow, $this->_value);
+    return new static($value, $this->arrow, $this->value);
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
@@ -105,7 +98,7 @@ final class FieldInitializer extends EditableNode {
    * NameToken | VariableExpression
    */
   public function getName(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_name);
+    return TypeAssert\instance_of(EditableNode::class, $this->name);
   }
 
   /**
@@ -116,26 +109,26 @@ final class FieldInitializer extends EditableNode {
     return $this->getName();
   }
 
-  public function getArrowUNTYPED(): EditableNode {
-    return $this->_arrow;
+  final public function getArrowUNTYPED(): EditableNode {
+    return $this->arrow;
   }
 
-  public function withArrow(EditableNode $value): this {
-    if ($value === $this->_arrow) {
+  public function withArrow(EqualGreaterThanToken $value): this {
+    if ($value === $this->arrow) {
       return $this;
     }
-    return new static($this->_name, $value, $this->_value);
+    return new static($this->name, $value, $this->value);
   }
 
   public function hasArrow(): bool {
-    return !$this->_arrow->isMissing();
+    return $this->arrow !== null;
   }
 
   /**
    * @returns EqualGreaterThanToken
    */
   public function getArrow(): EqualGreaterThanToken {
-    return TypeAssert\instance_of(EqualGreaterThanToken::class, $this->_arrow);
+    return TypeAssert\instance_of(EqualGreaterThanToken::class, $this->arrow);
   }
 
   /**
@@ -145,19 +138,19 @@ final class FieldInitializer extends EditableNode {
     return $this->getArrow();
   }
 
-  public function getValueUNTYPED(): EditableNode {
-    return $this->_value;
+  final public function getValueUNTYPED(): EditableNode {
+    return $this->value;
   }
 
   public function withValue(EditableNode $value): this {
-    if ($value === $this->_value) {
+    if ($value === $this->value) {
       return $this;
     }
-    return new static($this->_name, $this->_arrow, $value);
+    return new static($this->name, $this->arrow, $value);
   }
 
   public function hasValue(): bool {
-    return !$this->_value->isMissing();
+    return $this->value !== null;
   }
 
   /**
@@ -167,7 +160,7 @@ final class FieldInitializer extends EditableNode {
    * VectorIntrinsicExpression
    */
   public function getValue(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_value);
+    return TypeAssert\instance_of(EditableNode::class, $this->value);
   }
 
   /**

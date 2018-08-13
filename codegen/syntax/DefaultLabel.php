@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<d9bac9601f00d81a1848e52e1c61111a>>
+ * @generated SignedSource<<bab41cd968b13b9160502b7c2f2d55af>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class DefaultLabel extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_colon;
-
-  public function __construct(EditableNode $keyword, EditableNode $colon) {
+  public function __construct(
+    private DefaultToken $keyword,
+    private EditableToken $colon,
+  ) {
     parent::__construct('default_label');
-    $this->_keyword = $keyword;
-    $this->_colon = $colon;
   }
 
   <<__Override>>
@@ -26,14 +24,14 @@ final class DefaultLabel extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = DefaultToken::fromJSON(
       /* UNSAFE_EXPR */ $json['default_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $colon = EditableNode::fromJSON(
+    $colon = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['default_colon'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class DefaultLabel extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'colon' => $this->_colon,
+      'keyword' => $this->keyword,
+      'colon' => $this->colon,
     ];
   }
 
@@ -58,34 +56,34 @@ final class DefaultLabel extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $colon = $this->_colon->rewrite($rewriter, $parents);
-    if ($keyword === $this->_keyword && $colon === $this->_colon) {
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $colon = $this->colon->rewrite($rewriter, $parents);
+    if ($keyword === $this->keyword && $colon === $this->colon) {
       return $this;
     }
     return new static($keyword, $colon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(DefaultToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_colon);
+    return new static($value, $this->colon);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns DefaultToken
    */
   public function getKeyword(): DefaultToken {
-    return TypeAssert\instance_of(DefaultToken::class, $this->_keyword);
+    return TypeAssert\instance_of(DefaultToken::class, $this->keyword);
   }
 
   /**
@@ -95,26 +93,26 @@ final class DefaultLabel extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getColonUNTYPED(): EditableNode {
-    return $this->_colon;
+  final public function getColonUNTYPED(): EditableNode {
+    return $this->colon;
   }
 
-  public function withColon(EditableNode $value): this {
-    if ($value === $this->_colon) {
+  public function withColon(EditableToken $value): this {
+    if ($value === $this->colon) {
       return $this;
     }
-    return new static($this->_keyword, $value);
+    return new static($this->keyword, $value);
   }
 
   public function hasColon(): bool {
-    return !$this->_colon->isMissing();
+    return $this->colon !== null;
   }
 
   /**
    * @returns ColonToken | SemicolonToken
    */
   public function getColon(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_colon);
+    return TypeAssert\instance_of(EditableToken::class, $this->colon);
   }
 
   /**

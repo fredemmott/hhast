@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<e4bedfc5bea6f7a3f55fd95f901c40e1>>
+ * @generated SignedSource<<7d3d3f56f2067c566793708f19fd571b>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class XHPExpression extends EditableNode {
 
-  private EditableNode $_open;
-  private EditableNode $_body;
-  private EditableNode $_close;
-
   public function __construct(
-    EditableNode $open,
-    EditableNode $body,
-    EditableNode $close,
+    private XHPOpen $open,
+    private ?EditableList<EditableNode> $body,
+    private ?XHPClose $close,
   ) {
     parent::__construct('xhp_expression');
-    $this->_open = $open;
-    $this->_body = $body;
-    $this->_close = $close;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class XHPExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $open = EditableNode::fromJSON(
+    $open = XHPOpen::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_open'],
       $file,
       $offset,
       $source,
     );
     $offset += $open->getWidth();
-    $body = EditableNode::fromJSON(
+    $body = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_body'],
       $file,
       $offset,
       $source,
     );
     $offset += $body->getWidth();
-    $close = EditableNode::fromJSON(
+    $close = XHPClose::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_close'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class XHPExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'open' => $this->_open,
-      'body' => $this->_body,
-      'close' => $this->_close,
+      'open' => $this->open,
+      'body' => $this->body,
+      'close' => $this->close,
     ];
   }
 
@@ -72,39 +65,37 @@ final class XHPExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $open = $this->_open->rewrite($rewriter, $parents);
-    $body = $this->_body->rewrite($rewriter, $parents);
-    $close = $this->_close->rewrite($rewriter, $parents);
+    $open = $this->open->rewrite($rewriter, $parents);
+    $body = $this->body?->rewrite($rewriter, $parents);
+    $close = $this->close?->rewrite($rewriter, $parents);
     if (
-      $open === $this->_open &&
-      $body === $this->_body &&
-      $close === $this->_close
+      $open === $this->open && $body === $this->body && $close === $this->close
     ) {
       return $this;
     }
     return new static($open, $body, $close);
   }
 
-  public function getOpenUNTYPED(): EditableNode {
-    return $this->_open;
+  final public function getOpenUNTYPED(): EditableNode {
+    return $this->open;
   }
 
-  public function withOpen(EditableNode $value): this {
-    if ($value === $this->_open) {
+  public function withOpen(XHPOpen $value): this {
+    if ($value === $this->open) {
       return $this;
     }
-    return new static($value, $this->_body, $this->_close);
+    return new static($value, $this->body, $this->close);
   }
 
   public function hasOpen(): bool {
-    return !$this->_open->isMissing();
+    return $this->open !== null;
   }
 
   /**
    * @returns XHPOpen
    */
   public function getOpen(): XHPOpen {
-    return TypeAssert\instance_of(XHPOpen::class, $this->_open);
+    return TypeAssert\instance_of(XHPOpen::class, $this->open);
   }
 
   /**
@@ -114,67 +105,67 @@ final class XHPExpression extends EditableNode {
     return $this->getOpen();
   }
 
-  public function getBodyUNTYPED(): EditableNode {
-    return $this->_body;
+  final public function getBodyUNTYPED(): EditableNode {
+    return $this->body;
   }
 
-  public function withBody(EditableNode $value): this {
-    if ($value === $this->_body) {
+  public function withBody(?EditableList<EditableNode> $value): this {
+    if ($value === $this->body) {
       return $this;
     }
-    return new static($this->_open, $value, $this->_close);
+    return new static($this->open, $value, $this->close);
   }
 
   public function hasBody(): bool {
-    return !$this->_body->isMissing();
+    return $this->body !== null;
   }
 
   /**
    * @returns EditableList<EditableNode> | Missing
    */
   public function getBody(): ?EditableList<EditableNode> {
-    if ($this->_body->isMissing()) {
+    if ($this->body->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_body);
+    return TypeAssert\instance_of(EditableList::class, $this->body);
   }
 
   /**
    * @returns EditableList<EditableNode>
    */
   public function getBodyx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_body);
+    return TypeAssert\instance_of(EditableList::class, $this->body);
   }
 
-  public function getCloseUNTYPED(): EditableNode {
-    return $this->_close;
+  final public function getCloseUNTYPED(): EditableNode {
+    return $this->close;
   }
 
-  public function withClose(EditableNode $value): this {
-    if ($value === $this->_close) {
+  public function withClose(?XHPClose $value): this {
+    if ($value === $this->close) {
       return $this;
     }
-    return new static($this->_open, $this->_body, $value);
+    return new static($this->open, $this->body, $value);
   }
 
   public function hasClose(): bool {
-    return !$this->_close->isMissing();
+    return $this->close !== null;
   }
 
   /**
    * @returns Missing | XHPClose
    */
   public function getClose(): ?XHPClose {
-    if ($this->_close->isMissing()) {
+    if ($this->close->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(XHPClose::class, $this->_close);
+    return TypeAssert\instance_of(XHPClose::class, $this->close);
   }
 
   /**
    * @returns XHPClose
    */
   public function getClosex(): XHPClose {
-    return TypeAssert\instance_of(XHPClose::class, $this->_close);
+    return TypeAssert\instance_of(XHPClose::class, $this->close);
   }
 }

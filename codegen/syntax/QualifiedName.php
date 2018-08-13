@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<ce4efac348f23a1cbd79664111408e6d>>
+ * @generated SignedSource<<ac35e716e791868409f2f697c55909ee>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,11 +10,8 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class QualifiedName extends EditableNode {
 
-  private EditableNode $_parts;
-
-  public function __construct(EditableNode $parts) {
+  public function __construct(private EditableList<EditableNode> $parts) {
     parent::__construct('qualified_name');
-    $this->_parts = $parts;
   }
 
   <<__Override>>
@@ -24,7 +21,7 @@ final class QualifiedName extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $parts = EditableNode::fromJSON(
+    $parts = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['qualified_name_parts'],
       $file,
       $offset,
@@ -35,9 +32,9 @@ final class QualifiedName extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'parts' => $this->_parts,
+      'parts' => $this->parts,
     ];
   }
 
@@ -48,33 +45,33 @@ final class QualifiedName extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $parts = $this->_parts->rewrite($rewriter, $parents);
-    if ($parts === $this->_parts) {
+    $parts = $this->parts->rewrite($rewriter, $parents);
+    if ($parts === $this->parts) {
       return $this;
     }
     return new static($parts);
   }
 
-  public function getPartsUNTYPED(): EditableNode {
-    return $this->_parts;
+  final public function getPartsUNTYPED(): EditableNode {
+    return $this->parts;
   }
 
-  public function withParts(EditableNode $value): this {
-    if ($value === $this->_parts) {
+  public function withParts(EditableList<EditableNode> $value): this {
+    if ($value === $this->parts) {
       return $this;
     }
     return new static($value);
   }
 
   public function hasParts(): bool {
-    return !$this->_parts->isMissing();
+    return $this->parts !== null;
   }
 
   /**
    * @returns EditableList<EditableNode> | EditableList<NameToken>
    */
   public function getParts(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_parts);
+    return TypeAssert\instance_of(EditableList::class, $this->parts);
   }
 
   /**

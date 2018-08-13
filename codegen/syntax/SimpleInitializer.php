@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<a8fc62f4fc9b12e2070c3e52835d77ff>>
+ * @generated SignedSource<<cfd0e76e9149fd5a6d0eac8395c32ecc>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class SimpleInitializer extends EditableNode {
 
-  private EditableNode $_equal;
-  private EditableNode $_value;
-
-  public function __construct(EditableNode $equal, EditableNode $value) {
+  public function __construct(
+    private EqualToken $equal,
+    private EditableNode $value,
+  ) {
     parent::__construct('simple_initializer');
-    $this->_equal = $equal;
-    $this->_value = $value;
   }
 
   <<__Override>>
@@ -26,7 +24,7 @@ final class SimpleInitializer extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $equal = EditableNode::fromJSON(
+    $equal = EqualToken::fromJSON(
       /* UNSAFE_EXPR */ $json['simple_initializer_equal'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class SimpleInitializer extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'equal' => $this->_equal,
-      'value' => $this->_value,
+      'equal' => $this->equal,
+      'value' => $this->value,
     ];
   }
 
@@ -58,34 +56,34 @@ final class SimpleInitializer extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $equal = $this->_equal->rewrite($rewriter, $parents);
-    $value = $this->_value->rewrite($rewriter, $parents);
-    if ($equal === $this->_equal && $value === $this->_value) {
+    $equal = $this->equal->rewrite($rewriter, $parents);
+    $value = $this->value->rewrite($rewriter, $parents);
+    if ($equal === $this->equal && $value === $this->value) {
       return $this;
     }
     return new static($equal, $value);
   }
 
-  public function getEqualUNTYPED(): EditableNode {
-    return $this->_equal;
+  final public function getEqualUNTYPED(): EditableNode {
+    return $this->equal;
   }
 
-  public function withEqual(EditableNode $value): this {
-    if ($value === $this->_equal) {
+  public function withEqual(EqualToken $value): this {
+    if ($value === $this->equal) {
       return $this;
     }
-    return new static($value, $this->_value);
+    return new static($value, $this->value);
   }
 
   public function hasEqual(): bool {
-    return !$this->_equal->isMissing();
+    return $this->equal !== null;
   }
 
   /**
    * @returns EqualToken
    */
   public function getEqual(): EqualToken {
-    return TypeAssert\instance_of(EqualToken::class, $this->_equal);
+    return TypeAssert\instance_of(EqualToken::class, $this->equal);
   }
 
   /**
@@ -95,19 +93,19 @@ final class SimpleInitializer extends EditableNode {
     return $this->getEqual();
   }
 
-  public function getValueUNTYPED(): EditableNode {
-    return $this->_value;
+  final public function getValueUNTYPED(): EditableNode {
+    return $this->value;
   }
 
   public function withValue(EditableNode $value): this {
-    if ($value === $this->_value) {
+    if ($value === $this->value) {
       return $this;
     }
-    return new static($this->_equal, $value);
+    return new static($this->equal, $value);
   }
 
   public function hasValue(): bool {
-    return !$this->_value->isMissing();
+    return $this->value !== null;
   }
 
   /**
@@ -121,7 +119,7 @@ final class SimpleInitializer extends EditableNode {
    * VarrayIntrinsicExpression | VectorIntrinsicExpression | XHPExpression
    */
   public function getValue(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_value);
+    return TypeAssert\instance_of(EditableNode::class, $this->value);
   }
 
   /**

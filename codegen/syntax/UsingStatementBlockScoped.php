@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<eb6b6e673a313df22fe6711c08c9ed7b>>
+ * @generated SignedSource<<8915e22eb33d04f595e52000d2bda283>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,28 +10,15 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class UsingStatementBlockScoped extends EditableNode {
 
-  private EditableNode $_await_keyword;
-  private EditableNode $_using_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_expressions;
-  private EditableNode $_right_paren;
-  private EditableNode $_body;
-
   public function __construct(
-    EditableNode $await_keyword,
-    EditableNode $using_keyword,
-    EditableNode $left_paren,
-    EditableNode $expressions,
-    EditableNode $right_paren,
-    EditableNode $body,
+    private ?AwaitToken $awaitKeyword,
+    private UsingToken $usingKeyword,
+    private LeftParenToken $leftParen,
+    private EditableList<EditableNode> $expressions,
+    private RightParenToken $rightParen,
+    private CompoundStatement $body,
   ) {
     parent::__construct('using_statement_block_scoped');
-    $this->_await_keyword = $await_keyword;
-    $this->_using_keyword = $using_keyword;
-    $this->_left_paren = $left_paren;
-    $this->_expressions = $expressions;
-    $this->_right_paren = $right_paren;
-    $this->_body = $body;
   }
 
   <<__Override>>
@@ -41,42 +28,42 @@ final class UsingStatementBlockScoped extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $await_keyword = EditableNode::fromJSON(
+    $await_keyword = AwaitToken::fromJSON(
       /* UNSAFE_EXPR */ $json['using_block_await_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $await_keyword->getWidth();
-    $using_keyword = EditableNode::fromJSON(
+    $using_keyword = UsingToken::fromJSON(
       /* UNSAFE_EXPR */ $json['using_block_using_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $using_keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['using_block_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $expressions = EditableNode::fromJSON(
+    $expressions = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['using_block_expressions'],
       $file,
       $offset,
       $source,
     );
     $offset += $expressions->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['using_block_right_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $right_paren->getWidth();
-    $body = EditableNode::fromJSON(
+    $body = CompoundStatement::fromJSON(
       /* UNSAFE_EXPR */ $json['using_block_body'],
       $file,
       $offset,
@@ -94,14 +81,14 @@ final class UsingStatementBlockScoped extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'await_keyword' => $this->_await_keyword,
-      'using_keyword' => $this->_using_keyword,
-      'left_paren' => $this->_left_paren,
-      'expressions' => $this->_expressions,
-      'right_paren' => $this->_right_paren,
-      'body' => $this->_body,
+      'await_keyword' => $this->awaitKeyword,
+      'using_keyword' => $this->usingKeyword,
+      'left_paren' => $this->leftParen,
+      'expressions' => $this->expressions,
+      'right_paren' => $this->rightParen,
+      'body' => $this->body,
     ];
   }
 
@@ -112,19 +99,19 @@ final class UsingStatementBlockScoped extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $await_keyword = $this->_await_keyword->rewrite($rewriter, $parents);
-    $using_keyword = $this->_using_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $expressions = $this->_expressions->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
-    $body = $this->_body->rewrite($rewriter, $parents);
+    $await_keyword = $this->awaitKeyword?->rewrite($rewriter, $parents);
+    $using_keyword = $this->usingKeyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $expressions = $this->expressions->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
+    $body = $this->body->rewrite($rewriter, $parents);
     if (
-      $await_keyword === $this->_await_keyword &&
-      $using_keyword === $this->_using_keyword &&
-      $left_paren === $this->_left_paren &&
-      $expressions === $this->_expressions &&
-      $right_paren === $this->_right_paren &&
-      $body === $this->_body
+      $await_keyword === $this->awaitKeyword &&
+      $using_keyword === $this->usingKeyword &&
+      $left_paren === $this->leftParen &&
+      $expressions === $this->expressions &&
+      $right_paren === $this->rightParen &&
+      $body === $this->body
     ) {
       return $this;
     }
@@ -138,72 +125,72 @@ final class UsingStatementBlockScoped extends EditableNode {
     );
   }
 
-  public function getAwaitKeywordUNTYPED(): EditableNode {
-    return $this->_await_keyword;
+  final public function getAwaitKeywordUNTYPED(): EditableNode {
+    return $this->awaitKeyword;
   }
 
-  public function withAwaitKeyword(EditableNode $value): this {
-    if ($value === $this->_await_keyword) {
+  public function withAwaitKeyword(?AwaitToken $value): this {
+    if ($value === $this->awaitKeyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_using_keyword,
-      $this->_left_paren,
-      $this->_expressions,
-      $this->_right_paren,
-      $this->_body,
+      $this->using_keyword,
+      $this->left_paren,
+      $this->expressions,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasAwaitKeyword(): bool {
-    return !$this->_await_keyword->isMissing();
+    return $this->awaitKeyword !== null;
   }
 
   /**
    * @returns Missing | AwaitToken
    */
   public function getAwaitKeyword(): ?AwaitToken {
-    if ($this->_await_keyword->isMissing()) {
+    if ($this->awaitKeyword->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(AwaitToken::class, $this->_await_keyword);
+    return TypeAssert\instance_of(AwaitToken::class, $this->awaitKeyword);
   }
 
   /**
    * @returns AwaitToken
    */
   public function getAwaitKeywordx(): AwaitToken {
-    return TypeAssert\instance_of(AwaitToken::class, $this->_await_keyword);
+    return TypeAssert\instance_of(AwaitToken::class, $this->awaitKeyword);
   }
 
-  public function getUsingKeywordUNTYPED(): EditableNode {
-    return $this->_using_keyword;
+  final public function getUsingKeywordUNTYPED(): EditableNode {
+    return $this->usingKeyword;
   }
 
-  public function withUsingKeyword(EditableNode $value): this {
-    if ($value === $this->_using_keyword) {
+  public function withUsingKeyword(UsingToken $value): this {
+    if ($value === $this->usingKeyword) {
       return $this;
     }
     return new static(
-      $this->_await_keyword,
+      $this->await_keyword,
       $value,
-      $this->_left_paren,
-      $this->_expressions,
-      $this->_right_paren,
-      $this->_body,
+      $this->left_paren,
+      $this->expressions,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasUsingKeyword(): bool {
-    return !$this->_using_keyword->isMissing();
+    return $this->usingKeyword !== null;
   }
 
   /**
    * @returns UsingToken
    */
   public function getUsingKeyword(): UsingToken {
-    return TypeAssert\instance_of(UsingToken::class, $this->_using_keyword);
+    return TypeAssert\instance_of(UsingToken::class, $this->usingKeyword);
   }
 
   /**
@@ -213,33 +200,33 @@ final class UsingStatementBlockScoped extends EditableNode {
     return $this->getUsingKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_await_keyword,
-      $this->_using_keyword,
+      $this->await_keyword,
+      $this->using_keyword,
       $value,
-      $this->_expressions,
-      $this->_right_paren,
-      $this->_body,
+      $this->expressions,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -249,26 +236,26 @@ final class UsingStatementBlockScoped extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getExpressionsUNTYPED(): EditableNode {
-    return $this->_expressions;
+  final public function getExpressionsUNTYPED(): EditableNode {
+    return $this->expressions;
   }
 
-  public function withExpressions(EditableNode $value): this {
-    if ($value === $this->_expressions) {
+  public function withExpressions(EditableList<EditableNode> $value): this {
+    if ($value === $this->expressions) {
       return $this;
     }
     return new static(
-      $this->_await_keyword,
-      $this->_using_keyword,
-      $this->_left_paren,
+      $this->await_keyword,
+      $this->using_keyword,
+      $this->left_paren,
       $value,
-      $this->_right_paren,
-      $this->_body,
+      $this->right_paren,
+      $this->body,
     );
   }
 
   public function hasExpressions(): bool {
-    return !$this->_expressions->isMissing();
+    return $this->expressions !== null;
   }
 
   /**
@@ -278,7 +265,7 @@ final class UsingStatementBlockScoped extends EditableNode {
    * EditableList<PrefixUnaryExpression> | EditableList<VariableExpression>
    */
   public function getExpressions(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_expressions);
+    return TypeAssert\instance_of(EditableList::class, $this->expressions);
   }
 
   /**
@@ -291,33 +278,33 @@ final class UsingStatementBlockScoped extends EditableNode {
     return $this->getExpressions();
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_await_keyword,
-      $this->_using_keyword,
-      $this->_left_paren,
-      $this->_expressions,
+      $this->await_keyword,
+      $this->using_keyword,
+      $this->left_paren,
+      $this->expressions,
       $value,
-      $this->_body,
+      $this->body,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
@@ -327,33 +314,33 @@ final class UsingStatementBlockScoped extends EditableNode {
     return $this->getRightParen();
   }
 
-  public function getBodyUNTYPED(): EditableNode {
-    return $this->_body;
+  final public function getBodyUNTYPED(): EditableNode {
+    return $this->body;
   }
 
-  public function withBody(EditableNode $value): this {
-    if ($value === $this->_body) {
+  public function withBody(CompoundStatement $value): this {
+    if ($value === $this->body) {
       return $this;
     }
     return new static(
-      $this->_await_keyword,
-      $this->_using_keyword,
-      $this->_left_paren,
-      $this->_expressions,
-      $this->_right_paren,
+      $this->await_keyword,
+      $this->using_keyword,
+      $this->left_paren,
+      $this->expressions,
+      $this->right_paren,
       $value,
     );
   }
 
   public function hasBody(): bool {
-    return !$this->_body->isMissing();
+    return $this->body !== null;
   }
 
   /**
    * @returns CompoundStatement
    */
   public function getBody(): CompoundStatement {
-    return TypeAssert\instance_of(CompoundStatement::class, $this->_body);
+    return TypeAssert\instance_of(CompoundStatement::class, $this->body);
   }
 
   /**

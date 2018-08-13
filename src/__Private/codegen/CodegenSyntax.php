@@ -15,7 +15,7 @@ use type Facebook\HackCodegen\{
   CodegenConstructor,
   CodegenMethod,
   HackBuilderKeys,
-  HackBuilderValues
+  HackBuilderValues,
 };
 
 use namespace HH\Lib\{C, Dict, Keyset, Str, Vec};
@@ -33,7 +33,7 @@ final class CodegenSyntax extends CodegenBase {
       }
       $cg
         ->codegenFile(
-          $this->getOutputDirectory().'/syntax/'.$syntax['kind_name'].'.php'
+          $this->getOutputDirectory().'/syntax/'.$syntax['kind_name'].'.php',
         )
         ->setNamespace('Facebook\\HHAST')
         ->useNamespace('Facebook\\TypeAssert')
@@ -65,26 +65,18 @@ final class CodegenSyntax extends CodegenBase {
       ->setExtends('EditableNode')
       ->setInterfaces(
         (self::getMarkerInterfaces()[$syntax['kind_name']] ?? vec[])
-        |> Vec\map($$, $if ==> $cg->codegenImplementsInterface($if)),
+          |> Vec\map($$, $if ==> $cg->codegenImplementsInterface($if)),
       )
       ->setConstructor($this->generateConstructor($syntax))
       ->addMethod($this->generateFromJSONMethod($syntax))
       ->addMethod($this->generateChildrenMethod($syntax))
-      ->addMethod($this->generateRewriteChildrenMethod($syntax))
+      ->addMethod($this->generateRewriteDescendantsMethod($syntax))
       ->addMethods(
         Vec\map(
           $syntax['fields'],
           $field ==> $this->generateFieldMethods($syntax, $field['field_name']),
         )
-        |> Vec\flatten($$),
-      )
-      ->addProperties(
-        Vec\map(
-          $syntax['fields'],
-          $field ==> $cg
-            ->codegenProperty('_'.$field['field_name'])
-            ->setType('EditableNode')
-        )
+          |> Vec\flatten($$),
       );
   }
 
@@ -132,23 +124,26 @@ final class CodegenSyntax extends CodegenBase {
     string $underscored,
   ): Traversable<CodegenMethod> {
     $spec = $this->getTypeSpecForField($syntax, $underscored);
-    $upper_camel = StrP\upper_camel($underscored);
+    $type = $spec['nullable'] ? ('?'.$spec['class']) : $spec['class'];
     $types = $spec['possibleTypes'];
+    $lower_camel = StrP\lower_camel($underscored);
+    $upper_camel = StrP\upper_camel($underscored);
 
     $cg = $this->getCodegenFactory();
     yield $cg
       ->codegenMethodf('get%sUNTYPED', $upper_camel)
+      ->setIsFinal()
       ->setReturnType('EditableNode')
-      ->setBodyf('return $this->_%s;', $underscored);
+      ->setBodyf('return $this->%s;', $lower_camel);
 
     yield $cg
       ->codegenMethodf('with%s', $upper_camel)
       ->setReturnType('this')
-      ->addParameter('EditableNode $value')
+      ->addParameterf('%s $value', $type)
       ->setBody(
         $cg
           ->codegenHackBuilder()
-          ->startIfBlockf('$value === $this->_%s', $underscored)
+          ->startIfBlockf('$value === $this->%s', $lower_camel)
           ->addReturnf('$this')
           ->endIfBlock()
           ->add('return new ')
@@ -158,7 +153,7 @@ final class CodegenSyntax extends CodegenBase {
               $syntax['fields'],
               $inner ==> $inner['field_name'] === $underscored
                 ? '$value'
-                : '$this->_'.$inner['field_name'],
+                : '$this->'.$inner['field_name'],
             ),
           )
           ->getCode(),
@@ -167,9 +162,7 @@ final class CodegenSyntax extends CodegenBase {
     yield $cg
       ->codegenMethodf('has%s', $upper_camel)
       ->setReturnType('bool')
-      ->setBodyf('return !$this->_%s->isMissing();', $underscored);
-
-    $type = $spec['nullable'] ? ('?'.$spec['class']) : $spec['class'];
+      ->setBodyf('return $this->%s !== null;', $lower_camel);
 
     if (!$spec['nullable']) {
       yield $cg
@@ -177,9 +170,9 @@ final class CodegenSyntax extends CodegenBase {
         ->setDocBlock('@returns '.Str\join($types, ' | '))
         ->setReturnType($type)
         ->setBodyf(
-          'return TypeAssert\instance_of(%s::class, $this->_%s);',
+          'return TypeAssert\instance_of(%s::class, $this->%s);',
           $type |> Str\split($$, '<') |> C\firstx($$),
-          $underscored,
+          $lower_camel,
         );
       // For backwards compatibility: always offer getFoox, in case it was
       // nullable in a previous version
@@ -188,7 +181,7 @@ final class CodegenSyntax extends CodegenBase {
         ->setDocBlock('@returns '.Str\join($types, ' | '))
         ->setReturnType($type)
         ->setBodyf('return $this->get%s();', $upper_camel);
-     return;
+      return;
     }
 
     yield $cg
@@ -198,27 +191,29 @@ final class CodegenSyntax extends CodegenBase {
       ->setBody(
         $cg
           ->codegenHackBuilder()
-          ->startIfBlockf('$this->_%s->isMissing()', $underscored)
+          ->startIfBlockf('$this->%s->isMissing()', $lower_camel)
           ->addReturnf('null')
           ->endIfBlock()
           ->addReturnf(
-            'TypeAssert\instance_of(%s::class, $this->_%s)',
+            'TypeAssert\instance_of(%s::class, $this->%s)',
             $spec['class'] |> Str\split($$, '<') |> C\firstx($$),
-            $underscored,
+            $lower_camel,
           )
           ->getCode(),
       );
 
     yield $cg
       ->codegenMethodf('get%sx', $upper_camel)
-      ->setDocBlock(Vec\filter($types, $type ==> $type !== 'Missing')
-        |> Str\join($$, ' | ')
-        |> '@returns '.$$)
+      ->setDocBlock(
+        Vec\filter($types, $type ==> $type !== 'Missing')
+          |> Str\join($$, ' | ')
+          |> '@returns '.$$,
+      )
       ->setReturnType($spec['class'])
       ->setBodyf(
-        'return TypeAssert\instance_of(%s::class, $this->_%s);',
+        'return TypeAssert\instance_of(%s::class, $this->%s);',
         $spec['class'] |> Str\split($$, '<') |> C\firstx($$),
-        $underscored,
+        $lower_camel,
       );
   }
 
@@ -231,7 +226,15 @@ final class CodegenSyntax extends CodegenBase {
       ->addParameters(
         Vec\map(
           $syntax['fields'],
-          $field ==> 'EditableNode $'.$field['field_name'],
+          $field ==> {
+            $type = $this->getTypeSpecForField($syntax, $field['field_name']);
+            return Str\format(
+              'private %s%s $%s',
+              $type['nullable'] ? '?' : '',
+              $type['class'],
+              StrP\lower_camel($field['field_name']),
+            );
+          },
         ),
       )
       ->setBody(
@@ -241,17 +244,7 @@ final class CodegenSyntax extends CodegenBase {
             'parent::__construct(%s);',
             \var_export($syntax['type_name'], true),
           )
-          ->addLines(
-            Vec\map(
-              $syntax['fields'],
-              $field ==> Str\format(
-                '$this->_%s = $%s;',
-                $field['field_name'],
-                $field['field_name'],
-              ),
-            ),
-          )
-          ->getCode()
+          ->getCode(),
       );
   }
 
@@ -263,7 +256,12 @@ final class CodegenSyntax extends CodegenBase {
       $body
         ->addf('$%s = ', $field['field_name'])
         ->addMultilineCall(
-          'EditableNode::fromJSON',
+          (
+            $this->getTypeSpecForField($syntax, $field['field_name'])['class']
+            |> Str\split($$, '<')
+            |> C\firstx($$)
+          ).
+          '::fromJSON',
           vec[
             Str\format(
               '/* UNSAFE_EXPR */ $json[\'%s_%s\']',
@@ -303,7 +301,7 @@ final class CodegenSyntax extends CodegenBase {
     return $cg
       ->codegenMethod('getChildren')
       ->setIsOverride()
-      ->setReturnType('dict<string, EditableNode>')
+      ->setReturnType('dict<string, ?EditableNode>')
       ->setBody(
         $cg
           ->codegenHackBuilder()
@@ -313,7 +311,7 @@ final class CodegenSyntax extends CodegenBase {
             |> Vec\map($$, $field ==> $field['field_name'])
             |> Dict\pull(
               $$,
-              $field ==> '$this->_'.$field,
+              $field ==> '$this->'.StrP\lower_camel($field),
               $field ==> $field,
             ),
             HackBuilderValues::dict(
@@ -322,11 +320,11 @@ final class CodegenSyntax extends CodegenBase {
             ),
           )
           ->add(';')
-          ->getCode()
+          ->getCode(),
       );
   }
 
-  private function generateRewriteChildrenMethod(
+  private function generateRewriteDescendantsMethod(
     Schema\TAST $syntax,
   ): CodegenMethod {
     $cg = $this->getCodegenFactory();
@@ -347,11 +345,15 @@ final class CodegenSyntax extends CodegenBase {
           ->addLines(
             Vec\map(
               $fields,
-              $field ==> Str\format(
-                '$%s = $this->_%s->rewrite($rewriter, $parents);',
-                $field,
-                $field,
-              ),
+              $field ==> {
+                $spec = $this->getTypeSpecForField($syntax, $field);
+                return Str\format(
+                  '$%s = $this->%s%s->rewrite($rewriter, $parents);',
+                  $field,
+                  StrP\lower_camel($field),
+                  $spec['nullable'] ? '?' : '',
+                );
+              },
             ),
           )
           ->addLine('if (')
@@ -359,15 +361,19 @@ final class CodegenSyntax extends CodegenBase {
           ->addLines(
             Vec\map(
               $fields,
-              $field ==> Str\format('$%s === $this->_%s &&', $field, $field),
+              $field ==> Str\format(
+                '$%s === $this->%s &&',
+                $field,
+                StrP\lower_camel($field),
+              ),
             )
-            |> (
-              $lines ==> {
-                $idx = C\last_keyx($lines);
-                $lines[$idx] = Str\strip_suffix($lines[$idx], ' &&');
-                return $lines;
-              }
-            )($$),
+              |> (
+                $lines ==> {
+                  $idx = C\last_keyx($lines);
+                  $lines[$idx] = Str\strip_suffix($lines[$idx], ' &&');
+                  return $lines;
+                }
+              )($$),
           )
           ->unindent()
           ->addLine(') {')
@@ -406,18 +412,13 @@ final class CodegenSyntax extends CodegenBase {
     }
 
     $children = $specs[$key] |> Keyset\filter($$, $c ==> $c !== 'error');
-    $possible_types = Keyset\map(
-      $children,
-      $child ==> $this->getSyntaxClass($child),
-    );
+    $possible_types =
+      Keyset\map($children, $child ==> $this->getSyntaxClass($child));
 
     $nullable = C\contains_key($children, 'missing');
 
     if ($nullable) {
-      $children = Keyset\filter(
-        $children,
-        $child ==> $child !== 'missing',
-      );
+      $children = Keyset\filter($children, $child ==> $child !== 'missing');
     }
     return shape(
       'class' => $this->getUnifiedSyntaxClass($children),
@@ -427,7 +428,7 @@ final class CodegenSyntax extends CodegenBase {
   }
 
   <<__Memoize>>
-    private function getSyntaxClass(string $child): string {
+  private function getSyntaxClass(string $child): string {
     if ($child === 'token') {
       return 'EditableToken';
     }
@@ -479,7 +480,8 @@ final class CodegenSyntax extends CodegenBase {
       'AlternateElseClause' => keyset['IControlFlowStatement'],
       'AlternateElseifClause' => keyset['IControlFlowStatement'],
       'AlternateElseifStatement' => keyset['IControlFlowStatement'],
-      'AlternateLoopStatement' => keyset['IControlFlowStatement', 'ILoopStatement'],
+      'AlternateLoopStatement' =>
+        keyset['IControlFlowStatement', 'ILoopStatement'],
       'AlternateSwitchStatement' => keyset['IControlFlowStatement'],
       'DoStatement' => keyset['IControlFlowStatement', 'ILoopStatement'],
       'ElseClause' => keyset['IControlFlowStatement'],

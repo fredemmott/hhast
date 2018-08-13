@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<f0c227b31ce4e716904836ffebba8a1f>>
+ * @generated SignedSource<<7693a84b5c9b0d46458fc742b5d83a18>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class EchoStatement extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_expressions;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $expressions,
-    EditableNode $semicolon,
+    private EchoToken $keyword,
+    private EditableList<EditableNode> $expressions,
+    private ?SemicolonToken $semicolon,
   ) {
     parent::__construct('echo_statement');
-    $this->_keyword = $keyword;
-    $this->_expressions = $expressions;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class EchoStatement extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = EchoToken::fromJSON(
       /* UNSAFE_EXPR */ $json['echo_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $expressions = EditableNode::fromJSON(
+    $expressions = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['echo_expressions'],
       $file,
       $offset,
       $source,
     );
     $offset += $expressions->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['echo_semicolon'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class EchoStatement extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'expressions' => $this->_expressions,
-      'semicolon' => $this->_semicolon,
+      'keyword' => $this->keyword,
+      'expressions' => $this->expressions,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -72,39 +65,39 @@ final class EchoStatement extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $expressions = $this->_expressions->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $expressions = $this->expressions->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon?->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $expressions === $this->_expressions &&
-      $semicolon === $this->_semicolon
+      $keyword === $this->keyword &&
+      $expressions === $this->expressions &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
     return new static($keyword, $expressions, $semicolon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(EchoToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_expressions, $this->_semicolon);
+    return new static($value, $this->expressions, $this->semicolon);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns EchoToken
    */
   public function getKeyword(): EchoToken {
-    return TypeAssert\instance_of(EchoToken::class, $this->_keyword);
+    return TypeAssert\instance_of(EchoToken::class, $this->keyword);
   }
 
   /**
@@ -114,19 +107,19 @@ final class EchoStatement extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getExpressionsUNTYPED(): EditableNode {
-    return $this->_expressions;
+  final public function getExpressionsUNTYPED(): EditableNode {
+    return $this->expressions;
   }
 
-  public function withExpressions(EditableNode $value): this {
-    if ($value === $this->_expressions) {
+  public function withExpressions(EditableList<EditableNode> $value): this {
+    if ($value === $this->expressions) {
       return $this;
     }
-    return new static($this->_keyword, $value, $this->_semicolon);
+    return new static($this->keyword, $value, $this->semicolon);
   }
 
   public function hasExpressions(): bool {
-    return !$this->_expressions->isMissing();
+    return $this->expressions !== null;
   }
 
   /**
@@ -144,7 +137,7 @@ final class EchoStatement extends EditableNode {
    * EditableList<VariableExpression> | EditableList<XHPExpression>
    */
   public function getExpressions(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_expressions);
+    return TypeAssert\instance_of(EditableList::class, $this->expressions);
   }
 
   /**
@@ -165,35 +158,35 @@ final class EchoStatement extends EditableNode {
     return $this->getExpressions();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(?SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
-    return new static($this->_keyword, $this->_expressions, $value);
+    return new static($this->keyword, $this->expressions, $value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns Missing | SemicolonToken
    */
   public function getSemicolon(): ?SemicolonToken {
-    if ($this->_semicolon->isMissing()) {
+    if ($this->semicolon->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolonx(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 }

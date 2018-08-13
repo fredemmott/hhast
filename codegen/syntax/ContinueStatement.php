@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<875a1adc2ac3f6ef3a5d04fc1da4156d>>
+ * @generated SignedSource<<1948c9fe5e17c1ea07ebab9f44db6b4d>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ContinueStatement extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_level;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $level,
-    EditableNode $semicolon,
+    private ContinueToken $keyword,
+    private ?EditableNode $level,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('continue_statement');
-    $this->_keyword = $keyword;
-    $this->_level = $level;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -32,7 +25,7 @@ final class ContinueStatement extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = ContinueToken::fromJSON(
       /* UNSAFE_EXPR */ $json['continue_keyword'],
       $file,
       $offset,
@@ -46,7 +39,7 @@ final class ContinueStatement extends EditableNode {
       $source,
     );
     $offset += $level->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['continue_semicolon'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class ContinueStatement extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'level' => $this->_level,
-      'semicolon' => $this->_semicolon,
+      'keyword' => $this->keyword,
+      'level' => $this->level,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -72,39 +65,39 @@ final class ContinueStatement extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $level = $this->_level->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $level = $this->level?->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $level === $this->_level &&
-      $semicolon === $this->_semicolon
+      $keyword === $this->keyword &&
+      $level === $this->level &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
     return new static($keyword, $level, $semicolon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(ContinueToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_level, $this->_semicolon);
+    return new static($value, $this->level, $this->semicolon);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns ContinueToken
    */
   public function getKeyword(): ContinueToken {
-    return TypeAssert\instance_of(ContinueToken::class, $this->_keyword);
+    return TypeAssert\instance_of(ContinueToken::class, $this->keyword);
   }
 
   /**
@@ -114,58 +107,58 @@ final class ContinueStatement extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLevelUNTYPED(): EditableNode {
-    return $this->_level;
+  final public function getLevelUNTYPED(): EditableNode {
+    return $this->level;
   }
 
-  public function withLevel(EditableNode $value): this {
-    if ($value === $this->_level) {
+  public function withLevel(?EditableNode $value): this {
+    if ($value === $this->level) {
       return $this;
     }
-    return new static($this->_keyword, $value, $this->_semicolon);
+    return new static($this->keyword, $value, $this->semicolon);
   }
 
   public function hasLevel(): bool {
-    return !$this->_level->isMissing();
+    return $this->level !== null;
   }
 
   /**
    * @returns LiteralExpression | Missing | VariableExpression
    */
   public function getLevel(): ?EditableNode {
-    if ($this->_level->isMissing()) {
+    if ($this->level->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_level);
+    return TypeAssert\instance_of(EditableNode::class, $this->level);
   }
 
   /**
    * @returns LiteralExpression | VariableExpression
    */
   public function getLevelx(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_level);
+    return TypeAssert\instance_of(EditableNode::class, $this->level);
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
-    return new static($this->_keyword, $this->_level, $value);
+    return new static($this->keyword, $this->level, $value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

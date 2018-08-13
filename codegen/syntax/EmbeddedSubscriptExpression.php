@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<eb64c2d5fe88012704c27434f0a4dead>>
+ * @generated SignedSource<<a57cb15a33960121ffd33e5cd5334e27>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class EmbeddedSubscriptExpression extends EditableNode {
 
-  private EditableNode $_receiver;
-  private EditableNode $_left_bracket;
-  private EditableNode $_index;
-  private EditableNode $_right_bracket;
-
   public function __construct(
-    EditableNode $receiver,
-    EditableNode $left_bracket,
-    EditableNode $index,
-    EditableNode $right_bracket,
+    private EditableNode $receiver,
+    private EditableNode $leftBracket,
+    private EditableNode $index,
+    private EditableNode $rightBracket,
   ) {
     parent::__construct('embedded_subscript_expression');
-    $this->_receiver = $receiver;
-    $this->_left_bracket = $left_bracket;
-    $this->_index = $index;
-    $this->_right_bracket = $right_bracket;
   }
 
   <<__Override>>
@@ -67,12 +58,12 @@ final class EmbeddedSubscriptExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'receiver' => $this->_receiver,
-      'left_bracket' => $this->_left_bracket,
-      'index' => $this->_index,
-      'right_bracket' => $this->_right_bracket,
+      'receiver' => $this->receiver,
+      'left_bracket' => $this->leftBracket,
+      'index' => $this->index,
+      'right_bracket' => $this->rightBracket,
     ];
   }
 
@@ -83,46 +74,46 @@ final class EmbeddedSubscriptExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $receiver = $this->_receiver->rewrite($rewriter, $parents);
-    $left_bracket = $this->_left_bracket->rewrite($rewriter, $parents);
-    $index = $this->_index->rewrite($rewriter, $parents);
-    $right_bracket = $this->_right_bracket->rewrite($rewriter, $parents);
+    $receiver = $this->receiver->rewrite($rewriter, $parents);
+    $left_bracket = $this->leftBracket->rewrite($rewriter, $parents);
+    $index = $this->index->rewrite($rewriter, $parents);
+    $right_bracket = $this->rightBracket->rewrite($rewriter, $parents);
     if (
-      $receiver === $this->_receiver &&
-      $left_bracket === $this->_left_bracket &&
-      $index === $this->_index &&
-      $right_bracket === $this->_right_bracket
+      $receiver === $this->receiver &&
+      $left_bracket === $this->leftBracket &&
+      $index === $this->index &&
+      $right_bracket === $this->rightBracket
     ) {
       return $this;
     }
     return new static($receiver, $left_bracket, $index, $right_bracket);
   }
 
-  public function getReceiverUNTYPED(): EditableNode {
-    return $this->_receiver;
+  final public function getReceiverUNTYPED(): EditableNode {
+    return $this->receiver;
   }
 
   public function withReceiver(EditableNode $value): this {
-    if ($value === $this->_receiver) {
+    if ($value === $this->receiver) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_bracket,
-      $this->_index,
-      $this->_right_bracket,
+      $this->left_bracket,
+      $this->index,
+      $this->right_bracket,
     );
   }
 
   public function hasReceiver(): bool {
-    return !$this->_receiver->isMissing();
+    return $this->receiver !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getReceiver(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_receiver);
+    return TypeAssert\instance_of(EditableNode::class, $this->receiver);
   }
 
   /**
@@ -132,31 +123,27 @@ final class EmbeddedSubscriptExpression extends EditableNode {
     return $this->getReceiver();
   }
 
-  public function getLeftBracketUNTYPED(): EditableNode {
-    return $this->_left_bracket;
+  final public function getLeftBracketUNTYPED(): EditableNode {
+    return $this->leftBracket;
   }
 
   public function withLeftBracket(EditableNode $value): this {
-    if ($value === $this->_left_bracket) {
+    if ($value === $this->leftBracket) {
       return $this;
     }
-    return new static(
-      $this->_receiver,
-      $value,
-      $this->_index,
-      $this->_right_bracket,
-    );
+    return
+      new static($this->receiver, $value, $this->index, $this->right_bracket);
   }
 
   public function hasLeftBracket(): bool {
-    return !$this->_left_bracket->isMissing();
+    return $this->leftBracket !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getLeftBracket(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_left_bracket);
+    return TypeAssert\instance_of(EditableNode::class, $this->leftBracket);
   }
 
   /**
@@ -166,31 +153,31 @@ final class EmbeddedSubscriptExpression extends EditableNode {
     return $this->getLeftBracket();
   }
 
-  public function getIndexUNTYPED(): EditableNode {
-    return $this->_index;
+  final public function getIndexUNTYPED(): EditableNode {
+    return $this->index;
   }
 
   public function withIndex(EditableNode $value): this {
-    if ($value === $this->_index) {
+    if ($value === $this->index) {
       return $this;
     }
     return new static(
-      $this->_receiver,
-      $this->_left_bracket,
+      $this->receiver,
+      $this->left_bracket,
       $value,
-      $this->_right_bracket,
+      $this->right_bracket,
     );
   }
 
   public function hasIndex(): bool {
-    return !$this->_index->isMissing();
+    return $this->index !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getIndex(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_index);
+    return TypeAssert\instance_of(EditableNode::class, $this->index);
   }
 
   /**
@@ -200,27 +187,27 @@ final class EmbeddedSubscriptExpression extends EditableNode {
     return $this->getIndex();
   }
 
-  public function getRightBracketUNTYPED(): EditableNode {
-    return $this->_right_bracket;
+  final public function getRightBracketUNTYPED(): EditableNode {
+    return $this->rightBracket;
   }
 
   public function withRightBracket(EditableNode $value): this {
-    if ($value === $this->_right_bracket) {
+    if ($value === $this->rightBracket) {
       return $this;
     }
     return
-      new static($this->_receiver, $this->_left_bracket, $this->_index, $value);
+      new static($this->receiver, $this->left_bracket, $this->index, $value);
   }
 
   public function hasRightBracket(): bool {
-    return !$this->_right_bracket->isMissing();
+    return $this->rightBracket !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getRightBracket(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_right_bracket);
+    return TypeAssert\instance_of(EditableNode::class, $this->rightBracket);
   }
 
   /**

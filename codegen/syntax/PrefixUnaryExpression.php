@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<4c5ee5d255dadc9a5dddfbf145c890dd>>
+ * @generated SignedSource<<c4e5b208334b12bdc20a5bbf69c81d14>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class PrefixUnaryExpression extends EditableNode {
 
-  private EditableNode $_operator;
-  private EditableNode $_operand;
-
-  public function __construct(EditableNode $operator, EditableNode $operand) {
+  public function __construct(
+    private EditableToken $operator,
+    private EditableNode $operand,
+  ) {
     parent::__construct('prefix_unary_expression');
-    $this->_operator = $operator;
-    $this->_operand = $operand;
   }
 
   <<__Override>>
@@ -26,7 +24,7 @@ final class PrefixUnaryExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $operator = EditableNode::fromJSON(
+    $operator = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['prefix_unary_operator'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class PrefixUnaryExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'operator' => $this->_operator,
-      'operand' => $this->_operand,
+      'operator' => $this->operator,
+      'operand' => $this->operand,
     ];
   }
 
@@ -58,27 +56,27 @@ final class PrefixUnaryExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $operator = $this->_operator->rewrite($rewriter, $parents);
-    $operand = $this->_operand->rewrite($rewriter, $parents);
-    if ($operator === $this->_operator && $operand === $this->_operand) {
+    $operator = $this->operator->rewrite($rewriter, $parents);
+    $operand = $this->operand->rewrite($rewriter, $parents);
+    if ($operator === $this->operator && $operand === $this->operand) {
       return $this;
     }
     return new static($operator, $operand);
   }
 
-  public function getOperatorUNTYPED(): EditableNode {
-    return $this->_operator;
+  final public function getOperatorUNTYPED(): EditableNode {
+    return $this->operator;
   }
 
-  public function withOperator(EditableNode $value): this {
-    if ($value === $this->_operator) {
+  public function withOperator(EditableToken $value): this {
+    if ($value === $this->operator) {
       return $this;
     }
-    return new static($value, $this->_operand);
+    return new static($value, $this->operand);
   }
 
   public function hasOperator(): bool {
-    return !$this->_operator->isMissing();
+    return $this->operator !== null;
   }
 
   /**
@@ -87,7 +85,7 @@ final class PrefixUnaryExpression extends EditableNode {
    * CloneToken | PrintToken | SuspendToken | TildeToken
    */
   public function getOperator(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_operator);
+    return TypeAssert\instance_of(EditableToken::class, $this->operator);
   }
 
   /**
@@ -99,19 +97,19 @@ final class PrefixUnaryExpression extends EditableNode {
     return $this->getOperator();
   }
 
-  public function getOperandUNTYPED(): EditableNode {
-    return $this->_operand;
+  final public function getOperandUNTYPED(): EditableNode {
+    return $this->operand;
   }
 
   public function withOperand(EditableNode $value): this {
-    if ($value === $this->_operand) {
+    if ($value === $this->operand) {
       return $this;
     }
-    return new static($this->_operator, $value);
+    return new static($this->operator, $value);
   }
 
   public function hasOperand(): bool {
-    return !$this->_operand->isMissing();
+    return $this->operand !== null;
   }
 
   /**
@@ -127,7 +125,7 @@ final class PrefixUnaryExpression extends EditableNode {
    * VariableExpression
    */
   public function getOperand(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_operand);
+    return TypeAssert\instance_of(EditableNode::class, $this->operand);
   }
 
   /**

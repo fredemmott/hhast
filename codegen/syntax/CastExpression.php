@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<8dd5f2ff611b1a1199460338933e50e7>>
+ * @generated SignedSource<<d66ff724142ab7640ee285b037a28908>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class CastExpression extends EditableNode {
 
-  private EditableNode $_left_paren;
-  private EditableNode $_type;
-  private EditableNode $_right_paren;
-  private EditableNode $_operand;
-
   public function __construct(
-    EditableNode $left_paren,
-    EditableNode $type,
-    EditableNode $right_paren,
-    EditableNode $operand,
+    private LeftParenToken $leftParen,
+    private EditableToken $type,
+    private RightParenToken $rightParen,
+    private EditableNode $operand,
   ) {
     parent::__construct('cast_expression');
-    $this->_left_paren = $left_paren;
-    $this->_type = $type;
-    $this->_right_paren = $right_paren;
-    $this->_operand = $operand;
   }
 
   <<__Override>>
@@ -35,21 +26,21 @@ final class CastExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['cast_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $type = EditableNode::fromJSON(
+    $type = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['cast_type'],
       $file,
       $offset,
       $source,
     );
     $offset += $type->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['cast_right_paren'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class CastExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_paren' => $this->_left_paren,
-      'type' => $this->_type,
-      'right_paren' => $this->_right_paren,
-      'operand' => $this->_operand,
+      'left_paren' => $this->leftParen,
+      'type' => $this->type,
+      'right_paren' => $this->rightParen,
+      'operand' => $this->operand,
     ];
   }
 
@@ -83,42 +74,41 @@ final class CastExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
-    $operand = $this->_operand->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $type = $this->type->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
+    $operand = $this->operand->rewrite($rewriter, $parents);
     if (
-      $left_paren === $this->_left_paren &&
-      $type === $this->_type &&
-      $right_paren === $this->_right_paren &&
-      $operand === $this->_operand
+      $left_paren === $this->leftParen &&
+      $type === $this->type &&
+      $right_paren === $this->rightParen &&
+      $operand === $this->operand
     ) {
       return $this;
     }
     return new static($left_paren, $type, $right_paren, $operand);
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
-    return
-      new static($value, $this->_type, $this->_right_paren, $this->_operand);
+    return new static($value, $this->type, $this->right_paren, $this->operand);
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -128,24 +118,20 @@ final class CastExpression extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
-  public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+  public function withType(EditableToken $value): this {
+    if ($value === $this->type) {
       return $this;
     }
-    return new static(
-      $this->_left_paren,
-      $value,
-      $this->_right_paren,
-      $this->_operand,
-    );
+    return
+      new static($this->left_paren, $value, $this->right_paren, $this->operand);
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
@@ -154,7 +140,7 @@ final class CastExpression extends EditableNode {
    * StringToken | UnsetToken
    */
   public function getType(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_type);
+    return TypeAssert\instance_of(EditableToken::class, $this->type);
   }
 
   /**
@@ -166,27 +152,26 @@ final class CastExpression extends EditableNode {
     return $this->getType();
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
-    return
-      new static($this->_left_paren, $this->_type, $value, $this->_operand);
+    return new static($this->left_paren, $this->type, $value, $this->operand);
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
@@ -196,20 +181,20 @@ final class CastExpression extends EditableNode {
     return $this->getRightParen();
   }
 
-  public function getOperandUNTYPED(): EditableNode {
-    return $this->_operand;
+  final public function getOperandUNTYPED(): EditableNode {
+    return $this->operand;
   }
 
   public function withOperand(EditableNode $value): this {
-    if ($value === $this->_operand) {
+    if ($value === $this->operand) {
       return $this;
     }
     return
-      new static($this->_left_paren, $this->_type, $this->_right_paren, $value);
+      new static($this->left_paren, $this->type, $this->right_paren, $value);
   }
 
   public function hasOperand(): bool {
-    return !$this->_operand->isMissing();
+    return $this->operand !== null;
   }
 
   /**
@@ -223,7 +208,7 @@ final class CastExpression extends EditableNode {
    * VectorIntrinsicExpression | XHPExpression
    */
   public function getOperand(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_operand);
+    return TypeAssert\instance_of(EditableNode::class, $this->operand);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<a9f39eda6f444c45fb83193ec611ea9f>>
+ * @generated SignedSource<<06ba50f23b36ac6033ee9cde2efcedca>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,28 +10,15 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class LetStatement extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_name;
-  private EditableNode $_colon;
-  private EditableNode $_type;
-  private EditableNode $_initializer;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $name,
-    EditableNode $colon,
-    EditableNode $type,
-    EditableNode $initializer,
-    EditableNode $semicolon,
+    private EditableNode $keyword,
+    private EditableNode $name,
+    private EditableNode $colon,
+    private EditableNode $type,
+    private EditableNode $initializer,
+    private EditableNode $semicolon,
   ) {
     parent::__construct('let_statement');
-    $this->_keyword = $keyword;
-    $this->_name = $name;
-    $this->_colon = $colon;
-    $this->_type = $type;
-    $this->_initializer = $initializer;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -87,14 +74,14 @@ final class LetStatement extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'name' => $this->_name,
-      'colon' => $this->_colon,
-      'type' => $this->_type,
-      'initializer' => $this->_initializer,
-      'semicolon' => $this->_semicolon,
+      'keyword' => $this->keyword,
+      'name' => $this->name,
+      'colon' => $this->colon,
+      'type' => $this->type,
+      'initializer' => $this->initializer,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -105,52 +92,52 @@ final class LetStatement extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $colon = $this->_colon->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
-    $initializer = $this->_initializer->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $name = $this->name->rewrite($rewriter, $parents);
+    $colon = $this->colon->rewrite($rewriter, $parents);
+    $type = $this->type->rewrite($rewriter, $parents);
+    $initializer = $this->initializer->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $name === $this->_name &&
-      $colon === $this->_colon &&
-      $type === $this->_type &&
-      $initializer === $this->_initializer &&
-      $semicolon === $this->_semicolon
+      $keyword === $this->keyword &&
+      $name === $this->name &&
+      $colon === $this->colon &&
+      $type === $this->type &&
+      $initializer === $this->initializer &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
     return new static($keyword, $name, $colon, $type, $initializer, $semicolon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
   public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_name,
-      $this->_colon,
-      $this->_type,
-      $this->_initializer,
-      $this->_semicolon,
+      $this->name,
+      $this->colon,
+      $this->type,
+      $this->initializer,
+      $this->semicolon,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getKeyword(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_keyword);
+    return TypeAssert\instance_of(EditableNode::class, $this->keyword);
   }
 
   /**
@@ -160,33 +147,33 @@ final class LetStatement extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
   public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+    if ($value === $this->name) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_colon,
-      $this->_type,
-      $this->_initializer,
-      $this->_semicolon,
+      $this->colon,
+      $this->type,
+      $this->initializer,
+      $this->semicolon,
     );
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getName(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_name);
+    return TypeAssert\instance_of(EditableNode::class, $this->name);
   }
 
   /**
@@ -196,33 +183,33 @@ final class LetStatement extends EditableNode {
     return $this->getName();
   }
 
-  public function getColonUNTYPED(): EditableNode {
-    return $this->_colon;
+  final public function getColonUNTYPED(): EditableNode {
+    return $this->colon;
   }
 
   public function withColon(EditableNode $value): this {
-    if ($value === $this->_colon) {
+    if ($value === $this->colon) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_name,
+      $this->keyword,
+      $this->name,
       $value,
-      $this->_type,
-      $this->_initializer,
-      $this->_semicolon,
+      $this->type,
+      $this->initializer,
+      $this->semicolon,
     );
   }
 
   public function hasColon(): bool {
-    return !$this->_colon->isMissing();
+    return $this->colon !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getColon(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_colon);
+    return TypeAssert\instance_of(EditableNode::class, $this->colon);
   }
 
   /**
@@ -232,33 +219,33 @@ final class LetStatement extends EditableNode {
     return $this->getColon();
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
   public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+    if ($value === $this->type) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_name,
-      $this->_colon,
+      $this->keyword,
+      $this->name,
+      $this->colon,
       $value,
-      $this->_initializer,
-      $this->_semicolon,
+      $this->initializer,
+      $this->semicolon,
     );
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
   /**
@@ -268,33 +255,33 @@ final class LetStatement extends EditableNode {
     return $this->getType();
   }
 
-  public function getInitializerUNTYPED(): EditableNode {
-    return $this->_initializer;
+  final public function getInitializerUNTYPED(): EditableNode {
+    return $this->initializer;
   }
 
   public function withInitializer(EditableNode $value): this {
-    if ($value === $this->_initializer) {
+    if ($value === $this->initializer) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_name,
-      $this->_colon,
-      $this->_type,
+      $this->keyword,
+      $this->name,
+      $this->colon,
+      $this->type,
       $value,
-      $this->_semicolon,
+      $this->semicolon,
     );
   }
 
   public function hasInitializer(): bool {
-    return !$this->_initializer->isMissing();
+    return $this->initializer !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getInitializer(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_initializer);
+    return TypeAssert\instance_of(EditableNode::class, $this->initializer);
   }
 
   /**
@@ -304,33 +291,33 @@ final class LetStatement extends EditableNode {
     return $this->getInitializer();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
   public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+    if ($value === $this->semicolon) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_name,
-      $this->_colon,
-      $this->_type,
-      $this->_initializer,
+      $this->keyword,
+      $this->name,
+      $this->colon,
+      $this->type,
+      $this->initializer,
       $value,
     );
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns unknown
    */
   public function getSemicolon(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_semicolon);
+    return TypeAssert\instance_of(EditableNode::class, $this->semicolon);
   }
 
   /**

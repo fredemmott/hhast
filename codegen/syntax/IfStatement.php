@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9d48ab305ddb66e80ec83afd2fdfe80c>>
+ * @generated SignedSource<<181aecda3fb6a7e48dbfd7c913ec7866>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,31 +10,16 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class IfStatement extends EditableNode implements IControlFlowStatement {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_condition;
-  private EditableNode $_right_paren;
-  private EditableNode $_statement;
-  private EditableNode $_elseif_clauses;
-  private EditableNode $_else_clause;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_paren,
-    EditableNode $condition,
-    EditableNode $right_paren,
-    EditableNode $statement,
-    EditableNode $elseif_clauses,
-    EditableNode $else_clause,
+    private IfToken $keyword,
+    private LeftParenToken $leftParen,
+    private EditableNode $condition,
+    private RightParenToken $rightParen,
+    private EditableNode $statement,
+    private ?EditableList<EditableNode> $elseifClauses,
+    private ?ElseClause $elseClause,
   ) {
     parent::__construct('if_statement');
-    $this->_keyword = $keyword;
-    $this->_left_paren = $left_paren;
-    $this->_condition = $condition;
-    $this->_right_paren = $right_paren;
-    $this->_statement = $statement;
-    $this->_elseif_clauses = $elseif_clauses;
-    $this->_else_clause = $else_clause;
   }
 
   <<__Override>>
@@ -44,14 +29,14 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = IfToken::fromJSON(
       /* UNSAFE_EXPR */ $json['if_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['if_left_paren'],
       $file,
       $offset,
@@ -65,7 +50,7 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
       $source,
     );
     $offset += $condition->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['if_right_paren'],
       $file,
       $offset,
@@ -79,14 +64,14 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
       $source,
     );
     $offset += $statement->getWidth();
-    $elseif_clauses = EditableNode::fromJSON(
+    $elseif_clauses = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['if_elseif_clauses'],
       $file,
       $offset,
       $source,
     );
     $offset += $elseif_clauses->getWidth();
-    $else_clause = EditableNode::fromJSON(
+    $else_clause = ElseClause::fromJSON(
       /* UNSAFE_EXPR */ $json['if_else_clause'],
       $file,
       $offset,
@@ -105,15 +90,15 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_paren' => $this->_left_paren,
-      'condition' => $this->_condition,
-      'right_paren' => $this->_right_paren,
-      'statement' => $this->_statement,
-      'elseif_clauses' => $this->_elseif_clauses,
-      'else_clause' => $this->_else_clause,
+      'keyword' => $this->keyword,
+      'left_paren' => $this->leftParen,
+      'condition' => $this->condition,
+      'right_paren' => $this->rightParen,
+      'statement' => $this->statement,
+      'elseif_clauses' => $this->elseifClauses,
+      'else_clause' => $this->elseClause,
     ];
   }
 
@@ -124,21 +109,21 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $condition = $this->_condition->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
-    $statement = $this->_statement->rewrite($rewriter, $parents);
-    $elseif_clauses = $this->_elseif_clauses->rewrite($rewriter, $parents);
-    $else_clause = $this->_else_clause->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $condition = $this->condition->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
+    $statement = $this->statement->rewrite($rewriter, $parents);
+    $elseif_clauses = $this->elseifClauses?->rewrite($rewriter, $parents);
+    $else_clause = $this->elseClause?->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_paren === $this->_left_paren &&
-      $condition === $this->_condition &&
-      $right_paren === $this->_right_paren &&
-      $statement === $this->_statement &&
-      $elseif_clauses === $this->_elseif_clauses &&
-      $else_clause === $this->_else_clause
+      $keyword === $this->keyword &&
+      $left_paren === $this->leftParen &&
+      $condition === $this->condition &&
+      $right_paren === $this->rightParen &&
+      $statement === $this->statement &&
+      $elseif_clauses === $this->elseifClauses &&
+      $else_clause === $this->elseClause
     ) {
       return $this;
     }
@@ -153,34 +138,34 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
     );
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(IfToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_paren,
-      $this->_condition,
-      $this->_right_paren,
-      $this->_statement,
-      $this->_elseif_clauses,
-      $this->_else_clause,
+      $this->left_paren,
+      $this->condition,
+      $this->right_paren,
+      $this->statement,
+      $this->elseif_clauses,
+      $this->else_clause,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns IfToken
    */
   public function getKeyword(): IfToken {
-    return TypeAssert\instance_of(IfToken::class, $this->_keyword);
+    return TypeAssert\instance_of(IfToken::class, $this->keyword);
   }
 
   /**
@@ -190,34 +175,34 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
     return $this->getKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_condition,
-      $this->_right_paren,
-      $this->_statement,
-      $this->_elseif_clauses,
-      $this->_else_clause,
+      $this->condition,
+      $this->right_paren,
+      $this->statement,
+      $this->elseif_clauses,
+      $this->else_clause,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -227,27 +212,27 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
     return $this->getLeftParen();
   }
 
-  public function getConditionUNTYPED(): EditableNode {
-    return $this->_condition;
+  final public function getConditionUNTYPED(): EditableNode {
+    return $this->condition;
   }
 
   public function withCondition(EditableNode $value): this {
-    if ($value === $this->_condition) {
+    if ($value === $this->condition) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
+      $this->keyword,
+      $this->left_paren,
       $value,
-      $this->_right_paren,
-      $this->_statement,
-      $this->_elseif_clauses,
-      $this->_else_clause,
+      $this->right_paren,
+      $this->statement,
+      $this->elseif_clauses,
+      $this->else_clause,
     );
   }
 
   public function hasCondition(): bool {
-    return !$this->_condition->isMissing();
+    return $this->condition !== null;
   }
 
   /**
@@ -259,7 +244,7 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
    * SubscriptExpression | NameToken | VariableExpression
    */
   public function getCondition(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_condition);
+    return TypeAssert\instance_of(EditableNode::class, $this->condition);
   }
 
   /**
@@ -274,34 +259,34 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
     return $this->getCondition();
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_condition,
+      $this->keyword,
+      $this->left_paren,
+      $this->condition,
       $value,
-      $this->_statement,
-      $this->_elseif_clauses,
-      $this->_else_clause,
+      $this->statement,
+      $this->elseif_clauses,
+      $this->else_clause,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**
@@ -311,27 +296,27 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
     return $this->getRightParen();
   }
 
-  public function getStatementUNTYPED(): EditableNode {
-    return $this->_statement;
+  final public function getStatementUNTYPED(): EditableNode {
+    return $this->statement;
   }
 
   public function withStatement(EditableNode $value): this {
-    if ($value === $this->_statement) {
+    if ($value === $this->statement) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_condition,
-      $this->_right_paren,
+      $this->keyword,
+      $this->left_paren,
+      $this->condition,
+      $this->right_paren,
       $value,
-      $this->_elseif_clauses,
-      $this->_else_clause,
+      $this->elseif_clauses,
+      $this->else_clause,
     );
   }
 
   public function hasStatement(): bool {
-    return !$this->_statement->isMissing();
+    return $this->statement !== null;
   }
 
   /**
@@ -340,7 +325,7 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
    * ReturnStatement | ThrowStatement | UnsetStatement
    */
   public function getStatement(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_statement);
+    return TypeAssert\instance_of(EditableNode::class, $this->statement);
   }
 
   /**
@@ -352,83 +337,83 @@ final class IfStatement extends EditableNode implements IControlFlowStatement {
     return $this->getStatement();
   }
 
-  public function getElseifClausesUNTYPED(): EditableNode {
-    return $this->_elseif_clauses;
+  final public function getElseifClausesUNTYPED(): EditableNode {
+    return $this->elseifClauses;
   }
 
-  public function withElseifClauses(EditableNode $value): this {
-    if ($value === $this->_elseif_clauses) {
+  public function withElseifClauses(?EditableList<EditableNode> $value): this {
+    if ($value === $this->elseifClauses) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_condition,
-      $this->_right_paren,
-      $this->_statement,
+      $this->keyword,
+      $this->left_paren,
+      $this->condition,
+      $this->right_paren,
+      $this->statement,
       $value,
-      $this->_else_clause,
+      $this->else_clause,
     );
   }
 
   public function hasElseifClauses(): bool {
-    return !$this->_elseif_clauses->isMissing();
+    return $this->elseifClauses !== null;
   }
 
   /**
    * @returns EditableList<EditableNode> | Missing
    */
   public function getElseifClauses(): ?EditableList<EditableNode> {
-    if ($this->_elseif_clauses->isMissing()) {
+    if ($this->elseifClauses->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_elseif_clauses);
+    return TypeAssert\instance_of(EditableList::class, $this->elseifClauses);
   }
 
   /**
    * @returns EditableList<EditableNode>
    */
   public function getElseifClausesx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_elseif_clauses);
+    return TypeAssert\instance_of(EditableList::class, $this->elseifClauses);
   }
 
-  public function getElseClauseUNTYPED(): EditableNode {
-    return $this->_else_clause;
+  final public function getElseClauseUNTYPED(): EditableNode {
+    return $this->elseClause;
   }
 
-  public function withElseClause(EditableNode $value): this {
-    if ($value === $this->_else_clause) {
+  public function withElseClause(?ElseClause $value): this {
+    if ($value === $this->elseClause) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_condition,
-      $this->_right_paren,
-      $this->_statement,
-      $this->_elseif_clauses,
+      $this->keyword,
+      $this->left_paren,
+      $this->condition,
+      $this->right_paren,
+      $this->statement,
+      $this->elseif_clauses,
       $value,
     );
   }
 
   public function hasElseClause(): bool {
-    return !$this->_else_clause->isMissing();
+    return $this->elseClause !== null;
   }
 
   /**
    * @returns ElseClause | Missing
    */
   public function getElseClause(): ?ElseClause {
-    if ($this->_else_clause->isMissing()) {
+    if ($this->elseClause->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(ElseClause::class, $this->_else_clause);
+    return TypeAssert\instance_of(ElseClause::class, $this->elseClause);
   }
 
   /**
    * @returns ElseClause
    */
   public function getElseClausex(): ElseClause {
-    return TypeAssert\instance_of(ElseClause::class, $this->_else_clause);
+    return TypeAssert\instance_of(ElseClause::class, $this->elseClause);
   }
 }

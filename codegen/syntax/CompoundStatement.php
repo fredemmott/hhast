@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<4caceb0289c9b4de2b2b2eff836686ee>>
+ * @generated SignedSource<<14cdd3d0bf0e3c388b2d792fefe49684>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class CompoundStatement extends EditableNode {
 
-  private EditableNode $_left_brace;
-  private EditableNode $_statements;
-  private EditableNode $_right_brace;
-
   public function __construct(
-    EditableNode $left_brace,
-    EditableNode $statements,
-    EditableNode $right_brace,
+    private ?LeftBraceToken $leftBrace,
+    private ?EditableList<EditableNode> $statements,
+    private ?RightBraceToken $rightBrace,
   ) {
     parent::__construct('compound_statement');
-    $this->_left_brace = $left_brace;
-    $this->_statements = $statements;
-    $this->_right_brace = $right_brace;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class CompoundStatement extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_brace = EditableNode::fromJSON(
+    $left_brace = LeftBraceToken::fromJSON(
       /* UNSAFE_EXPR */ $json['compound_left_brace'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_brace->getWidth();
-    $statements = EditableNode::fromJSON(
+    $statements = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['compound_statements'],
       $file,
       $offset,
       $source,
     );
     $offset += $statements->getWidth();
-    $right_brace = EditableNode::fromJSON(
+    $right_brace = RightBraceToken::fromJSON(
       /* UNSAFE_EXPR */ $json['compound_right_brace'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class CompoundStatement extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_brace' => $this->_left_brace,
-      'statements' => $this->_statements,
-      'right_brace' => $this->_right_brace,
+      'left_brace' => $this->leftBrace,
+      'statements' => $this->statements,
+      'right_brace' => $this->rightBrace,
     ];
   }
 
@@ -72,112 +65,112 @@ final class CompoundStatement extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_brace = $this->_left_brace->rewrite($rewriter, $parents);
-    $statements = $this->_statements->rewrite($rewriter, $parents);
-    $right_brace = $this->_right_brace->rewrite($rewriter, $parents);
+    $left_brace = $this->leftBrace?->rewrite($rewriter, $parents);
+    $statements = $this->statements?->rewrite($rewriter, $parents);
+    $right_brace = $this->rightBrace?->rewrite($rewriter, $parents);
     if (
-      $left_brace === $this->_left_brace &&
-      $statements === $this->_statements &&
-      $right_brace === $this->_right_brace
+      $left_brace === $this->leftBrace &&
+      $statements === $this->statements &&
+      $right_brace === $this->rightBrace
     ) {
       return $this;
     }
     return new static($left_brace, $statements, $right_brace);
   }
 
-  public function getLeftBraceUNTYPED(): EditableNode {
-    return $this->_left_brace;
+  final public function getLeftBraceUNTYPED(): EditableNode {
+    return $this->leftBrace;
   }
 
-  public function withLeftBrace(EditableNode $value): this {
-    if ($value === $this->_left_brace) {
+  public function withLeftBrace(?LeftBraceToken $value): this {
+    if ($value === $this->leftBrace) {
       return $this;
     }
-    return new static($value, $this->_statements, $this->_right_brace);
+    return new static($value, $this->statements, $this->right_brace);
   }
 
   public function hasLeftBrace(): bool {
-    return !$this->_left_brace->isMissing();
+    return $this->leftBrace !== null;
   }
 
   /**
    * @returns Missing | LeftBraceToken
    */
   public function getLeftBrace(): ?LeftBraceToken {
-    if ($this->_left_brace->isMissing()) {
+    if ($this->leftBrace->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(LeftBraceToken::class, $this->_left_brace);
+    return TypeAssert\instance_of(LeftBraceToken::class, $this->leftBrace);
   }
 
   /**
    * @returns LeftBraceToken
    */
   public function getLeftBracex(): LeftBraceToken {
-    return TypeAssert\instance_of(LeftBraceToken::class, $this->_left_brace);
+    return TypeAssert\instance_of(LeftBraceToken::class, $this->leftBrace);
   }
 
-  public function getStatementsUNTYPED(): EditableNode {
-    return $this->_statements;
+  final public function getStatementsUNTYPED(): EditableNode {
+    return $this->statements;
   }
 
-  public function withStatements(EditableNode $value): this {
-    if ($value === $this->_statements) {
+  public function withStatements(?EditableList<EditableNode> $value): this {
+    if ($value === $this->statements) {
       return $this;
     }
-    return new static($this->_left_brace, $value, $this->_right_brace);
+    return new static($this->left_brace, $value, $this->right_brace);
   }
 
   public function hasStatements(): bool {
-    return !$this->_statements->isMissing();
+    return $this->statements !== null;
   }
 
   /**
    * @returns EditableList<EditableNode> | Missing
    */
   public function getStatements(): ?EditableList<EditableNode> {
-    if ($this->_statements->isMissing()) {
+    if ($this->statements->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableList::class, $this->_statements);
+    return TypeAssert\instance_of(EditableList::class, $this->statements);
   }
 
   /**
    * @returns EditableList<EditableNode>
    */
   public function getStatementsx(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_statements);
+    return TypeAssert\instance_of(EditableList::class, $this->statements);
   }
 
-  public function getRightBraceUNTYPED(): EditableNode {
-    return $this->_right_brace;
+  final public function getRightBraceUNTYPED(): EditableNode {
+    return $this->rightBrace;
   }
 
-  public function withRightBrace(EditableNode $value): this {
-    if ($value === $this->_right_brace) {
+  public function withRightBrace(?RightBraceToken $value): this {
+    if ($value === $this->rightBrace) {
       return $this;
     }
-    return new static($this->_left_brace, $this->_statements, $value);
+    return new static($this->left_brace, $this->statements, $value);
   }
 
   public function hasRightBrace(): bool {
-    return !$this->_right_brace->isMissing();
+    return $this->rightBrace !== null;
   }
 
   /**
    * @returns Missing | RightBraceToken
    */
   public function getRightBrace(): ?RightBraceToken {
-    if ($this->_right_brace->isMissing()) {
+    if ($this->rightBrace->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(RightBraceToken::class, $this->_right_brace);
+    return TypeAssert\instance_of(RightBraceToken::class, $this->rightBrace);
   }
 
   /**
    * @returns RightBraceToken
    */
   public function getRightBracex(): RightBraceToken {
-    return TypeAssert\instance_of(RightBraceToken::class, $this->_right_brace);
+    return TypeAssert\instance_of(RightBraceToken::class, $this->rightBrace);
   }
 }

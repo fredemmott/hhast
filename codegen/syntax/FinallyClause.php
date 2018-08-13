@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<1cdab1a5365210762fadedd2153ced8a>>
+ * @generated SignedSource<<d0e62e9aba96d167f51aa023463c250d>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class FinallyClause extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_body;
-
-  public function __construct(EditableNode $keyword, EditableNode $body) {
+  public function __construct(
+    private FinallyToken $keyword,
+    private CompoundStatement $body,
+  ) {
     parent::__construct('finally_clause');
-    $this->_keyword = $keyword;
-    $this->_body = $body;
   }
 
   <<__Override>>
@@ -26,14 +24,14 @@ final class FinallyClause extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = FinallyToken::fromJSON(
       /* UNSAFE_EXPR */ $json['finally_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $body = EditableNode::fromJSON(
+    $body = CompoundStatement::fromJSON(
       /* UNSAFE_EXPR */ $json['finally_body'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class FinallyClause extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'body' => $this->_body,
+      'keyword' => $this->keyword,
+      'body' => $this->body,
     ];
   }
 
@@ -58,34 +56,34 @@ final class FinallyClause extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $body = $this->_body->rewrite($rewriter, $parents);
-    if ($keyword === $this->_keyword && $body === $this->_body) {
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $body = $this->body->rewrite($rewriter, $parents);
+    if ($keyword === $this->keyword && $body === $this->body) {
       return $this;
     }
     return new static($keyword, $body);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(FinallyToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_body);
+    return new static($value, $this->body);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns FinallyToken
    */
   public function getKeyword(): FinallyToken {
-    return TypeAssert\instance_of(FinallyToken::class, $this->_keyword);
+    return TypeAssert\instance_of(FinallyToken::class, $this->keyword);
   }
 
   /**
@@ -95,26 +93,26 @@ final class FinallyClause extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getBodyUNTYPED(): EditableNode {
-    return $this->_body;
+  final public function getBodyUNTYPED(): EditableNode {
+    return $this->body;
   }
 
-  public function withBody(EditableNode $value): this {
-    if ($value === $this->_body) {
+  public function withBody(CompoundStatement $value): this {
+    if ($value === $this->body) {
       return $this;
     }
-    return new static($this->_keyword, $value);
+    return new static($this->keyword, $value);
   }
 
   public function hasBody(): bool {
-    return !$this->_body->isMissing();
+    return $this->body !== null;
   }
 
   /**
    * @returns CompoundStatement
    */
   public function getBody(): CompoundStatement {
-    return TypeAssert\instance_of(CompoundStatement::class, $this->_body);
+    return TypeAssert\instance_of(CompoundStatement::class, $this->body);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<46946695a433feb860a6573dba18cea1>>
+ * @generated SignedSource<<8fcdad3731f4412b2e10e3d82edf3d93>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,8 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class SoftTypeSpecifier extends EditableNode {
 
-  private EditableNode $_at;
-  private EditableNode $_type;
-
-  public function __construct(EditableNode $at, EditableNode $type) {
+  public function __construct(private AtToken $at, private EditableNode $type) {
     parent::__construct('soft_type_specifier');
-    $this->_at = $at;
-    $this->_type = $type;
   }
 
   <<__Override>>
@@ -26,7 +21,7 @@ final class SoftTypeSpecifier extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $at = EditableNode::fromJSON(
+    $at = AtToken::fromJSON(
       /* UNSAFE_EXPR */ $json['soft_at'],
       $file,
       $offset,
@@ -44,10 +39,10 @@ final class SoftTypeSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'at' => $this->_at,
-      'type' => $this->_type,
+      'at' => $this->at,
+      'type' => $this->type,
     ];
   }
 
@@ -58,34 +53,34 @@ final class SoftTypeSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $at = $this->_at->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
-    if ($at === $this->_at && $type === $this->_type) {
+    $at = $this->at->rewrite($rewriter, $parents);
+    $type = $this->type->rewrite($rewriter, $parents);
+    if ($at === $this->at && $type === $this->type) {
       return $this;
     }
     return new static($at, $type);
   }
 
-  public function getAtUNTYPED(): EditableNode {
-    return $this->_at;
+  final public function getAtUNTYPED(): EditableNode {
+    return $this->at;
   }
 
-  public function withAt(EditableNode $value): this {
-    if ($value === $this->_at) {
+  public function withAt(AtToken $value): this {
+    if ($value === $this->at) {
       return $this;
     }
-    return new static($value, $this->_type);
+    return new static($value, $this->type);
   }
 
   public function hasAt(): bool {
-    return !$this->_at->isMissing();
+    return $this->at !== null;
   }
 
   /**
    * @returns AtToken
    */
   public function getAt(): AtToken {
-    return TypeAssert\instance_of(AtToken::class, $this->_at);
+    return TypeAssert\instance_of(AtToken::class, $this->at);
   }
 
   /**
@@ -95,19 +90,19 @@ final class SoftTypeSpecifier extends EditableNode {
     return $this->getAt();
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
   public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+    if ($value === $this->type) {
       return $this;
     }
-    return new static($this->_at, $value);
+    return new static($this->at, $value);
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
@@ -116,7 +111,7 @@ final class SoftTypeSpecifier extends EditableNode {
    * TupleTypeSpecifier
    */
   public function getType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<0d48297f6224a80d50a461959e0ecbe5>>
+ * @generated SignedSource<<79764cbb66f09e5ebf3464e14492fb34>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class TypeParameters extends EditableNode {
 
-  private EditableNode $_left_angle;
-  private EditableNode $_parameters;
-  private EditableNode $_right_angle;
-
   public function __construct(
-    EditableNode $left_angle,
-    EditableNode $parameters,
-    EditableNode $right_angle,
+    private LessThanToken $leftAngle,
+    private EditableList<TypeParameter> $parameters,
+    private GreaterThanToken $rightAngle,
   ) {
     parent::__construct('type_parameters');
-    $this->_left_angle = $left_angle;
-    $this->_parameters = $parameters;
-    $this->_right_angle = $right_angle;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class TypeParameters extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_angle = EditableNode::fromJSON(
+    $left_angle = LessThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_parameters_left_angle'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_angle->getWidth();
-    $parameters = EditableNode::fromJSON(
+    $parameters = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['type_parameters_parameters'],
       $file,
       $offset,
       $source,
     );
     $offset += $parameters->getWidth();
-    $right_angle = EditableNode::fromJSON(
+    $right_angle = GreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_parameters_right_angle'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class TypeParameters extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_angle' => $this->_left_angle,
-      'parameters' => $this->_parameters,
-      'right_angle' => $this->_right_angle,
+      'left_angle' => $this->leftAngle,
+      'parameters' => $this->parameters,
+      'right_angle' => $this->rightAngle,
     ];
   }
 
@@ -72,39 +65,39 @@ final class TypeParameters extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_angle = $this->_left_angle->rewrite($rewriter, $parents);
-    $parameters = $this->_parameters->rewrite($rewriter, $parents);
-    $right_angle = $this->_right_angle->rewrite($rewriter, $parents);
+    $left_angle = $this->leftAngle->rewrite($rewriter, $parents);
+    $parameters = $this->parameters->rewrite($rewriter, $parents);
+    $right_angle = $this->rightAngle->rewrite($rewriter, $parents);
     if (
-      $left_angle === $this->_left_angle &&
-      $parameters === $this->_parameters &&
-      $right_angle === $this->_right_angle
+      $left_angle === $this->leftAngle &&
+      $parameters === $this->parameters &&
+      $right_angle === $this->rightAngle
     ) {
       return $this;
     }
     return new static($left_angle, $parameters, $right_angle);
   }
 
-  public function getLeftAngleUNTYPED(): EditableNode {
-    return $this->_left_angle;
+  final public function getLeftAngleUNTYPED(): EditableNode {
+    return $this->leftAngle;
   }
 
-  public function withLeftAngle(EditableNode $value): this {
-    if ($value === $this->_left_angle) {
+  public function withLeftAngle(LessThanToken $value): this {
+    if ($value === $this->leftAngle) {
       return $this;
     }
-    return new static($value, $this->_parameters, $this->_right_angle);
+    return new static($value, $this->parameters, $this->right_angle);
   }
 
   public function hasLeftAngle(): bool {
-    return !$this->_left_angle->isMissing();
+    return $this->leftAngle !== null;
   }
 
   /**
    * @returns LessThanToken
    */
   public function getLeftAngle(): LessThanToken {
-    return TypeAssert\instance_of(LessThanToken::class, $this->_left_angle);
+    return TypeAssert\instance_of(LessThanToken::class, $this->leftAngle);
   }
 
   /**
@@ -114,26 +107,26 @@ final class TypeParameters extends EditableNode {
     return $this->getLeftAngle();
   }
 
-  public function getParametersUNTYPED(): EditableNode {
-    return $this->_parameters;
+  final public function getParametersUNTYPED(): EditableNode {
+    return $this->parameters;
   }
 
-  public function withParameters(EditableNode $value): this {
-    if ($value === $this->_parameters) {
+  public function withParameters(EditableList<TypeParameter> $value): this {
+    if ($value === $this->parameters) {
       return $this;
     }
-    return new static($this->_left_angle, $value, $this->_right_angle);
+    return new static($this->left_angle, $value, $this->right_angle);
   }
 
   public function hasParameters(): bool {
-    return !$this->_parameters->isMissing();
+    return $this->parameters !== null;
   }
 
   /**
    * @returns EditableList<TypeParameter>
    */
   public function getParameters(): EditableList<TypeParameter> {
-    return TypeAssert\instance_of(EditableList::class, $this->_parameters);
+    return TypeAssert\instance_of(EditableList::class, $this->parameters);
   }
 
   /**
@@ -143,26 +136,26 @@ final class TypeParameters extends EditableNode {
     return $this->getParameters();
   }
 
-  public function getRightAngleUNTYPED(): EditableNode {
-    return $this->_right_angle;
+  final public function getRightAngleUNTYPED(): EditableNode {
+    return $this->rightAngle;
   }
 
-  public function withRightAngle(EditableNode $value): this {
-    if ($value === $this->_right_angle) {
+  public function withRightAngle(GreaterThanToken $value): this {
+    if ($value === $this->rightAngle) {
       return $this;
     }
-    return new static($this->_left_angle, $this->_parameters, $value);
+    return new static($this->left_angle, $this->parameters, $value);
   }
 
   public function hasRightAngle(): bool {
-    return !$this->_right_angle->isMissing();
+    return $this->rightAngle !== null;
   }
 
   /**
    * @returns GreaterThanToken
    */
   public function getRightAngle(): GreaterThanToken {
-    return TypeAssert\instance_of(GreaterThanToken::class, $this->_right_angle);
+    return TypeAssert\instance_of(GreaterThanToken::class, $this->rightAngle);
   }
 
   /**

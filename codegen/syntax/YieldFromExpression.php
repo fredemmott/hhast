@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<00647d20bf77b9010554b131680a31a1>>
+ * @generated SignedSource<<0620b27b71fb98b88d919f854561e679>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class YieldFromExpression extends EditableNode {
 
-  private EditableNode $_yield_keyword;
-  private EditableNode $_from_keyword;
-  private EditableNode $_operand;
-
   public function __construct(
-    EditableNode $yield_keyword,
-    EditableNode $from_keyword,
-    EditableNode $operand,
+    private YieldToken $yieldKeyword,
+    private FromToken $fromKeyword,
+    private EditableNode $operand,
   ) {
     parent::__construct('yield_from_expression');
-    $this->_yield_keyword = $yield_keyword;
-    $this->_from_keyword = $from_keyword;
-    $this->_operand = $operand;
   }
 
   <<__Override>>
@@ -32,14 +25,14 @@ final class YieldFromExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $yield_keyword = EditableNode::fromJSON(
+    $yield_keyword = YieldToken::fromJSON(
       /* UNSAFE_EXPR */ $json['yield_from_yield_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $yield_keyword->getWidth();
-    $from_keyword = EditableNode::fromJSON(
+    $from_keyword = FromToken::fromJSON(
       /* UNSAFE_EXPR */ $json['yield_from_from_keyword'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class YieldFromExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'yield_keyword' => $this->_yield_keyword,
-      'from_keyword' => $this->_from_keyword,
-      'operand' => $this->_operand,
+      'yield_keyword' => $this->yieldKeyword,
+      'from_keyword' => $this->fromKeyword,
+      'operand' => $this->operand,
     ];
   }
 
@@ -72,39 +65,39 @@ final class YieldFromExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $yield_keyword = $this->_yield_keyword->rewrite($rewriter, $parents);
-    $from_keyword = $this->_from_keyword->rewrite($rewriter, $parents);
-    $operand = $this->_operand->rewrite($rewriter, $parents);
+    $yield_keyword = $this->yieldKeyword->rewrite($rewriter, $parents);
+    $from_keyword = $this->fromKeyword->rewrite($rewriter, $parents);
+    $operand = $this->operand->rewrite($rewriter, $parents);
     if (
-      $yield_keyword === $this->_yield_keyword &&
-      $from_keyword === $this->_from_keyword &&
-      $operand === $this->_operand
+      $yield_keyword === $this->yieldKeyword &&
+      $from_keyword === $this->fromKeyword &&
+      $operand === $this->operand
     ) {
       return $this;
     }
     return new static($yield_keyword, $from_keyword, $operand);
   }
 
-  public function getYieldKeywordUNTYPED(): EditableNode {
-    return $this->_yield_keyword;
+  final public function getYieldKeywordUNTYPED(): EditableNode {
+    return $this->yieldKeyword;
   }
 
-  public function withYieldKeyword(EditableNode $value): this {
-    if ($value === $this->_yield_keyword) {
+  public function withYieldKeyword(YieldToken $value): this {
+    if ($value === $this->yieldKeyword) {
       return $this;
     }
-    return new static($value, $this->_from_keyword, $this->_operand);
+    return new static($value, $this->from_keyword, $this->operand);
   }
 
   public function hasYieldKeyword(): bool {
-    return !$this->_yield_keyword->isMissing();
+    return $this->yieldKeyword !== null;
   }
 
   /**
    * @returns YieldToken
    */
   public function getYieldKeyword(): YieldToken {
-    return TypeAssert\instance_of(YieldToken::class, $this->_yield_keyword);
+    return TypeAssert\instance_of(YieldToken::class, $this->yieldKeyword);
   }
 
   /**
@@ -114,26 +107,26 @@ final class YieldFromExpression extends EditableNode {
     return $this->getYieldKeyword();
   }
 
-  public function getFromKeywordUNTYPED(): EditableNode {
-    return $this->_from_keyword;
+  final public function getFromKeywordUNTYPED(): EditableNode {
+    return $this->fromKeyword;
   }
 
-  public function withFromKeyword(EditableNode $value): this {
-    if ($value === $this->_from_keyword) {
+  public function withFromKeyword(FromToken $value): this {
+    if ($value === $this->fromKeyword) {
       return $this;
     }
-    return new static($this->_yield_keyword, $value, $this->_operand);
+    return new static($this->yield_keyword, $value, $this->operand);
   }
 
   public function hasFromKeyword(): bool {
-    return !$this->_from_keyword->isMissing();
+    return $this->fromKeyword !== null;
   }
 
   /**
    * @returns FromToken
    */
   public function getFromKeyword(): FromToken {
-    return TypeAssert\instance_of(FromToken::class, $this->_from_keyword);
+    return TypeAssert\instance_of(FromToken::class, $this->fromKeyword);
   }
 
   /**
@@ -143,19 +136,19 @@ final class YieldFromExpression extends EditableNode {
     return $this->getFromKeyword();
   }
 
-  public function getOperandUNTYPED(): EditableNode {
-    return $this->_operand;
+  final public function getOperandUNTYPED(): EditableNode {
+    return $this->operand;
   }
 
   public function withOperand(EditableNode $value): this {
-    if ($value === $this->_operand) {
+    if ($value === $this->operand) {
       return $this;
     }
-    return new static($this->_yield_keyword, $this->_from_keyword, $value);
+    return new static($this->yield_keyword, $this->from_keyword, $value);
   }
 
   public function hasOperand(): bool {
-    return !$this->_operand->isMissing();
+    return $this->operand !== null;
   }
 
   /**
@@ -163,7 +156,7 @@ final class YieldFromExpression extends EditableNode {
    * LiteralExpression | ParenthesizedExpression | VariableExpression
    */
   public function getOperand(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_operand);
+    return TypeAssert\instance_of(EditableNode::class, $this->operand);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<4b017b0d98ac3e88116d3f133dcf6940>>
+ * @generated SignedSource<<3e5965d907e47b77d83d334eddff0466>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,11 +10,8 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class XHPSimpleClassAttribute extends EditableNode {
 
-  private EditableNode $_type;
-
-  public function __construct(EditableNode $type) {
+  public function __construct(private SimpleTypeSpecifier $type) {
     parent::__construct('xhp_simple_class_attribute');
-    $this->_type = $type;
   }
 
   <<__Override>>
@@ -24,7 +21,7 @@ final class XHPSimpleClassAttribute extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $type = EditableNode::fromJSON(
+    $type = SimpleTypeSpecifier::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_simple_class_attribute_type'],
       $file,
       $offset,
@@ -35,9 +32,9 @@ final class XHPSimpleClassAttribute extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'type' => $this->_type,
+      'type' => $this->type,
     ];
   }
 
@@ -48,33 +45,33 @@ final class XHPSimpleClassAttribute extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $type = $this->_type->rewrite($rewriter, $parents);
-    if ($type === $this->_type) {
+    $type = $this->type->rewrite($rewriter, $parents);
+    if ($type === $this->type) {
       return $this;
     }
     return new static($type);
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
-  public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+  public function withType(SimpleTypeSpecifier $value): this {
+    if ($value === $this->type) {
       return $this;
     }
     return new static($value);
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
    * @returns SimpleTypeSpecifier
    */
   public function getType(): SimpleTypeSpecifier {
-    return TypeAssert\instance_of(SimpleTypeSpecifier::class, $this->_type);
+    return TypeAssert\instance_of(SimpleTypeSpecifier::class, $this->type);
   }
 
   /**

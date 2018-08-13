@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<4d8f82d11d03806c8cbd84c64772fc2a>>
+ * @generated SignedSource<<28410e3622b598ad56e75089df9f2336>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class AttributeSpecification extends EditableNode {
 
-  private EditableNode $_left_double_angle;
-  private EditableNode $_attributes;
-  private EditableNode $_right_double_angle;
-
   public function __construct(
-    EditableNode $left_double_angle,
-    EditableNode $attributes,
-    EditableNode $right_double_angle,
+    private LessThanLessThanToken $leftDoubleAngle,
+    private EditableList<Attribute> $attributes,
+    private GreaterThanGreaterThanToken $rightDoubleAngle,
   ) {
     parent::__construct('attribute_specification');
-    $this->_left_double_angle = $left_double_angle;
-    $this->_attributes = $attributes;
-    $this->_right_double_angle = $right_double_angle;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class AttributeSpecification extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $left_double_angle = EditableNode::fromJSON(
+    $left_double_angle = LessThanLessThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['attribute_specification_left_double_angle'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_double_angle->getWidth();
-    $attributes = EditableNode::fromJSON(
+    $attributes = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['attribute_specification_attributes'],
       $file,
       $offset,
       $source,
     );
     $offset += $attributes->getWidth();
-    $right_double_angle = EditableNode::fromJSON(
+    $right_double_angle = GreaterThanGreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['attribute_specification_right_double_angle'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class AttributeSpecification extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_double_angle' => $this->_left_double_angle,
-      'attributes' => $this->_attributes,
-      'right_double_angle' => $this->_right_double_angle,
+      'left_double_angle' => $this->leftDoubleAngle,
+      'attributes' => $this->attributes,
+      'right_double_angle' => $this->rightDoubleAngle,
     ];
   }
 
@@ -72,34 +65,32 @@ final class AttributeSpecification extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_double_angle =
-      $this->_left_double_angle->rewrite($rewriter, $parents);
-    $attributes = $this->_attributes->rewrite($rewriter, $parents);
-    $right_double_angle =
-      $this->_right_double_angle->rewrite($rewriter, $parents);
+    $left_double_angle = $this->leftDoubleAngle->rewrite($rewriter, $parents);
+    $attributes = $this->attributes->rewrite($rewriter, $parents);
+    $right_double_angle = $this->rightDoubleAngle->rewrite($rewriter, $parents);
     if (
-      $left_double_angle === $this->_left_double_angle &&
-      $attributes === $this->_attributes &&
-      $right_double_angle === $this->_right_double_angle
+      $left_double_angle === $this->leftDoubleAngle &&
+      $attributes === $this->attributes &&
+      $right_double_angle === $this->rightDoubleAngle
     ) {
       return $this;
     }
     return new static($left_double_angle, $attributes, $right_double_angle);
   }
 
-  public function getLeftDoubleAngleUNTYPED(): EditableNode {
-    return $this->_left_double_angle;
+  final public function getLeftDoubleAngleUNTYPED(): EditableNode {
+    return $this->leftDoubleAngle;
   }
 
-  public function withLeftDoubleAngle(EditableNode $value): this {
-    if ($value === $this->_left_double_angle) {
+  public function withLeftDoubleAngle(LessThanLessThanToken $value): this {
+    if ($value === $this->leftDoubleAngle) {
       return $this;
     }
-    return new static($value, $this->_attributes, $this->_right_double_angle);
+    return new static($value, $this->attributes, $this->right_double_angle);
   }
 
   public function hasLeftDoubleAngle(): bool {
-    return !$this->_left_double_angle->isMissing();
+    return $this->leftDoubleAngle !== null;
   }
 
   /**
@@ -108,7 +99,7 @@ final class AttributeSpecification extends EditableNode {
   public function getLeftDoubleAngle(): LessThanLessThanToken {
     return TypeAssert\instance_of(
       LessThanLessThanToken::class,
-      $this->_left_double_angle,
+      $this->leftDoubleAngle,
     );
   }
 
@@ -119,27 +110,27 @@ final class AttributeSpecification extends EditableNode {
     return $this->getLeftDoubleAngle();
   }
 
-  public function getAttributesUNTYPED(): EditableNode {
-    return $this->_attributes;
+  final public function getAttributesUNTYPED(): EditableNode {
+    return $this->attributes;
   }
 
-  public function withAttributes(EditableNode $value): this {
-    if ($value === $this->_attributes) {
+  public function withAttributes(EditableList<Attribute> $value): this {
+    if ($value === $this->attributes) {
       return $this;
     }
     return
-      new static($this->_left_double_angle, $value, $this->_right_double_angle);
+      new static($this->left_double_angle, $value, $this->right_double_angle);
   }
 
   public function hasAttributes(): bool {
-    return !$this->_attributes->isMissing();
+    return $this->attributes !== null;
   }
 
   /**
    * @returns EditableList<Attribute>
    */
   public function getAttributes(): EditableList<Attribute> {
-    return TypeAssert\instance_of(EditableList::class, $this->_attributes);
+    return TypeAssert\instance_of(EditableList::class, $this->attributes);
   }
 
   /**
@@ -149,19 +140,21 @@ final class AttributeSpecification extends EditableNode {
     return $this->getAttributes();
   }
 
-  public function getRightDoubleAngleUNTYPED(): EditableNode {
-    return $this->_right_double_angle;
+  final public function getRightDoubleAngleUNTYPED(): EditableNode {
+    return $this->rightDoubleAngle;
   }
 
-  public function withRightDoubleAngle(EditableNode $value): this {
-    if ($value === $this->_right_double_angle) {
+  public function withRightDoubleAngle(
+    GreaterThanGreaterThanToken $value,
+  ): this {
+    if ($value === $this->rightDoubleAngle) {
       return $this;
     }
-    return new static($this->_left_double_angle, $this->_attributes, $value);
+    return new static($this->left_double_angle, $this->attributes, $value);
   }
 
   public function hasRightDoubleAngle(): bool {
-    return !$this->_right_double_angle->isMissing();
+    return $this->rightDoubleAngle !== null;
   }
 
   /**
@@ -170,7 +163,7 @@ final class AttributeSpecification extends EditableNode {
   public function getRightDoubleAngle(): GreaterThanGreaterThanToken {
     return TypeAssert\instance_of(
       GreaterThanGreaterThanToken::class,
-      $this->_right_double_angle,
+      $this->rightDoubleAngle,
     );
   }
 

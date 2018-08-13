@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<52ad1657e248e81337b7f612c8f576f6>>
+ * @generated SignedSource<<18707ecf63d7fdc5fa6dee60d5bc26f9>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class FunctionStaticStatement extends EditableNode {
 
-  private EditableNode $_static_keyword;
-  private EditableNode $_declarations;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $static_keyword,
-    EditableNode $declarations,
-    EditableNode $semicolon,
+    private StaticToken $staticKeyword,
+    private EditableList<StaticDeclarator> $declarations,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('function_static_statement');
-    $this->_static_keyword = $static_keyword;
-    $this->_declarations = $declarations;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -32,21 +25,21 @@ final class FunctionStaticStatement extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $static_keyword = EditableNode::fromJSON(
+    $static_keyword = StaticToken::fromJSON(
       /* UNSAFE_EXPR */ $json['static_static_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $static_keyword->getWidth();
-    $declarations = EditableNode::fromJSON(
+    $declarations = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['static_declarations'],
       $file,
       $offset,
       $source,
     );
     $offset += $declarations->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['static_semicolon'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class FunctionStaticStatement extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'static_keyword' => $this->_static_keyword,
-      'declarations' => $this->_declarations,
-      'semicolon' => $this->_semicolon,
+      'static_keyword' => $this->staticKeyword,
+      'declarations' => $this->declarations,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -72,39 +65,39 @@ final class FunctionStaticStatement extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $static_keyword = $this->_static_keyword->rewrite($rewriter, $parents);
-    $declarations = $this->_declarations->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $static_keyword = $this->staticKeyword->rewrite($rewriter, $parents);
+    $declarations = $this->declarations->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $static_keyword === $this->_static_keyword &&
-      $declarations === $this->_declarations &&
-      $semicolon === $this->_semicolon
+      $static_keyword === $this->staticKeyword &&
+      $declarations === $this->declarations &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
     return new static($static_keyword, $declarations, $semicolon);
   }
 
-  public function getStaticKeywordUNTYPED(): EditableNode {
-    return $this->_static_keyword;
+  final public function getStaticKeywordUNTYPED(): EditableNode {
+    return $this->staticKeyword;
   }
 
-  public function withStaticKeyword(EditableNode $value): this {
-    if ($value === $this->_static_keyword) {
+  public function withStaticKeyword(StaticToken $value): this {
+    if ($value === $this->staticKeyword) {
       return $this;
     }
-    return new static($value, $this->_declarations, $this->_semicolon);
+    return new static($value, $this->declarations, $this->semicolon);
   }
 
   public function hasStaticKeyword(): bool {
-    return !$this->_static_keyword->isMissing();
+    return $this->staticKeyword !== null;
   }
 
   /**
    * @returns StaticToken
    */
   public function getStaticKeyword(): StaticToken {
-    return TypeAssert\instance_of(StaticToken::class, $this->_static_keyword);
+    return TypeAssert\instance_of(StaticToken::class, $this->staticKeyword);
   }
 
   /**
@@ -114,26 +107,28 @@ final class FunctionStaticStatement extends EditableNode {
     return $this->getStaticKeyword();
   }
 
-  public function getDeclarationsUNTYPED(): EditableNode {
-    return $this->_declarations;
+  final public function getDeclarationsUNTYPED(): EditableNode {
+    return $this->declarations;
   }
 
-  public function withDeclarations(EditableNode $value): this {
-    if ($value === $this->_declarations) {
+  public function withDeclarations(
+    EditableList<StaticDeclarator> $value,
+  ): this {
+    if ($value === $this->declarations) {
       return $this;
     }
-    return new static($this->_static_keyword, $value, $this->_semicolon);
+    return new static($this->static_keyword, $value, $this->semicolon);
   }
 
   public function hasDeclarations(): bool {
-    return !$this->_declarations->isMissing();
+    return $this->declarations !== null;
   }
 
   /**
    * @returns EditableList<StaticDeclarator>
    */
   public function getDeclarations(): EditableList<StaticDeclarator> {
-    return TypeAssert\instance_of(EditableList::class, $this->_declarations);
+    return TypeAssert\instance_of(EditableList::class, $this->declarations);
   }
 
   /**
@@ -143,26 +138,26 @@ final class FunctionStaticStatement extends EditableNode {
     return $this->getDeclarations();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
-    return new static($this->_static_keyword, $this->_declarations, $value);
+    return new static($this->static_keyword, $this->declarations, $value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b061253e00bf5cad5fd6f6e1da4e0a38>>
+ * @generated SignedSource<<0caefb88b551b9a5d573776254c79918>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class BreakStatement extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_level;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $level,
-    EditableNode $semicolon,
+    private BreakToken $keyword,
+    private ?EditableNode $level,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('break_statement');
-    $this->_keyword = $keyword;
-    $this->_level = $level;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -32,7 +25,7 @@ final class BreakStatement extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = BreakToken::fromJSON(
       /* UNSAFE_EXPR */ $json['break_keyword'],
       $file,
       $offset,
@@ -46,7 +39,7 @@ final class BreakStatement extends EditableNode {
       $source,
     );
     $offset += $level->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['break_semicolon'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class BreakStatement extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'level' => $this->_level,
-      'semicolon' => $this->_semicolon,
+      'keyword' => $this->keyword,
+      'level' => $this->level,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -72,39 +65,39 @@ final class BreakStatement extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $level = $this->_level->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $level = $this->level?->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $level === $this->_level &&
-      $semicolon === $this->_semicolon
+      $keyword === $this->keyword &&
+      $level === $this->level &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
     return new static($keyword, $level, $semicolon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(BreakToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_level, $this->_semicolon);
+    return new static($value, $this->level, $this->semicolon);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns BreakToken
    */
   public function getKeyword(): BreakToken {
-    return TypeAssert\instance_of(BreakToken::class, $this->_keyword);
+    return TypeAssert\instance_of(BreakToken::class, $this->keyword);
   }
 
   /**
@@ -114,58 +107,58 @@ final class BreakStatement extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLevelUNTYPED(): EditableNode {
-    return $this->_level;
+  final public function getLevelUNTYPED(): EditableNode {
+    return $this->level;
   }
 
-  public function withLevel(EditableNode $value): this {
-    if ($value === $this->_level) {
+  public function withLevel(?EditableNode $value): this {
+    if ($value === $this->level) {
       return $this;
     }
-    return new static($this->_keyword, $value, $this->_semicolon);
+    return new static($this->keyword, $value, $this->semicolon);
   }
 
   public function hasLevel(): bool {
-    return !$this->_level->isMissing();
+    return $this->level !== null;
   }
 
   /**
    * @returns LiteralExpression | Missing | VariableExpression
    */
   public function getLevel(): ?EditableNode {
-    if ($this->_level->isMissing()) {
+    if ($this->level->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_level);
+    return TypeAssert\instance_of(EditableNode::class, $this->level);
   }
 
   /**
    * @returns LiteralExpression | VariableExpression
    */
   public function getLevelx(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_level);
+    return TypeAssert\instance_of(EditableNode::class, $this->level);
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
-    return new static($this->_keyword, $this->_level, $value);
+    return new static($this->keyword, $this->level, $value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

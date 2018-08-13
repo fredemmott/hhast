@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<43aff8c12ee3eaf77324c4f77b29fddd>>
+ * @generated SignedSource<<2a8f270be7c2466e8da2b0cd97f9e387>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,16 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class WhereClause extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_constraints;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $constraints,
+    private WhereToken $keyword,
+    private EditableList<WhereConstraint> $constraints,
   ) {
     parent::__construct('where_clause');
-    $this->_keyword = $keyword;
-    $this->_constraints = $constraints;
   }
 
   <<__Override>>
@@ -29,14 +24,14 @@ final class WhereClause extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = WhereToken::fromJSON(
       /* UNSAFE_EXPR */ $json['where_clause_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $constraints = EditableNode::fromJSON(
+    $constraints = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['where_clause_constraints'],
       $file,
       $offset,
@@ -47,10 +42,10 @@ final class WhereClause extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'constraints' => $this->_constraints,
+      'keyword' => $this->keyword,
+      'constraints' => $this->constraints,
     ];
   }
 
@@ -61,34 +56,34 @@ final class WhereClause extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $constraints = $this->_constraints->rewrite($rewriter, $parents);
-    if ($keyword === $this->_keyword && $constraints === $this->_constraints) {
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $constraints = $this->constraints->rewrite($rewriter, $parents);
+    if ($keyword === $this->keyword && $constraints === $this->constraints) {
       return $this;
     }
     return new static($keyword, $constraints);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(WhereToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_constraints);
+    return new static($value, $this->constraints);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns WhereToken
    */
   public function getKeyword(): WhereToken {
-    return TypeAssert\instance_of(WhereToken::class, $this->_keyword);
+    return TypeAssert\instance_of(WhereToken::class, $this->keyword);
   }
 
   /**
@@ -98,26 +93,26 @@ final class WhereClause extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getConstraintsUNTYPED(): EditableNode {
-    return $this->_constraints;
+  final public function getConstraintsUNTYPED(): EditableNode {
+    return $this->constraints;
   }
 
-  public function withConstraints(EditableNode $value): this {
-    if ($value === $this->_constraints) {
+  public function withConstraints(EditableList<WhereConstraint> $value): this {
+    if ($value === $this->constraints) {
       return $this;
     }
-    return new static($this->_keyword, $value);
+    return new static($this->keyword, $value);
   }
 
   public function hasConstraints(): bool {
-    return !$this->_constraints->isMissing();
+    return $this->constraints !== null;
   }
 
   /**
    * @returns EditableList<WhereConstraint>
    */
   public function getConstraints(): EditableList<WhereConstraint> {
-    return TypeAssert\instance_of(EditableList::class, $this->_constraints);
+    return TypeAssert\instance_of(EditableList::class, $this->constraints);
   }
 
   /**

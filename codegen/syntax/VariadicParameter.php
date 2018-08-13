@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<2856f5d46ecf2c1b97b2b4789df4ba6c>>
+ * @generated SignedSource<<def77b3c8c5e450dcba7b63c6d16efef>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class VariadicParameter extends EditableNode {
 
-  private EditableNode $_call_convention;
-  private EditableNode $_type;
-  private EditableNode $_ellipsis;
-
   public function __construct(
-    EditableNode $call_convention,
-    EditableNode $type,
-    EditableNode $ellipsis,
+    private ?EditableNode $callConvention,
+    private ?EditableNode $type,
+    private DotDotDotToken $ellipsis,
   ) {
     parent::__construct('variadic_parameter');
-    $this->_call_convention = $call_convention;
-    $this->_type = $type;
-    $this->_ellipsis = $ellipsis;
   }
 
   <<__Override>>
@@ -46,7 +39,7 @@ final class VariadicParameter extends EditableNode {
       $source,
     );
     $offset += $type->getWidth();
-    $ellipsis = EditableNode::fromJSON(
+    $ellipsis = DotDotDotToken::fromJSON(
       /* UNSAFE_EXPR */ $json['variadic_parameter_ellipsis'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class VariadicParameter extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'call_convention' => $this->_call_convention,
-      'type' => $this->_type,
-      'ellipsis' => $this->_ellipsis,
+      'call_convention' => $this->callConvention,
+      'type' => $this->type,
+      'ellipsis' => $this->ellipsis,
     ];
   }
 
@@ -72,64 +65,64 @@ final class VariadicParameter extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $call_convention = $this->_call_convention->rewrite($rewriter, $parents);
-    $type = $this->_type->rewrite($rewriter, $parents);
-    $ellipsis = $this->_ellipsis->rewrite($rewriter, $parents);
+    $call_convention = $this->callConvention?->rewrite($rewriter, $parents);
+    $type = $this->type?->rewrite($rewriter, $parents);
+    $ellipsis = $this->ellipsis->rewrite($rewriter, $parents);
     if (
-      $call_convention === $this->_call_convention &&
-      $type === $this->_type &&
-      $ellipsis === $this->_ellipsis
+      $call_convention === $this->callConvention &&
+      $type === $this->type &&
+      $ellipsis === $this->ellipsis
     ) {
       return $this;
     }
     return new static($call_convention, $type, $ellipsis);
   }
 
-  public function getCallConventionUNTYPED(): EditableNode {
-    return $this->_call_convention;
+  final public function getCallConventionUNTYPED(): EditableNode {
+    return $this->callConvention;
   }
 
-  public function withCallConvention(EditableNode $value): this {
-    if ($value === $this->_call_convention) {
+  public function withCallConvention(?EditableNode $value): this {
+    if ($value === $this->callConvention) {
       return $this;
     }
-    return new static($value, $this->_type, $this->_ellipsis);
+    return new static($value, $this->type, $this->ellipsis);
   }
 
   public function hasCallConvention(): bool {
-    return !$this->_call_convention->isMissing();
+    return $this->callConvention !== null;
   }
 
   /**
    * @returns Missing
    */
   public function getCallConvention(): ?EditableNode {
-    if ($this->_call_convention->isMissing()) {
+    if ($this->callConvention->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_call_convention);
+    return TypeAssert\instance_of(EditableNode::class, $this->callConvention);
   }
 
   /**
    * @returns
    */
   public function getCallConventionx(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_call_convention);
+    return TypeAssert\instance_of(EditableNode::class, $this->callConvention);
   }
 
-  public function getTypeUNTYPED(): EditableNode {
-    return $this->_type;
+  final public function getTypeUNTYPED(): EditableNode {
+    return $this->type;
   }
 
-  public function withType(EditableNode $value): this {
-    if ($value === $this->_type) {
+  public function withType(?EditableNode $value): this {
+    if ($value === $this->type) {
       return $this;
     }
-    return new static($this->_call_convention, $value, $this->_ellipsis);
+    return new static($this->call_convention, $value, $this->ellipsis);
   }
 
   public function hasType(): bool {
-    return !$this->_type->isMissing();
+    return $this->type !== null;
   }
 
   /**
@@ -137,39 +130,39 @@ final class VariadicParameter extends EditableNode {
    * TupleTypeSpecifier
    */
   public function getType(): ?EditableNode {
-    if ($this->_type->isMissing()) {
+    if ($this->type->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
   /**
    * @returns ClosureTypeSpecifier | SimpleTypeSpecifier | TupleTypeSpecifier
    */
   public function getTypex(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->type);
   }
 
-  public function getEllipsisUNTYPED(): EditableNode {
-    return $this->_ellipsis;
+  final public function getEllipsisUNTYPED(): EditableNode {
+    return $this->ellipsis;
   }
 
-  public function withEllipsis(EditableNode $value): this {
-    if ($value === $this->_ellipsis) {
+  public function withEllipsis(DotDotDotToken $value): this {
+    if ($value === $this->ellipsis) {
       return $this;
     }
-    return new static($this->_call_convention, $this->_type, $value);
+    return new static($this->call_convention, $this->type, $value);
   }
 
   public function hasEllipsis(): bool {
-    return !$this->_ellipsis->isMissing();
+    return $this->ellipsis !== null;
   }
 
   /**
    * @returns DotDotDotToken
    */
   public function getEllipsis(): DotDotDotToken {
-    return TypeAssert\instance_of(DotDotDotToken::class, $this->_ellipsis);
+    return TypeAssert\instance_of(DotDotDotToken::class, $this->ellipsis);
   }
 
   /**

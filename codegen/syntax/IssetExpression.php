@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9fd5e9d9809d3513907a5b15f0d97c34>>
+ * @generated SignedSource<<f642bb45d465af094cd35fcd147791b5>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class IssetExpression extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_paren;
-  private EditableNode $_argument_list;
-  private EditableNode $_right_paren;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_paren,
-    EditableNode $argument_list,
-    EditableNode $right_paren,
+    private IssetToken $keyword,
+    private LeftParenToken $leftParen,
+    private EditableList<EditableNode> $argumentList,
+    private RightParenToken $rightParen,
   ) {
     parent::__construct('isset_expression');
-    $this->_keyword = $keyword;
-    $this->_left_paren = $left_paren;
-    $this->_argument_list = $argument_list;
-    $this->_right_paren = $right_paren;
   }
 
   <<__Override>>
@@ -35,28 +26,28 @@ final class IssetExpression extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = IssetToken::fromJSON(
       /* UNSAFE_EXPR */ $json['isset_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_paren = EditableNode::fromJSON(
+    $left_paren = LeftParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['isset_left_paren'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_paren->getWidth();
-    $argument_list = EditableNode::fromJSON(
+    $argument_list = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['isset_argument_list'],
       $file,
       $offset,
       $source,
     );
     $offset += $argument_list->getWidth();
-    $right_paren = EditableNode::fromJSON(
+    $right_paren = RightParenToken::fromJSON(
       /* UNSAFE_EXPR */ $json['isset_right_paren'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class IssetExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_paren' => $this->_left_paren,
-      'argument_list' => $this->_argument_list,
-      'right_paren' => $this->_right_paren,
+      'keyword' => $this->keyword,
+      'left_paren' => $this->leftParen,
+      'argument_list' => $this->argumentList,
+      'right_paren' => $this->rightParen,
     ];
   }
 
@@ -83,46 +74,46 @@ final class IssetExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_paren = $this->_left_paren->rewrite($rewriter, $parents);
-    $argument_list = $this->_argument_list->rewrite($rewriter, $parents);
-    $right_paren = $this->_right_paren->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_paren = $this->leftParen->rewrite($rewriter, $parents);
+    $argument_list = $this->argumentList->rewrite($rewriter, $parents);
+    $right_paren = $this->rightParen->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_paren === $this->_left_paren &&
-      $argument_list === $this->_argument_list &&
-      $right_paren === $this->_right_paren
+      $keyword === $this->keyword &&
+      $left_paren === $this->leftParen &&
+      $argument_list === $this->argumentList &&
+      $right_paren === $this->rightParen
     ) {
       return $this;
     }
     return new static($keyword, $left_paren, $argument_list, $right_paren);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(IssetToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_paren,
-      $this->_argument_list,
-      $this->_right_paren,
+      $this->left_paren,
+      $this->argument_list,
+      $this->right_paren,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns IssetToken
    */
   public function getKeyword(): IssetToken {
-    return TypeAssert\instance_of(IssetToken::class, $this->_keyword);
+    return TypeAssert\instance_of(IssetToken::class, $this->keyword);
   }
 
   /**
@@ -132,31 +123,31 @@ final class IssetExpression extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftParenUNTYPED(): EditableNode {
-    return $this->_left_paren;
+  final public function getLeftParenUNTYPED(): EditableNode {
+    return $this->leftParen;
   }
 
-  public function withLeftParen(EditableNode $value): this {
-    if ($value === $this->_left_paren) {
+  public function withLeftParen(LeftParenToken $value): this {
+    if ($value === $this->leftParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_argument_list,
-      $this->_right_paren,
+      $this->argument_list,
+      $this->right_paren,
     );
   }
 
   public function hasLeftParen(): bool {
-    return !$this->_left_paren->isMissing();
+    return $this->leftParen !== null;
   }
 
   /**
    * @returns LeftParenToken
    */
   public function getLeftParen(): LeftParenToken {
-    return TypeAssert\instance_of(LeftParenToken::class, $this->_left_paren);
+    return TypeAssert\instance_of(LeftParenToken::class, $this->leftParen);
   }
 
   /**
@@ -166,24 +157,20 @@ final class IssetExpression extends EditableNode {
     return $this->getLeftParen();
   }
 
-  public function getArgumentListUNTYPED(): EditableNode {
-    return $this->_argument_list;
+  final public function getArgumentListUNTYPED(): EditableNode {
+    return $this->argumentList;
   }
 
-  public function withArgumentList(EditableNode $value): this {
-    if ($value === $this->_argument_list) {
+  public function withArgumentList(EditableList<EditableNode> $value): this {
+    if ($value === $this->argumentList) {
       return $this;
     }
-    return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $value,
-      $this->_right_paren,
-    );
+    return
+      new static($this->keyword, $this->left_paren, $value, $this->right_paren);
   }
 
   public function hasArgumentList(): bool {
-    return !$this->_argument_list->isMissing();
+    return $this->argumentList !== null;
   }
 
   /**
@@ -195,7 +182,7 @@ final class IssetExpression extends EditableNode {
    * EditableList<SubscriptExpression> | EditableList<VariableExpression>
    */
   public function getArgumentList(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_argument_list);
+    return TypeAssert\instance_of(EditableList::class, $this->argumentList);
   }
 
   /**
@@ -210,31 +197,31 @@ final class IssetExpression extends EditableNode {
     return $this->getArgumentList();
   }
 
-  public function getRightParenUNTYPED(): EditableNode {
-    return $this->_right_paren;
+  final public function getRightParenUNTYPED(): EditableNode {
+    return $this->rightParen;
   }
 
-  public function withRightParen(EditableNode $value): this {
-    if ($value === $this->_right_paren) {
+  public function withRightParen(RightParenToken $value): this {
+    if ($value === $this->rightParen) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_paren,
-      $this->_argument_list,
+      $this->keyword,
+      $this->left_paren,
+      $this->argument_list,
       $value,
     );
   }
 
   public function hasRightParen(): bool {
-    return !$this->_right_paren->isMissing();
+    return $this->rightParen !== null;
   }
 
   /**
    * @returns RightParenToken
    */
   public function getRightParen(): RightParenToken {
-    return TypeAssert\instance_of(RightParenToken::class, $this->_right_paren);
+    return TypeAssert\instance_of(RightParenToken::class, $this->rightParen);
   }
 
   /**

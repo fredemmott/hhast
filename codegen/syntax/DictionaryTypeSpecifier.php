@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<15257798cec262aae7022dae37566f98>>
+ * @generated SignedSource<<b1eb0b47a38952fca035f1579ee9d345>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,22 +10,13 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class DictionaryTypeSpecifier extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_angle;
-  private EditableNode $_members;
-  private EditableNode $_right_angle;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_angle,
-    EditableNode $members,
-    EditableNode $right_angle,
+    private DictToken $keyword,
+    private LessThanToken $leftAngle,
+    private EditableList<EditableNode> $members,
+    private GreaterThanToken $rightAngle,
   ) {
     parent::__construct('dictionary_type_specifier');
-    $this->_keyword = $keyword;
-    $this->_left_angle = $left_angle;
-    $this->_members = $members;
-    $this->_right_angle = $right_angle;
   }
 
   <<__Override>>
@@ -35,28 +26,28 @@ final class DictionaryTypeSpecifier extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = DictToken::fromJSON(
       /* UNSAFE_EXPR */ $json['dictionary_type_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_angle = EditableNode::fromJSON(
+    $left_angle = LessThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['dictionary_type_left_angle'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_angle->getWidth();
-    $members = EditableNode::fromJSON(
+    $members = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['dictionary_type_members'],
       $file,
       $offset,
       $source,
     );
     $offset += $members->getWidth();
-    $right_angle = EditableNode::fromJSON(
+    $right_angle = GreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['dictionary_type_right_angle'],
       $file,
       $offset,
@@ -67,12 +58,12 @@ final class DictionaryTypeSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_angle' => $this->_left_angle,
-      'members' => $this->_members,
-      'right_angle' => $this->_right_angle,
+      'keyword' => $this->keyword,
+      'left_angle' => $this->leftAngle,
+      'members' => $this->members,
+      'right_angle' => $this->rightAngle,
     ];
   }
 
@@ -83,46 +74,42 @@ final class DictionaryTypeSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_angle = $this->_left_angle->rewrite($rewriter, $parents);
-    $members = $this->_members->rewrite($rewriter, $parents);
-    $right_angle = $this->_right_angle->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_angle = $this->leftAngle->rewrite($rewriter, $parents);
+    $members = $this->members->rewrite($rewriter, $parents);
+    $right_angle = $this->rightAngle->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_angle === $this->_left_angle &&
-      $members === $this->_members &&
-      $right_angle === $this->_right_angle
+      $keyword === $this->keyword &&
+      $left_angle === $this->leftAngle &&
+      $members === $this->members &&
+      $right_angle === $this->rightAngle
     ) {
       return $this;
     }
     return new static($keyword, $left_angle, $members, $right_angle);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(DictToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static(
-      $value,
-      $this->_left_angle,
-      $this->_members,
-      $this->_right_angle,
-    );
+    return
+      new static($value, $this->left_angle, $this->members, $this->right_angle);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns DictToken
    */
   public function getKeyword(): DictToken {
-    return TypeAssert\instance_of(DictToken::class, $this->_keyword);
+    return TypeAssert\instance_of(DictToken::class, $this->keyword);
   }
 
   /**
@@ -132,27 +119,27 @@ final class DictionaryTypeSpecifier extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftAngleUNTYPED(): EditableNode {
-    return $this->_left_angle;
+  final public function getLeftAngleUNTYPED(): EditableNode {
+    return $this->leftAngle;
   }
 
-  public function withLeftAngle(EditableNode $value): this {
-    if ($value === $this->_left_angle) {
+  public function withLeftAngle(LessThanToken $value): this {
+    if ($value === $this->leftAngle) {
       return $this;
     }
     return
-      new static($this->_keyword, $value, $this->_members, $this->_right_angle);
+      new static($this->keyword, $value, $this->members, $this->right_angle);
   }
 
   public function hasLeftAngle(): bool {
-    return !$this->_left_angle->isMissing();
+    return $this->leftAngle !== null;
   }
 
   /**
    * @returns LessThanToken
    */
   public function getLeftAngle(): LessThanToken {
-    return TypeAssert\instance_of(LessThanToken::class, $this->_left_angle);
+    return TypeAssert\instance_of(LessThanToken::class, $this->leftAngle);
   }
 
   /**
@@ -162,31 +149,27 @@ final class DictionaryTypeSpecifier extends EditableNode {
     return $this->getLeftAngle();
   }
 
-  public function getMembersUNTYPED(): EditableNode {
-    return $this->_members;
+  final public function getMembersUNTYPED(): EditableNode {
+    return $this->members;
   }
 
-  public function withMembers(EditableNode $value): this {
-    if ($value === $this->_members) {
+  public function withMembers(EditableList<EditableNode> $value): this {
+    if ($value === $this->members) {
       return $this;
     }
-    return new static(
-      $this->_keyword,
-      $this->_left_angle,
-      $value,
-      $this->_right_angle,
-    );
+    return
+      new static($this->keyword, $this->left_angle, $value, $this->right_angle);
   }
 
   public function hasMembers(): bool {
-    return !$this->_members->isMissing();
+    return $this->members !== null;
   }
 
   /**
    * @returns EditableList<EditableNode> | EditableList<SimpleTypeSpecifier>
    */
   public function getMembers(): EditableList<EditableNode> {
-    return TypeAssert\instance_of(EditableList::class, $this->_members);
+    return TypeAssert\instance_of(EditableList::class, $this->members);
   }
 
   /**
@@ -196,27 +179,27 @@ final class DictionaryTypeSpecifier extends EditableNode {
     return $this->getMembers();
   }
 
-  public function getRightAngleUNTYPED(): EditableNode {
-    return $this->_right_angle;
+  final public function getRightAngleUNTYPED(): EditableNode {
+    return $this->rightAngle;
   }
 
-  public function withRightAngle(EditableNode $value): this {
-    if ($value === $this->_right_angle) {
+  public function withRightAngle(GreaterThanToken $value): this {
+    if ($value === $this->rightAngle) {
       return $this;
     }
     return
-      new static($this->_keyword, $this->_left_angle, $this->_members, $value);
+      new static($this->keyword, $this->left_angle, $this->members, $value);
   }
 
   public function hasRightAngle(): bool {
-    return !$this->_right_angle->isMissing();
+    return $this->rightAngle !== null;
   }
 
   /**
    * @returns GreaterThanToken
    */
   public function getRightAngle(): GreaterThanToken {
-    return TypeAssert\instance_of(GreaterThanToken::class, $this->_right_angle);
+    return TypeAssert\instance_of(GreaterThanToken::class, $this->rightAngle);
   }
 
   /**

@@ -93,7 +93,7 @@ abstract class EditableToken extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
       'leading' => $this->getLeading(),
       'trailing' => $this->getTrailing(),
@@ -142,7 +142,7 @@ abstract class EditableToken extends EditableNode {
     string $file,
     int $offset,
     string $source,
-  ): EditableToken {
+  ): this {
     $leading_list = __Private\fold_map(
       /* HH_IGNORE_ERROR[4110] */ $json['leading'],
       ($j, $p) ==> EditableNode::fromJSON($j, $file, $p, $source),
@@ -162,13 +162,16 @@ abstract class EditableToken extends EditableNode {
       $trailing_position,
     );
     $trailing = EditableList::fromItems($trailing_list);
-    return EditableToken::factory(
-      $file,
-      $token_position,
-      /* HH_IGNORE_ERROR[4110] */ $json['kind'],
-      $leading,
-      $trailing,
-      $token_text,
+    return TypeAssert\instance_of(
+      static::class,
+      EditableToken::factory(
+        $file,
+        $token_position,
+        /* HH_IGNORE_ERROR[4110] */ $json['kind'],
+        $leading,
+        $trailing,
+        $token_text,
+      ),
     );
   }
 

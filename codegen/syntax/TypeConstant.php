@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<4d6e2db00b0b43187a1e2d66fd84ef7e>>
+ * @generated SignedSource<<36cb7a8af0139db2565de56684ae8302>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class TypeConstant extends EditableNode {
 
-  private EditableNode $_left_type;
-  private EditableNode $_separator;
-  private EditableNode $_right_type;
-
   public function __construct(
-    EditableNode $left_type,
-    EditableNode $separator,
-    EditableNode $right_type,
+    private EditableNode $leftType,
+    private ColonColonToken $separator,
+    private NameToken $rightType,
   ) {
     parent::__construct('type_constant');
-    $this->_left_type = $left_type;
-    $this->_separator = $separator;
-    $this->_right_type = $right_type;
   }
 
   <<__Override>>
@@ -39,14 +32,14 @@ final class TypeConstant extends EditableNode {
       $source,
     );
     $offset += $left_type->getWidth();
-    $separator = EditableNode::fromJSON(
+    $separator = ColonColonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_constant_separator'],
       $file,
       $offset,
       $source,
     );
     $offset += $separator->getWidth();
-    $right_type = EditableNode::fromJSON(
+    $right_type = NameToken::fromJSON(
       /* UNSAFE_EXPR */ $json['type_constant_right_type'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class TypeConstant extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'left_type' => $this->_left_type,
-      'separator' => $this->_separator,
-      'right_type' => $this->_right_type,
+      'left_type' => $this->leftType,
+      'separator' => $this->separator,
+      'right_type' => $this->rightType,
     ];
   }
 
@@ -72,39 +65,39 @@ final class TypeConstant extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $left_type = $this->_left_type->rewrite($rewriter, $parents);
-    $separator = $this->_separator->rewrite($rewriter, $parents);
-    $right_type = $this->_right_type->rewrite($rewriter, $parents);
+    $left_type = $this->leftType->rewrite($rewriter, $parents);
+    $separator = $this->separator->rewrite($rewriter, $parents);
+    $right_type = $this->rightType->rewrite($rewriter, $parents);
     if (
-      $left_type === $this->_left_type &&
-      $separator === $this->_separator &&
-      $right_type === $this->_right_type
+      $left_type === $this->leftType &&
+      $separator === $this->separator &&
+      $right_type === $this->rightType
     ) {
       return $this;
     }
     return new static($left_type, $separator, $right_type);
   }
 
-  public function getLeftTypeUNTYPED(): EditableNode {
-    return $this->_left_type;
+  final public function getLeftTypeUNTYPED(): EditableNode {
+    return $this->leftType;
   }
 
   public function withLeftType(EditableNode $value): this {
-    if ($value === $this->_left_type) {
+    if ($value === $this->leftType) {
       return $this;
     }
-    return new static($value, $this->_separator, $this->_right_type);
+    return new static($value, $this->separator, $this->right_type);
   }
 
   public function hasLeftType(): bool {
-    return !$this->_left_type->isMissing();
+    return $this->leftType !== null;
   }
 
   /**
    * @returns NameToken | ParentToken | SelfToken | ThisToken | TypeConstant
    */
   public function getLeftType(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_left_type);
+    return TypeAssert\instance_of(EditableNode::class, $this->leftType);
   }
 
   /**
@@ -114,26 +107,26 @@ final class TypeConstant extends EditableNode {
     return $this->getLeftType();
   }
 
-  public function getSeparatorUNTYPED(): EditableNode {
-    return $this->_separator;
+  final public function getSeparatorUNTYPED(): EditableNode {
+    return $this->separator;
   }
 
-  public function withSeparator(EditableNode $value): this {
-    if ($value === $this->_separator) {
+  public function withSeparator(ColonColonToken $value): this {
+    if ($value === $this->separator) {
       return $this;
     }
-    return new static($this->_left_type, $value, $this->_right_type);
+    return new static($this->left_type, $value, $this->right_type);
   }
 
   public function hasSeparator(): bool {
-    return !$this->_separator->isMissing();
+    return $this->separator !== null;
   }
 
   /**
    * @returns ColonColonToken
    */
   public function getSeparator(): ColonColonToken {
-    return TypeAssert\instance_of(ColonColonToken::class, $this->_separator);
+    return TypeAssert\instance_of(ColonColonToken::class, $this->separator);
   }
 
   /**
@@ -143,26 +136,26 @@ final class TypeConstant extends EditableNode {
     return $this->getSeparator();
   }
 
-  public function getRightTypeUNTYPED(): EditableNode {
-    return $this->_right_type;
+  final public function getRightTypeUNTYPED(): EditableNode {
+    return $this->rightType;
   }
 
-  public function withRightType(EditableNode $value): this {
-    if ($value === $this->_right_type) {
+  public function withRightType(NameToken $value): this {
+    if ($value === $this->rightType) {
       return $this;
     }
-    return new static($this->_left_type, $this->_separator, $value);
+    return new static($this->left_type, $this->separator, $value);
   }
 
   public function hasRightType(): bool {
-    return !$this->_right_type->isMissing();
+    return $this->rightType !== null;
   }
 
   /**
    * @returns NameToken
    */
   public function getRightType(): NameToken {
-    return TypeAssert\instance_of(NameToken::class, $this->_right_type);
+    return TypeAssert\instance_of(NameToken::class, $this->rightType);
   }
 
   /**

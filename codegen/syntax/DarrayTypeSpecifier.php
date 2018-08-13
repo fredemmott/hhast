@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b622e43ad9a2d10c498478e5e9685001>>
+ * @generated SignedSource<<45064baeb72ea82a2fa706140665e472>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,31 +10,16 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class DarrayTypeSpecifier extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_left_angle;
-  private EditableNode $_key;
-  private EditableNode $_comma;
-  private EditableNode $_value;
-  private EditableNode $_trailing_comma;
-  private EditableNode $_right_angle;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $left_angle,
-    EditableNode $key,
-    EditableNode $comma,
-    EditableNode $value,
-    EditableNode $trailing_comma,
-    EditableNode $right_angle,
+    private DarrayToken $keyword,
+    private LessThanToken $leftAngle,
+    private SimpleTypeSpecifier $key,
+    private CommaToken $comma,
+    private EditableNode $value,
+    private ?EditableNode $trailingComma,
+    private GreaterThanToken $rightAngle,
   ) {
     parent::__construct('darray_type_specifier');
-    $this->_keyword = $keyword;
-    $this->_left_angle = $left_angle;
-    $this->_key = $key;
-    $this->_comma = $comma;
-    $this->_value = $value;
-    $this->_trailing_comma = $trailing_comma;
-    $this->_right_angle = $right_angle;
   }
 
   <<__Override>>
@@ -44,28 +29,28 @@ final class DarrayTypeSpecifier extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = DarrayToken::fromJSON(
       /* UNSAFE_EXPR */ $json['darray_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_angle = EditableNode::fromJSON(
+    $left_angle = LessThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['darray_left_angle'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_angle->getWidth();
-    $key = EditableNode::fromJSON(
+    $key = SimpleTypeSpecifier::fromJSON(
       /* UNSAFE_EXPR */ $json['darray_key'],
       $file,
       $offset,
       $source,
     );
     $offset += $key->getWidth();
-    $comma = EditableNode::fromJSON(
+    $comma = CommaToken::fromJSON(
       /* UNSAFE_EXPR */ $json['darray_comma'],
       $file,
       $offset,
@@ -86,7 +71,7 @@ final class DarrayTypeSpecifier extends EditableNode {
       $source,
     );
     $offset += $trailing_comma->getWidth();
-    $right_angle = EditableNode::fromJSON(
+    $right_angle = GreaterThanToken::fromJSON(
       /* UNSAFE_EXPR */ $json['darray_right_angle'],
       $file,
       $offset,
@@ -105,15 +90,15 @@ final class DarrayTypeSpecifier extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'left_angle' => $this->_left_angle,
-      'key' => $this->_key,
-      'comma' => $this->_comma,
-      'value' => $this->_value,
-      'trailing_comma' => $this->_trailing_comma,
-      'right_angle' => $this->_right_angle,
+      'keyword' => $this->keyword,
+      'left_angle' => $this->leftAngle,
+      'key' => $this->key,
+      'comma' => $this->comma,
+      'value' => $this->value,
+      'trailing_comma' => $this->trailingComma,
+      'right_angle' => $this->rightAngle,
     ];
   }
 
@@ -124,21 +109,21 @@ final class DarrayTypeSpecifier extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_angle = $this->_left_angle->rewrite($rewriter, $parents);
-    $key = $this->_key->rewrite($rewriter, $parents);
-    $comma = $this->_comma->rewrite($rewriter, $parents);
-    $value = $this->_value->rewrite($rewriter, $parents);
-    $trailing_comma = $this->_trailing_comma->rewrite($rewriter, $parents);
-    $right_angle = $this->_right_angle->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_angle = $this->leftAngle->rewrite($rewriter, $parents);
+    $key = $this->key->rewrite($rewriter, $parents);
+    $comma = $this->comma->rewrite($rewriter, $parents);
+    $value = $this->value->rewrite($rewriter, $parents);
+    $trailing_comma = $this->trailingComma?->rewrite($rewriter, $parents);
+    $right_angle = $this->rightAngle->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $left_angle === $this->_left_angle &&
-      $key === $this->_key &&
-      $comma === $this->_comma &&
-      $value === $this->_value &&
-      $trailing_comma === $this->_trailing_comma &&
-      $right_angle === $this->_right_angle
+      $keyword === $this->keyword &&
+      $left_angle === $this->leftAngle &&
+      $key === $this->key &&
+      $comma === $this->comma &&
+      $value === $this->value &&
+      $trailing_comma === $this->trailingComma &&
+      $right_angle === $this->rightAngle
     ) {
       return $this;
     }
@@ -153,34 +138,34 @@ final class DarrayTypeSpecifier extends EditableNode {
     );
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(DarrayToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
       $value,
-      $this->_left_angle,
-      $this->_key,
-      $this->_comma,
-      $this->_value,
-      $this->_trailing_comma,
-      $this->_right_angle,
+      $this->left_angle,
+      $this->key,
+      $this->comma,
+      $this->value,
+      $this->trailing_comma,
+      $this->right_angle,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns DarrayToken
    */
   public function getKeyword(): DarrayToken {
-    return TypeAssert\instance_of(DarrayToken::class, $this->_keyword);
+    return TypeAssert\instance_of(DarrayToken::class, $this->keyword);
   }
 
   /**
@@ -190,34 +175,34 @@ final class DarrayTypeSpecifier extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftAngleUNTYPED(): EditableNode {
-    return $this->_left_angle;
+  final public function getLeftAngleUNTYPED(): EditableNode {
+    return $this->leftAngle;
   }
 
-  public function withLeftAngle(EditableNode $value): this {
-    if ($value === $this->_left_angle) {
+  public function withLeftAngle(LessThanToken $value): this {
+    if ($value === $this->leftAngle) {
       return $this;
     }
     return new static(
-      $this->_keyword,
+      $this->keyword,
       $value,
-      $this->_key,
-      $this->_comma,
-      $this->_value,
-      $this->_trailing_comma,
-      $this->_right_angle,
+      $this->key,
+      $this->comma,
+      $this->value,
+      $this->trailing_comma,
+      $this->right_angle,
     );
   }
 
   public function hasLeftAngle(): bool {
-    return !$this->_left_angle->isMissing();
+    return $this->leftAngle !== null;
   }
 
   /**
    * @returns LessThanToken
    */
   public function getLeftAngle(): LessThanToken {
-    return TypeAssert\instance_of(LessThanToken::class, $this->_left_angle);
+    return TypeAssert\instance_of(LessThanToken::class, $this->leftAngle);
   }
 
   /**
@@ -227,34 +212,34 @@ final class DarrayTypeSpecifier extends EditableNode {
     return $this->getLeftAngle();
   }
 
-  public function getKeyUNTYPED(): EditableNode {
-    return $this->_key;
+  final public function getKeyUNTYPED(): EditableNode {
+    return $this->key;
   }
 
-  public function withKey(EditableNode $value): this {
-    if ($value === $this->_key) {
+  public function withKey(SimpleTypeSpecifier $value): this {
+    if ($value === $this->key) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_angle,
+      $this->keyword,
+      $this->left_angle,
       $value,
-      $this->_comma,
-      $this->_value,
-      $this->_trailing_comma,
-      $this->_right_angle,
+      $this->comma,
+      $this->value,
+      $this->trailing_comma,
+      $this->right_angle,
     );
   }
 
   public function hasKey(): bool {
-    return !$this->_key->isMissing();
+    return $this->key !== null;
   }
 
   /**
    * @returns SimpleTypeSpecifier
    */
   public function getKey(): SimpleTypeSpecifier {
-    return TypeAssert\instance_of(SimpleTypeSpecifier::class, $this->_key);
+    return TypeAssert\instance_of(SimpleTypeSpecifier::class, $this->key);
   }
 
   /**
@@ -264,34 +249,34 @@ final class DarrayTypeSpecifier extends EditableNode {
     return $this->getKey();
   }
 
-  public function getCommaUNTYPED(): EditableNode {
-    return $this->_comma;
+  final public function getCommaUNTYPED(): EditableNode {
+    return $this->comma;
   }
 
-  public function withComma(EditableNode $value): this {
-    if ($value === $this->_comma) {
+  public function withComma(CommaToken $value): this {
+    if ($value === $this->comma) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_angle,
-      $this->_key,
+      $this->keyword,
+      $this->left_angle,
+      $this->key,
       $value,
-      $this->_value,
-      $this->_trailing_comma,
-      $this->_right_angle,
+      $this->value,
+      $this->trailing_comma,
+      $this->right_angle,
     );
   }
 
   public function hasComma(): bool {
-    return !$this->_comma->isMissing();
+    return $this->comma !== null;
   }
 
   /**
    * @returns CommaToken
    */
   public function getComma(): CommaToken {
-    return TypeAssert\instance_of(CommaToken::class, $this->_comma);
+    return TypeAssert\instance_of(CommaToken::class, $this->comma);
   }
 
   /**
@@ -301,27 +286,27 @@ final class DarrayTypeSpecifier extends EditableNode {
     return $this->getComma();
   }
 
-  public function getValueUNTYPED(): EditableNode {
-    return $this->_value;
+  final public function getValueUNTYPED(): EditableNode {
+    return $this->value;
   }
 
   public function withValue(EditableNode $value): this {
-    if ($value === $this->_value) {
+    if ($value === $this->value) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_angle,
-      $this->_key,
-      $this->_comma,
+      $this->keyword,
+      $this->left_angle,
+      $this->key,
+      $this->comma,
       $value,
-      $this->_trailing_comma,
-      $this->_right_angle,
+      $this->trailing_comma,
+      $this->right_angle,
     );
   }
 
   public function hasValue(): bool {
-    return !$this->_value->isMissing();
+    return $this->value !== null;
   }
 
   /**
@@ -329,7 +314,7 @@ final class DarrayTypeSpecifier extends EditableNode {
    * VectorArrayTypeSpecifier
    */
   public function getValue(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_value);
+    return TypeAssert\instance_of(EditableNode::class, $this->value);
   }
 
   /**
@@ -340,74 +325,74 @@ final class DarrayTypeSpecifier extends EditableNode {
     return $this->getValue();
   }
 
-  public function getTrailingCommaUNTYPED(): EditableNode {
-    return $this->_trailing_comma;
+  final public function getTrailingCommaUNTYPED(): EditableNode {
+    return $this->trailingComma;
   }
 
-  public function withTrailingComma(EditableNode $value): this {
-    if ($value === $this->_trailing_comma) {
+  public function withTrailingComma(?EditableNode $value): this {
+    if ($value === $this->trailingComma) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_angle,
-      $this->_key,
-      $this->_comma,
-      $this->_value,
+      $this->keyword,
+      $this->left_angle,
+      $this->key,
+      $this->comma,
+      $this->value,
       $value,
-      $this->_right_angle,
+      $this->right_angle,
     );
   }
 
   public function hasTrailingComma(): bool {
-    return !$this->_trailing_comma->isMissing();
+    return $this->trailingComma !== null;
   }
 
   /**
    * @returns Missing
    */
   public function getTrailingComma(): ?EditableNode {
-    if ($this->_trailing_comma->isMissing()) {
+    if ($this->trailingComma->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_trailing_comma);
+    return TypeAssert\instance_of(EditableNode::class, $this->trailingComma);
   }
 
   /**
    * @returns
    */
   public function getTrailingCommax(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_trailing_comma);
+    return TypeAssert\instance_of(EditableNode::class, $this->trailingComma);
   }
 
-  public function getRightAngleUNTYPED(): EditableNode {
-    return $this->_right_angle;
+  final public function getRightAngleUNTYPED(): EditableNode {
+    return $this->rightAngle;
   }
 
-  public function withRightAngle(EditableNode $value): this {
-    if ($value === $this->_right_angle) {
+  public function withRightAngle(GreaterThanToken $value): this {
+    if ($value === $this->rightAngle) {
       return $this;
     }
     return new static(
-      $this->_keyword,
-      $this->_left_angle,
-      $this->_key,
-      $this->_comma,
-      $this->_value,
-      $this->_trailing_comma,
+      $this->keyword,
+      $this->left_angle,
+      $this->key,
+      $this->comma,
+      $this->value,
+      $this->trailing_comma,
       $value,
     );
   }
 
   public function hasRightAngle(): bool {
-    return !$this->_right_angle->isMissing();
+    return $this->rightAngle !== null;
   }
 
   /**
    * @returns GreaterThanToken
    */
   public function getRightAngle(): GreaterThanToken {
-    return TypeAssert\instance_of(GreaterThanToken::class, $this->_right_angle);
+    return TypeAssert\instance_of(GreaterThanToken::class, $this->rightAngle);
   }
 
   /**

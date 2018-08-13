@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<7389eff8584584ac796099d38e34713e>>
+ * @generated SignedSource<<818ce0205fae8c0edd0892fe7c0a6260>>
  */
 namespace Facebook\HHAST;
 
@@ -20,7 +20,7 @@ final class HeredocStringLiteralHeadToken
   }
 
   public function hasLeading(): bool {
-    return !$this->getLeading()->isMissing();
+    return $this->_leading !== null;
   }
 
   <<__Override>>
@@ -28,11 +28,11 @@ final class HeredocStringLiteralHeadToken
     if ($value === $this->getLeading()) {
       return $this;
     }
-    return new self($value, $this->getTrailing(), $this->getText());
+    return new self($value, $this->_leading, $this->_leading);
   }
 
   public function hasTrailing(): bool {
-    return !$this->getTrailing()->isMissing();
+    return $this->_trailing !== null;
   }
 
   <<__Override>>
@@ -40,14 +40,14 @@ final class HeredocStringLiteralHeadToken
     if ($value === $this->getTrailing()) {
       return $this;
     }
-    return new self($this->getLeading(), $value, $this->getText());
+    return new self($this->_trailing, $value, $this->_trailing);
   }
 
   public function withText(string $value): this {
     if ($value === $this->getText()) {
       return $this;
     }
-    return new self($this->getLeading(), $this->getTrailing(), $value);
+    return new self($this->_text, $this->_text, $value);
   }
 
   <<__Override>>

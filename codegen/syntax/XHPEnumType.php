@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<63b1b67bd97ff9e9af6cb6751d821db6>>
+ * @generated SignedSource<<1e79dced7d2ac4e089221a0a6a5784a2>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,25 +10,14 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class XHPEnumType extends EditableNode {
 
-  private EditableNode $_optional;
-  private EditableNode $_keyword;
-  private EditableNode $_left_brace;
-  private EditableNode $_values;
-  private EditableNode $_right_brace;
-
   public function __construct(
-    EditableNode $optional,
-    EditableNode $keyword,
-    EditableNode $left_brace,
-    EditableNode $values,
-    EditableNode $right_brace,
+    private ?EditableNode $optional,
+    private EnumToken $keyword,
+    private LeftBraceToken $leftBrace,
+    private EditableList<LiteralExpression> $values,
+    private RightBraceToken $rightBrace,
   ) {
     parent::__construct('xhp_enum_type');
-    $this->_optional = $optional;
-    $this->_keyword = $keyword;
-    $this->_left_brace = $left_brace;
-    $this->_values = $values;
-    $this->_right_brace = $right_brace;
   }
 
   <<__Override>>
@@ -45,28 +34,28 @@ final class XHPEnumType extends EditableNode {
       $source,
     );
     $offset += $optional->getWidth();
-    $keyword = EditableNode::fromJSON(
+    $keyword = EnumToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_enum_keyword'],
       $file,
       $offset,
       $source,
     );
     $offset += $keyword->getWidth();
-    $left_brace = EditableNode::fromJSON(
+    $left_brace = LeftBraceToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_enum_left_brace'],
       $file,
       $offset,
       $source,
     );
     $offset += $left_brace->getWidth();
-    $values = EditableNode::fromJSON(
+    $values = EditableList::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_enum_values'],
       $file,
       $offset,
       $source,
     );
     $offset += $values->getWidth();
-    $right_brace = EditableNode::fromJSON(
+    $right_brace = RightBraceToken::fromJSON(
       /* UNSAFE_EXPR */ $json['xhp_enum_right_brace'],
       $file,
       $offset,
@@ -77,13 +66,13 @@ final class XHPEnumType extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'optional' => $this->_optional,
-      'keyword' => $this->_keyword,
-      'left_brace' => $this->_left_brace,
-      'values' => $this->_values,
-      'right_brace' => $this->_right_brace,
+      'optional' => $this->optional,
+      'keyword' => $this->keyword,
+      'left_brace' => $this->leftBrace,
+      'values' => $this->values,
+      'right_brace' => $this->rightBrace,
     ];
   }
 
@@ -94,87 +83,87 @@ final class XHPEnumType extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $optional = $this->_optional->rewrite($rewriter, $parents);
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $left_brace = $this->_left_brace->rewrite($rewriter, $parents);
-    $values = $this->_values->rewrite($rewriter, $parents);
-    $right_brace = $this->_right_brace->rewrite($rewriter, $parents);
+    $optional = $this->optional?->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $left_brace = $this->leftBrace->rewrite($rewriter, $parents);
+    $values = $this->values->rewrite($rewriter, $parents);
+    $right_brace = $this->rightBrace->rewrite($rewriter, $parents);
     if (
-      $optional === $this->_optional &&
-      $keyword === $this->_keyword &&
-      $left_brace === $this->_left_brace &&
-      $values === $this->_values &&
-      $right_brace === $this->_right_brace
+      $optional === $this->optional &&
+      $keyword === $this->keyword &&
+      $left_brace === $this->leftBrace &&
+      $values === $this->values &&
+      $right_brace === $this->rightBrace
     ) {
       return $this;
     }
     return new static($optional, $keyword, $left_brace, $values, $right_brace);
   }
 
-  public function getOptionalUNTYPED(): EditableNode {
-    return $this->_optional;
+  final public function getOptionalUNTYPED(): EditableNode {
+    return $this->optional;
   }
 
-  public function withOptional(EditableNode $value): this {
-    if ($value === $this->_optional) {
+  public function withOptional(?EditableNode $value): this {
+    if ($value === $this->optional) {
       return $this;
     }
     return new static(
       $value,
-      $this->_keyword,
-      $this->_left_brace,
-      $this->_values,
-      $this->_right_brace,
+      $this->keyword,
+      $this->left_brace,
+      $this->values,
+      $this->right_brace,
     );
   }
 
   public function hasOptional(): bool {
-    return !$this->_optional->isMissing();
+    return $this->optional !== null;
   }
 
   /**
    * @returns Missing
    */
   public function getOptional(): ?EditableNode {
-    if ($this->_optional->isMissing()) {
+    if ($this->optional->isMissing()) {
       return null;
     }
-    return TypeAssert\instance_of(EditableNode::class, $this->_optional);
+    return TypeAssert\instance_of(EditableNode::class, $this->optional);
   }
 
   /**
    * @returns
    */
   public function getOptionalx(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_optional);
+    return TypeAssert\instance_of(EditableNode::class, $this->optional);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(EnumToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
     return new static(
-      $this->_optional,
+      $this->optional,
       $value,
-      $this->_left_brace,
-      $this->_values,
-      $this->_right_brace,
+      $this->left_brace,
+      $this->values,
+      $this->right_brace,
     );
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns EnumToken
    */
   public function getKeyword(): EnumToken {
-    return TypeAssert\instance_of(EnumToken::class, $this->_keyword);
+    return TypeAssert\instance_of(EnumToken::class, $this->keyword);
   }
 
   /**
@@ -184,32 +173,32 @@ final class XHPEnumType extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getLeftBraceUNTYPED(): EditableNode {
-    return $this->_left_brace;
+  final public function getLeftBraceUNTYPED(): EditableNode {
+    return $this->leftBrace;
   }
 
-  public function withLeftBrace(EditableNode $value): this {
-    if ($value === $this->_left_brace) {
+  public function withLeftBrace(LeftBraceToken $value): this {
+    if ($value === $this->leftBrace) {
       return $this;
     }
     return new static(
-      $this->_optional,
-      $this->_keyword,
+      $this->optional,
+      $this->keyword,
       $value,
-      $this->_values,
-      $this->_right_brace,
+      $this->values,
+      $this->right_brace,
     );
   }
 
   public function hasLeftBrace(): bool {
-    return !$this->_left_brace->isMissing();
+    return $this->leftBrace !== null;
   }
 
   /**
    * @returns LeftBraceToken
    */
   public function getLeftBrace(): LeftBraceToken {
-    return TypeAssert\instance_of(LeftBraceToken::class, $this->_left_brace);
+    return TypeAssert\instance_of(LeftBraceToken::class, $this->leftBrace);
   }
 
   /**
@@ -219,32 +208,32 @@ final class XHPEnumType extends EditableNode {
     return $this->getLeftBrace();
   }
 
-  public function getValuesUNTYPED(): EditableNode {
-    return $this->_values;
+  final public function getValuesUNTYPED(): EditableNode {
+    return $this->values;
   }
 
-  public function withValues(EditableNode $value): this {
-    if ($value === $this->_values) {
+  public function withValues(EditableList<LiteralExpression> $value): this {
+    if ($value === $this->values) {
       return $this;
     }
     return new static(
-      $this->_optional,
-      $this->_keyword,
-      $this->_left_brace,
+      $this->optional,
+      $this->keyword,
+      $this->left_brace,
       $value,
-      $this->_right_brace,
+      $this->right_brace,
     );
   }
 
   public function hasValues(): bool {
-    return !$this->_values->isMissing();
+    return $this->values !== null;
   }
 
   /**
    * @returns EditableList<LiteralExpression>
    */
   public function getValues(): EditableList<LiteralExpression> {
-    return TypeAssert\instance_of(EditableList::class, $this->_values);
+    return TypeAssert\instance_of(EditableList::class, $this->values);
   }
 
   /**
@@ -254,32 +243,32 @@ final class XHPEnumType extends EditableNode {
     return $this->getValues();
   }
 
-  public function getRightBraceUNTYPED(): EditableNode {
-    return $this->_right_brace;
+  final public function getRightBraceUNTYPED(): EditableNode {
+    return $this->rightBrace;
   }
 
-  public function withRightBrace(EditableNode $value): this {
-    if ($value === $this->_right_brace) {
+  public function withRightBrace(RightBraceToken $value): this {
+    if ($value === $this->rightBrace) {
       return $this;
     }
     return new static(
-      $this->_optional,
-      $this->_keyword,
-      $this->_left_brace,
-      $this->_values,
+      $this->optional,
+      $this->keyword,
+      $this->left_brace,
+      $this->values,
       $value,
     );
   }
 
   public function hasRightBrace(): bool {
-    return !$this->_right_brace->isMissing();
+    return $this->rightBrace !== null;
   }
 
   /**
    * @returns RightBraceToken
    */
   public function getRightBrace(): RightBraceToken {
-    return TypeAssert\instance_of(RightBraceToken::class, $this->_right_brace);
+    return TypeAssert\instance_of(RightBraceToken::class, $this->rightBrace);
   }
 
   /**

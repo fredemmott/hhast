@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<63726dc422ed3f0419daf22b756cc256>>
+ * @generated SignedSource<<da26374a68e10c646dc557abb3ca2f9e>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,19 +10,12 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class ThrowStatement extends EditableNode {
 
-  private EditableNode $_keyword;
-  private EditableNode $_expression;
-  private EditableNode $_semicolon;
-
   public function __construct(
-    EditableNode $keyword,
-    EditableNode $expression,
-    EditableNode $semicolon,
+    private ThrowToken $keyword,
+    private EditableNode $expression,
+    private SemicolonToken $semicolon,
   ) {
     parent::__construct('throw_statement');
-    $this->_keyword = $keyword;
-    $this->_expression = $expression;
-    $this->_semicolon = $semicolon;
   }
 
   <<__Override>>
@@ -32,7 +25,7 @@ final class ThrowStatement extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $keyword = EditableNode::fromJSON(
+    $keyword = ThrowToken::fromJSON(
       /* UNSAFE_EXPR */ $json['throw_keyword'],
       $file,
       $offset,
@@ -46,7 +39,7 @@ final class ThrowStatement extends EditableNode {
       $source,
     );
     $offset += $expression->getWidth();
-    $semicolon = EditableNode::fromJSON(
+    $semicolon = SemicolonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['throw_semicolon'],
       $file,
       $offset,
@@ -57,11 +50,11 @@ final class ThrowStatement extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'keyword' => $this->_keyword,
-      'expression' => $this->_expression,
-      'semicolon' => $this->_semicolon,
+      'keyword' => $this->keyword,
+      'expression' => $this->expression,
+      'semicolon' => $this->semicolon,
     ];
   }
 
@@ -72,39 +65,39 @@ final class ThrowStatement extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $keyword = $this->_keyword->rewrite($rewriter, $parents);
-    $expression = $this->_expression->rewrite($rewriter, $parents);
-    $semicolon = $this->_semicolon->rewrite($rewriter, $parents);
+    $keyword = $this->keyword->rewrite($rewriter, $parents);
+    $expression = $this->expression->rewrite($rewriter, $parents);
+    $semicolon = $this->semicolon->rewrite($rewriter, $parents);
     if (
-      $keyword === $this->_keyword &&
-      $expression === $this->_expression &&
-      $semicolon === $this->_semicolon
+      $keyword === $this->keyword &&
+      $expression === $this->expression &&
+      $semicolon === $this->semicolon
     ) {
       return $this;
     }
     return new static($keyword, $expression, $semicolon);
   }
 
-  public function getKeywordUNTYPED(): EditableNode {
-    return $this->_keyword;
+  final public function getKeywordUNTYPED(): EditableNode {
+    return $this->keyword;
   }
 
-  public function withKeyword(EditableNode $value): this {
-    if ($value === $this->_keyword) {
+  public function withKeyword(ThrowToken $value): this {
+    if ($value === $this->keyword) {
       return $this;
     }
-    return new static($value, $this->_expression, $this->_semicolon);
+    return new static($value, $this->expression, $this->semicolon);
   }
 
   public function hasKeyword(): bool {
-    return !$this->_keyword->isMissing();
+    return $this->keyword !== null;
   }
 
   /**
    * @returns ThrowToken
    */
   public function getKeyword(): ThrowToken {
-    return TypeAssert\instance_of(ThrowToken::class, $this->_keyword);
+    return TypeAssert\instance_of(ThrowToken::class, $this->keyword);
   }
 
   /**
@@ -114,19 +107,19 @@ final class ThrowStatement extends EditableNode {
     return $this->getKeyword();
   }
 
-  public function getExpressionUNTYPED(): EditableNode {
-    return $this->_expression;
+  final public function getExpressionUNTYPED(): EditableNode {
+    return $this->expression;
   }
 
   public function withExpression(EditableNode $value): this {
-    if ($value === $this->_expression) {
+    if ($value === $this->expression) {
       return $this;
     }
-    return new static($this->_keyword, $value, $this->_semicolon);
+    return new static($this->keyword, $value, $this->semicolon);
   }
 
   public function hasExpression(): bool {
-    return !$this->_expression->isMissing();
+    return $this->expression !== null;
   }
 
   /**
@@ -134,7 +127,7 @@ final class ThrowStatement extends EditableNode {
    * ObjectCreationExpression | ParenthesizedExpression | VariableExpression
    */
   public function getExpression(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_expression);
+    return TypeAssert\instance_of(EditableNode::class, $this->expression);
   }
 
   /**
@@ -145,26 +138,26 @@ final class ThrowStatement extends EditableNode {
     return $this->getExpression();
   }
 
-  public function getSemicolonUNTYPED(): EditableNode {
-    return $this->_semicolon;
+  final public function getSemicolonUNTYPED(): EditableNode {
+    return $this->semicolon;
   }
 
-  public function withSemicolon(EditableNode $value): this {
-    if ($value === $this->_semicolon) {
+  public function withSemicolon(SemicolonToken $value): this {
+    if ($value === $this->semicolon) {
       return $this;
     }
-    return new static($this->_keyword, $this->_expression, $value);
+    return new static($this->keyword, $this->expression, $value);
   }
 
   public function hasSemicolon(): bool {
-    return !$this->_semicolon->isMissing();
+    return $this->semicolon !== null;
   }
 
   /**
    * @returns SemicolonToken
    */
   public function getSemicolon(): SemicolonToken {
-    return TypeAssert\instance_of(SemicolonToken::class, $this->_semicolon);
+    return TypeAssert\instance_of(SemicolonToken::class, $this->semicolon);
   }
 
   /**

@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<75e9d34efa418a57e3b61d93eaa123b7>>
+ * @generated SignedSource<<710b8f7471c981d028bd423a929ccb05>>
  */
 namespace Facebook\HHAST;
 
@@ -19,7 +19,7 @@ final class XHPClassNameToken extends EditableTokenWithVariableText {
   }
 
   public function hasLeading(): bool {
-    return !$this->getLeading()->isMissing();
+    return $this->_leading !== null;
   }
 
   <<__Override>>
@@ -27,11 +27,11 @@ final class XHPClassNameToken extends EditableTokenWithVariableText {
     if ($value === $this->getLeading()) {
       return $this;
     }
-    return new self($value, $this->getTrailing(), $this->getText());
+    return new self($value, $this->_leading, $this->_leading);
   }
 
   public function hasTrailing(): bool {
-    return !$this->getTrailing()->isMissing();
+    return $this->_trailing !== null;
   }
 
   <<__Override>>
@@ -39,14 +39,14 @@ final class XHPClassNameToken extends EditableTokenWithVariableText {
     if ($value === $this->getTrailing()) {
       return $this;
     }
-    return new self($this->getLeading(), $value, $this->getText());
+    return new self($this->_trailing, $value, $this->_trailing);
   }
 
   public function withText(string $value): this {
     if ($value === $this->getText()) {
       return $this;
     }
-    return new self($this->getLeading(), $this->getTrailing(), $value);
+    return new self($this->_text, $this->_text, $value);
   }
 
   <<__Override>>

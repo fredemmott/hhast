@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<61ed792f78c4e0eefa5ac63afd9baaab>>
+ * @generated SignedSource<<292c3e9817bc4a3f52aa68d1a02d3250>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class PostfixUnaryExpression extends EditableNode {
 
-  private EditableNode $_operand;
-  private EditableNode $_operator;
-
-  public function __construct(EditableNode $operand, EditableNode $operator) {
+  public function __construct(
+    private EditableNode $operand,
+    private EditableToken $operator,
+  ) {
     parent::__construct('postfix_unary_expression');
-    $this->_operand = $operand;
-    $this->_operator = $operator;
   }
 
   <<__Override>>
@@ -33,7 +31,7 @@ final class PostfixUnaryExpression extends EditableNode {
       $source,
     );
     $offset += $operand->getWidth();
-    $operator = EditableNode::fromJSON(
+    $operator = EditableToken::fromJSON(
       /* UNSAFE_EXPR */ $json['postfix_unary_operator'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class PostfixUnaryExpression extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'operand' => $this->_operand,
-      'operator' => $this->_operator,
+      'operand' => $this->operand,
+      'operator' => $this->operator,
     ];
   }
 
@@ -58,27 +56,27 @@ final class PostfixUnaryExpression extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $operand = $this->_operand->rewrite($rewriter, $parents);
-    $operator = $this->_operator->rewrite($rewriter, $parents);
-    if ($operand === $this->_operand && $operator === $this->_operator) {
+    $operand = $this->operand->rewrite($rewriter, $parents);
+    $operator = $this->operator->rewrite($rewriter, $parents);
+    if ($operand === $this->operand && $operator === $this->operator) {
       return $this;
     }
     return new static($operand, $operator);
   }
 
-  public function getOperandUNTYPED(): EditableNode {
-    return $this->_operand;
+  final public function getOperandUNTYPED(): EditableNode {
+    return $this->operand;
   }
 
   public function withOperand(EditableNode $value): this {
-    if ($value === $this->_operand) {
+    if ($value === $this->operand) {
       return $this;
     }
-    return new static($value, $this->_operator);
+    return new static($value, $this->operator);
   }
 
   public function hasOperand(): bool {
-    return !$this->_operand->isMissing();
+    return $this->operand !== null;
   }
 
   /**
@@ -86,7 +84,7 @@ final class PostfixUnaryExpression extends EditableNode {
    * ScopeResolutionExpression | SubscriptExpression | VariableExpression
    */
   public function getOperand(): EditableNode {
-    return TypeAssert\instance_of(EditableNode::class, $this->_operand);
+    return TypeAssert\instance_of(EditableNode::class, $this->operand);
   }
 
   /**
@@ -97,26 +95,26 @@ final class PostfixUnaryExpression extends EditableNode {
     return $this->getOperand();
   }
 
-  public function getOperatorUNTYPED(): EditableNode {
-    return $this->_operator;
+  final public function getOperatorUNTYPED(): EditableNode {
+    return $this->operator;
   }
 
-  public function withOperator(EditableNode $value): this {
-    if ($value === $this->_operator) {
+  public function withOperator(EditableToken $value): this {
+    if ($value === $this->operator) {
       return $this;
     }
-    return new static($this->_operand, $value);
+    return new static($this->operand, $value);
   }
 
   public function hasOperator(): bool {
-    return !$this->_operator->isMissing();
+    return $this->operator !== null;
   }
 
   /**
    * @returns PlusPlusToken | MinusMinusToken
    */
   public function getOperator(): EditableToken {
-    return TypeAssert\instance_of(EditableToken::class, $this->_operator);
+    return TypeAssert\instance_of(EditableToken::class, $this->operator);
   }
 
   /**

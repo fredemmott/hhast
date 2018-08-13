@@ -2,7 +2,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<8a0298be636102197b9fb4147f982ad6>>
+ * @generated SignedSource<<ce425a48f36fa89f94d673654487399e>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,13 +10,11 @@ use namespace Facebook\TypeAssert;
 <<__ConsistentConstruct>>
 final class GotoLabel extends EditableNode {
 
-  private EditableNode $_name;
-  private EditableNode $_colon;
-
-  public function __construct(EditableNode $name, EditableNode $colon) {
+  public function __construct(
+    private NameToken $name,
+    private ColonToken $colon,
+  ) {
     parent::__construct('goto_label');
-    $this->_name = $name;
-    $this->_colon = $colon;
   }
 
   <<__Override>>
@@ -26,14 +24,14 @@ final class GotoLabel extends EditableNode {
     int $offset,
     string $source,
   ): this {
-    $name = EditableNode::fromJSON(
+    $name = NameToken::fromJSON(
       /* UNSAFE_EXPR */ $json['goto_label_name'],
       $file,
       $offset,
       $source,
     );
     $offset += $name->getWidth();
-    $colon = EditableNode::fromJSON(
+    $colon = ColonToken::fromJSON(
       /* UNSAFE_EXPR */ $json['goto_label_colon'],
       $file,
       $offset,
@@ -44,10 +42,10 @@ final class GotoLabel extends EditableNode {
   }
 
   <<__Override>>
-  public function getChildren(): dict<string, EditableNode> {
+  public function getChildren(): dict<string, ?EditableNode> {
     return dict[
-      'name' => $this->_name,
-      'colon' => $this->_colon,
+      'name' => $this->name,
+      'colon' => $this->colon,
     ];
   }
 
@@ -58,34 +56,34 @@ final class GotoLabel extends EditableNode {
   ): this {
     $parents = $parents === null ? vec[] : vec($parents);
     $parents[] = $this;
-    $name = $this->_name->rewrite($rewriter, $parents);
-    $colon = $this->_colon->rewrite($rewriter, $parents);
-    if ($name === $this->_name && $colon === $this->_colon) {
+    $name = $this->name->rewrite($rewriter, $parents);
+    $colon = $this->colon->rewrite($rewriter, $parents);
+    if ($name === $this->name && $colon === $this->colon) {
       return $this;
     }
     return new static($name, $colon);
   }
 
-  public function getNameUNTYPED(): EditableNode {
-    return $this->_name;
+  final public function getNameUNTYPED(): EditableNode {
+    return $this->name;
   }
 
-  public function withName(EditableNode $value): this {
-    if ($value === $this->_name) {
+  public function withName(NameToken $value): this {
+    if ($value === $this->name) {
       return $this;
     }
-    return new static($value, $this->_colon);
+    return new static($value, $this->colon);
   }
 
   public function hasName(): bool {
-    return !$this->_name->isMissing();
+    return $this->name !== null;
   }
 
   /**
    * @returns NameToken
    */
   public function getName(): NameToken {
-    return TypeAssert\instance_of(NameToken::class, $this->_name);
+    return TypeAssert\instance_of(NameToken::class, $this->name);
   }
 
   /**
@@ -95,26 +93,26 @@ final class GotoLabel extends EditableNode {
     return $this->getName();
   }
 
-  public function getColonUNTYPED(): EditableNode {
-    return $this->_colon;
+  final public function getColonUNTYPED(): EditableNode {
+    return $this->colon;
   }
 
-  public function withColon(EditableNode $value): this {
-    if ($value === $this->_colon) {
+  public function withColon(ColonToken $value): this {
+    if ($value === $this->colon) {
       return $this;
     }
-    return new static($this->_name, $value);
+    return new static($this->name, $value);
   }
 
   public function hasColon(): bool {
-    return !$this->_colon->isMissing();
+    return $this->colon !== null;
   }
 
   /**
    * @returns ColonToken
    */
   public function getColon(): ColonToken {
-    return TypeAssert\instance_of(ColonToken::class, $this->_colon);
+    return TypeAssert\instance_of(ColonToken::class, $this->colon);
   }
 
   /**
