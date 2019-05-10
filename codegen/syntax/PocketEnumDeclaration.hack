@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<8d8f90671dfa72e0175fb50adb99ef62>>
+ * @generated SignedSource<<c5a652fe15cf69c5dcedaa3ae275848e>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class PocketEnumDeclaration extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_modifiers;
   private EditableNode $_enum;

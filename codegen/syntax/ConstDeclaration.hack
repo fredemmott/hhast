@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<408e6e01d67fb8a770d14182543ef78b>>
+ * @generated SignedSource<<5869c761a16ef1162895c46105e0f672>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class ConstDeclaration
   extends EditableNode
   implements IClassBodyDeclaration {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IClassBodyDeclaration::class,
+  ];
 
   private EditableNode $_visibility;
   private EditableNode $_abstract;

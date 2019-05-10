@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<bdd4718f87b5fa8c9d4aea82d55284b4>>
+ * @generated SignedSource<<ce7ff97286d3858a444333403b5d77d3>>
  */
 namespace Facebook\HHAST;
 
 final class EndOfFileToken extends EditableTokenWithFixedText {
 
   const string KIND = 'EndOfFile';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '';
 
   public function __construct(

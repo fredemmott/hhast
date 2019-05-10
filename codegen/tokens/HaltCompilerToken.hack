@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<4529e9c3d3f0076510680fd75be9108b>>
+ * @generated SignedSource<<11b46e26077d3cf007c6181da3b5f56a>>
  */
 namespace Facebook\HHAST;
 
 final class HaltCompilerToken extends EditableTokenWithVariableText {
 
   const string KIND = '__halt_compiler';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

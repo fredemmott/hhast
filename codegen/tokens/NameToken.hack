@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<25f4723bb7394470644317e81c5a3564>>
+ * @generated SignedSource<<9c12f0266513d95f5640283873649aee>>
  */
 namespace Facebook\HHAST;
 
@@ -10,6 +10,12 @@ final class NameToken
   implements INameishNode {
 
   const string KIND = 'name';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+    INameishNode::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

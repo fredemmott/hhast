@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<53af186c212542fc01694c396712242e>>
+ * @generated SignedSource<<09c669ee4d27ef7139e081c8511aad27>>
  */
 namespace Facebook\HHAST;
 
 final class XHPCategoryNameToken extends EditableTokenWithVariableText {
 
   const string KIND = 'XHP_category_name';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

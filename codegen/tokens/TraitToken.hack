@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<a03a8f36fab341d8ee3f130e86c0b9b2>>
+ * @generated SignedSource<<01889f5948e33cf06f9fb4e564af6d53>>
  */
 namespace Facebook\HHAST;
 
 final class TraitToken extends EditableTokenWithVariableText {
 
   const string KIND = 'trait';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

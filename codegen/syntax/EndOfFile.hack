@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b1951ea7034221391e1d3e5e473c747a>>
+ * @generated SignedSource<<8fdb09ac495877317f521e1415f372a6>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class EndOfFile extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_token;
 

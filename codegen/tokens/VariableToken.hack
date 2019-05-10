@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<dcb9e966ecff593f34998c58aca57e02>>
+ * @generated SignedSource<<786495a45290d68f0e1d62a0b731596d>>
  */
 namespace Facebook\HHAST;
 
@@ -10,6 +10,13 @@ final class VariableToken
   implements ILambdaBody, IExpression {
 
   const string KIND = 'variable';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+    ILambdaBody::class,
+    IExpression::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

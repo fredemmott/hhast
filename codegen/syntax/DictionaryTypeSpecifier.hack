@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<fa27dc4cbd935743aa9a105b1eb3f8a3>>
+ * @generated SignedSource<<00405f4a77c426fbd9774b295138e3c0>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class DictionaryTypeSpecifier
   extends EditableNode
   implements ITypeSpecifier {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ITypeSpecifier::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_angle;

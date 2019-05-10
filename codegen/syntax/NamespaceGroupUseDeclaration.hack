@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<c93a9587b7c8e0e1ae0cfddc04a045d5>>
+ * @generated SignedSource<<a31431c0a2b7920e8269123020def577>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class NamespaceGroupUseDeclaration
   extends EditableNode
   implements INamespaceUseDeclaration {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    INamespaceUseDeclaration::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_kind;

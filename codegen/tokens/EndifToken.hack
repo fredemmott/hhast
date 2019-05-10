@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b3f2720aad30f11a6c84340c01512654>>
+ * @generated SignedSource<<cc6bed01a1858128305b86d41bcc16bc>>
  */
 namespace Facebook\HHAST;
 
 final class EndifToken extends EditableTokenWithVariableText {
 
   const string KIND = 'endif';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

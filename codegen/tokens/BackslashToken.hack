@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<00a648fbcd00e69808f0edda4c5e4a21>>
+ * @generated SignedSource<<87ccce502e5424da282eb64e58af6236>>
  */
 namespace Facebook\HHAST;
 
 final class BackslashToken extends EditableTokenWithFixedText {
 
   const string KIND = '\\';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '\\';
 
   public function __construct(

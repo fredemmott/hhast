@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<d7ebda108c0105e9730ad05a9ca38878>>
+ * @generated SignedSource<<816ce519925ebd268d7e1bd4a67ed82c>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class XHPSpreadAttribute extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_left_brace;
   private EditableNode $_spread_operator;

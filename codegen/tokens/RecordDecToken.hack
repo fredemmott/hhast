@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<a4f482b3c44469721126aa5597831e3a>>
+ * @generated SignedSource<<e072bd726121da02a96cd36c2031f5df>>
  */
 namespace Facebook\HHAST;
 
 final class RecordDecToken extends EditableTokenWithVariableText {
 
   const string KIND = 'record';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<ff0ae47505f4a1e6bd3ece368d2cd025>>
+ * @generated SignedSource<<2d9d6bc030855ec03516cd697e12d21d>>
  */
 namespace Facebook\HHAST;
 
 final class SlashGreaterThanToken extends EditableTokenWithFixedText {
 
   const string KIND = '/>';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '/>';
 
   public function __construct(

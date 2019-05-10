@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<0fddcbc64af0c1120d0c9f446138a555>>
+ * @generated SignedSource<<db793ce4af71cd627454d738b70e44db>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class QualifiedName extends EditableNode implements INameishNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    INameishNode::class,
+  ];
 
   private EditableNode $_parts;
 

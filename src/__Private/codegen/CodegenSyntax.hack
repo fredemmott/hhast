@@ -58,6 +58,9 @@ final class CodegenSyntax extends CodegenBase {
     if ($is_abstract) {
       $class_name .= 'GeneratedBase';
     }
+    $interfaces =
+      $this->getMarkerInterfacesByImplementingClass()[$syntax['kind_name']] ??
+      keyset[];
 
     return $cg
       ->codegenClass($class_name)
@@ -66,12 +69,23 @@ final class CodegenSyntax extends CodegenBase {
       ->setIsAbstract($is_abstract)
       ->setExtends('EditableNode')
       ->setInterfaces(
-        (
-          $this
-            ->getMarkerInterfacesByImplementingClass()[$syntax['kind_name']] ??
-          vec[]
-        )
-          |> Vec\map($$, $if ==> $cg->codegenImplementsInterface($if)),
+        Vec\map($interfaces, $if ==> $cg->codegenImplementsInterface($if)),
+      )
+      ->addConstant(
+        $cg->codegenClassConstant('INTERFACES')
+          ->setType('keyset<classname<EditableNode>>')
+          ->setValue(
+            Keyset\union(
+              keyset[
+                $is_abstract ? $syntax['kind_name'] : 'self',
+                'EditableNode',
+              ],
+              $interfaces,
+            ),
+            HackBuilderValues::keyset(
+              HackBuilderValues::lambda(($_, $if) ==> $if.'::class'),
+            ),
+          ),
       )
       ->setConstructor($this->generateConstructor($syntax))
       ->addMethod($this->generateFromJSONMethod($syntax))
@@ -642,7 +656,11 @@ final class CodegenSyntax extends CodegenBase {
       HHAST\MethodishDeclaration::class,
       HHAST\NamespaceDeclaration::class,
       HHAST\ParameterDeclaration::class,
-    ] |> Keyset\map($$, $class ==> Str\strip_prefix($class, "Facebook\\HHAST\\"));
+    ]
+      |> Keyset\map(
+        $$,
+        $class ==> Str\strip_prefix($class, "Facebook\\HHAST\\"),
+      );
   }
 
   private function getHardcodedTypes(

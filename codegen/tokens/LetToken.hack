@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<cee0cb406f8881c0615c9f65f2df8a0b>>
+ * @generated SignedSource<<a67f54a7072dbd2cc39adbf1f2522003>>
  */
 namespace Facebook\HHAST;
 
 final class LetToken extends EditableTokenWithVariableText {
 
   const string KIND = 'let';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

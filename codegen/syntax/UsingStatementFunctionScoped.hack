@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<d09bd88b51c72c8426fc605f20b566e9>>
+ * @generated SignedSource<<1213b9c4405f9e41b8dd7077571ae1db>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class UsingStatementFunctionScoped
   extends EditableNode
   implements IStatement {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IStatement::class,
+  ];
 
   private EditableNode $_await_keyword;
   private EditableNode $_using_keyword;

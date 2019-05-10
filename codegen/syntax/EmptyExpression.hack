@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<15620216d9b2eb3439e507a34287f1c2>>
+ * @generated SignedSource<<2d6e4510d57dfae2e3decc378e6defb2>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,13 @@ use namespace Facebook\TypeAssert;
 final class EmptyExpression
   extends EditableNode
   implements ILambdaBody, IExpression {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ILambdaBody::class,
+    IExpression::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_paren;

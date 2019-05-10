@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<20591ca1634492f0bbf465f608c686a7>>
+ * @generated SignedSource<<1536d81e4651ada653a3781341797d75>>
  */
 namespace Facebook\HHAST;
 
 final class TildeToken extends EditableTokenWithFixedText {
 
   const string KIND = '~';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '~';
 
   public function __construct(

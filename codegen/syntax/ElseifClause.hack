@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<669046dc582ef0581f6eadac61c534ae>>
+ * @generated SignedSource<<03ff0c767d96fcc8511768a304e2b189>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class ElseifClause extends EditableNode implements IControlFlowStatement {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IControlFlowStatement::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_paren;

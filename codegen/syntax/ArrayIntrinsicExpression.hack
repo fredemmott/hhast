@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<6603f653231fce585bcede52bc9d0639>>
+ * @generated SignedSource<<d88424989cc272edd162785d1ef8e076>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,15 @@ use namespace Facebook\TypeAssert;
 final class ArrayIntrinsicExpression
   extends EditableNode
   implements IPHPArray, IContainer, ILambdaBody, IExpression {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IPHPArray::class,
+    IContainer::class,
+    ILambdaBody::class,
+    IExpression::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_paren;

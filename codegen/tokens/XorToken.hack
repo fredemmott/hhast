@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<536466bbbe06453bb4e552e78a795375>>
+ * @generated SignedSource<<9561ce8fdae73c1f5d3ff23158fd0f58>>
  */
 namespace Facebook\HHAST;
 
 final class XorToken extends EditableTokenWithVariableText {
 
   const string KIND = 'xor';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

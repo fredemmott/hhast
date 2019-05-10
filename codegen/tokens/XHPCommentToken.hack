@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<632c60268504ebfb62fc5b7cdd181f92>>
+ * @generated SignedSource<<c350ffd8bc09b06ad35f0f84e2818079>>
  */
 namespace Facebook\HHAST;
 
 final class XHPCommentToken extends EditableTokenWithVariableText {
 
   const string KIND = 'XHP_comment';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

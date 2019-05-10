@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<af2f6284364c193c7afd1383d1484955>>
+ * @generated SignedSource<<cb45817f7169b97d23e36eb343cb7fb5>>
  */
 namespace Facebook\HHAST;
 
 final class EnddeclareToken extends EditableTokenWithVariableText {
 
   const string KIND = 'enddeclare';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

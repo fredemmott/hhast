@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<78c3dee6339bfa3f6db5c1f313c88fd4>>
+ * @generated SignedSource<<76bf7e9a7386f54596ac29f0b3114b57>>
  */
 namespace Facebook\HHAST;
 
 final class ElseToken extends EditableTokenWithVariableText {
 
   const string KIND = 'else';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

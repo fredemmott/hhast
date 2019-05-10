@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<e03e7c722102df262b6839468b2ca6ac>>
+ * @generated SignedSource<<0903cfeb89edaae9c4a4952d377bbf87>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,13 @@ use namespace Facebook\TypeAssert;
 final class InstanceofExpression
   extends EditableNode
   implements ILambdaBody, IExpression {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ILambdaBody::class,
+    IExpression::class,
+  ];
 
   private EditableNode $_left_operand;
   private EditableNode $_operator;

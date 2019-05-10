@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<1cae3204753dd869adfab6615d3b09ef>>
+ * @generated SignedSource<<ac896c8692fd61a5d80740467d4950db>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class XHPClose extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_left_angle;
   private EditableNode $_name;

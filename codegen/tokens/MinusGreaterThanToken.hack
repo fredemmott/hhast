@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<997384c6b18cc987e1271d1d87931299>>
+ * @generated SignedSource<<1484f79bfba7a13101ccc8773863c30c>>
  */
 namespace Facebook\HHAST;
 
 final class MinusGreaterThanToken extends EditableTokenWithFixedText {
 
   const string KIND = '->';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '->';
 
   public function __construct(

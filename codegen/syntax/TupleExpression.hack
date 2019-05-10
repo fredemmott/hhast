@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<694eba42b7e8970fe96d5b5c2c1a9f94>>
+ * @generated SignedSource<<ab92d813b3250c217a450dcb72c848bb>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,13 @@ use namespace Facebook\TypeAssert;
 final class TupleExpression
   extends EditableNode
   implements ILambdaBody, IExpression {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ILambdaBody::class,
+    IExpression::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_paren;

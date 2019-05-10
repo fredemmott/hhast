@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<97ec51f2a258d3b225515f3c6e4be26e>>
+ * @generated SignedSource<<6761f23924473e4bbf56a939fd74c251>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,15 @@ use namespace Facebook\TypeAssert;
 final class VectorIntrinsicExpression
   extends EditableNode
   implements IHackArray, IContainer, ILambdaBody, IExpression {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IHackArray::class,
+    IContainer::class,
+    ILambdaBody::class,
+    IExpression::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_explicit_type;

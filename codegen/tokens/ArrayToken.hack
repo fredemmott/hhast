@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<8fe7bc3564bc92337175e954113d1c37>>
+ * @generated SignedSource<<f36f11d7df4f0e23ce63a6ca5eacdfb6>>
  */
 namespace Facebook\HHAST;
 
 final class ArrayToken extends EditableTokenWithVariableText {
 
   const string KIND = 'array';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

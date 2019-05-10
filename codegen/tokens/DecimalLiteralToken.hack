@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<22641a6f6c68498e6f5f5629aee9fae7>>
+ * @generated SignedSource<<1b68169205fbe0e70f03c9fc29dee64f>>
  */
 namespace Facebook\HHAST;
 
 final class DecimalLiteralToken extends EditableTokenWithVariableText {
 
   const string KIND = 'decimal_literal';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

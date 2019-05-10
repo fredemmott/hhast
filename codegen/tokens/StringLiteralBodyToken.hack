@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<4ad4d65646227259ece82aadf9b3b6f3>>
+ * @generated SignedSource<<c464dd1534ca2c0dd9ac3accb7fe544b>>
  */
 namespace Facebook\HHAST;
 
 final class StringLiteralBodyToken extends EditableTokenWithVariableText {
 
   const string KIND = 'string_literal_body';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

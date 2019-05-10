@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<ab83f2c79766225f4fb13226165d8678>>
+ * @generated SignedSource<<ced82abe1492fd6dac1b5f94ceef33a6>>
  */
 namespace Facebook\HHAST;
 
 final class TupleToken extends EditableTokenWithVariableText {
 
   const string KIND = 'tuple';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<64e288f2840a31e1ffd724fa4b0fa4d8>>
+ * @generated SignedSource<<dd32b4b98578de7e8db57795c3664132>>
  */
 namespace Facebook\HHAST;
 
 final class WhereToken extends EditableTokenWithVariableText {
 
   const string KIND = 'where';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

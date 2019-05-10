@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<1b0f1c00e06b713831bb7a9b5ae46e81>>
+ * @generated SignedSource<<a37063d5a962dfec324df431677b6236>>
  */
 namespace Facebook\HHAST;
 
 final class TryToken extends EditableTokenWithVariableText {
 
   const string KIND = 'try';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

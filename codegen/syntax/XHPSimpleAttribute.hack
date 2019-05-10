@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<31da5e300f156c19cd97b3de02017dfa>>
+ * @generated SignedSource<<6d16d651ce8e8fbf4171aa3cb3fe3048>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class XHPSimpleAttribute extends EditableNode implements IXHPAttribute {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IXHPAttribute::class,
+  ];
 
   private EditableNode $_name;
   private EditableNode $_equal;

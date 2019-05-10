@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b91d80a3db0a7f1d90cda578267ceef2>>
+ * @generated SignedSource<<216d84724a16eb2cb635918fe44401c5>>
  */
 namespace Facebook\HHAST;
 
 final class DestructToken extends EditableTokenWithVariableText {
 
   const string KIND = '__destruct';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<5e8d035672028f02f1d2dbb5a994639d>>
+ * @generated SignedSource<<bc54216cc746d66c02914f27e1406e88>>
  */
 namespace Facebook\HHAST;
 
 final class GotoToken extends EditableTokenWithVariableText {
 
   const string KIND = 'goto';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

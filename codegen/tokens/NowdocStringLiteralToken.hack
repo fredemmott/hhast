@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<57d9532d74c0f0520c575a858bda9fd4>>
+ * @generated SignedSource<<dc050163f34222d93f4cc02213da7b08>>
  */
 namespace Facebook\HHAST;
 
@@ -10,6 +10,12 @@ final class NowdocStringLiteralToken
   implements IStringLiteral {
 
   const string KIND = 'nowdoc_string_literal';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+    IStringLiteral::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

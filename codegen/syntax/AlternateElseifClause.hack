@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<bb4e1b6d1a5edcd2e78a507cd793aee2>>
+ * @generated SignedSource<<b5ff883c7bee2b9af986ef5ebecce7d1>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class AlternateElseifClause
   extends EditableNode
   implements IControlFlowStatement {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IControlFlowStatement::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_paren;

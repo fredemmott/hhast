@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<ca5b3154764ae15792dd71eabf535dd2>>
+ * @generated SignedSource<<4cdaa04d8084cf10997ad9a37271cf2b>>
  */
 namespace Facebook\HHAST;
 
 final class CaseToken extends EditableTokenWithVariableText {
 
   const string KIND = 'case';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

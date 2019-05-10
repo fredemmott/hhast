@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<a3e67724b8208e98d5e5943f695ca6a7>>
+ * @generated SignedSource<<101e0ec0f3575f62eccf7d785240e64a>>
  */
 namespace Facebook\HHAST;
 
 final class CaratEqualToken extends EditableTokenWithFixedText {
 
   const string KIND = '^=';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '^=';
 
   public function __construct(

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<7b7f8dd51a888bbe8ca879f2b552adfc>>
+ * @generated SignedSource<<63a3f6863caf2250c9d195ddd267b518>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class PocketMappingIdDeclaration extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_name;
   private EditableNode $_initializer;

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<cdddb47d0ec7b355ad12680f88d6e3c1>>
+ * @generated SignedSource<<cebba88bf0076594aea0624d7b0e8ffe>>
  */
 namespace Facebook\HHAST;
 
 final class NamespaceToken extends EditableTokenWithVariableText {
 
   const string KIND = 'namespace';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<177f5d7a57720eeb7f5b4827b6cceed8>>
+ * @generated SignedSource<<fe5b8f5443389fb4e2d529c6afe65d78>>
  */
 namespace Facebook\HHAST;
 
 final class SuperToken extends EditableTokenWithVariableText {
 
   const string KIND = 'super';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

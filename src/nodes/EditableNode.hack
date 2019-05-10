@@ -9,16 +9,19 @@
 
 namespace Facebook\HHAST;
 
-use namespace HH\Lib\{Dict, Vec, C, Str};
+use namespace HH\Lib\{Dict, C, Keyset, Str, Vec};
 use namespace Facebook\TypeAssert;
 
 abstract class EditableNode {
+  abstract const keyset<classname<EditableNode>> INTERFACES;
+
   const type TRewriter = (function(
     EditableNode,
     ?vec<EditableNode>,
   ): EditableNode);
 
   private keyset<int> $_descendants = keyset[];
+  private keyset<classname<EditableNode>> $_descendantInterfaces = keyset[];
   private static dict<int, EditableNode> $byID = dict[];
   private string $_syntax_kind;
   protected ?int $_width;
@@ -36,8 +39,13 @@ abstract class EditableNode {
         return $with_child;
       },
     )
-      |> Vec\flatten($$)
-      |> keyset($$);
+      |> Keyset\flatten($$);
+    $this->_descendantInterfaces = Vec\map(
+      $this->getChildren(),
+      $child ==> $child->_descendantInterfaces,
+    )
+      |> Keyset\flatten($$)
+      |> Keyset\union($$, static::INTERFACES);
     /* handy for debugging :)
     if ($sourceRef !== null) {
       $code = $this->getCode();
@@ -56,7 +64,7 @@ abstract class EditableNode {
   private static int $_maxID = 0;
 
   <<__Memoize>>
-  private function getUniqueID(): int {
+  public function getUniqueID(): int {
     $id = self::$_maxID;
     self::$_maxID++;
     return $id;
@@ -213,13 +221,17 @@ abstract class EditableNode {
   public function getDescendantsOfType<T as EditableNode>(
     classname<T> $what,
   ): vec<T> {
-    $out = vec[];
-    foreach ($this->traverse() as $child) {
-      if ($child instanceof $what) {
-        $out[] = $child;
-      }
+    if (!C\contains_key($this->_descendantInterfaces, $what)) {
+      return vec[];
     }
-    return $out;
+
+    return $this->getChildren()
+      |> Vec\map($$, $child ==> $child->getDescendantsOfType($what))
+      |> Vec\flatten($$)
+      |> Vec\concat(
+        $this instanceof $what ? vec[$this] : vec[],
+        $$
+      );
   }
 
   public function removeWhere(

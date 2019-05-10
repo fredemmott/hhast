@@ -10,6 +10,8 @@
 namespace Facebook\HHAST;
 
 final class Missing extends EditableNode {
+  const keyset<classname<EditableNode>> INTERFACES = keyset[];
+
   <<__Override>>
   public function __construct() {
     parent::__construct('missing', null);

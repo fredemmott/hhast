@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<aa7247a2fd4b2357fbc75bf37f3ec961>>
+ * @generated SignedSource<<efe5a93112069b97e9b7221c846cdf74>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class XHPCategoryDeclaration
   extends EditableNode
   implements IClassBodyDeclaration {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IClassBodyDeclaration::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_categories;

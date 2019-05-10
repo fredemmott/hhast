@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<019cb50221c3aa82cb28af6b9da22fb6>>
+ * @generated SignedSource<<46d3b987bc1de1d9599ac22788c28d55>>
  */
 namespace Facebook\HHAST;
 
 final class UnsetToken extends EditableTokenWithVariableText {
 
   const string KIND = 'unset';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

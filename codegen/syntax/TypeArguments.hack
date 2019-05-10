@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b3189dc874ccdbc50d6f3d47ca60b897>>
+ * @generated SignedSource<<86acd9047bbdc770a5e481caa87a1b79>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class TypeArguments extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_left_angle;
   private EditableNode $_types;

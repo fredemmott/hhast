@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<90c380b12da5694d39718150c3d8b69f>>
+ * @generated SignedSource<<97335a0d16b18b16cdca474fa13a02c7>>
  */
 namespace Facebook\HHAST;
 
@@ -9,6 +9,11 @@ final class HeredocStringLiteralTailToken
   extends EditableTokenWithVariableText {
 
   const string KIND = 'heredoc_string_literal_tail';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<65064eeccabdbbf08d1227bee0d99024>>
+ * @generated SignedSource<<e1b08da440ff4e0bb63ae6d4fa0c650d>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class SimpleInitializer extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_equal;
   private EditableNode $_value;

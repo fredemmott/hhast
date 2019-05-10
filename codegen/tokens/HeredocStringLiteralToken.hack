@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<899c79223b9d552b5f5c6c7ebccd54e1>>
+ * @generated SignedSource<<96782b9ae7431402b4e1e046791a0d92>>
  */
 namespace Facebook\HHAST;
 
@@ -10,6 +10,12 @@ final class HeredocStringLiteralToken
   implements IStringLiteral {
 
   const string KIND = 'heredoc_string_literal';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+    IStringLiteral::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

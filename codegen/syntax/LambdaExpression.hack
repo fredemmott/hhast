@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<e79f1d1f1c3575e32b9613591c8d341e>>
+ * @generated SignedSource<<7ad78cb5322e38ab32bab57de40b43cd>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,15 @@ use namespace Facebook\TypeAssert;
 final class LambdaExpression
   extends EditableNode
   implements IHasFunctionBody, ILambdaBody, IHasAttributeSpec, IExpression {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IHasFunctionBody::class,
+    ILambdaBody::class,
+    IHasAttributeSpec::class,
+    IExpression::class,
+  ];
 
   private EditableNode $_attribute_spec;
   private EditableNode $_async;

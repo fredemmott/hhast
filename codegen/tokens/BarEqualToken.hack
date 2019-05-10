@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<0ffbef930a82c101810f52a781a4351f>>
+ * @generated SignedSource<<f12d5992ea47f834ef1b31311af1c40a>>
  */
 namespace Facebook\HHAST;
 
 final class BarEqualToken extends EditableTokenWithFixedText {
 
   const string KIND = '|=';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '|=';
 
   public function __construct(

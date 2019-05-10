@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<8d85fd1ef373c8b34d89112bfe45bfaf>>
+ * @generated SignedSource<<5aecb6034997b9876c5e7c1d0cf83813>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class FieldInitializer extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_name;
   private EditableNode $_arrow;

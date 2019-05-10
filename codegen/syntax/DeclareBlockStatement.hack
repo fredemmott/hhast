@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<48f8e5e54a52baee72ec762cdb7b1f75>>
+ * @generated SignedSource<<1e6f8c084b43f61e52683d684bb775c3>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class DeclareBlockStatement extends EditableNode implements IStatement {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IStatement::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_paren;

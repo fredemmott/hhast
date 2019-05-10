@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<0b524a56b6fa9b846fae4704a5b8713d>>
+ * @generated SignedSource<<5bf0e71e6ac463886c9daeefbd36564f>>
  */
 namespace Facebook\HHAST;
 
 final class StarToken extends EditableTokenWithFixedText {
 
   const string KIND = '*';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '*';
 
   public function __construct(

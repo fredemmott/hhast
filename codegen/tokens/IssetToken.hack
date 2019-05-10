@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<dcee3a8f629799b26e19b62ec319c7b4>>
+ * @generated SignedSource<<9da1b910ecf7ca58bdf68943d601e271>>
  */
 namespace Facebook\HHAST;
 
 final class IssetToken extends EditableTokenWithVariableText {
 
   const string KIND = 'isset';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

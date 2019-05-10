@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<16714f1f7a5d88e8d45b6b736e61bc5c>>
+ * @generated SignedSource<<0fa8924c57d4e7d26ad26725eedcb6b6>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class SoftTypeSpecifier extends EditableNode implements ITypeSpecifier {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ITypeSpecifier::class,
+  ];
 
   private EditableNode $_at;
   private EditableNode $_type;

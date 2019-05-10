@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<1e87635cd507dda9832c5277853405f8>>
+ * @generated SignedSource<<01b59bab30dd39cf51c1edf7aeb2db4c>>
  */
 namespace Facebook\HHAST;
 
 final class EndswitchToken extends EditableTokenWithVariableText {
 
   const string KIND = 'endswitch';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

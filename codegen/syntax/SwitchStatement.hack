@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b2d2b9dc5c39ea65dfc7e66c772874d9>>
+ * @generated SignedSource<<aa598052655b485894c3503845daba09>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,13 @@ use namespace Facebook\TypeAssert;
 final class SwitchStatement
   extends EditableNode
   implements IControlFlowStatement, IStatement {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IControlFlowStatement::class,
+    IStatement::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_paren;

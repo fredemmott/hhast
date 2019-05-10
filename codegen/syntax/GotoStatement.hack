@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<769df4c5048dc98257848aca8adec0e3>>
+ * @generated SignedSource<<36fd397e46fe288da6ce67132d871422>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class GotoStatement extends EditableNode implements IStatement {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IStatement::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_label_name;

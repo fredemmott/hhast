@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<84ddbbcc5a7b69390b4fc640be52f8e8>>
+ * @generated SignedSource<<7028655ed5808817903ad18eb5b2434d>>
  */
 namespace Facebook\HHAST;
 
 final class GlobalToken extends EditableTokenWithVariableText {
 
   const string KIND = 'global';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

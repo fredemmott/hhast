@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<1bbab58fb907bfb03caebe089e37d01a>>
+ * @generated SignedSource<<fddebd8ea13ce887e4bce36a5d242ec2>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class TraitUse extends EditableNode implements IClassBodyDeclaration {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IClassBodyDeclaration::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_names;

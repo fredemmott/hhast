@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<d79e8ddcd1a785e12543494cd713ff48>>
+ * @generated SignedSource<<0b5bdc9056c589cb964cd41055867391>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class PocketAtomMappingDeclaration extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_glyph;
   private EditableNode $_name;

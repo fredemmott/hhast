@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<d1ab876a84d5e29900ee8b8ae7329629>>
+ * @generated SignedSource<<301004b1b29b157a5a0673b92a05b6ad>>
  */
 namespace Facebook\HHAST;
 
 final class QuestionColonToken extends EditableTokenWithFixedText {
 
   const string KIND = '?:';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '?:';
 
   public function __construct(

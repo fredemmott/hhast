@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<e3d2347cf44dd0abf1a51275e22525ae>>
+ * @generated SignedSource<<a19abfa91d91d82e4d6cabb1bca3f11f>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,14 @@ use namespace Facebook\TypeAssert;
 final class FunctionCallExpression
   extends EditableNode
   implements IFunctionCallishExpression, ILambdaBody, IExpression {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IFunctionCallishExpression::class,
+    ILambdaBody::class,
+    IExpression::class,
+  ];
 
   private EditableNode $_receiver;
   private EditableNode $_type_args;

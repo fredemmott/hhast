@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<42087c5d69c0c2efeb110336ca680687>>
+ * @generated SignedSource<<459fae081a6ed5ec054006d5286ec443>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class VectorTypeSpecifier extends EditableNode implements ITypeSpecifier {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ITypeSpecifier::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_angle;

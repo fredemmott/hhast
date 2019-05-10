@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<55c2bf3f69f46c07174a3805dbb109ac>>
+ * @generated SignedSource<<890ba78ced3a37ce26bcb33e4476905e>>
  */
 namespace Facebook\HHAST;
 
 final class CloneToken extends EditableTokenWithVariableText {
 
   const string KIND = 'clone';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

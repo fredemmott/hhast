@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<59b05dc24acba12c65d2ee9a54e21b2f>>
+ * @generated SignedSource<<e3ba893446d70ef0a6ed7fa7ae301df9>>
  */
 namespace Facebook\HHAST;
 
 final class AsyncToken extends EditableTokenWithVariableText {
 
   const string KIND = 'async';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

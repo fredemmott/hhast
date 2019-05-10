@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<47f790fa0e4b53efe72db69e5699bf0a>>
+ * @generated SignedSource<<2f02e5f75f00ad3fcc841e950f444205>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,15 @@ use namespace Facebook\TypeAssert;
 abstract class AwaitableCreationExpressionGeneratedBase
   extends EditableNode
   implements IHasFunctionBody, ILambdaBody, IHasAttributeSpec, IExpression {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    AwaitableCreationExpression::class,
+    EditableNode::class,
+    IHasFunctionBody::class,
+    ILambdaBody::class,
+    IHasAttributeSpec::class,
+    IExpression::class,
+  ];
 
   private EditableNode $_attribute_spec;
   private EditableNode $_async;

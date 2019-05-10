@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<5b64a7d2eeb005ec67fbea665ed93556>>
+ * @generated SignedSource<<a2a874af1bfcf41d742eaf3f1137b2c1>>
  */
 namespace Facebook\HHAST;
 
 final class VoidToken extends EditableTokenWithVariableText {
 
   const string KIND = 'void';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

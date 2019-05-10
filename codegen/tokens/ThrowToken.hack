@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<a95b234bb65cb3ca46a652b6490943dc>>
+ * @generated SignedSource<<c4e0e022fe07fb9b1508901e311f9fd0>>
  */
 namespace Facebook\HHAST;
 
 final class ThrowToken extends EditableTokenWithVariableText {
 
   const string KIND = 'throw';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

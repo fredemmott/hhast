@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9cfd9efdd3ad16a2ee81f19052667e6d>>
+ * @generated SignedSource<<3e6de4840dc94294d602598ac8d99c63>>
  */
 namespace Facebook\HHAST;
 
 final class ReturnToken extends EditableTokenWithVariableText {
 
   const string KIND = 'return';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

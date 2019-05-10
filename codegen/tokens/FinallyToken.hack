@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<7df4b179f578f455f834f0e537bd6d0b>>
+ * @generated SignedSource<<4b8c0978a17b0689efc513503fb95ffd>>
  */
 namespace Facebook\HHAST;
 
 final class FinallyToken extends EditableTokenWithVariableText {
 
   const string KIND = 'finally';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

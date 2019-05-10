@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<560b0c505a910c8e43d37d7807ba8e97>>
+ * @generated SignedSource<<ed7a1d835a3c19b9570c2580db3acd11>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,14 @@ use namespace Facebook\TypeAssert;
 final class PropertyDeclaration
   extends EditableNode
   implements IClassBodyDeclaration, IHasTypeHint, IHasAttributeSpec {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IClassBodyDeclaration::class,
+    IHasTypeHint::class,
+    IHasAttributeSpec::class,
+  ];
 
   private EditableNode $_attribute_spec;
   private EditableNode $_modifiers;

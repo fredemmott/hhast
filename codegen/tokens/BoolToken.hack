@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<193909a92700f6bebc9416a537af5422>>
+ * @generated SignedSource<<4749a37c8da5e59e2cae55c80f1f09ee>>
  */
 namespace Facebook\HHAST;
 
 final class BoolToken extends EditableTokenWithVariableText {
 
   const string KIND = 'bool';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

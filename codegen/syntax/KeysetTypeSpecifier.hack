@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<acea004dc71a71ea06abb72749e6c5bf>>
+ * @generated SignedSource<<bf3aaee0215ad111a7c79fb836152803>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class KeysetTypeSpecifier extends EditableNode implements ITypeSpecifier {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ITypeSpecifier::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_angle;

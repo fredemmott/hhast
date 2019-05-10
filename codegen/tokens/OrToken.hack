@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b2b3aa895416517cb988b1dce3a13db5>>
+ * @generated SignedSource<<d757eb27d8279643a6360fb73b8cb8f0>>
  */
 namespace Facebook\HHAST;
 
 final class OrToken extends EditableTokenWithVariableText {
 
   const string KIND = 'or';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

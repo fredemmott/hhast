@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<ecc8d376705aec5ed4a8a7cdfcc5161f>>
+ * @generated SignedSource<<6e9e01f8f3e829fdcd8673929f63fae8>>
  */
 namespace Facebook\HHAST;
 
 final class EndforeachToken extends EditableTokenWithVariableText {
 
   const string KIND = 'endforeach';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

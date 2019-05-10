@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<03bd22e2024cbfd3dff1256cf992259e>>
+ * @generated SignedSource<<9ea9f5d4676543b071c47a74d25b8598>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class TupleTypeExplicitSpecifier
   extends EditableNode
   implements ITypeSpecifier {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ITypeSpecifier::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_angle;

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<6e8e9c1a7f51f6af5b73244209da83fa>>
+ * @generated SignedSource<<23701456998dfbdd35f8427cec6f3efd>>
  */
 namespace Facebook\HHAST;
 
 final class Include_onceToken extends EditableTokenWithVariableText {
 
   const string KIND = 'include_once';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

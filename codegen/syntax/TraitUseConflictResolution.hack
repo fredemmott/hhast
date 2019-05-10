@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<cac49cbd7e5801879b3161f186fd2614>>
+ * @generated SignedSource<<c22e93f6e7a55a509c92e11c119e6ed8>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class TraitUseConflictResolution
   extends EditableNode
   implements IClassBodyDeclaration {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IClassBodyDeclaration::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_names;

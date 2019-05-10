@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<317c2c4cf56fe0cd6b766147c454fa42>>
+ * @generated SignedSource<<4cc10f3cd3164bc14f2eeaa8e86fa490>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class MarkupSuffix extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_less_than_question;
   private EditableNode $_name;

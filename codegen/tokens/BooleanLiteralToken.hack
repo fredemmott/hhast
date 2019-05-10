@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<58dd074d1253f0dc2fa5bca71f66a4d2>>
+ * @generated SignedSource<<7bca88a660820658a52a0f14646aac19>>
  */
 namespace Facebook\HHAST;
 
 final class BooleanLiteralToken extends EditableTokenWithVariableText {
 
   const string KIND = 'boolean_literal';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

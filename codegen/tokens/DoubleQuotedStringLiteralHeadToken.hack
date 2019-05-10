@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<7cfd08e84bc4b06ea90765c8810fcf8e>>
+ * @generated SignedSource<<d1f619688888fb5543b16c07dcaac0e5>>
  */
 namespace Facebook\HHAST;
 
@@ -9,6 +9,11 @@ final class DoubleQuotedStringLiteralHeadToken
   extends EditableTokenWithVariableText {
 
   const string KIND = 'double_quoted_string_literal_head';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

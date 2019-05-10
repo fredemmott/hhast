@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<04a7089db15cf95fe2b80bdede2f5f47>>
+ * @generated SignedSource<<53dba741b181ecaec44b8efe71bbb05a>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class VarrayTypeSpecifier extends EditableNode implements ITypeSpecifier {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ITypeSpecifier::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_angle;

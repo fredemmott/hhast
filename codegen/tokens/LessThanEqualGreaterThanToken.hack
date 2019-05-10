@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<fc26a69386d847438cc700ad872d1e3d>>
+ * @generated SignedSource<<e3b42d0e90d381fa5607e17f9b065e18>>
  */
 namespace Facebook\HHAST;
 
 final class LessThanEqualGreaterThanToken extends EditableTokenWithFixedText {
 
   const string KIND = '<=>';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '<=>';
 
   public function __construct(

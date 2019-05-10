@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<fa9a26cf1dbcb67da99020ed6c2112df>>
+ * @generated SignedSource<<a500f6808c43d39bc966f15bcddfd548>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class BreakStatement extends EditableNode implements IStatement {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IStatement::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_level;

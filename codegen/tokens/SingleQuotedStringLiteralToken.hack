@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<6bac89fb4f5cdecd6f5126feced96d8f>>
+ * @generated SignedSource<<4eea3fc6ecc5f2e5c31967e8b06ba119>>
  */
 namespace Facebook\HHAST;
 
@@ -10,6 +10,12 @@ final class SingleQuotedStringLiteralToken
   implements IStringLiteral {
 
   const string KIND = 'single_quoted_string_literal';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+    IStringLiteral::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

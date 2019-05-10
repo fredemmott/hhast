@@ -1,11 +1,17 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<665e8a082776f9b3a6a91aef9d8377c1>>
+ * @generated SignedSource<<e2b4b64f2c0513ed414dd4fb9bb9a7bd>>
  */
 namespace Facebook\HHAST;
 
 final class AfterHaltCompiler extends EditableTrivia {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    AfterHaltCompiler::class,
+    EditableNode::class,
+    EditableTrivia::class,
+  ];
 
   public function __construct(
     string $text,
@@ -24,6 +30,13 @@ final class AfterHaltCompiler extends EditableTrivia {
 
 final class DelimitedComment extends EditableTrivia implements IComment {
 
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    DelimitedComment::class,
+    EditableNode::class,
+    EditableTrivia::class,
+    IComment::class,
+  ];
+
   public function __construct(
     string $text,
     ?__Private\SourceRef $source_ref = null,
@@ -40,6 +53,12 @@ final class DelimitedComment extends EditableTrivia implements IComment {
 }
 
 final class EndOfLine extends EditableTrivia {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    EndOfLine::class,
+    EditableNode::class,
+    EditableTrivia::class,
+  ];
 
   public function __construct(
     string $text,
@@ -58,6 +77,12 @@ final class EndOfLine extends EditableTrivia {
 
 final class ExtraTokenError extends EditableTrivia {
 
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    ExtraTokenError::class,
+    EditableNode::class,
+    EditableTrivia::class,
+  ];
+
   public function __construct(
     string $text,
     ?__Private\SourceRef $source_ref = null,
@@ -74,6 +99,12 @@ final class ExtraTokenError extends EditableTrivia {
 }
 
 final class FallThrough extends EditableTrivia {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    FallThrough::class,
+    EditableNode::class,
+    EditableTrivia::class,
+  ];
 
   public function __construct(
     string $text,
@@ -92,6 +123,12 @@ final class FallThrough extends EditableTrivia {
 
 final class FixMe extends EditableTrivia {
 
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    FixMe::class,
+    EditableNode::class,
+    EditableTrivia::class,
+  ];
+
   public function __construct(
     string $text,
     ?__Private\SourceRef $source_ref = null,
@@ -108,6 +145,12 @@ final class FixMe extends EditableTrivia {
 }
 
 final class IgnoreError extends EditableTrivia {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    IgnoreError::class,
+    EditableNode::class,
+    EditableTrivia::class,
+  ];
 
   public function __construct(
     string $text,
@@ -126,6 +169,13 @@ final class IgnoreError extends EditableTrivia {
 
 final class SingleLineComment extends EditableTrivia implements IComment {
 
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    SingleLineComment::class,
+    EditableNode::class,
+    EditableTrivia::class,
+    IComment::class,
+  ];
+
   public function __construct(
     string $text,
     ?__Private\SourceRef $source_ref = null,
@@ -142,6 +192,12 @@ final class SingleLineComment extends EditableTrivia implements IComment {
 }
 
 final class Unsafe extends EditableTrivia {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    Unsafe::class,
+    EditableNode::class,
+    EditableTrivia::class,
+  ];
 
   public function __construct(
     string $text,
@@ -160,6 +216,12 @@ final class Unsafe extends EditableTrivia {
 
 final class UnsafeExpression extends EditableTrivia {
 
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    UnsafeExpression::class,
+    EditableNode::class,
+    EditableTrivia::class,
+  ];
+
   public function __construct(
     string $text,
     ?__Private\SourceRef $source_ref = null,
@@ -176,6 +238,12 @@ final class UnsafeExpression extends EditableTrivia {
 }
 
 final class WhiteSpace extends EditableTrivia {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    WhiteSpace::class,
+    EditableNode::class,
+    EditableTrivia::class,
+  ];
 
   public function __construct(
     string $text,

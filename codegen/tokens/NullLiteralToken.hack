@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<c8e0f6c28d0f083c57bdd19ba1781b4b>>
+ * @generated SignedSource<<4ced045d086dd6e03ba1ec96a763a607>>
  */
 namespace Facebook\HHAST;
 
 final class NullLiteralToken extends EditableTokenWithVariableText {
 
   const string KIND = 'null';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

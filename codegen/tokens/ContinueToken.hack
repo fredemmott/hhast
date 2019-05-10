@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<f2c24a679b31a6c190564d2bc78fe932>>
+ * @generated SignedSource<<6d1ac438324485a1cf37265d5240de9f>>
  */
 namespace Facebook\HHAST;
 
 final class ContinueToken extends EditableTokenWithVariableText {
 
   const string KIND = 'continue';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

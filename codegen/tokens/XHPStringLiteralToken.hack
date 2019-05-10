@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<aa9669d49a6c41cb3eaf4bb648ab358a>>
+ * @generated SignedSource<<b3d1b7942e11f2f0b60c6becbd829f84>>
  */
 namespace Facebook\HHAST;
 
 final class XHPStringLiteralToken extends EditableTokenWithVariableText {
 
   const string KIND = 'XHP_string_literal';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<afb7095cd619bbd9f2fa785d07d9e274>>
+ * @generated SignedSource<<184f32eb22e98afc3fa436d87a33984b>>
  */
 namespace Facebook\HHAST;
 
 final class IfToken extends EditableTokenWithVariableText {
 
   const string KIND = 'if';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

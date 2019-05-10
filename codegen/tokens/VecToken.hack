@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<419ece18c88f42871b5dbc7568edcf19>>
+ * @generated SignedSource<<81b79687932e5199391e0435d60705f4>>
  */
 namespace Facebook\HHAST;
 
 final class VecToken extends EditableTokenWithVariableText {
 
   const string KIND = 'vec';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

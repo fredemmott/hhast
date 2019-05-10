@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<823fb15d78c35bd5fae5b25f7e4154c2>>
+ * @generated SignedSource<<8c5f892bf258159d19875be4ca1de382>>
  */
 namespace Facebook\HHAST;
 
 final class YieldToken extends EditableTokenWithVariableText {
 
   const string KIND = 'yield';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

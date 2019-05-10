@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<eb67cc7c68f70f62cfd87a1558744d2f>>
+ * @generated SignedSource<<661352c48b748314ffa585112ecfbfc2>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,14 @@ use namespace Facebook\TypeAssert;
 final class CollectionLiteralExpression
   extends EditableNode
   implements IContainer, ILambdaBody, IExpression {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IContainer::class,
+    ILambdaBody::class,
+    IExpression::class,
+  ];
 
   private EditableNode $_name;
   private EditableNode $_left_brace;

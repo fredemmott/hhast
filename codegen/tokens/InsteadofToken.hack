@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<34d92f03d3926420bcca096ad854c429>>
+ * @generated SignedSource<<0a9df659835aa09be6224a5666cc0050>>
  */
 namespace Facebook\HHAST;
 
 final class InsteadofToken extends EditableTokenWithVariableText {
 
   const string KIND = 'insteadof';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

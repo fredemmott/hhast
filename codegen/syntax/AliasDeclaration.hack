@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b7a5ca90bdcd1bb24b96fbc84144b2f8>>
+ * @generated SignedSource<<426b02fc74200abaea177447795228ee>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class AliasDeclaration extends EditableNode implements IHasAttributeSpec {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IHasAttributeSpec::class,
+  ];
 
   private EditableNode $_attribute_spec;
   private EditableNode $_keyword;

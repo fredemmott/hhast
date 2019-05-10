@@ -9,8 +9,8 @@
 
 namespace Facebook\HHAST\__Private;
 
-use namespace HH\Lib\Vec;
-use type Facebook\HackCodegen\CodegenFileType;
+use namespace HH\Lib\{Keyset, Vec};
+use type Facebook\HackCodegen\{CodegenFileType, HackBuilderValues};
 
 final class CodegenTrivia extends CodegenBase {
   <<__Override>>
@@ -23,18 +23,16 @@ final class CodegenTrivia extends CodegenBase {
       ->setNamespace('Facebook\\HHAST');
 
     foreach ($this->getSchema()['trivia'] as $trivia) {
+      $interfaces = $this
+        ->getMarkerInterfacesByImplementingClass()[$trivia['trivia_kind_name']] ??
+        keyset[];
       $file->addClass(
         $cg
           ->codegenClass($trivia['trivia_kind_name'])
           ->setIsFinal()
           ->setExtends('EditableTrivia')
           ->setInterfaces(
-            (
-              $this
-                ->getMarkerInterfacesByImplementingClass()[$trivia['trivia_kind_name']] ??
-              vec[]
-            )
-              |> Vec\map($$, $if ==> $cg->codegenImplementsInterface($if)),
+            Vec\map($interfaces, $if ==> $cg->codegenImplementsInterface($if)),
           )
           ->setConstructor(
             $cg
@@ -59,6 +57,23 @@ final class CodegenTrivia extends CodegenBase {
                   ->endIfBlock()
                   ->addReturnf('new self($text)')
                   ->getCode(),
+              ),
+          )
+          ->addConstant(
+            $cg->codegenClassConstant('INTERFACES')
+              ->setType('keyset<classname<EditableNode>>')
+              ->setValue(
+                Keyset\union(
+                  keyset[
+                    $trivia['trivia_kind_name'],
+                    'EditableNode',
+                    'EditableTrivia',
+                  ],
+                  $interfaces,
+                ),
+                HackBuilderValues::keyset(
+                  HackBuilderValues::lambda(($_, $if) ==> $if.'::class'),
+                ),
               ),
           ),
       );

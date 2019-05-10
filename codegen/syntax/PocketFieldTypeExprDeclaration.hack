@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<8b674c9ccf1353068633f5767873bb3d>>
+ * @generated SignedSource<<f792a87fb1ecd2fb2507800d0f1fcf9e>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class PocketFieldTypeExprDeclaration extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_case;
   private EditableNode $_type;

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<7895a9a2f6353cea2edb051207617aac>>
+ * @generated SignedSource<<357f72cf533761dc3f0fbf7195f36e0c>>
  */
 namespace Facebook\HHAST;
 
 final class SuspendToken extends EditableTokenWithVariableText {
 
   const string KIND = 'suspend';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

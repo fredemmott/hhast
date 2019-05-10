@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<bd3a47aae98b6c506ee424d922a2544a>>
+ * @generated SignedSource<<4d1a2dda83d585052874a9ccd4ee5a72>>
  */
 namespace Facebook\HHAST;
 
 final class FloatingLiteralToken extends EditableTokenWithVariableText {
 
   const string KIND = 'floating_literal';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

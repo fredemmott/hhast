@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<56b7024c80373d2714bb5e9bd75964ad>>
+ * @generated SignedSource<<5cb1deef97fde37350083b719a2fcde2>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class MethodishTraitResolution
   extends EditableNode
   implements IClassBodyDeclaration {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IClassBodyDeclaration::class,
+  ];
 
   private EditableNode $_attribute;
   private EditableNode $_function_decl_header;

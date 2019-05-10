@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<c5def867b78f0edc6c166b32b83382e4>>
+ * @generated SignedSource<<06f28598a011b6eed103d2b878095406>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class AttributeSpecification extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_left_double_angle;
   private EditableNode $_attributes;

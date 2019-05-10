@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<e8c62c8f181028011a2f165d5261a559>>
+ * @generated SignedSource<<d40497f7ff36f44286cbde096737749a>>
  */
 namespace Facebook\HHAST;
 
 final class ColonColonToken extends EditableTokenWithFixedText {
 
   const string KIND = '::';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '::';
 
   public function __construct(

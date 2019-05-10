@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<20bb1a2610a19430a0b8998dc5dca6c8>>
+ * @generated SignedSource<<9e15fcb4732965911eef8562f5f9f114>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class ExpressionStatement extends EditableNode implements IStatement {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IStatement::class,
+  ];
 
   private EditableNode $_expression;
   private EditableNode $_semicolon;

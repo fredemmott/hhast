@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<bef6ea52a77c090b547ad84a1df2e36e>>
+ * @generated SignedSource<<bc3b7b5797e21939a5e7d2716a9df6f5>>
  */
 namespace Facebook\HHAST;
 
 final class BinaryToken extends EditableTokenWithVariableText {
 
   const string KIND = 'binary';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

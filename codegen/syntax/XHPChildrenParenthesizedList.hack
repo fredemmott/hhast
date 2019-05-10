@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<f743f9e4325663858e9f0031ef19f541>>
+ * @generated SignedSource<<d94d4e3e6bb204ce8719bc9164e03aca>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class XHPChildrenParenthesizedList extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_left_paren;
   private EditableNode $_xhp_children;

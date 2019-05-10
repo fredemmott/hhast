@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<b7a4391881792bd0a338b65e81489c5c>>
+ * @generated SignedSource<<507b12923d42d736a8eaa8dd32953de5>>
  */
 namespace Facebook\HHAST;
 
 final class ElseifToken extends EditableTokenWithVariableText {
 
   const string KIND = 'elseif';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

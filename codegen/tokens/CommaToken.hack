@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<85041b8c3029ffe31400a637d504e417>>
+ * @generated SignedSource<<12ecf5a13ad3c610441a6352e2e53e73>>
  */
 namespace Facebook\HHAST;
 
 final class CommaToken extends EditableTokenWithFixedText {
 
   const string KIND = ',';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = ',';
 
   public function __construct(

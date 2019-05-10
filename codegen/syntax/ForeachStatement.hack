@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<aac510a34f533d2fa014892dec0d0e83>>
+ * @generated SignedSource<<91e5cceb8e245eecb13f78c52413a7a6>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,14 @@ use namespace Facebook\TypeAssert;
 final class ForeachStatement
   extends EditableNode
   implements IControlFlowStatement, ILoopStatement, IStatement {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IControlFlowStatement::class,
+    ILoopStatement::class,
+    IStatement::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_paren;

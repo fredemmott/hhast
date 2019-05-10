@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<1e78b637c1ec16548fb1de9aee7fc89a>>
+ * @generated SignedSource<<8655ebbad302f00af5b9030168cf55d4>>
  */
 namespace Facebook\HHAST;
 
 final class SemicolonToken extends EditableTokenWithFixedText {
 
   const string KIND = ';';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = ';';
 
   public function __construct(

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<de0237ad61bc8424b1989ad84e3f6bd8>>
+ * @generated SignedSource<<8e35906d711d0e36f1b4412ec4b20f9a>>
  */
 namespace Facebook\HHAST;
 
 final class BreakToken extends EditableTokenWithVariableText {
 
   const string KIND = 'break';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<63171c7c2b03a21fb204c5d7d714b0b2>>
+ * @generated SignedSource<<30bbcd0bb880276f056503aa8ef9e84f>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class NamespaceEmptyBody extends EditableNode implements INamespaceBody {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    INamespaceBody::class,
+  ];
 
   private EditableNode $_semicolon;
 

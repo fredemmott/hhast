@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<df2990155b206a2dfe12488695a00b93>>
+ * @generated SignedSource<<7da9d22c3cd06031715b72b8a02c6717>>
  */
 namespace Facebook\HHAST;
 
 final class CatchToken extends EditableTokenWithVariableText {
 
   const string KIND = 'catch';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

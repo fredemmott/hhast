@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<32d14fe141f9384bf6834c1d8a42bf8a>>
+ * @generated SignedSource<<36aa9fab8cd074e7eb51719aa17f9e51>>
  */
 namespace Facebook\HHAST;
 
 final class ExclamationToken extends EditableTokenWithFixedText {
 
   const string KIND = '!';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '!';
 
   public function __construct(

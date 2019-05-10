@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<cc721cafa352556c32e17d0d35091db0>>
+ * @generated SignedSource<<b567bf4dc2dd56f5cc74a75fbd543f73>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,14 @@ use namespace Facebook\TypeAssert;
 abstract class ParameterDeclarationGeneratedBase
   extends EditableNode
   implements IHasTypeHint, IHasAttributeSpec, IParameter {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    ParameterDeclaration::class,
+    EditableNode::class,
+    IHasTypeHint::class,
+    IHasAttributeSpec::class,
+    IParameter::class,
+  ];
 
   private EditableNode $_attribute;
   private EditableNode $_visibility;

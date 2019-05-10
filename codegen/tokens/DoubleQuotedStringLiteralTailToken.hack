@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<74f3d4ea9040010dcda2f6a3f3ae6aa9>>
+ * @generated SignedSource<<fcdeca3d6a4698680649876c6d4e7f41>>
  */
 namespace Facebook\HHAST;
 
@@ -9,6 +9,11 @@ final class DoubleQuotedStringLiteralTailToken
   extends EditableTokenWithVariableText {
 
   const string KIND = 'double_quoted_string_literal_tail';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

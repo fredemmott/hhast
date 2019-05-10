@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<f8385a49cefb5da59ec73f4720aada56>>
+ * @generated SignedSource<<5ed2564abf6d8a0919d4658d0518bd1a>>
  */
 namespace Facebook\HHAST;
 
 final class LeftBraceToken extends EditableTokenWithFixedText {
 
   const string KIND = '{';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '{';
 
   public function __construct(

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<bed5fdaf9b7265bf7eab0d50daa3203f>>
+ * @generated SignedSource<<3d71f32c1fb2bde501c8d3b0f711c493>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class NamespaceUseClause extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_clause_kind;
   private EditableNode $_name;

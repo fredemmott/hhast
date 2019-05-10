@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<268fb26869f34ca107bdec0f7b638818>>
+ * @generated SignedSource<<86180e9b2acc4e3e0c09cf9728cad063>>
  */
 namespace Facebook\HHAST;
 
 final class DollarToken extends EditableTokenWithFixedText {
 
   const string KIND = '$';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '$';
 
   public function __construct(

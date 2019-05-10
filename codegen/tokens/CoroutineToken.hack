@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9437c2103343aeef91fabd8372da8014>>
+ * @generated SignedSource<<8def752b5b812210fc05d601e7364b67>>
  */
 namespace Facebook\HHAST;
 
 final class CoroutineToken extends EditableTokenWithVariableText {
 
   const string KIND = 'coroutine';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

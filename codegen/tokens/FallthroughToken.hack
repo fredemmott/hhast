@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<a0713ec4a23c90a29b2f985b6bba048b>>
+ * @generated SignedSource<<ae0c775dac0717007a38ca0102a31ed4>>
  */
 namespace Facebook\HHAST;
 
 final class FallthroughToken extends EditableTokenWithVariableText {
 
   const string KIND = 'fallthrough';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

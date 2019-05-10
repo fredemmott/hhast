@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<3fa92e56e4f9138c5e2bfd048fa24c10>>
+ * @generated SignedSource<<9a5dcd5e7e3eef0c0c2d42eebcbb271c>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class RecordDeclaration extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_attribute_spec;
   private EditableNode $_keyword;

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<702b3754ca8104d2a0d2d9b8932aa5be>>
+ * @generated SignedSource<<408b5065e5cd9474ee21aa6cee0cc2b1>>
  */
 namespace Facebook\HHAST;
 
 final class RequiredToken extends EditableTokenWithVariableText {
 
   const string KIND = 'required';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

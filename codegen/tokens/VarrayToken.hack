@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<856f14be428a296a11f36f24a78ea16b>>
+ * @generated SignedSource<<de3a8d9282d9d3954a13f0feebc77d38>>
  */
 namespace Facebook\HHAST;
 
 final class VarrayToken extends EditableTokenWithVariableText {
 
   const string KIND = 'varray';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

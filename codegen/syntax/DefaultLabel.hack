@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<60a4ee6f54ded383443ba253f640418f>>
+ * @generated SignedSource<<ad02d3f1b476d8675aa7695be70fcb81>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class DefaultLabel extends EditableNode implements ISwitchLabel {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ISwitchLabel::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_colon;

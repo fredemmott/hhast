@@ -9,7 +9,7 @@
 
 namespace Facebook\HHAST\__Private;
 
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\{C, Keyset, Str, Vec};
 use type Facebook\HackCodegen\{
   CodegenClass,
   CodegenConstructor,
@@ -104,6 +104,10 @@ final class CodegenTokens extends CodegenBase {
   }
 
   public function generateClassForToken(self::TTokenSpec $token): CodegenClass {
+    $interfaces = $this->getMarkerInterfacesByImplementingClass()[
+      $token['kind'].'Token'
+    ] ??
+      keyset[];
     $cg = $this->getCodegenFactory();
     $cc = $cg
       ->codegenClass($token['kind'].'Token')
@@ -116,17 +120,23 @@ final class CodegenTokens extends CodegenBase {
       )
       ->setConstructor($this->generateConstructor($token))
       ->addMethods($this->generateFieldMethods($token))
-      ->addMethod($this->generateRewriteChildrenMethod($token));
-
-    $cc->addInterfaces(
-      Vec\map(
-        $this->getMarkerInterfacesByImplementingClass()[
-          $token['kind'].'Token'
-        ] ??
-          vec[],
-        $interface ==> $cg->codegenImplementsInterface($interface),
-      ),
-    );
+      ->addMethod($this->generateRewriteChildrenMethod($token))
+      ->addInterfaces(
+        Vec\map($interfaces, $if ==> $cg->codegenImplementsInterface($if)),
+      )
+      ->addConstant(
+        $cg->codegenClassConstant('INTERFACES')
+          ->setType('keyset<classname<EditableNode>>')
+          ->setValue(
+            Keyset\union(
+              keyset['self', 'EditableNode', 'EditableToken'],
+              $interfaces,
+            ),
+            HackBuilderValues::keyset(
+              HackBuilderValues::lambda(($_, $if) ==> $if.'::class'),
+            ),
+          ),
+      );
 
     $text = $token['text'];
     if ($text !== null) {

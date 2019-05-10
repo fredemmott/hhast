@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<a9c313a38e72fd14cea6366c398cb3bb>>
+ * @generated SignedSource<<fec84cb47654a64ef8528d2fd9654e3e>>
  */
 namespace Facebook\HHAST;
 
 final class PercentToken extends EditableTokenWithFixedText {
 
   const string KIND = '%';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '%';
 
   public function __construct(

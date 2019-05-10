@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<f48c8b145bd60549776773d29fdc567b>>
+ * @generated SignedSource<<b4fed153e450c0dce81ff533b8db28fe>>
  */
 namespace Facebook\HHAST;
 
 final class DotEqualToken extends EditableTokenWithFixedText {
 
   const string KIND = '.=';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '.=';
 
   public function __construct(

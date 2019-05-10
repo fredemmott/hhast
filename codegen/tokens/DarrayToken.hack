@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<3c96d44b46e1bde4102ccaa675053590>>
+ * @generated SignedSource<<9aa02a77408317b361615c98ab7f7e57>>
  */
 namespace Facebook\HHAST;
 
 final class DarrayToken extends EditableTokenWithVariableText {
 
   const string KIND = 'darray';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

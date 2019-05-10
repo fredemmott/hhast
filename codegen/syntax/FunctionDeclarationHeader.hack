@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<35c18ac3ae88b05a0000de8aedf1cc67>>
+ * @generated SignedSource<<ed1b54dad25fee22e835abd21f28218f>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class FunctionDeclarationHeader extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_modifiers;
   private EditableNode $_keyword;

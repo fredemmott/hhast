@@ -12,6 +12,7 @@ namespace Facebook\HHAST\Linters;
 use type Facebook\HHAST\EditableNode;
 use namespace Facebook\HHAST;
 use namespace Facebook\HHAST\Linters\SuppressASTLinter;
+use namespace HH\Lib\{C, Dict};
 
 abstract class ASTLinter<Tnode as HHAST\EditableNode> extends BaseLinter {
   private ?HHAST\EditableNode $ast;
@@ -37,15 +38,21 @@ abstract class ASTLinter<Tnode as HHAST\EditableNode> extends BaseLinter {
     return $ast;
   }
 
-  private static ?vec<(EditableNode, vec<EditableNode>)> $parentsCache = null;
+  private static ?dict<int, (EditableNode, vec<EditableNode>)> $parentsCache =
+    null;
 
-  private function getASTWithParents(): vec<(EditableNode, vec<EditableNode>)> {
+  private function getASTWithParents(
+  ): dict<int, (EditableNode, vec<EditableNode>)> {
     $cache = self::$parentsCache;
     $ast = $this->getAST();
-    if ($cache is nonnull && ($cache[0][0] ?? null) === $ast) {
+    if ($cache is nonnull && (C\first($cache)[0] ?? null) === $ast) {
       return $cache;
     }
-    $result = $ast->traverseWithParents();
+    $result = Dict\pull(
+      $ast->traverseWithParents(),
+      $v ==> $v,
+      $v ==> $v[0]->getUniqueID(),
+    );
     self::$parentsCache = $result;
     return $result;
   }
@@ -61,9 +68,7 @@ abstract class ASTLinter<Tnode as HHAST\EditableNode> extends BaseLinter {
    * Some parts of the node may be irrelevant to the actual error; strip them
    * out here to display more concise messages to humans.
    */
-  public function getPrettyTextForNode(
-    Tnode $node,
-  ): string {
+  public function getPrettyTextForNode(Tnode $node): string {
     return $node->getCode();
   }
 
@@ -71,55 +76,55 @@ abstract class ASTLinter<Tnode as HHAST\EditableNode> extends BaseLinter {
   final public async function getLintErrorsAsync(
   ): Awaitable<vec<ASTLintError<Tnode>>> {
     $this->ast = await self::getASTFromFileAsync($this->getFile());
-    $target = static::getTargetType();
 
     $errors = vec[];
-    foreach ($this->getASTWithParents() as list($node, $parents)) {
-      if ($node instanceof $target) {
+    foreach (
+      $this->ast->getDescendantsOfType(static::getTargetType()) as $node
+    ) {
+      $parents = $this->getASTWithParents()[$node->getUniqueID()][1];
+      try {
+        $error = $this->getLintErrorForNode($node, $parents);
+      } catch (LinterException $e) {
+        if ($e->getPosition() !== null) {
+          throw $e;
+        }
         try {
-          $error = $this->getLintErrorForNode($node, $parents);
-        } catch (LinterException $e) {
-          if ($e->getPosition() !== null) {
-            throw $e;
-          }
-          try {
-            $position = HHAST\find_position($this->getAST(), $node);
-          } catch (\Throwable $_) {
-            throw $e;
-          }
-          throw new LinterException(
-            $e->getLinterClass(),
-            $e->getFileBeingLinted(),
-            $e->getRawMessage(),
-            $position,
-            $e->getPrevious(),
-          );
-        } catch (\Throwable $t) {
-          try {
-            $position = HHAST\find_position($this->getAST(), $node);
-          } catch (\Throwable $_) {
-            throw $t;
-          }
-          throw new LinterException(
-            static::class,
-            $this->getFile()->getPath(),
-            $t->getMessage(),
-            $position,
-            $t,
-          );
+          $position = HHAST\find_position($this->getAST(), $node);
+        } catch (\Throwable $_) {
+          throw $e;
         }
+        throw new LinterException(
+          $e->getLinterClass(),
+          $e->getFileBeingLinted(),
+          $e->getRawMessage(),
+          $position,
+          $e->getPrevious(),
+        );
+      } catch (\Throwable $t) {
+        try {
+          $position = HHAST\find_position($this->getAST(), $node);
+        } catch (\Throwable $_) {
+          throw $t;
+        }
+        throw new LinterException(
+          static::class,
+          $this->getFile()->getPath(),
+          $t->getMessage(),
+          $position,
+          $t,
+        );
+      }
 
-        if (
-          $error !== null &&
-          !SuppressASTLinter\is_linter_error_suppressed(
-            $this,
-            $node,
-            $parents,
-            $error,
-          )
-        ) {
-          $errors[] = $error;
-        }
+      if (
+        $error !== null &&
+        !SuppressASTLinter\is_linter_error_suppressed(
+          $this,
+          $node,
+          $parents,
+          $error,
+        )
+      ) {
+        $errors[] = $error;
       }
     }
     return $errors;

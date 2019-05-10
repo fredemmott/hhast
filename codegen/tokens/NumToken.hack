@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<e3769290e175472283216c974b98b23b>>
+ * @generated SignedSource<<f8ccac2abcc2d4eab9e0cbe69539b0f6>>
  */
 namespace Facebook\HHAST;
 
 final class NumToken extends EditableTokenWithVariableText {
 
   const string KIND = 'num';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

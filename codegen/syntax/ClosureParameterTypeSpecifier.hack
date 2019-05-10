@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<002bf0539a83cfeacfbb302b8d101079>>
+ * @generated SignedSource<<a24ef28b357b787408823d63e8b93b97>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class ClosureParameterTypeSpecifier
   extends EditableNode
   implements ITypeSpecifier {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ITypeSpecifier::class,
+  ];
 
   private EditableNode $_call_convention;
   private EditableNode $_type;

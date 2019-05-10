@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<761349b25f48395b66646f10c01fb9e6>>
+ * @generated SignedSource<<62df84ede0c8bff9900e2ac0493103f5>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class EnumDeclaration extends EditableNode implements IHasAttributeSpec {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IHasAttributeSpec::class,
+  ];
 
   private EditableNode $_attribute_spec;
   private EditableNode $_keyword;

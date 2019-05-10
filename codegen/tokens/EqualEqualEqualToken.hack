@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<5d04163cf48e17fdcdb9d0ee2ed6398d>>
+ * @generated SignedSource<<f00ef7c825f9a5e3ae57f352e12724d0>>
  */
 namespace Facebook\HHAST;
 
 final class EqualEqualEqualToken extends EditableTokenWithFixedText {
 
   const string KIND = '===';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '===';
 
   public function __construct(

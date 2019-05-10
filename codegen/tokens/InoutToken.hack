@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<66c4e736bf9055c6e02c9b33c3821963>>
+ * @generated SignedSource<<2c402372d0ffa6d3c4e93589fe1a2fa0>>
  */
 namespace Facebook\HHAST;
 
 final class InoutToken extends EditableTokenWithVariableText {
 
   const string KIND = 'inout';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

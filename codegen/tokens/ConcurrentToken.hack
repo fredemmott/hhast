@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<5f69768667e57e35887f56bfba4cbaad>>
+ * @generated SignedSource<<32b01ae6dfda9bc2dcd58325d8039d45>>
  */
 namespace Facebook\HHAST;
 
 final class ConcurrentToken extends EditableTokenWithVariableText {
 
   const string KIND = 'concurrent';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

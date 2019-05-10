@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<1189f36fa688207b53e75b6326b87ed9>>
+ * @generated SignedSource<<bdd8bc92e6904db76e52e0d4690c37a9>>
  */
 namespace Facebook\HHAST;
 
 final class WhileToken extends EditableTokenWithVariableText {
 
   const string KIND = 'while';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

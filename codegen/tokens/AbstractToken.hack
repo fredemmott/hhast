@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<93f867edeab977c39a70f94844e6b121>>
+ * @generated SignedSource<<6c75ace4c06b43b2acf84afdb9e06b82>>
  */
 namespace Facebook\HHAST;
 
 final class AbstractToken extends EditableTokenWithVariableText {
 
   const string KIND = 'abstract';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

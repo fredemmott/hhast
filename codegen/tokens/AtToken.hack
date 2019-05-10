@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9299bc8916b0aa3e05eae331c5f0f9d8>>
+ * @generated SignedSource<<cdea21ab40f6f24a8dc344d4f8d9ae61>>
  */
 namespace Facebook\HHAST;
 
 final class AtToken extends EditableTokenWithFixedText {
 
   const string KIND = '@';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '@';
 
   public function __construct(

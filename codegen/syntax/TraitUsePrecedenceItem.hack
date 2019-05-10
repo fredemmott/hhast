@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<7bfcb3e9d07ff9c5d6e97145798bc039>>
+ * @generated SignedSource<<bce91c350e196f0dbb6ea09fe766104f>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 final class TraitUsePrecedenceItem
   extends EditableNode
   implements ITraitUseItem {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ITraitUseItem::class,
+  ];
 
   private EditableNode $_name;
   private EditableNode $_keyword;

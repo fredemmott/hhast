@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9d8a39312c1f4ba1dace87be3469a9cd>>
+ * @generated SignedSource<<738784dea3c008ff049c0385a066c8b5>>
  */
 namespace Facebook\HHAST;
 
 final class AmpersandAmpersandToken extends EditableTokenWithFixedText {
 
   const string KIND = '&&';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '&&';
 
   public function __construct(

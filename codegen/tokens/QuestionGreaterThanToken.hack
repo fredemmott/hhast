@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<610abfe908ec4e34887a04171894ef4d>>
+ * @generated SignedSource<<65d1f88adca859de67751d41aebd5ac6>>
  */
 namespace Facebook\HHAST;
 
 final class QuestionGreaterThanToken extends EditableTokenWithFixedText {
 
   const string KIND = '?>';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '?>';
 
   public function __construct(

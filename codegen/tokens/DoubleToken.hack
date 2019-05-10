@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<66393cd164d3dacb7669b5d6f761add2>>
+ * @generated SignedSource<<dd8619022d277d05c5ca3fb25de34925>>
  */
 namespace Facebook\HHAST;
 
 final class DoubleToken extends EditableTokenWithVariableText {
 
   const string KIND = 'double';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

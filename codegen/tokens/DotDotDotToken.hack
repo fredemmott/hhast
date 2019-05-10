@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<f323fa72da0918904a328fc1113bb741>>
+ * @generated SignedSource<<4c3e8e9f55871caa3c9bfdf9c9c2f834>>
  */
 namespace Facebook\HHAST;
 
 final class DotDotDotToken extends EditableTokenWithFixedText {
 
   const string KIND = '...';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '...';
 
   public function __construct(

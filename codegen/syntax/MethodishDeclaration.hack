@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<0ca1e8fd353572474ef02efff4c1fa8f>>
+ * @generated SignedSource<<9d352a0af88bab1f032908b8c20068a5>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -14,6 +14,15 @@ abstract class MethodishDeclarationGeneratedBase
     IFunctionishDeclaration,
     IHasFunctionBody,
     IHasAttributeSpec {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    MethodishDeclaration::class,
+    EditableNode::class,
+    IClassBodyDeclaration::class,
+    IFunctionishDeclaration::class,
+    IHasFunctionBody::class,
+    IHasAttributeSpec::class,
+  ];
 
   private EditableNode $_attribute;
   private EditableNode $_function_decl_header;

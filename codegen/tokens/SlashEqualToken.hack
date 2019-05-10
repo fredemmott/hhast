@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9d0d203a0f6adf696c3242b8d1237d50>>
+ * @generated SignedSource<<9d8ad648747fa05e937eb2626980d1d0>>
  */
 namespace Facebook\HHAST;
 
 final class SlashEqualToken extends EditableTokenWithFixedText {
 
   const string KIND = '/=';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '/=';
 
   public function __construct(

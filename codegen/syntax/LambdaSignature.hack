@@ -1,13 +1,19 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<e9d00bebe33dea82d3cdd15c491da163>>
+ * @generated SignedSource<<338faefaef8e40947e4398e868e0d1e2>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class LambdaSignature extends EditableNode implements ILambdaSignature {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ILambdaSignature::class,
+  ];
 
   private EditableNode $_left_paren;
   private EditableNode $_parameters;

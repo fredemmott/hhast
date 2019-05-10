@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<ea2c3b2a74d8f2ac9f01f9df75d3b067>>
+ * @generated SignedSource<<38b9815c5d2beb3d760f330bd7ce2738>>
  */
 namespace Facebook\HHAST;
 
 final class ReifyToken extends EditableTokenWithVariableText {
 
   const string KIND = 'reify';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

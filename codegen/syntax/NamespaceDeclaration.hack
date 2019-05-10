@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<977aebc9a63dcb98e300a8b758e6344b>>
+ * @generated SignedSource<<7b305d2881f19a3769af73fbfa6eafab>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 abstract class NamespaceDeclarationGeneratedBase extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    NamespaceDeclaration::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_name;

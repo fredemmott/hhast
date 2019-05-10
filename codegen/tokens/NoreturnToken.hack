@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<dc96832662964d1cc8411142bbaf84de>>
+ * @generated SignedSource<<bd169961c70fdada21c37bb07e17aa7f>>
  */
 namespace Facebook\HHAST;
 
 final class NoreturnToken extends EditableTokenWithVariableText {
 
   const string KIND = 'noreturn';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

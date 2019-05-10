@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<9c40351fb1175dd335a532aea836be6c>>
+ * @generated SignedSource<<5a65c915889ceaef681587618e8d243f>>
  */
 namespace Facebook\HHAST;
 
 final class EnumToken extends EditableTokenWithVariableText {
 
   const string KIND = 'enum';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

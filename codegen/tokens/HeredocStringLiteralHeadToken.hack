@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<5ed7c06a385fc35120c1faa3693c21c9>>
+ * @generated SignedSource<<0ea0a4e6f9f8f64a4fe1be9a09baa052>>
  */
 namespace Facebook\HHAST;
 
@@ -9,6 +9,11 @@ final class HeredocStringLiteralHeadToken
   extends EditableTokenWithVariableText {
 
   const string KIND = 'heredoc_string_literal_head';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

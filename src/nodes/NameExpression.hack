@@ -11,6 +11,8 @@ namespace Facebook\HHAST;
 
 final class NameExpression extends WrapperNode implements IExpression {
   const type TWrapped = INameishNode;
+  const keyset<classname<EditableNode>> INTERFACES =
+    keyset[EditableNode::class, WrapperNode::class, self::class];
 
   <<__Override>>
   public function getWrappedNode(): INameishNode {

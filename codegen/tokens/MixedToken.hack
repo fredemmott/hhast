@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<ab1fbf6dea7749e46af862b8770dc828>>
+ * @generated SignedSource<<a9b7c1a6ad45be7d16e860110c5a233c>>
  */
 namespace Facebook\HHAST;
 
 final class MixedToken extends EditableTokenWithVariableText {
 
   const string KIND = 'mixed';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

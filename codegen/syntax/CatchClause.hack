@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<37d07cb874c9967492da59b30f13b460>>
+ * @generated SignedSource<<fdd9894836d53ddf64f3a1f8d8a1e006>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class CatchClause extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_keyword;
   private EditableNode $_left_paren;

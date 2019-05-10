@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<dda9ac2bf0c2052cef3288b0eb0a5b46>>
+ * @generated SignedSource<<8809e9a27e5abfab608eafa986e32355>>
  */
 namespace Facebook\HHAST;
 
 final class DictToken extends EditableTokenWithVariableText {
 
   const string KIND = 'dict';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<d7ae3fdc11cadcbc65b6fa977a936acf>>
+ * @generated SignedSource<<b485ad1908e05673217c54fea70a658d>>
  */
 namespace Facebook\HHAST;
 
 final class RightParenToken extends EditableTokenWithFixedText {
 
   const string KIND = ')';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = ')';
 
   public function __construct(

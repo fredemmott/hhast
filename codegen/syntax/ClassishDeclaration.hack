@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<c3a0136b8414dd107afd101dc797f1ff>>
+ * @generated SignedSource<<026583f30347bd19da7a4c9ed755f004>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,12 @@ use namespace Facebook\TypeAssert;
 abstract class ClassishDeclarationGeneratedBase
   extends EditableNode
   implements IHasAttributeSpec {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    ClassishDeclaration::class,
+    EditableNode::class,
+    IHasAttributeSpec::class,
+  ];
 
   private EditableNode $_attribute;
   private EditableNode $_modifiers;

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<16766650bc74e995e9fcfac9100fe590>>
+ * @generated SignedSource<<4b02a24ad66ceb789e1812c7fca7730c>>
  */
 namespace Facebook\HHAST;
 
 final class StaticToken extends EditableTokenWithVariableText {
 
   const string KIND = 'static';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

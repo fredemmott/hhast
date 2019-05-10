@@ -12,6 +12,11 @@ namespace Facebook\HHAST;
 use namespace HH\Lib\{C, Dict, Vec};
 
 final class EditableList<Titem as ?EditableNode> extends EditableNode {
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    EditableNode::class,
+    EditableList::class,
+  ];
+
   /**
    * Use `EditableList::createMaybeEmptyList()` or
    * `EditableList::createNonEmptyListOrMissing()` instead to be explicit

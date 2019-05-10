@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<df5849ab11ead4d53692024e60cb5c75>>
+ * @generated SignedSource<<da30d0b98382e283c58e9cc5dc8d5ceb>>
  */
 namespace Facebook\HHAST;
 
 final class AwaitToken extends EditableTokenWithVariableText {
 
   const string KIND = 'await';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

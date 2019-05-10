@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<d524c261bf6ef5c8808d4356fba478b8>>
+ * @generated SignedSource<<b184372d2768d377009cb3c4edd37a2e>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,13 @@ use namespace Facebook\TypeAssert;
 final class CompoundStatement
   extends EditableNode
   implements ILambdaBody, IStatement {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ILambdaBody::class,
+    IStatement::class,
+  ];
 
   private EditableNode $_left_brace;
   private EditableNode $_statements;

@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<65d3a80009cfb581b0cfcace2312afdc>>
+ * @generated SignedSource<<4597063f7f2cf2b6e5b027fc747f32f7>>
  */
 namespace Facebook\HHAST;
 
 final class OctalLiteralToken extends EditableTokenWithVariableText {
 
   const string KIND = 'octal_literal';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

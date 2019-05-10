@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<1906ddfe65de9ed214b1a0f61e6a8b49>>
+ * @generated SignedSource<<953177fd32e4dd543610cce6da4af36d>>
  */
 namespace Facebook\HHAST;
 
 final class EndwhileToken extends EditableTokenWithVariableText {
 
   const string KIND = 'endwhile';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

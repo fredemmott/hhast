@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<13a80e018cf2df8c635374f28b2eb26e>>
+ * @generated SignedSource<<f1d5db4e6f8572a6f3b186803a5d1156>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,13 @@ use namespace Facebook\TypeAssert;
 final class SimpleTypeSpecifier
   extends EditableNode
   implements ISimpleCreationSpecifier, ITypeSpecifier {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    ISimpleCreationSpecifier::class,
+    ITypeSpecifier::class,
+  ];
 
   private EditableNode $_specifier;
 

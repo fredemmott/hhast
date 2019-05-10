@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<2887031cb34db02e4a1dfa58edaf1f39>>
+ * @generated SignedSource<<47d26541b3c48d74e8397f69ee79c3aa>>
  */
 namespace Facebook\HHAST;
 
 final class ErrorTokenToken extends EditableTokenWithVariableText {
 
   const string KIND = 'error_token';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

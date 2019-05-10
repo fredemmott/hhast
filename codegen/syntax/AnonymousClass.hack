@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<6460d8a965fe365bc9fecbde17f25816>>
+ * @generated SignedSource<<5b309fea4bbc7d9a9486f885c3218156>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 final class AnonymousClass extends EditableNode {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+  ];
 
   private EditableNode $_class_keyword;
   private EditableNode $_left_paren;

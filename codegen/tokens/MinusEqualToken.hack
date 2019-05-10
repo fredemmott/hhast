@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<70716df243925e89833c5540e9cf2e0b>>
+ * @generated SignedSource<<a86005d64e4afabc9e41ed9c6acf3ac2>>
  */
 namespace Facebook\HHAST;
 
 final class MinusEqualToken extends EditableTokenWithFixedText {
 
   const string KIND = '-=';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
   const string TEXT = '-=';
 
   public function __construct(

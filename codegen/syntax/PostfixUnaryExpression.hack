@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<15fa4f1ea2571d7a33fc6e0dcf709961>>
+ * @generated SignedSource<<05061945f237a7b39ed452a9c7c3c923>>
  */
 namespace Facebook\HHAST;
 use namespace Facebook\TypeAssert;
@@ -10,6 +10,14 @@ use namespace Facebook\TypeAssert;
 final class PostfixUnaryExpression
   extends EditableNode
   implements IHasOperator, ILambdaBody, IExpression {
+
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    IHasOperator::class,
+    ILambdaBody::class,
+    IExpression::class,
+  ];
 
   private EditableNode $_operand;
   private EditableNode $_operator;

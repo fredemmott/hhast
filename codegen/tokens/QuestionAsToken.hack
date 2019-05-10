@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<0a4f0a98f88e6c5660cd091b43c9d64a>>
+ * @generated SignedSource<<96a04b8f333b0c7ae13ae5f176781d1a>>
  */
 namespace Facebook\HHAST;
 
 final class QuestionAsToken extends EditableTokenWithVariableText {
 
   const string KIND = '?as';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,

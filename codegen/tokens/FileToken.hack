@@ -1,13 +1,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<93537bdae67cea4ed72c6d33150d4a52>>
+ * @generated SignedSource<<c3cb3a1f832b74360917d192d33b0f81>>
  */
 namespace Facebook\HHAST;
 
 final class FileToken extends EditableTokenWithVariableText {
 
   const string KIND = 'file';
+  const keyset<classname<EditableNode>> INTERFACES = keyset[
+    self::class,
+    EditableNode::class,
+    EditableToken::class,
+  ];
 
   public function __construct(
     EditableNode $leading,
