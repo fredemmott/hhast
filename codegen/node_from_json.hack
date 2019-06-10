@@ -233,5 +233,6 @@ function node_from_json_unwrapped(
     $file,
     $offset,
     (string)$json['kind'],
+    BOGUS
   );
 }
